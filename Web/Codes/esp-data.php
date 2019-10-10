@@ -2,14 +2,14 @@
 <html><body>
 <?php
 
-$servername = "localhost";
+$servername = "91.216.107.248";
 
 // REPLACE with your Database name
-$dbname = "wecod1168786_2jauzk";
+$dbname = "gauth1148636_1fzru";
 // REPLACE with Database user
-$username = "wecod1168786_2jauzk";
+$username = "gauth1148636_1fzru";
 // REPLACE with Database user password
-$password = "guyjptvc2p";
+$password = "n7ttg6wdjq";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -18,28 +18,26 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT id, sensor, location, value1, value2, value3, reading_time FROM SensorData";
+$sql = "SELECT id, id_stage, nbr_entree, nbr_sortie, nbr_actuel, heure FROM Nbr_Personne";
 
 echo '<table cellspacing="5" cellpadding="5">
       <tr> 
         <td>ID</td> 
-        <td>Sensor</td> 
-        <td>Location</td> 
-        <td>Value 1</td> 
-        <td>Value 2</td>
-        <td>Value 3</td> 
-        <td>Timestamp</td> 
+        <td>ID_Stage</td> 
+        <td>Nombre d\'entrées</td> 
+        <td>Nombre de sorties</td> 
+        <td>Nombre actuel</td> 
+        <td>Heure</td>
       </tr>';
 
 if ($result = $conn->query($sql)) {
     while ($row = $result->fetch_assoc()) {
         $row_id = $row["id"];
-        $row_sensor = $row["sensor"];
-        $row_location = $row["location"];
-        $row_value1 = $row["value1"];
-        $row_value2 = $row["value2"];
-        $row_value3 = $row["value3"];
-        $row_reading_time = $row["reading_time"];
+        $row_id_stage = $row["id_stage"];
+        $row_nbr_entree = $row["nbr_entree"];
+        $row_nbr_sortie = $row["nbr_sortie"];
+        $row_nbr_actuel = $row["nbr_actuel"];
+        $row_heure = $row["heure"];
         // Uncomment to set timezone to - 1 hour (you can change 1 to any number)
         //$row_reading_time = date("Y-m-d H:i:s", strtotime("$row_reading_time - 1 hours"));
 
@@ -48,12 +46,11 @@ if ($result = $conn->query($sql)) {
 
         echo '<tr> 
                 <td>' . $row_id . '</td> 
-                <td>' . $row_sensor . '</td> 
-                <td>' . $row_location . '</td> 
-                <td>' . $row_value1 . '</td> 
-                <td>' . $row_value2 . '</td>
-                <td>' . $row_value3 . '</td> 
-                <td>' . $row_reading_time . '</td> 
+                <td>' . $row_id_stage . '</td>
+                <td>' . $row_nbr_entree . '</td> 
+                <td>' . $row_nbr_sortie . '</td> 
+                <td>' . $row_nbr_actuel . '</td> 
+                <td>' . $row_heure . '</td>
               </tr>';
     }
     $result->free();
