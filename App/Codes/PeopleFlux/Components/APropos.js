@@ -4,15 +4,15 @@ import { StyleSheet, View, TextInput, Button, Text, SafeAreaView, TouchableOpaci
 class APropos extends React.Component {
   render() {
     return (
-      <SafeAreaView style={styles.main_container}>
         <View style={styles.main_container}>
           <TouchableOpacity style={styles.TouchableOpacity}>
-            <Image
-            source={require('../Images/PeopleFlux.png')}
-            style={styles.icon}/>
+            <View style={styles.title_container}>
+              <Text style={styles.title_text_people}> People</Text><Text style={styles.title_text_flux}>Flux </Text>
+            </View>
+            <Text style={styles.text_a_propos}>A Propos </Text>
+            <Text style={styles.text_notre_equipe}>Notre equipe </Text>
           </TouchableOpacity>
         </View>
-      </SafeAreaView>
     )
   }
 }
@@ -20,20 +20,45 @@ class APropos extends React.Component {
 const styles = StyleSheet.create({
   main_container: {
     flex: 1,
-    backgroundColor: '#232531'
+    backgroundColor: '#232531',
   },
   touchableOpacity: {
+
     justifyContent: 'center',
     alignItems: 'center'
 
   },
-  icon: {
+  title_container:{
+    flexDirection:'row',
+    textAlign:'center',
     justifyContent: 'center',
     alignItems: 'center'
+
+  },
+  title_text_people: {
+    marginTop:50,
+    color:'white',
+    fontSize:30,
+
+  },
+  title_text_flux:{
+    marginTop:50,
+    color:'#ff5733',
+    fontSize:30,
+
+  },
+  text_a_propos:{
+    fontSize:30,
+    color:'#c70039',
+    marginLeft:10,
+    marginTop:10
+  },
+  text_notre_equipe:{
+    fontSize:20,
+    color:'white',
+    marginLeft:10,
+    marginTop:5
   }
 })
 
 export default APropos
-
-
-// L'alignement du logo PeopleFlux ne se fait pas
