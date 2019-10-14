@@ -35,7 +35,7 @@
         <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-11 col-xl-2">
-                    <h1 class="mb-0"><a href="index.html" class="text-white h2 mb-0">People<span class="text-primary">Flux</span> </a></h1>
+                    <h1 class="mb-0"><a href="index.php" class="text-white h2 mb-0">People<span class="text-primary">Flux</span> </a></h1>
                 </div>
                 <div class="col-12 col-md-10 d-none d-xl-block">
                     <nav class="site-navigation position-relative text-right" role="navigation">
@@ -44,8 +44,8 @@
                             <li><a href="info.php">A propos</a></li>
                             <li class="active"><a href="equipe.php">Groupe</a></li>
                             <li><a href="lieux.php">Lieux</a></li>
-                            <li><a href="contact.html">Contacts</a></li>
-                            <li class="cta"><a href="buy.php">Commander</a></li>
+                            <li><a href="pageContact.php">Contacts</a></li>
+                            <li class="cta"><a href="user.php">S'identifier</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -78,10 +78,11 @@
                 <h2 class="text-white mb-4 name" data-aos="fade-right" data-aos-delay="200">Gauthier BOHYN</h2>
                 <div class="bio pl-lg-5">
                     <span class="text-uppercase text-primary d-block mb-3" data-aos="fade-right" data-aos-delay="300">Producter Owner</span>
-                    <p class="mb-4" data-aos="fade-right" data-aos-delay="400">Explication perso...</p>
+                    <p class="mb-4" data-aos="fade-right" data-aos-delay="400">Considéré comme le Product Owner, je pense pouvoir bien gérer le groupe vu l'expérience que j’ai avec mes années passées dans le scoutisme. Concernant l’informatique, je suis passionné par le développement web donc je m’occuperai probablement d’une grosse partie de programmation html, css, javascript, php, etc …
+                        Je m’occuperai également de l’impression 3D.
+                    </p>
                     <p data-aos="fade-right" data-aos-delay="500">
-                        <a href="#" class="p-2"><span class="icon-facebook"></span></a>
-                        <a href="#" class="p-2"><span class="icon-github"></span></a>
+                        <a target="_blank" href="https://www.facebook.com/gauthier.bohyn" class="p-2"><span class="icon-facebook"></span></a>
                     </p>
                 </div>
             </div>
@@ -96,10 +97,9 @@
                 <h2 class="text-white mb-4 name" data-aos="fade-left" data-aos-delay="200">Aymeric PONJEE</h2>
                 <div class="bio pr-lg-5">
                     <span class="text-uppercase text-primary d-block mb-3" data-aos="fade-left" data-aos-delay="300">Scrum Master</span>
-                    <p class="mb-4" data-aos="fade-left" data-aos-delay="400">Explication perso...</p>
+                    <p class="mb-4" data-aos="fade-left" data-aos-delay="400">Je suis polyvalent et je maîtrise assez bien les matières pour travailler seul ou en groupe. De plus, je m’adapte vite à un travail en cours que ce soit de la programmation ou autre, ce qui me permet d’aider un peu tout le monde.</p>
                     <p data-aos="fade-left" data-aos-delay="500">
-                        <a href="#" class="p-2"><span class="icon-facebook"></span></a>
-                        <a href="#" class="p-2"><span class="icon-github"></span></a>
+                        <a target="_blank" href="https://www.facebook.com/aymeric.ponjee" class="p-2"><span class="icon-facebook"></span></a>
                     </p>
                 </div>
             </div>
@@ -114,10 +114,12 @@
                 <h2 class="text-white mb-4 name" data-aos="fade-right" data-aos-delay="200">Thibaut HERMANT</h2>
                 <div class="bio pl-lg-5">
                     <span class="text-uppercase text-primary d-block mb-3" data-aos="fade-right" data-aos-delay="300">Membre</span>
-                    <p class="mb-4" data-aos="fade-right" data-aos-delay="400">Explication perso...</p>
+                    <p class="mb-4" data-aos="fade-right" data-aos-delay="400">Je pense que mon principal point fort est la programmation. Je me débrouille assez bien dans des langages tels que PHP, JS, HTML, ...
+                        N'ayant jamais développé d'applications, l'apprentissage du React Native (programmation pour les App's) pourrait sembler compliqué mais un autre de mes points forts est l'autodidactisme !
+                        Ce ne sera donc pas un problème pour moi d'apprendre ce langage.
+                    </p>
                     <p data-aos="fade-right" data-aos-delay="500">
-                        <a href="#" class="p-2"><span class="icon-facebook"></span></a>
-                        <a href="#" class="p-2"><span class="icon-github"></span></a>
+                        <a target="_blank" href="https://www.facebook.com/thibaut.hermant" class="p-2"><span class="icon-facebook"></span></a>
                     </p>
                 </div>
             </div>
@@ -132,10 +134,11 @@
                 <h2 class="text-white mb-4 name" data-aos="fade-left" data-aos-delay="200">Robin PAQUET</h2>
                 <div class="bio pr-lg-5">
                     <span class="text-uppercase text-primary d-block mb-3" data-aos="fade-left" data-aos-delay="300">Membre</span>
-                    <p class="mb-4" data-aos="fade-left" data-aos-delay="400">Explication perso...</p>
+                    <p class="mb-4" data-aos="fade-left" data-aos-delay="400">J'ai déjà utilisé certains modules en électronique. Je suis en possession de plusieurs esp32 et un raspberry pi avec lesquels j'ai déjà bidouillé.
+                        Je suis un peu plus à l'aise avec la programmation telle que celle de la carte électronique que nous allons utiliser mais aussi avec la programmation d'application.
+                    </p>
                     <p data-aos="fade-left" data-aos-delay="500">
-                        <a href="#" class="p-2"><span class="icon-facebook"></span></a>
-                        <a href="#" class="p-2"><span class="icon-github"></span></a>
+                        <a target="_blank" href="https://www.facebook.com/robinp12" class="p-2"><span class="icon-facebook"></span></a>
                     </p>
                 </div>
             </div>
@@ -149,10 +152,10 @@
                 <h2 class="text-white mb-4 name" data-aos="fade-right" data-aos-delay="200">Ludo VAN DEN DORPE</h2>
                 <div class="bio pl-lg-5">
                     <span class="text-uppercase text-primary d-block mb-3" data-aos="fade-right" data-aos-delay="300">Membre</span>
-                    <p class="mb-4" data-aos="fade-right" data-aos-delay="400">Explication perso...</p>
+                    <p class="mb-4" data-aos="fade-right" data-aos-delay="400">Je suis très à l’aise dans l’environnement de Proteus et je peux donc réaliser la plupart des montages électroniques.
+                        Également, j’ai une bonne compréhension des composants et je peux donc faire fonctionner un montage disposant d’un code C. Bonnes connaissances dans la gestion des BDD et dans le développement Web.</p>
                     <p data-aos="fade-right" data-aos-delay="500">
-                        <a href="#" class="p-2"><span class="icon-facebook"></span></a>
-                        <a href="#" class="p-2"><span class="icon-github"></span></a>
+                        <a target="_blank" href="https://www.facebook.com/ludo.vandendorpe.5" class="p-2"><span class="icon-facebook"></span></a>
                     </p>
                 </div>
             </div>
@@ -167,10 +170,13 @@
                 <h2 class="text-white mb-4 name" data-aos="fade-left" data-aos-delay="200">Tristan PESTIAUX</h2>
                 <div class="bio pr-lg-5">
                     <span class="text-uppercase text-primary d-block mb-3" data-aos="fade-left" data-aos-delay="300">Membre</span>
-                    <p class="mb-4" data-aos="fade-left" data-aos-delay="400">Explication perso...</p>
+                    <p class="mb-4" data-aos="fade-left" data-aos-delay="400">Ce qui se rapporte à la programmation (web ou application). Je suis motivé et j’ai facile à apprendre de nouveaux langages de programmation.
+                        Pour notre projet je compte apprendre à développer une application mobile (native) et ainsi contribuer à son développement.
+                        Au niveau du travail en groupe je trouve que j’ai facile à m’adapter et j’apprends vite.
+                        Autre point fort, je suis bon en orthographe et aussi au niveau des tournures de phrase. Je pourrai donc m’occuper de la relecture des documents à rendre ou encore les écrits sur le site web/application mobile.
+                    </p>
                     <p data-aos="fade-left" data-aos-delay="500">
-                        <a href="#" class="p-2"><span class="icon-facebook"></span></a>
-                        <a href="#" class="p-2"><span class="icon-github"></span></a>
+                        <a target="_blank" href="https://www.facebook.com/tristan.pestiaux" class="p-2"><span class="icon-facebook"></span></a>
                     </p>
                 </div>
             </div>
@@ -184,10 +190,10 @@
                 <h2 class="text-white mb-4 name" data-aos="fade-right" data-aos-delay="200">Brian HANQUET</h2>
                 <div class="bio pl-lg-5">
                     <span class="text-uppercase text-primary d-block mb-3" data-aos="fade-right" data-aos-delay="300">Membre</span>
-                    <p class="mb-4" data-aos="fade-right" data-aos-delay="400">Explication perso...</p>
+                    <p class="mb-4" data-aos="fade-right" data-aos-delay="400">Je suis meilleur dans la programmation et en électronique. Je peux donc aider à faire le php et faire les circuits électroniques
+                        qui permettent de compter le nombre de personnes qui passent. Et puis j'aime apprendre de nouvelles choses et utiliser de nouveaux langages. </p>
                     <p data-aos="fade-right" data-aos-delay="500">
-                        <a href="#" class="p-2"><span class="icon-facebook"></span></a>
-                        <a href="#" class="p-2"><span class="icon-github"></span></a>
+                        <a target="_blank" href="https://www.facebook.com/brian.hanquet" class="p-2"><span class="icon-facebook"></span></a>
                     </p>
                 </div>
             </div>

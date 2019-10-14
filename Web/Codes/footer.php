@@ -11,7 +11,7 @@
                 <li><a href="info.php">A propos</a></li>
                 <li><a href="equipe.php">Groupe</a></li>
                 <li><a href="lieux.php">Lieux</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="pageContact.php">Contacts</a></li>
             </ul>
         </div>
         <div class="col-md-4">
@@ -23,8 +23,19 @@
         </div>
     </div>
     <div class="row">
-
         <div class="col-md-12 text-center">
+
+
+            <form action="addClient.php" method="post">
+                <br>
+
+                    S'identifier en tant qu'admin:
+                    <input style="width:100px;" type="password" name="mot_de_passe" />
+                    <input type="submit" value="v" />
+                </p>
+            </form>
+
+
             <div class="border-top pt-5">
                 <p>
                     &copy; <script>document.write(new Date().getFullYear());</script> Team People Flux</a>

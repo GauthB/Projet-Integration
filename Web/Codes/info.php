@@ -35,7 +35,7 @@
         <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-11 col-xl-2">
-                    <h1 class="mb-0"><a href="index.html" class="text-white h2 mb-0">People<span class="text-primary">Flux</span> </a></h1>
+                    <h1 class="mb-0"><a href="index.php" class="text-white h2 mb-0">People<span class="text-primary">Flux</span> </a></h1>
                 </div>
                 <div class="col-12 col-md-10 d-none d-xl-block">
                     <nav class="site-navigation position-relative text-right" role="navigation">
@@ -44,8 +44,8 @@
                             <li class="active"><a href="info.php">A propos</a></li>
                             <li><a href="equipe.php">Groupe</a></li>
                             <li><a href="lieux.php">Lieux</a></li>
-                            <li><a href="contact.html">Contacts</a></li>
-                            <li class="cta"><a href="buy.php">Commander</a></li>
+                            <li><a href="pageContact.php">Contacts</a></li>
+                            <li class="cta"><a href="user.php">S'identifier</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -75,12 +75,12 @@
                     </div>
                 </div>
                 <div class="col-lg-5 mt-5 pl-lg-5" data-aos="fade-up" data-aos-delay="200">
-                    <p>Nous sommes 7 amis - étudiant à l'EPHEC de Louvain-la-Neuve en 3ème Technologie de l'Informatique.</p>
+                    <p>Nous sommes 7 amis - étudiants à l'EPHEC de Louvain-la-Neuve en 3ème Technologie de l'Informatique.</p>
                 </div>
             </div>
             <div class="row mb-5">
                 <div class="col-12" data-aos="fade-up" data-aos-delay="300">
-                    <img src="images/hero_1.jpg" alt="Image" class="img-fluid">
+                    <img src="images/hero_01.jpg" alt="Image" class="img-fluid">
                 </div>
             </div>
 
@@ -133,11 +133,14 @@
                 <div class="col-md-6 col-lg-4 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="600">
                     <img src="images/logo_5.png" alt="Image" class="img-fluid">
                 </div>
-                <!--
+
                 <div class="col-md-6 col-lg-4 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="700">
-                  <img src="images/logo_6.png" alt="Image" class="img-fluid">
+                    <img src="images/logo_6.png" alt="Image" class="img-fluid">
                 </div>
-              -->
+                <div class="col-md-6 col-lg-4 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="700">
+                    <img src="images/logo_7.png" alt="Image" class="img-fluid">
+                </div>
+
             </div>
         </div>
     </div>

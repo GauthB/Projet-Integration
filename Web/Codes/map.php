@@ -12,7 +12,7 @@ $eventInfos = $eventInfoQuery->fetchAll(PDO::FETCH_ASSOC);
 
     <link rel="stylesheet" href="css/add.css">
     <ul>
-<!--        Boutton Event-->
+<!-- ################################    Boutton Event  ####################################-->
         <?php
         foreach ($eventInfos as $eventName) {
             echo '<li><input classe="btnMap" type="button" value="' . $eventName['event_name'] . '" id="btn' . $eventName['id_event'] . '"></li>';
@@ -20,7 +20,7 @@ $eventInfos = $eventInfoQuery->fetchAll(PDO::FETCH_ASSOC);
         ?>
    </ul>
 
-<!--    Titre Event-->
+<!--  ####################################  Titre Event   ################################################-->
     <?php for ($i=0; $i<count($eventInfos); $i++): ?>
         <div id="title<?=$eventInfos[$i]['id_event']?>" class="eventInfo" <?php if($i != 0) echo 'style="display:none"'?>>
             <span class="d-block mb-3 caption" data-aos="fade-up" style="text-align: center;text-decoration: underline;"><i><?=$eventInfos[$i]['event_name']?></i></span>
@@ -29,7 +29,7 @@ $eventInfos = $eventInfoQuery->fetchAll(PDO::FETCH_ASSOC);
 
     <div id="mapid" style=" height: 480px "></div>
 
-<!--    Info sur les évènements-->
+<!--  ####################################  Info sur les évènements   ################################################-->
     <h2>Info</h2>
 
     <?php for ($i=0; $i<count($eventInfos); $i++): ?>
@@ -38,6 +38,8 @@ $eventInfos = $eventInfoQuery->fetchAll(PDO::FETCH_ASSOC);
         </p>
     <?php endfor;?>
 
+
+<!--  ###################################################################################################################-->
     <script>
 
         <?php
@@ -54,7 +56,10 @@ $eventInfos = $eventInfoQuery->fetchAll(PDO::FETCH_ASSOC);
 
         $stageInfo = $stageQuery->fetchAll(PDO::FETCH_ASSOC);
 
-        // créé les points sur la carte
+
+        //############################################################################################################
+        // Créer les points sur la carte
+        //############################################################################################################
         foreach ($stageInfo as $stage) {
             echo "\n\t\t" . 'L.marker([ ' . $stage['stage_latitude'] . ', ' . $stage['stage_longitude'] . ']).bindPopup("<b>' . $stage['stage_name'] . '</b><br>Il y a 0 participant(s)!<br> Le nombre maximum de participant est estimé à ' . $stage['max_people'] . '").addTo(layer' . $stage['id_event'] . ');';
         }
@@ -74,7 +79,10 @@ $eventInfos = $eventInfoQuery->fetchAll(PDO::FETCH_ASSOC);
             accessToken: 'pk.eyJ1IjoiZ2F1dGhpZXJiIiwiYSI6ImNrMTQzODZuZDBlcDkzb29henlhMndvMnEifQ.nrVFAyoW00lvhk94CeCz0Q'
         }).addTo(mymap);
 
-        // Affiche de nouveau points lorsque l'on clique sur un boutton
+        //############################################################################################################
+        // ############ Affiche de nouveau points lorsque l'on clique sur un boutton  ################################
+        //############################################################################################################
+
         <?foreach ($eventInfos as $eventName) :?>
             document.getElementById('btn<?=$eventName['id_event']?>').onclick = function () {
                 if (!mymap.hasLayer(layer<?=$eventName['id_event']?>)) {
