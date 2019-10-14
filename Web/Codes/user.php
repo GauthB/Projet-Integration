@@ -44,7 +44,7 @@
                             <li><a href="equipe.php">Groupe</a></li>
                             <li><a href="lieux.php">Lieux</a></li>
                             <li><a href="pageContact.php">Contacts</a></li>
-                            <li class="cta"><a href="admin.php">S'identifier</a></li>
+                            <li class="cta"><a href="user.php">S'identifier</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -93,8 +93,8 @@
                         <div class="row form-group">
                             <div class="col-md-12">
 
-                                     <input  name="envoi" type="submit" id="submitContact" value="S'identifier" class="btn btn-primary py-2 px-4 text-white">
-
+                                     <input   name="envoi" type="submit" id="submitContact" value="S'identifier" class="btn btn-primary py-2 px-4 text-white">
+                            </br> <a href="admin.php">TESTER l'interface admin client</a>
                             </div>
                         </div>
 

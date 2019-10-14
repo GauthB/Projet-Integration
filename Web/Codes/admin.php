@@ -46,7 +46,7 @@
                             <li><a href="equipe.php">Groupe</a></li>
                             <li><a href="lieux.php">Lieux</a></li>
                             <li><a href="pageContact.php">Contacts</a></li>
-                            <li class="cta"><a href="admin.php">S'identifier</a></li>
+                            <li class="cta"><a href="user.php">S'identifier</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -60,7 +60,9 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-10">
-                    <h1 class="d-block mb-4" data-aos="fade-up" data-aos-delay="100">Bienvenue dans ton interface!</h1>
+                    <span class="d-block mb-3 caption" data-aos="fade-up">Nom du client...</span>
+                    <h1 class="d-block mb-4" data-aos="fade-up" data-aos-delay="100">Bienvenue dans votre interface!</h1>
+
                 </div>
             </div>
         </div>
@@ -70,24 +72,52 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6" data-aos="fade-up">
-                    <form id= "formContact" class="contact-form" action="" method="post">
+                    <br id= "formContact" class="contact-form" action="" method="post">
 
 
+                 <h2 class="d-block mb-3 caption" data-aos="fade-up">Ajouter un évènement</h2>
+                    <div class="border-top pt-5">
+                    </div>
                         <div class="row form-group">
 
                             <div class="col-md-12">
                                 <label class="" for="email">Nom de l'évènement</label>
-                                <input type="email"  id="email" class="input form-control" name="votremail" placeholder="Votre email">
+                                <input type="email"  id="email" class="input form-control" name="votremail" placeholder="Nom de lévènement">
                             </div>
                         </div>
 
                         <div class="row form-group">
 
                             <div class="col-md-12">
-                                <label class="" >sujet</label>
-                                <input type="text" id="objet"  class="input form-control" name="objet" placeholder="Sujet">
+                                <label class="" >Dates</label>
+                                <input type="text" id="objet"  class="input form-control" name="objet" placeholder="Date du début de l'évènement"></br>
+                                <input type="text" id="objet"  class="input form-control" name="objet" placeholder="Date de la fin de l'évènement">
                             </div>
                         </div>
+                    <div class="row form-group">
+
+                        <div class="col-md-12">
+                            <label class="" >Adresse</label>
+                            <input type="text" id="objet"  class="input form-control" name="objet" placeholder="L'adresse">
+                        </div>
+                    </div>
+                        <div class="row form-group">
+                            <div class="col-md-12">
+                                <label class="" for="message">Informations</label>
+                                <textarea class="input form-control" placeholder="Informations utiles à savoir sur votre évènement" id="message" name="message" ></textarea>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-12">
+                                <input  name="envoi" type="submit" id="submitContact" value="Ajouter un évènement" class="btn btn-primary py-2 px-4 text-white">
+                            </div>
+                        </div>
+
+
+                    </br> <h2 class="d-block mb-3 caption" data-aos="fade-up">Ajouter une scène</h2>
+                    <div class="border-top pt-5">
+                    </div>
+
 
                         <div class="row form-group">
                             <div class="col-md-12">
@@ -109,19 +139,6 @@
 
                     </form>
                     <div id="errorContact"></div>
-                </div>
-                <div class="col-md-5 ml-auto" data-aos="fade-up" data-aos-delay="100">
-                    <div class="p-4 mb-3">
-                        <p class="mb-0 font-weight-bold text-secondary text-uppercase mb-3">Addresse</p>
-                        <p class="mb-4"><a href="#">Louvain-la-Neuve</a></p>
-
-                        <p class="mb-0 font-weight-bold text-secondary text-uppercase mb-3">Tél.</p>
-                        <p class="mb-4"><a href="#">+32 472/30.76.70</a></p>
-
-                        <p class="mb-0 font-weight-bold text-secondary text-uppercase mb-3">Email</p>
-                        <p class="mb-0"><a href="#">peopleflux@gmail.com</a></p>
-
-                    </div>
                 </div>
             </div>
         </div>
