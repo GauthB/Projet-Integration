@@ -61,7 +61,7 @@
             <div class="row align-items-center">
                 <div class="col-md-10">
                     <span class="d-block mb-3 caption" data-aos="fade-up">Nom du client...</span>
-                    <h1 class="d-block mb-4" data-aos="fade-up" data-aos-delay="100">Bienvenue dans votre interface!</h1>
+                    <h1 class="d-block mb-4" data-aos="fade-up" data-aos-delay="100">Bienvenue dans l'interface!</h1>
 
                 </div>
             </div>
@@ -76,9 +76,9 @@
 
 
                  <h2 class="d-block mb-3 caption" data-aos="fade-up">Ajouter un évènement</h2>
-                    <div class="border-top pt-5">
+                    <div class="border-top pt-5" data-aos="fade-up">
                     </div>
-                        <div class="row form-group">
+                        <div class="row form-group" data-aos="fade-up">
 
                             <div class="col-md-12">
                                 <label class="" for="email">Nom de l'évènement</label>
@@ -86,7 +86,7 @@
                             </div>
                         </div>
 
-                        <div class="row form-group">
+                        <div class="row form-group" data-aos="fade-up">
 
                             <div class="col-md-12">
                                 <label class="" >Dates</label>
@@ -94,20 +94,20 @@
                                 <input type="text" id="objet"  class="input form-control" name="objet" placeholder="Date de la fin de l'évènement">
                             </div>
                         </div>
-                    <div class="row form-group">
+                    <div class="row form-group" data-aos="fade-up">
 
                         <div class="col-md-12">
                             <label class="" >Adresse</label>
                             <input type="text" id="objet"  class="input form-control" name="objet" placeholder="L'adresse">
                         </div>
                     </div>
-                        <div class="row form-group">
+                        <div class="row form-group" data-aos="fade-up">
                             <div class="col-md-12">
                                 <label class="" for="message">Informations</label>
                                 <textarea class="input form-control" placeholder="Informations utiles à savoir sur votre évènement" id="message" name="message" ></textarea>
                             </div>
                         </div>
-                        <div class="row form-group">
+                        <div class="row form-group" data-aos="fade-up">
                             <div class="col-md-12">
                                 <input  name="envoi" type="submit" id="submitContact" value="Ajouter un évènement" class="btn btn-primary py-2 px-4 text-white">
                             </div>
@@ -115,20 +115,40 @@
 
 
                     </br> <h2 class="d-block mb-3 caption" data-aos="fade-up">Ajouter une scène</h2>
-                    <div class="border-top pt-5">
+                    <div class="border-top pt-5" data-aos="fade-up">
                     </div>
 
 
-                        <div class="row form-group">
+                        <div class="row form-group" data-aos="fade-up">
                             <div class="col-md-12">
-                                <label class="" for="message">Message</label>
-                                <textarea class="input form-control" placeholder="Message" id="message" name="message" ></textarea>
+                                <label class="" for="message">Nom</label>
+                                <input type="text" id="objet"  class="input form-control" name="objet" placeholder="Nom de la scène à ajouter">
                             </div>
                         </div>
+                    <div class="row form-group" data-aos="fade-up">
+                        <div class="col-md-12">
+                            <label class="" for="message">Coordonnées</label>
+                            <input type="text" id="objet"  class="input form-control" name="objet" placeholder="Latitude">
+                            <input type="text" id="objet"  class="input form-control" name="objet" placeholder="Longitude">
+                        </div>
+                    </div>
+                    <div class="row form-group" data-aos="fade-up">
+                        <div class="col-md-12">
+                            <label class="" for="message">Nombre Max de participants</label>
+                            <input type="text" id="objet"  class="input form-control" name="objet" placeholder="Estimation">
+                        </div>
+                    </div>
+                    <div class="row form-group" data-aos="fade-up">
+                        <div class="col-md-12">
+                            <label class="" for="message">Horaires</label>
+                            <input type="text" id="objet"  class="input form-control" name="objet" placeholder="Heure de début">
+                            <input type="text" id="objet"  class="input form-control" name="objet" placeholder="Heure de fin">
+                        </div>
+                    </div>
 
-                        <div class="row form-group">
+                        <div class="row form-group" data-aos="fade-up">
                             <div class="col-md-12">
-                                <input  name="envoi" type="submit" id="submitContact" value="Envoyer" class="btn btn-primary py-2 px-4 text-white">
+                                <input  name="envoi" type="submit" id="submitContact" value="Ajouter une scène" class="btn btn-primary py-2 px-4 text-white">
                             </div>
                         </div>
 
