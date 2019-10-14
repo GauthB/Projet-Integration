@@ -36,4 +36,4 @@ const styles = StyleSheet.create({
 export default APropos
 
 
-// L'alignement du logo ne se fait pas
+// L'alignement du logo PeopleFlux ne se fait pas
