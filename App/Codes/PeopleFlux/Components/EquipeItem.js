@@ -1,21 +1,22 @@
 
 import React from 'react'
 import { StyleSheet, View, Text, Image } from 'react-native'
+import { getImageFromData } from '../Helpers/GetImages'
 
 
 class EquipeItem extends React.Component {
 
+
   render() {
     const equipe=this.props.equipe
-    const image = this.props.equipe.picture
-    console.log(image);
+
+
     return (
       <View style={styles.main_container}>
         <View style={styles.image_container}>
           <Image
-            style={styles.image}
-            source={require("../Images/ludo.jpg")}
-          />
+          style ={styles.image}
+          source={{uri: 'https://peopleflux.gauthierbohyn.com/images/'+ equipe.picture}} />
         </View>
         <View style={styles.content_container}>
           <View style={styles.name_container}>
