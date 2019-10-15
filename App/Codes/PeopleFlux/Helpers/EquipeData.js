@@ -4,49 +4,49 @@ export default data = [
       id:1,
       name:"Bohyn",
       firstname:"Gauthier",
-      picture:"../Images/gauthier.png",
+      picture:"../Images/gauthier.jpg",
       status:"Product Owner"
    },
    {
       id:2,
       name:"Ponjee",
       firstname:"Aymeric",
-      picture:"../Images/aymeric.png",
+      picture:"../Images/aymeric.jgp",
       status:"Scrum Master"
    },
    {
       id:3,
       name:"Hermant",
       firstname:"Thibaut",
-      picture:"../Images/thibaut.png",
+      picture:"../Images/thibaut.jgp",
       status:"Developpeur"
    },
    {
       id:4,
       name:"Paquet",
       firstname:"Robin",
-      picture:"../Images/robin.png",
+      picture:"../Images/robin.jgp",
       status:"Developpeur"
    },
    {
       id:5,
       name:"Van den Dorpe",
       firstname:"Ludo",
-      picture:"../Images/ludo.png",
+      picture:"../Images/ludo.jgp",
       status:"Developpeur"
    },
    {
       id:6,
       name:"Pestiaux",
       firstname:"Tristan",
-      picture:"../Images/tristan.png",
+      picture:"../Images/tristan.jgp",
       status:"Developpeur"
    },
    {
       id:7,
       name:"Hanquet",
       firstname:"Brian",
-      picture:"../Images/brian.png",
+      picture:"../Images/brian.jgp",
       status:"Developpeur"
    }
 ]
