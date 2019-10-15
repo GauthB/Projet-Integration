@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>PeopleFlux Contact</title>
+    <title>PeopleFlux - Ajout client</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -18,6 +18,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script type="text/javascript" src="js/contact.js"></script>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/x-icon" href="LogoSmall.ico"/>
 </head>
 <body>
 
@@ -45,8 +46,8 @@
                             <li><a href="info.php">A propos</a></li>
                             <li><a href="equipe.php">Groupe</a></li>
                             <li><a href="lieux.php">Lieux</a></li>
-                            <li><a href="pageContact.php">Contacts</a></li>
-                            <li class="cta"><a href="admin.php">S'identifier</a></li>
+                            <li><a href="pageContact.php">Contact</a></li>
+                            <li class="cta"><a href="user.php">S'identifier</a></li>
                         </ul>
                     </nav>
                 </div>

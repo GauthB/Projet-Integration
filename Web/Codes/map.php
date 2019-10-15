@@ -15,7 +15,19 @@ $eventInfos = $eventInfoQuery->fetchAll(PDO::FETCH_ASSOC);
 <!-- ################################    Boutton Event  ####################################-->
         <?php
         foreach ($eventInfos as $eventName) {
-            echo '<li><input classe="btnMap" type="button" value="' . $eventName['event_name'] . '" id="btn' . $eventName['id_event'] . '"></li>';
+            echo '<input style="
+
+background:    #d84e31;
+border:        1px solid #000000;
+border-radius: 12px;
+padding:       5px 12px;
+color:         #ffffff;
+display:       inline-block;
+font:          normal bold 24px/1 "Calibri", sans-serif;
+text-align:    center;
+text-shadow:   0px 0px #000000;
+
+" type="button" value="' . $eventName['event_name'] . '" id="btn' . $eventName['id_event'] . '"></br></br>';
         }
         ?>
    </ul>

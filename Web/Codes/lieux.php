@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>PeopleFlux Lieux</title>
+    <title>PeopleFlux - Lieux</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -17,7 +17,7 @@
       <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
       <link rel="stylesheet" href="css/aos.css">
       <link rel="stylesheet" href="css/add.css">
-
+      <link rel="icon" type="image/x-icon" href="LogoSmall.ico"/>
     <link rel="stylesheet" href="css/style.css">
 
 
@@ -64,7 +64,7 @@
                     <li><a href="info.php">A propos</a></li>
                     <li><a href="equipe.php">Groupe</a></li>
                     <li class="active"><a href="lieux.php">Lieux</a></li>
-                    <li><a href="pageContact.php">Contacts</a></li>
+                    <li><a href="pageContact.php">Contact</a></li>
                     <li class="cta"><a href="user.php">S'identifier</a></li>
                 </ul>
             </nav>

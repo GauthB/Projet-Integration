@@ -30,8 +30,20 @@
                 <br>
 
                     S'identifier en tant qu'admin:
-                    <input style="width:100px;" type="password" name="mot_de_passe" />
-                    <input type="submit" value="v" />
+                    <input style="width:100px; " type="password" name="mot_de_passe" />
+                    <input style="
+
+
+background:    #d84e31;
+border:        1px solid #000000;
+border-radius: 12px;
+padding:       5px 8px;
+color:         #ffffff;
+display:       inline-block;
+font:          normal bold 24px/1 "Calibri", sans-serif;
+                text-align:    center;
+                text-shadow:   0px 0px #000000;
+                    " type="submit" value="v" />
                 </p>
             </form>
 

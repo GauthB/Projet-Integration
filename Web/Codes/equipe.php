@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>PeopleFlux Equipe</title>
+    <title>PeopleFlux - Equipe</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
     <link rel="stylesheet" href="css/aos.css">
-
+    <link rel="icon" type="image/x-icon" href="LogoSmall.ico"/>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -44,7 +44,7 @@
                             <li><a href="info.php">A propos</a></li>
                             <li class="active"><a href="equipe.php">Groupe</a></li>
                             <li><a href="lieux.php">Lieux</a></li>
-                            <li><a href="pageContact.php">Contacts</a></li>
+                            <li><a href="pageContact.php">Contact</a></li>
                             <li class="cta"><a href="user.php">S'identifier</a></li>
                         </ul>
                     </nav>
