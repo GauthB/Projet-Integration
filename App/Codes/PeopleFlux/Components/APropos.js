@@ -1,23 +1,25 @@
 import React from 'react'
 import { StyleSheet, View, TextInput, Button, Text, SafeAreaView, TouchableOpacity, Image, ScrollView, FlatList } from 'react-native'
-import members from '../Helpers/EquipeData'
-import EquipeList from './EquipeList'
+import equipeData from '../Helpers/EquipeData'
+import EquipeItem  from './EquipeItem'
 
 class APropos extends React.Component {
 
   render() {
     return (
         <View style={styles.main_container}>
-          <TouchableOpacity style={styles.TouchableOpacity}>
             <View style={styles.title_container}>
-              <Text style={styles.title_text_people}> People</Text><Text style={styles.title_text_flux}>Flux </Text>
+              <Text style={styles.title_text_people}>People</Text><Text style={styles.title_text_flux}>Flux</Text>
             </View>
-          </TouchableOpacity>
-          <Text style={styles.text_a_propos}>A Propos </Text>
-          <Text style={styles.text_notre_equipe}>Notre equipe </Text>
-          <ScrollView style={styles.scrollview_container}>
-            <EquipeList/>
-          </ScrollView>
+            <Text style={styles.text_a_propos}>A Propos</Text>
+            <Text style={styles.text_notre_equipe}>Notre equipe</Text>
+
+            <FlatList
+            data={equipeData}
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={({item}) => <EquipeItem equipe={item}/>}
+            />
+
 
         </View>
     )

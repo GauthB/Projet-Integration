@@ -1,24 +1,27 @@
 import React from 'react'
-import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native'
-import { EquipeData } from '../Helpers/EquipeData'
-
+import { StyleSheet, View, Text, Image } from 'react-native'
 
 
 class EquipeItem extends React.Component {
+
+class EquipeItem extends React.Component {
   render() {
-    const membre = this.props.membre
+    const equipe=this.props.equipe
     return (
       <View style={styles.main_container}>
         <View style={styles.image_container}>
-
+          <Image
+            style={styles.image}
+            source={require("../Images/thibaut.png")}
+          />
         </View>
         <View style={styles.content_container}>
           <View style={styles.name_container}>
-            <Text style={styles.firstname_text}>{membre.firstname}</Text>
-            <Text style={styles.name_text}>{membre.name}</Text>
+            <Text style={styles.firstname_text}>{equipe.firstname}</Text>
+            <Text style={styles.name_text}>{equipe.name}</Text>
           </View>
           <View style={styles.statut_container}>
-            <Text style={styles.status_text}>{membre.status}</Text>
+            <Text style={styles.status_text}>{equipe.status}</Text>
           </View>
         </View>
       </View>
