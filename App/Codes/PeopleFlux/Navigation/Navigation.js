@@ -1,54 +1,68 @@
-import {createAppContainer} from 'react-navigation'
-import {createDrawerNavigator, DrawerActions} from 'react-navigation-drawer';
-import {createStackNavigator} from 'react-navigation-stack';
+import React from 'react';
 import { Ionicons } from '@expo/vector-icons'
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 
 
-import {StyleSheet, Image} from 'react-native'
-import React from 'react'
+import { createDrawerNavigator, DrawerActions } from 'react-navigation-drawer';
 
 import APropos from '../Components/APropos'
+import Contact from '../Components/Contact'
 
-const AProposStackNavigator = createStackNavigator({
-    APropos: {
-      screen: APropos,
-      navigationOptions: ({ navigation }) => {
-        const { state } = navigation;
 
-        if(state.isDrawerOpen) {
-          return {
-            headerLeft: ({titleStyle}) => (
-              <TouchableOpacity onPress={() => {navigation.dispatch(DrawerActions.toggleDrawer())}}>
-                <Ionicons name="ios-close" style={styles.menuClose} size={36} color={titleStyle} />
-              </TouchableOpacity>
-            )
-          }
-        }
-        else {
-          return {
-            headerLeft: ({titleStyle}) => (
-              <TouchableOpacity onPress={() => {navigation.dispatch(DrawerActions.toggleDrawer())}}>
-                <Ionicons name="ios-menu" style={styles.menuOpen} size={32} color={titleStyle} />
-              </TouchableOpacity>
-            )
-          }
-        }
-      }
-    }
-  })
+
+
+
+
 
 const DrawerNavigator = createDrawerNavigator({
   APropos: {
     screen: APropos,
     navigationOptions: ({ navigation }) => ({
-      title: 'Home Screen',
-      drawerLabel: 'Home',
-      drawerIcon: () => (
-        <Ionicons name="ios-home" size={20} />
-      )
+      title: 'APropos Screen',
+      drawerLabel: 'A Propos',
     })
+  },
+  Contact: {
+    screen: Contact,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Contact Screen',
+      drawerLabel: 'Contact',
+
+    })
+  },
+},
+  {
+    drawerPosition: 'right',
+    drawerOpenRoute: 'DrawerRightOpen',
+    drawerType: 'slide',
+    drawerBackgroundColor: '#232531',
+  }
+);
+
+
+const StackNavigator = createStackNavigator({
+  DrawerNavigator: {
+    screen: DrawerNavigator,
+    navigationOptions: ({ navigation }) => {
+      const { state } = navigation;
+
+
+        return {
+          headerLeft: ({titleStyle}) => (
+            <View style={styles.container}>
+              <TouchableOpacity onPress={() => {navigation.dispatch(DrawerActions.toggleDrawer())}}>
+                <Ionicons name="ios-menu" style={styles.menuOpen} size={40} color='#fff' />
+              </TouchableOpacity>
+            </View>
+          )
+        }
+
+    }
   }
 })
+
 
 const styles = StyleSheet.create({
   container: {
@@ -59,12 +73,15 @@ const styles = StyleSheet.create({
   },
   menuOpen: {
     marginLeft: 10,
-    marginTop: 10
+    marginTop: 10,
+    backgroundColor: '#232531'
   },
   menuClose: {
     marginLeft: 14,
-    marginTop: 10
+    marginTop: 10,
+    backgroundColor: '#232531'
+
   }
 });
 
-export default createAppContainer(DrawerNavigator);
+export default createAppContainer(StackNavigator);
