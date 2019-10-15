@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, TextInput, Button, Text, SafeAreaView, TouchableOpacity, Image, ScrollView, FlatList } from 'react-native'
+import { StyleSheet, View, TextInput, Button, Text, SafeAreaView,Alert, TouchableOpacity, Image, ScrollView, FlatList } from 'react-native'
 
 
 
@@ -18,33 +18,35 @@ class Contact extends React.Component {
             <View style={styles.title_container}>
               <Text style={styles.title_text_people}>People</Text><Text style={styles.title_text_flux}>Flux</Text>
             </View>
-            <Text style={styles.text_a_propos}>Contact</Text>
-            <Text style={styles.text_notre_equipe}>Que souhaitez vous?</Text>
-            <Text style={styles.champ_mail}>Email</Text>
+          <Text style={styles.text_a_propos}>Contact</Text>
+          <Text style={styles.text_notre_equipe}>Que souhaitez vous?</Text>
 
-            <TextInput
-        style={{height: 35, borderColor: 'red',marginBottom:18, borderWidth: 1,borderRadius:25,overflow: 'hidden'}}
+
+      <Text style={styles.champ_mail}>Email</Text>
+      <TextInput
+        style={styles.bordure_mail}
         onChangeText={(text) => this.setState({text})}
         value={this.state.text}
       />
+
       <Text style={styles.champ_sujet}>Sujet</Text>
       <TextInput
-  style={{height: 40, borderColor: 'red',marginTop: 1, borderWidth: 1,borderRadius:25,overflow: 'hidden'}}
-  onChangeText={(text) => this.setState({text})}
-  value={this.sujet.text}
-/>
+        style={styles.bordure_sujet}
+        onChangeText={(text) => this.setState({text})}
+        value={this.sujet.text}
+      />
+
       <Text style={styles.champ_message}>Message</Text>
       <TextInput
-    style={{height: 100, borderColor: 'red',marginTop: 1, borderWidth: 1,borderRadius:25,overflow: 'hidden'}}
-    onChangeText={(text) => this.setState({text})}
-    value={this.message.text}
-/>
-
-
-
-
-
+        style={styles.bordure_message}
+        onChangeText={(text) => this.setState({text})}
+        value={this.message.text}
+      />
+        <View style={styles.btn_envoie}>
+        <Button title='Envoyer' color='white' onPress={() => Alert.alert('le commercant rend pas la monnaie')}/>
         </View>
+        </View>
+
     )
   }
 }
@@ -108,6 +110,47 @@ const styles = StyleSheet.create({
     color :'white',
     marginLeft:15,
     marginTop:20,
+  },
+  bordure_mail:{
+    height: 35,
+    borderColor: '#404040',
+    marginBottom:18,
+    marginLeft:6,
+    marginRight:6,
+    borderWidth: 1,
+    borderRadius:25,
+    overflow: 'hidden',
+    backgroundColor: '#404040'
+  },
+  bordure_sujet:{
+    height: 35,
+    borderColor: '#404040',
+    marginTop: 1,
+    marginLeft:6,
+    marginRight:6,
+    borderWidth: 1,
+    borderRadius:25,
+    overflow: 'hidden',
+    backgroundColor: '#404040'
+  },
+  bordure_message:{
+    height: 90,
+    borderColor: '#404040',
+    marginTop: 1,
+    marginLeft:6,
+    marginRight:6,
+    borderWidth: 1,
+    borderRadius:25,
+    backgroundColor: '#404040'
+  },
+  btn_envoie:{
+    borderWidth:1,
+    backgroundColor: '#FF5800',
+    borderRadius:30,
+    marginTop:25,
+    marginLeft:6,
+    marginRight:6,
+
   }
 
 
