@@ -7,12 +7,14 @@ class EquipeItem extends React.Component {
 
   render() {
     const equipe=this.props.equipe
+    const image = this.props.equipe.picture
+    console.log(image);
     return (
       <View style={styles.main_container}>
         <View style={styles.image_container}>
           <Image
             style={styles.image}
-            source={require("../Images/thibaut.png")}
+            source={require("../Images/ludo.jpg")}
           />
         </View>
         <View style={styles.content_container}>
@@ -31,7 +33,8 @@ class EquipeItem extends React.Component {
 
 const styles = StyleSheet.create({
   main_container: {
-    height: 190,
+    height: 75,
+    marginTop:5,
     flexDirection: 'row'
   },
   image_container:{
@@ -44,30 +47,32 @@ const styles = StyleSheet.create({
   },
   content_container: {
     flex: 1,
-    margin: 5
+    margin: 5,
+    marginLeft:15
   },
   name_container: {
     flex: 3,
     flexDirection: 'row'
   },
   firstname_text: {
-    fontWeight: 'bold',
     fontSize: 20,
-    flex: 1,
-    flexWrap: 'wrap',
-    paddingRight: 5
+    color: 'white',
+    height:30
+
   },
   name_text: {
-    fontWeight: 'bold',
-    fontSize: 26,
-    color: '#666666'
+    fontSize: 20,
+    color: 'white',
+    paddingLeft:5,
+    height:30
   },
   statut_container: {
     flex: 7
   },
   status_text: {
     fontStyle: 'italic',
-    color: '#666666'
+    color: '#ff5733',
+    marginTop:5
   }
 })
 

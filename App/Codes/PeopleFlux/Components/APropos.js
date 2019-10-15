@@ -12,11 +12,11 @@ class APropos extends React.Component {
             </View>
             <Text style={styles.text_a_propos}>A Propos</Text>
             <Text style={styles.text_notre_equipe}>Notre equipe</Text>
-          
+
             <FlatList
-            data={equipeData}
-            keyExtractor={(item) => item.id.toString()}
-            renderItem={({item}) => <EquipeItem equipe={item}/>}
+              data={equipeData}
+              keyExtractor={(item) => item.id.toString()}
+              renderItem={({item}) => <EquipeItem equipe={item}/>}
             />
 
 
@@ -65,7 +65,8 @@ const styles = StyleSheet.create({
     fontSize:20,
     color:'white',
     marginLeft:10,
-    marginTop:5
+    marginTop:5,
+    marginBottom:15
   },
   scrollview_container:{
 
