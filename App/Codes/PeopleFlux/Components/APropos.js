@@ -1,5 +1,7 @@
 import React from 'react'
 import { StyleSheet, View, TextInput, Button, Text, SafeAreaView, TouchableOpacity, Image } from 'react-native'
+import { EquipeList } from './EquipeList'
+import { EquipeItem } from './EquipeItem'
 
 class APropos extends React.Component {
   render() {
@@ -9,9 +11,13 @@ class APropos extends React.Component {
             <View style={styles.title_container}>
               <Text style={styles.title_text_people}> People</Text><Text style={styles.title_text_flux}>Flux </Text>
             </View>
-            <Text style={styles.text_a_propos}>A Propos </Text>
-            <Text style={styles.text_notre_equipe}>Notre equipe </Text>
           </TouchableOpacity>
+          <Text style={styles.text_a_propos}>A Propos </Text>
+          <Text style={styles.text_notre_equipe}>Notre equipe </Text>
+          <ScrollView style={styles.scrollview_container}>
+            <EquipeList/>
+          </ScrollView>
+
         </View>
     )
   }
@@ -58,7 +64,11 @@ const styles = StyleSheet.create({
     color:'white',
     marginLeft:10,
     marginTop:5
+  },
+  scrollview_container:{
+
   }
+
 })
 
 export default APropos
