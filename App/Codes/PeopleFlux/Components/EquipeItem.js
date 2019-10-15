@@ -1,33 +1,27 @@
 
 import React from 'react'
-import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native'
+import { StyleSheet, View, Text, Image } from 'react-native'
 
 
-class FilmItem extends React.Component {
-  constructor(props) {
-      super(props)
-  }
+class EquipeItem extends React.Component {
 
   render() {
-
-    const member=this.props.member
-
-
+    const equipe=this.props.equipe
     return (
       <View style={styles.main_container}>
         <View style={styles.image_container}>
-          /*<Image
+          <Image
             style={styles.image}
-            source={require(member.picture)}
-          />*/
+            source={require("../Images/thibaut.png")}
+          />
         </View>
         <View style={styles.content_container}>
           <View style={styles.name_container}>
-            <Text style={styles.firstname_text}>{member.firstname}</Text>
-            <Text style={styles.name_text}>{member.name}</Text>
+            <Text style={styles.firstname_text}>{equipe.firstname}</Text>
+            <Text style={styles.name_text}>{equipe.name}</Text>
           </View>
           <View style={styles.statut_container}>
-            <Text style={styles.status_text}>{member.status}</Text>
+            <Text style={styles.status_text}>{equipe.status}</Text>
           </View>
         </View>
       </View>
@@ -77,4 +71,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default FilmItem
+export default EquipeItem
