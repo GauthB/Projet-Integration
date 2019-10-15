@@ -3,8 +3,6 @@ import { StyleSheet, View, Text, Image } from 'react-native'
 
 
 class EquipeItem extends React.Component {
-
-class EquipeItem extends React.Component {
   render() {
     const equipe=this.props.equipe
     const image = this.props.equipe.picture
