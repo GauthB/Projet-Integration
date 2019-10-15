@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, TextInput, Button, Text, SafeAreaView, TouchableOpacity, Image } from 'react-native'
+import { StyleSheet, View, TextInput, Button, Text, SafeAreaView, TouchableOpacity, Image,ScrollView } from 'react-native'
 import { EquipeList } from './EquipeList'
 import { EquipeItem } from './EquipeItem'
 

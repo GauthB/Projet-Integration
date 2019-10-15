@@ -3,7 +3,7 @@ import React from 'react'
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native'
 
 
-class FilmItem extends React.Component {
+class EquipeItem extends React.Component {
   constructor(props) {
       super(props)
   }
@@ -16,10 +16,7 @@ class FilmItem extends React.Component {
     return (
       <View style={styles.main_container}>
         <View style={styles.image_container}>
-          /*<Image
-            style={styles.image}
-            source={require(member.picture)}
-          />*/
+
         </View>
         <View style={styles.content_container}>
           <View style={styles.name_container}>
@@ -77,4 +74,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default FilmItem
+export default EquipeItem
