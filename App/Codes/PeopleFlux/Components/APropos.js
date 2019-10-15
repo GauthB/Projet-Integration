@@ -2,7 +2,6 @@ import React from 'react'
 import { StyleSheet, View, TextInput, Button, Text, SafeAreaView, TouchableOpacity, Image, ScrollView, FlatList } from 'react-native'
 import equipeData from '../Helpers/EquipeData'
 import EquipeItem  from './EquipeItem'
-import { getImageFromData } from '../Helpers/GetImages'
 
 class APropos extends React.Component {
   render() {

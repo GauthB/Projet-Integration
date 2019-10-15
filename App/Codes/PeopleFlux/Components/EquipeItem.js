@@ -1,7 +1,6 @@
 
 import React from 'react'
 import { StyleSheet, View, Text, Image } from 'react-native'
-import { getImageFromData } from '../Helpers/GetImages'
 
 
 class EquipeItem extends React.Component {
