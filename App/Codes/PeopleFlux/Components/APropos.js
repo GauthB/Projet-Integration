@@ -20,7 +20,6 @@ class APropos extends React.Component {
               renderItem={({item}) => <EquipeItem equipe={item}/>}
             />
 
-
         </View>
     )
   }
