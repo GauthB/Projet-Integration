@@ -1,18 +1,12 @@
-
 import React from 'react'
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native'
+import { EquipeData } from '../Helpers/EquipeData'
+
 
 
 class EquipeItem extends React.Component {
-  constructor(props) {
-      super(props)
-  }
-
   render() {
-
-    const member=this.props.member
-
-
+    const membre = this.props.membre
     return (
       <View style={styles.main_container}>
         <View style={styles.image_container}>
@@ -20,11 +14,11 @@ class EquipeItem extends React.Component {
         </View>
         <View style={styles.content_container}>
           <View style={styles.name_container}>
-            <Text style={styles.firstname_text}>{member.firstname}</Text>
-            <Text style={styles.name_text}>{member.name}</Text>
+            <Text style={styles.firstname_text}>{membre.firstname}</Text>
+            <Text style={styles.name_text}>{membre.name}</Text>
           </View>
           <View style={styles.statut_container}>
-            <Text style={styles.status_text}>{member.status}</Text>
+            <Text style={styles.status_text}>{membre.status}</Text>
           </View>
         </View>
       </View>

@@ -1,5 +1,5 @@
 
-export default equipeData = [
+export default data = [
    {
       id:1,
       name:"Bohyn",

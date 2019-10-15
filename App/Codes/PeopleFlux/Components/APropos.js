@@ -1,9 +1,10 @@
 import React from 'react'
-import { StyleSheet, View, TextInput, Button, Text, SafeAreaView, TouchableOpacity, Image,ScrollView } from 'react-native'
-import { EquipeList } from './EquipeList'
-import { EquipeItem } from './EquipeItem'
+import { StyleSheet, View, TextInput, Button, Text, SafeAreaView, TouchableOpacity, Image, ScrollView, FlatList } from 'react-native'
+import members from '../Helpers/EquipeData'
+import EquipeList from './EquipeList'
 
 class APropos extends React.Component {
+
   render() {
     return (
         <View style={styles.main_container}>

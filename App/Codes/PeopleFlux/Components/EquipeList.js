@@ -3,6 +3,7 @@ import { StyleSheet, FlatList } from 'react-native'
 import { EquipeItem } from './EquipeItem'
 import { equipeData } from '../Helpers/EquipeData'
 
+
 class EquipeList extends React.Component {
 
   constructor(props) {
@@ -13,14 +14,12 @@ class EquipeList extends React.Component {
     return (
         <FlatList
           style={styles.list}
-          data={EquipeItem}
+          data={members}
           keyExtractor={(item) => item.id.toString()}
-          renderItem={({item}) => (
-            <EquipeItem
-              member={item}
-            />
+          renderItem={({item}) => <EquipeItem membre={item}/>}
           )}
         />
+
     )
   }
 }
