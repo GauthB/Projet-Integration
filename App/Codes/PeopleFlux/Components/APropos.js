@@ -8,9 +8,6 @@ class APropos extends React.Component {
   render() {
     return (
         <View style={styles.main_container}>
-            <View style={styles.title_container}>
-              <Text style={styles.title_text_people}>People</Text><Text style={styles.title_text_flux}>Flux</Text>
-            </View>
             <Text style={styles.text_a_propos}>A Propos</Text>
             <Text style={styles.text_notre_equipe}>Notre equipe</Text>
 
@@ -34,25 +31,6 @@ const styles = StyleSheet.create({
 
     justifyContent: 'center',
     alignItems: 'center'
-
-  },
-  title_container:{
-    flexDirection:'row',
-    textAlign:'center',
-    justifyContent: 'center',
-    alignItems: 'center'
-
-  },
-  title_text_people: {
-    marginTop:50,
-    color:'white',
-    fontSize:30,
-
-  },
-  title_text_flux:{
-    marginTop:50,
-    color:'#ff5733',
-    fontSize:30,
 
   },
   text_a_propos:{

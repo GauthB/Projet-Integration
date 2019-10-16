@@ -3,17 +3,9 @@ import { Ionicons } from '@expo/vector-icons'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-
-
 import { createDrawerNavigator, DrawerActions } from 'react-navigation-drawer';
-
 import APropos from '../Components/APropos'
 import Contact from '../Components/Contact'
-
-
-
-
-
 
 
 const DrawerNavigator = createDrawerNavigator({
@@ -35,9 +27,13 @@ const DrawerNavigator = createDrawerNavigator({
 },
   {
     drawerPosition: 'right',
-    drawerOpenRoute: 'DrawerRightOpen',
     drawerType: 'slide',
     drawerBackgroundColor: '#232531',
+    drawerWidth: 150,
+    contentOptions:{
+      activeTintColor: '#c70039',
+      inactiveTintColor: '#fff'
+    }
   }
 );
 
@@ -50,13 +46,18 @@ const StackNavigator = createStackNavigator({
 
 
         return {
-          headerLeft: ({titleStyle}) => (
-            <View style={styles.container}>
-              <TouchableOpacity onPress={() => {navigation.dispatch(DrawerActions.toggleDrawer())}}>
-                <Ionicons name="ios-menu" style={styles.menuOpen} size={40} color='#fff' />
-              </TouchableOpacity>
-            </View>
+          header: ({titleStyle}) =>(
+
+                <View style={styles.title_container}>
+                  <Text style={styles.title_text_people}>People</Text><Text style={styles.title_text_flux}>Flux</Text>
+                  <TouchableOpacity onPress={() => {navigation.dispatch(DrawerActions.toggleDrawer())}}>
+                    <Ionicons name="ios-menu" style={styles.menuOpen} size={40} color='#fff' />
+                  </TouchableOpacity>
+                </View>
+
+
           )
+
         }
 
     }
@@ -65,22 +66,33 @@ const StackNavigator = createStackNavigator({
 
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
+
+  title_container:{
+    flexDirection:'row',
+    textAlign:'center',
     justifyContent: 'center',
-  },
-  menuOpen: {
-    marginLeft: 10,
-    marginTop: 10,
-    backgroundColor: '#232531'
-  },
-  menuClose: {
-    marginLeft: 14,
-    marginTop: 10,
+    alignItems: 'center',
     backgroundColor: '#232531'
 
+  },
+  title_text_people: {
+    marginTop:30,
+    color:'white',
+    fontSize:30,
+    borderLeftWidth: 55
+
+
+  },
+  title_text_flux:{
+    marginTop:30,
+    color:'#ff5733',
+    fontSize:30,
+    borderRightWidth: 55
+
+  },
+  menuOpen: {
+    marginTop: 30,
+    backgroundColor: '#232531'
   }
 });
 
