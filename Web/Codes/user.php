@@ -1,3 +1,33 @@
+<?php
+if(isset($_POST['envoi'])) {
+    require_once "db_connect.php";
+
+    $sql = 'SELECT id_client, client_name, client_mail, client_password
+    FROM Clients
+  WHERE client_mail = :client_mail';
+    $sth = $dbh->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+    $sth->execute(array(':client_mail' => $_POST['votremail']));
+    $user = $sth->fetch(PDO::FETCH_ASSOC);
+    $sth->closeCursor();
+
+    $isPasswordCorrect = password_verify($_POST['password'], $user['client_password']);
+    if(!isset($user)) {
+        echo "connection refusé";
+    } else {
+        if($isPasswordCorrect) {
+            session_start();
+            $_SESSION['id'] = $user['id_client'];
+            $_SESSION['name'] = $user['client_name'];
+            echo 'Vous êtes connecté !';
+            header('Location: admin.php');
+        }
+        else {
+            echo 'Mauvais identifiant ou mot de passe !';
+        }
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -74,51 +104,45 @@
 
 
                         <div class="row form-group">
-
                             <div " class="col-md-12">
-                                <label class="" for="email">Nom d'utilisateur</label>
-                                <input type="email"  id="email" class="input form-control" name="votremail" placeholder="Utilisateur">
-                            </div>
+                            <label class="" for="email">Votre adresse mail</label>
+                            <input type="email"  id="email" class="input form-control" name="votremail" placeholder="Mail">
                         </div>
+                </div>
 
-                        <div class="row form-group">
+                <div class="row form-group">
 
-                            <div class="col-md-12">
-                                <label class="" >Mot de passe</label>
-                                <input type="text" id="objet"  class="input form-control" name="objet" placeholder="Mdp">
-                            </div>
-                        </div>
-
-
-                        <div class="row form-group">
-                            <div class="col-md-12">
-
-                                     <input   name="envoi" type="submit" id="submitContact" value="S'identifier" class="btn btn-primary py-2 px-4 text-white">
-                            </br> <a href="admin.php">TESTER l'interface admin client</a>
-                            </div>
-                        </div>
-
-               
+                    <div class="col-md-12">
+                        <label class="" >Mot de passe</label>
+                        <input type="password" id="password"  class="input form-control" name="password" placeholder="Mdp">
+                    </div>
                 </div>
 
 
+                <div class="row form-group">
+                    <div class="col-md-12">
 
-
-
-
-                    </form>
-                    <div id="errorContact"></div>
+                        <input   name="envoi" type="submit" id="submitContact" value="S'identifier" class="btn btn-primary py-2 px-4 text-white">
+                        </br> <a href="admin.php">TESTER l'interface admin client</a>
+                    </div>
                 </div>
+
+
             </div>
+
+            </form>
+            <div id="errorContact"></div>
         </div>
     </div>
+</div>
+</div>
 
 
 
-    <footer class="site-footer">
-        <div class="container">
-            <?php include("footer.php"); ?>
-    </footer>
+<footer class="site-footer">
+    <div class="container">
+        <?php include("footer.php"); ?>
+</footer>
 
 </div>
 
