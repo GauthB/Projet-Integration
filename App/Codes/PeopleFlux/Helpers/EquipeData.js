@@ -1,52 +1,52 @@
 
-export default equipeData = [
+export default data = [
    {
       id:1,
       name:"Bohyn",
       firstname:"Gauthier",
-      picture:"../Images/gauthier.png",
+      picture:"person_1.jpg",
       status:"Product Owner"
    },
    {
       id:2,
       name:"Ponjee",
       firstname:"Aymeric",
-      picture:"../Images/aymeric.png",
+      picture:"person_2.jpg",
       status:"Scrum Master"
    },
    {
       id:3,
       name:"Hermant",
       firstname:"Thibaut",
-      picture:"../Images/thibaut.png",
+      picture:"person_3.jpg",
       status:"Developpeur"
    },
    {
       id:4,
       name:"Paquet",
       firstname:"Robin",
-      picture:"../Images/robin.png",
+      picture:"person_4.jpg",
       status:"Developpeur"
    },
    {
       id:5,
       name:"Van den Dorpe",
       firstname:"Ludo",
-      picture:"../Images/ludo.png",
+      picture:"person_5.jpg",
       status:"Developpeur"
    },
    {
       id:6,
       name:"Pestiaux",
       firstname:"Tristan",
-      picture:"../Images/tristan.png",
+      picture:"person_6.jpg",
       status:"Developpeur"
    },
    {
       id:7,
       name:"Hanquet",
       firstname:"Brian",
-      picture:"../Images/brian.png",
+      picture:"person_7.jpg",
       status:"Developpeur"
    }
 ]
