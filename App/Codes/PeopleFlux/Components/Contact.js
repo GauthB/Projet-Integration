@@ -14,38 +14,42 @@ class Contact extends React.Component {
 
   render() {
     return (
-        <View style={styles.main_container}>
-            <View style={styles.title_container}>
-              <Text style={styles.title_text_people}>People</Text><Text style={styles.title_text_flux}>Flux</Text>
+
+          <View style={styles.main_container}>
+              <View style={styles.title_container}>
+                <Text style={styles.title_text_people}>People</Text><Text style={styles.title_text_flux}>Flux</Text>
+              </View>
+              <ScrollView>
+                <Text style={styles.text_a_propos}>Contact</Text>
+                <Text style={styles.text_notre_equipe}>Que souhaitez vous?</Text>
+
+
+                <Text style={styles.champ_mail}>Email</Text>
+                <TextInput
+                  style={styles.bordure_mail}
+                  onChangeText={(text) => this.setState({text})}
+                  value={this.state.text}
+                />
+
+                <Text style={styles.champ_sujet}>Sujet</Text>
+                <TextInput
+                  style={styles.bordure_sujet}
+                  onChangeText={(text) => this.setState({text})}
+                  value={this.sujet.text}
+                />
+
+                <Text style={styles.champ_message}>Message</Text>
+                <TextInput
+                  style={styles.bordure_message}
+                  onChangeText={(text) => this.setState({text})}
+                  value={this.message.text}
+                />
+                <View style={styles.btn_envoie}>
+                <Button title='Envoyer' color='white' onPress={() => Alert.alert('le commercant rend pas la monnaie')}/>
+                </View>
+              </ScrollView>
             </View>
-          <Text style={styles.text_a_propos}>Contact</Text>
-          <Text style={styles.text_notre_equipe}>Que souhaitez vous?</Text>
 
-
-      <Text style={styles.champ_mail}>Email</Text>
-      <TextInput
-        style={styles.bordure_mail}
-        onChangeText={(text) => this.setState({text})}
-        value={this.state.text}
-      />
-
-      <Text style={styles.champ_sujet}>Sujet</Text>
-      <TextInput
-        style={styles.bordure_sujet}
-        onChangeText={(text) => this.setState({text})}
-        value={this.sujet.text}
-      />
-
-      <Text style={styles.champ_message}>Message</Text>
-      <TextInput
-        style={styles.bordure_message}
-        onChangeText={(text) => this.setState({text})}
-        value={this.message.text}
-      />
-        <View style={styles.btn_envoie}>
-        <Button title='Envoyer' color='white' onPress={() => Alert.alert('le commercant rend pas la monnaie')}/>
-        </View>
-        </View>
 
     )
   }
@@ -55,11 +59,12 @@ const styles = StyleSheet.create({
   main_container: {
     flex: 1,
     backgroundColor: '#232531',
+
   },
   touchableOpacity: {
 
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
 
   },
   title_container:{
