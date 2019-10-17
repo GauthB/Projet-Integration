@@ -1,5 +1,6 @@
 import React from 'react'
-import { StyleSheet, View, TextInput, Button, Text, SafeAreaView,Alert, TouchableOpacity, Image, ScrollView, FlatList } from 'react-native'
+import { StyleSheet, View, TextInput, Button, Text, SafeAreaView,Alert, TouchableOpacity, Image, ScrollView, FlatList,KeyboardAvoidingView  } from 'react-native'
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview'
 
 
 
@@ -15,14 +16,14 @@ class Contact extends React.Component {
   render() {
     return (
 
-          <View style={styles.main_container}>
+          <KeyboardAvoidingView style={styles.main_container} behavior="position">
 
               <ScrollView>
                 <Text style={styles.text_a_propos}>Contact</Text>
                 <Text style={styles.text_notre_equipe}>Que souhaitez vous?</Text>
 
-
                 <Text style={styles.champ_mail}>Email</Text>
+
                 <TextInput
                   style={styles.bordure_mail}
                   onChangeText={(text) => this.setState({text})}
@@ -42,11 +43,12 @@ class Contact extends React.Component {
                   onChangeText={(text) => this.setState({text})}
                   placeholder='Votre message'
                 />
+
                 <View style={styles.btn_envoie}>
                 <Button title='Envoyer' color='white' onPress={() => Alert.alert('Pas disponible actuellement')}/>
                 </View>
               </ScrollView>
-            </View>
+            </KeyboardAvoidingView>
 
 
     )
