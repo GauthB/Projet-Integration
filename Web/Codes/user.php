@@ -60,29 +60,7 @@ if(isset($_POST['envoi'])) {
         <div class="site-mobile-menu-body"></div>
     </div>
 
-    <header class="site-navbar py-3" role="banner">
-        <div class="container-fluid">
-            <div class="row align-items-center">
-                <div class="col-11 col-xl-2">
-                    <h1 class="mb-0"><a href="index.php" class="text-white h2 mb-0">People<span class="text-primary">Flux</span> </a></h1>
-                </div>
-                <div class="col-12 col-md-10 d-none d-xl-block">
-                    <nav class="site-navigation position-relative text-right" role="navigation">
-                        <ul class="site-menu js-clone-nav mx-auto d-none d-lg-block">
-                            <li><a href="index.php">Accueil</a></li>
-                            <li><a href="info.php">A propos</a></li>
-                            <li><a href="equipe.php">Groupe</a></li>
-                            <li><a href="lieux.php">Lieux</a></li>
-                            <li><a href="pageContact.php">Contact</a></li>
-                            <li class="cta"><a href="user.php">S'identifier</a></li>
-                        </ul>
-                    </nav>
-                </div>
-                <div class="d-inline-block d-xl-none ml-md-0 mr-auto py-3" style="position: relative; top: 3px;"><a href="#" class="site-menu-toggle js-menu-toggle text-white"><span class="icon-menu h3"></span></a></div>
-            </div>
-        </div>
-
-    </header>
+    <?php include 'header.php'?>
 
     <div class="site-section site-hero inner">
         <div class="container">
@@ -123,7 +101,6 @@ if(isset($_POST['envoi'])) {
                     <div class="col-md-12">
 
                         <input   name="envoi" type="submit" id="submitContact" value="S'identifier" class="btn btn-primary py-2 px-4 text-white">
-                        </br> <a href="admin.php">TESTER l'interface admin client</a>
                     </div>
                 </div>
 
