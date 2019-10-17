@@ -26,24 +26,24 @@ class Contact extends React.Component {
                 <TextInput
                   style={styles.bordure_mail}
                   onChangeText={(text) => this.setState({text})}
-                  value={this.state.text}
+                  placeholder='Votre email'
                 />
 
                 <Text style={styles.champ_sujet}>Sujet</Text>
                 <TextInput
                   style={styles.bordure_sujet}
                   onChangeText={(text) => this.setState({text})}
-                  value={this.sujet.text}
+                  placeholder='Votre sujet'
                 />
 
                 <Text style={styles.champ_message}>Message</Text>
                 <TextInput
                   style={styles.bordure_message}
                   onChangeText={(text) => this.setState({text})}
-                  value={this.message.text}
+                  placeholder='Votre message'
                 />
                 <View style={styles.btn_envoie}>
-                <Button title='Envoyer' color='white' onPress={() => Alert.alert('le commercant rend pas la monnaie')}/>
+                <Button title='Envoyer' color='white' onPress={() => Alert.alert('Pas disponible actuellement')}/>
                 </View>
               </ScrollView>
             </View>
@@ -104,7 +104,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius:25,
     overflow: 'hidden',
-    backgroundColor: '#404040'
+    backgroundColor: '#404040',
+    color: '#fff'
   },
   bordure_sujet:{
     height: 35,
@@ -115,7 +116,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius:25,
     overflow: 'hidden',
-    backgroundColor: '#404040'
+    backgroundColor: '#404040',
+    color: '#fff'
+
   },
   bordure_message:{
     height: 90,
@@ -125,7 +128,9 @@ const styles = StyleSheet.create({
     marginRight:6,
     borderWidth: 1,
     borderRadius:25,
-    backgroundColor: '#404040'
+    backgroundColor: '#404040',
+    color: '#fff'
+
   },
   btn_envoie:{
     borderWidth:1,
