@@ -4,6 +4,7 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview'
 
 
 
+
 class Contact extends React.Component {
 
   constructor(props) {
@@ -16,39 +17,50 @@ class Contact extends React.Component {
   render() {
     return (
 
-          <KeyboardAvoidingView style={styles.main_container} behavior="position">
+          <View style={styles.main_container}>
 
-              <ScrollView>
-                <Text style={styles.text_a_propos}>Contact</Text>
-                <Text style={styles.text_notre_equipe}>Que souhaitez vous?</Text>
-
+              <KeyboardAwareScrollView>
+                <Text style={styles.text_contact}>Contact</Text>
+                <Text style={styles.text_que_souhaitez_vous}>Que souhaitez vous?</Text>
                 <Text style={styles.champ_mail}>Email</Text>
 
                 <TextInput
                   style={styles.bordure_mail}
                   onChangeText={(text) => this.setState({text})}
                   placeholder='Votre email'
+                  placeholderTextColor='#232531'
+                  returnKeyType = {"next"}
+                  onSubmitEditing={() => { this.secondTextInput.focus(); }}
+                  blurOnSubmit={false}
                 />
 
                 <Text style={styles.champ_sujet}>Sujet</Text>
                 <TextInput
+                  ref={(input) => { this.secondTextInput = input; }}
                   style={styles.bordure_sujet}
                   onChangeText={(text) => this.setState({text})}
                   placeholder='Votre sujet'
+                  placeholderTextColor='#232531'
+                  returnKeyType = {"next"}
+                  onSubmitEditing={() => { this.thirdTextInput.focus(); }}
+                  blurOnSubmit={false}
+
                 />
 
                 <Text style={styles.champ_message}>Message</Text>
                 <TextInput
+                ref={(input) => { this.thirdTextInput = input; }}
                   style={styles.bordure_message}
                   onChangeText={(text) => this.setState({text})}
                   placeholder='Votre message'
+                  placeholderTextColor='#232531'
                 />
 
                 <View style={styles.btn_envoie}>
-                <Button title='Envoyer' color='white' onPress={() => Alert.alert('Pas disponible actuellement')}/>
+                <Button title='Envoyer' color='white'  onPress={() => Alert.alert('Pas disponible actuellement')}/>
                 </View>
-              </ScrollView>
-            </KeyboardAvoidingView>
+              </KeyboardAwareScrollView>
+            </View>
 
 
     )
@@ -67,13 +79,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
 
   },
-  text_a_propos:{
+  text_contact:{
     fontSize:30,
     color:'#c70039',
     marginLeft:10,
     marginTop:10
   },
-  text_notre_equipe:{
+  text_que_souhaitez_vous:{
     fontSize:20,
     color:'white',
     marginLeft:10,
@@ -141,7 +153,7 @@ const styles = StyleSheet.create({
   },
   btn_envoie:{
     borderWidth:1,
-    backgroundColor: '#FF5800',
+    backgroundColor: '#ff5733',
     borderRadius:30,
     marginTop:25,
     marginLeft:6,
