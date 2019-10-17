@@ -105,7 +105,9 @@ const styles = StyleSheet.create({
     borderRadius:25,
     overflow: 'hidden',
     backgroundColor: '#404040',
-    color: '#fff'
+    color: '#fff',
+    paddingLeft: 7,
+
   },
   bordure_sujet:{
     height: 35,
@@ -117,7 +119,9 @@ const styles = StyleSheet.create({
     borderRadius:25,
     overflow: 'hidden',
     backgroundColor: '#404040',
-    color: '#fff'
+    color: '#fff',
+    paddingLeft: 7,
+
 
   },
   bordure_message:{
@@ -129,7 +133,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius:25,
     backgroundColor: '#404040',
-    color: '#fff'
+    color: '#fff',
+    paddingLeft: 7,
 
   },
   btn_envoie:{
