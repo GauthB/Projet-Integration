@@ -6,6 +6,9 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createDrawerNavigator, DrawerActions } from 'react-navigation-drawer';
 import APropos from '../Components/APropos'
 import Contact from '../Components/Contact'
+import Lieux from '../Components/Lieux.js'
+import Calendrier from '../Components/Calendrier.js'
+
 
 
 const DrawerNavigator = createDrawerNavigator({
@@ -24,6 +27,21 @@ const DrawerNavigator = createDrawerNavigator({
 
     })
   },
+    Lieux: {
+      screen: Lieux,
+      navigationOptions: ({ navigation }) => ({
+        title: 'Lieux Screen',
+        drawerLabel: 'Lieux',
+      })
+    },
+    Calendrier: {
+      screen: Calendrier,
+      navigationOptions: ({ navigation }) => ({
+        title: 'Calendrier Screen',
+        drawerLabel: 'Calendrier',
+      })
+    }
+
 },
   {
     drawerPosition: 'right',
