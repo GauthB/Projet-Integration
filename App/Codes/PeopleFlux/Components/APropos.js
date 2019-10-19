@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, TextInput, Button, Text, SafeAreaView, TouchableOpacity, Image, ScrollView, FlatList } from 'react-native'
+import { StyleSheet, View, Text , FlatList } from 'react-native'
 import equipeData from '../Helpers/EquipeData'
 import EquipeItem  from './EquipeItem'
 
@@ -26,12 +26,6 @@ const styles = StyleSheet.create({
   main_container: {
     flex: 1,
     backgroundColor: '#232531',
-  },
-  touchableOpacity: {
-
-    justifyContent: 'center',
-    alignItems: 'center'
-
   },
   text_a_propos:{
     fontSize:30,

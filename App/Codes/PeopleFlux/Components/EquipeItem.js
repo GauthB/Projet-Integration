@@ -56,14 +56,18 @@ const styles = StyleSheet.create({
   firstname_text: {
     fontSize: 20,
     color: 'white',
-    height:30
+    height:30,
+    fontWeight : 'bold',
+
 
   },
   name_text: {
     fontSize: 20,
     color: 'white',
     paddingLeft:5,
-    height:30
+    height:30,
+    fontWeight : 'bold',
+
   },
   statut_container: {
     flex: 7

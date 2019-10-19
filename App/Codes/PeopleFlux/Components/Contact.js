@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, TextInput, Button, Text, SafeAreaView,Alert, TouchableOpacity, Image, ScrollView, FlatList,KeyboardAvoidingView, Platform  } from 'react-native'
+import { StyleSheet, View, TextInput, Text , Platform  } from 'react-native'
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview'
 import BoutonEnvoyer from './BoutonEnvoyer'
 
@@ -18,9 +18,8 @@ class Contact extends React.Component {
   render() {
     return (
 
-          <View style={styles.main_container}>
-
           <KeyboardAwareScrollView
+            style={styles.main_container}
             enableOnAndroid={true}
             enableAutomaticScroll={(Platform.OS === 'ios')}
           >
@@ -62,7 +61,6 @@ class Contact extends React.Component {
                 <BoutonEnvoyer/>
 
               </KeyboardAwareScrollView>
-            </View>
 
 
     )
@@ -73,12 +71,6 @@ const styles = StyleSheet.create({
   main_container: {
     flex: 1,
     backgroundColor: '#232531',
-
-  },
-  touchableOpacity: {
-
-    justifyContent: 'center',
-    alignItems: 'center',
 
   },
   text_contact:{
@@ -113,28 +105,28 @@ const styles = StyleSheet.create({
   },
   bordure_mail:{
     height: 35,
-    borderColor: '#404040',
+    borderColor: '#4B4C56',
     marginBottom:18,
     marginLeft:6,
     marginRight:6,
     borderWidth: 1,
     borderRadius:25,
     overflow: 'hidden',
-    backgroundColor: '#404040',
+    backgroundColor: '#4B4C56',
     color: '#fff',
     paddingLeft: 7,
 
   },
   bordure_sujet:{
     height: 35,
-    borderColor: '#404040',
+    borderColor: '#4B4C56',
     marginTop: 1,
     marginLeft:6,
     marginRight:6,
     borderWidth: 1,
     borderRadius:25,
     overflow: 'hidden',
-    backgroundColor: '#404040',
+    backgroundColor: '#4B4C56',
     color: '#fff',
     paddingLeft: 7,
 
@@ -142,13 +134,13 @@ const styles = StyleSheet.create({
   },
   bordure_message:{
     height: 90,
-    borderColor: '#404040',
+    borderColor: '#4B4C56',
     marginTop: 1,
     marginLeft:6,
     marginRight:6,
     borderWidth: 1,
     borderRadius:25,
-    backgroundColor: '#404040',
+    backgroundColor: '#4B4C56',
     color: '#fff',
     paddingLeft: 7,
 
