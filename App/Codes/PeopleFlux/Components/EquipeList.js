@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, FlatList } from 'react-native'
 import { EquipeItem } from './EquipeItem'
-import { equipeData } from '../Helpers/EquipeData'
+import { EquipeData } from '../Helpers/EquipeData'
 
 
 class EquipeList extends React.Component {

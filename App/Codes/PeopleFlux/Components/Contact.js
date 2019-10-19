@@ -18,49 +18,51 @@ class Contact extends React.Component {
   render() {
     return (
 
-          <KeyboardAwareScrollView
-            style={styles.main_container}
-            enableOnAndroid={true}
-            enableAutomaticScroll={(Platform.OS === 'ios')}
-          >
+              <View style={styles.main_container}>
                 <Text style={styles.text_contact}>Contact</Text>
-                <Text style={styles.text_que_souhaitez_vous}>Que souhaitez vous?</Text>
-                <Text style={styles.champ_mail}>Email</Text>
+                <Text style={styles.text_que_souhaitez_vous}>Que souhaitez-vous?</Text>
+                <KeyboardAwareScrollView
+                  enableOnAndroid={true}
+                  enableAutomaticScroll={(Platform.OS === 'ios')}
+                >
 
-                <TextInput
-                  style={styles.bordure_mail}
-                  onChangeText={(text) => this.setState({text})}
-                  placeholder='Votre email'
-                  placeholderTextColor='#232531'
-                  returnKeyType = {"next"}
-                  onSubmitEditing={() => { this.secondTextInput.focus(); }}
-                  blurOnSubmit={false}
-                />
+                  <Text style={styles.champ_mail}>Email</Text>
 
-                <Text style={styles.champ_sujet}>Sujet</Text>
-                <TextInput
-                  ref={(input) => { this.secondTextInput = input; }}
-                  style={styles.bordure_sujet}
-                  onChangeText={(text) => this.setState({text})}
-                  placeholder='Votre sujet'
-                  placeholderTextColor='#232531'
-                  returnKeyType = {"next"}
-                  onSubmitEditing={() => { this.thirdTextInput.focus(); }}
-                  blurOnSubmit={false}
+                  <TextInput
+                    style={styles.bordure_mail}
+                    onChangeText={(text) => this.setState({text})}
+                    placeholder='Votre email'
+                    placeholderTextColor='#232531'
+                    returnKeyType = {"next"}
+                    onSubmitEditing={() => { this.secondTextInput.focus(); }}
+                    blurOnSubmit={false}
+                  />
 
-                />
+                  <Text style={styles.champ_sujet}>Sujet</Text>
+                  <TextInput
+                    ref={(input) => { this.secondTextInput = input; }}
+                    style={styles.bordure_sujet}
+                    onChangeText={(text) => this.setState({text})}
+                    placeholder='Votre sujet'
+                    placeholderTextColor='#232531'
+                    returnKeyType = {"next"}
+                    onSubmitEditing={() => { this.thirdTextInput.focus(); }}
+                    blurOnSubmit={false}
 
-                <Text style={styles.champ_message}>Message</Text>
-                <TextInput
-                ref={(input) => { this.thirdTextInput = input; }}
-                  style={styles.bordure_message}
-                  onChangeText={(text) => this.setState({text})}
-                  placeholder='Votre message'
-                  placeholderTextColor='#232531'
-                />
-                <BoutonEnvoyer/>
+                  />
+
+                  <Text style={styles.champ_message}>Message</Text>
+                  <TextInput
+                  ref={(input) => { this.thirdTextInput = input; }}
+                    style={styles.bordure_message}
+                    onChangeText={(text) => this.setState({text})}
+                    placeholder='Votre message'
+                    placeholderTextColor='#232531'
+                  />
+                  <BoutonEnvoyer/>
 
               </KeyboardAwareScrollView>
+            </View>
 
 
     )

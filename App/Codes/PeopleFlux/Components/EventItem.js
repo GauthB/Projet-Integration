@@ -1,21 +1,28 @@
 import React from 'react'
-import { StyleSheet, View, Text, Platform, FlatList } from 'react-native'
-import eventData from '../Helpers/EventData'
-import EventItem  from './EventItem'
+import { StyleSheet, View, Text, Platform, TouchableOpacity } from 'react-native'
+import EventDetail from './EventDetail'
 
-class Calendrier extends React.Component {
+
+class EventItem extends React.Component {
+
 
 
   render() {
+    const evenement=this.props.event
+
     return (
-      <View style={styles.main_container}>
-            <Text style={styles.text_calendrier}>Calendrier</Text>
-            <FlatList
-              data={eventData}
-              keyExtractor={(item) => item.id.toString()}
-              renderItem={({item}) => <EventItem event={item}/>}
-            />
-      </View>
+          <View style={styles.main_container}>
+            <TouchableOpacity
+            >
+              <View style={styles.bordure}>
+                <View style={styles.event_date}>
+                  <Text style={styles.text_event}>{evenement.name}</Text>
+                  <Text style={styles.text_date}>{evenement.date}</Text>
+                </View>
+                <Text style={styles.text_lieux}>{evenement.lieu}</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
     )
   }
 }
@@ -69,4 +76,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default Calendrier
+export default EventItem
