@@ -1,6 +1,7 @@
 import React from 'react'
-import { StyleSheet, View, TextInput, Button, Text, SafeAreaView,Alert, TouchableOpacity, Image, ScrollView, FlatList,KeyboardAvoidingView  } from 'react-native'
+import { StyleSheet, View, TextInput, Button, Text, SafeAreaView,Alert, TouchableOpacity, Image, ScrollView, FlatList,KeyboardAvoidingView, Platform  } from 'react-native'
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview'
+import BoutonEnvoyer from './BoutonEnvoyer'
 
 
 
@@ -19,7 +20,10 @@ class Contact extends React.Component {
 
           <View style={styles.main_container}>
 
-              <KeyboardAwareScrollView>
+          <KeyboardAwareScrollView
+            enableOnAndroid={true}
+            enableAutomaticScroll={(Platform.OS === 'ios')}
+          >
                 <Text style={styles.text_contact}>Contact</Text>
                 <Text style={styles.text_que_souhaitez_vous}>Que souhaitez vous?</Text>
                 <Text style={styles.champ_mail}>Email</Text>
@@ -55,10 +59,8 @@ class Contact extends React.Component {
                   placeholder='Votre message'
                   placeholderTextColor='#232531'
                 />
+                <BoutonEnvoyer/>
 
-                <View style={styles.btn_envoie}>
-                <Button title='Envoyer' color='white'  onPress={() => Alert.alert('Pas disponible actuellement')}/>
-                </View>
               </KeyboardAwareScrollView>
             </View>
 
@@ -149,15 +151,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#404040',
     color: '#fff',
     paddingLeft: 7,
-
-  },
-  btn_envoie:{
-    borderWidth:1,
-    backgroundColor: '#ff5733',
-    borderRadius:30,
-    marginTop:25,
-    marginLeft:6,
-    marginRight:6,
 
   }
 

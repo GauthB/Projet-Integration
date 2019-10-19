@@ -42,6 +42,7 @@ const DrawerNavigator = createDrawerNavigator({
       })
     }
 
+
 },
   {
     drawerPosition: 'right',
@@ -69,7 +70,7 @@ const StackNavigator = createStackNavigator({
                 <View style={styles.title_container}>
                   <Text style={styles.title_text_people}>People</Text><Text style={styles.title_text_flux}>Flux</Text>
                   <TouchableOpacity onPress={() => {navigation.dispatch(DrawerActions.toggleDrawer())}}>
-                    <Ionicons name="ios-menu" style={styles.menuOpen} size={40} color='#fff' />
+                    <Ionicons name="ios-menu" style={styles.menuOpen} size={50} color='#fff' />
                   </TouchableOpacity>
                 </View>
 
@@ -97,7 +98,7 @@ const styles = StyleSheet.create({
     marginTop:30,
     color:'white',
     fontSize:30,
-    borderLeftWidth: 55
+  paddingLeft: 60
 
 
   },
@@ -105,12 +106,13 @@ const styles = StyleSheet.create({
     marginTop:30,
     color:'#ff5733',
     fontSize:30,
-    borderRightWidth: 55
+    paddingRight: 60
+
 
   },
   menuOpen: {
     marginTop: 30,
-    backgroundColor: '#232531'
+    backgroundColor: '#232531',
   }
 });
 
