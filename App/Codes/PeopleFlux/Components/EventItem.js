@@ -9,10 +9,12 @@ class EventItem extends React.Component {
 
   render() {
     const evenement=this.props.event
+    const displayDetail = this.props.displayDetail
 
     return (
           <View style={styles.main_container}>
             <TouchableOpacity
+              onPress={() => displayDetail(evenement.description)}
             >
               <View style={styles.bordure}>
                 <View style={styles.event_date}>

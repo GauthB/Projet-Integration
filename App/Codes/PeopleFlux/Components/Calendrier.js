@@ -5,6 +5,9 @@ import EventItem  from './EventItem'
 
 class Calendrier extends React.Component {
 
+_displayDetail = (description) => {
+  this.props.navigation.navigate("EventDetail", {description: description})
+}
 
   render() {
     return (
@@ -13,7 +16,7 @@ class Calendrier extends React.Component {
             <FlatList
               data={eventData}
               keyExtractor={(item) => item.id.toString()}
-              renderItem={({item}) => <EventItem event={item}/>}
+              renderItem={({item}) => <EventItem event={item} displayDetail={this._displayDetail}/>}
             />
       </View>
     )

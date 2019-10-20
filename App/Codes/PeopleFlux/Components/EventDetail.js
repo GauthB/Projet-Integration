@@ -4,12 +4,13 @@ import eventData from '../Helpers/EventData'
 
 class EventDetail extends React.Component {
 
+
   render(){
-    const evenement=this.props.event
+    const description = this.props.navigation.state.params.description
 
     return(
       <View style={styles.main_container}>
-        <Text>{evenement.description}</Text>
+        <Text style={styles.text_description}>{description}</Text>
       </View>
     )
   }
@@ -19,6 +20,9 @@ const styles = StyleSheet.create({
   main_container: {
     flex: 1,
     backgroundColor: '#232531',
+  },
+  text_description:{
+    marginTop: 50
   }
 })
 export default EventDetail
