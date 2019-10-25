@@ -1,6 +1,7 @@
 import React from 'react'
-import { StyleSheet, View, TextInput, Button, Text, SafeAreaView,Alert, TouchableOpacity, Image, ScrollView, FlatList,KeyboardAvoidingView  } from 'react-native'
+import { StyleSheet, View, TextInput, Text , Platform  } from 'react-native'
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview'
+import BoutonEnvoyer from './BoutonEnvoyer'
 
 
 
@@ -17,48 +18,49 @@ class Contact extends React.Component {
   render() {
     return (
 
-          <View style={styles.main_container}>
-
-              <KeyboardAwareScrollView>
+              <View style={styles.main_container}>
                 <Text style={styles.text_contact}>Contact</Text>
-                <Text style={styles.text_que_souhaitez_vous}>Que souhaitez vous?</Text>
-                <Text style={styles.champ_mail}>Email</Text>
+                <Text style={styles.text_que_souhaitez_vous}>Que souhaitez-vous?</Text>
+                <KeyboardAwareScrollView
+                  enableOnAndroid={true}
+                  enableAutomaticScroll={(Platform.OS === 'ios')}
+                >
 
-                <TextInput
-                  style={styles.bordure_mail}
-                  onChangeText={(text) => this.setState({text})}
-                  placeholder='Votre email'
-                  placeholderTextColor='#232531'
-                  returnKeyType = {"next"}
-                  onSubmitEditing={() => { this.secondTextInput.focus(); }}
-                  blurOnSubmit={false}
-                />
+                  <Text style={styles.champ_mail}>Email</Text>
 
-                <Text style={styles.champ_sujet}>Sujet</Text>
-                <TextInput
-                  ref={(input) => { this.secondTextInput = input; }}
-                  style={styles.bordure_sujet}
-                  onChangeText={(text) => this.setState({text})}
-                  placeholder='Votre sujet'
-                  placeholderTextColor='#232531'
-                  returnKeyType = {"next"}
-                  onSubmitEditing={() => { this.thirdTextInput.focus(); }}
-                  blurOnSubmit={false}
+                  <TextInput
+                    style={styles.bordure_mail}
+                    onChangeText={(text) => this.setState({text})}
+                    placeholder='Votre email'
+                    placeholderTextColor='#232531'
+                    returnKeyType = {"next"}
+                    onSubmitEditing={() => { this.secondTextInput.focus(); }}
+                    blurOnSubmit={false}
+                  />
 
-                />
+                  <Text style={styles.champ_sujet}>Sujet</Text>
+                  <TextInput
+                    ref={(input) => { this.secondTextInput = input; }}
+                    style={styles.bordure_sujet}
+                    onChangeText={(text) => this.setState({text})}
+                    placeholder='Votre sujet'
+                    placeholderTextColor='#232531'
+                    returnKeyType = {"next"}
+                    onSubmitEditing={() => { this.thirdTextInput.focus(); }}
+                    blurOnSubmit={false}
 
-                <Text style={styles.champ_message}>Message</Text>
-                <TextInput
-                ref={(input) => { this.thirdTextInput = input; }}
-                  style={styles.bordure_message}
-                  onChangeText={(text) => this.setState({text})}
-                  placeholder='Votre message'
-                  placeholderTextColor='#232531'
-                />
+                  />
 
-                <View style={styles.btn_envoie}>
-                <Button title='Envoyer' color='white'  onPress={() => Alert.alert('Pas disponible actuellement')}/>
-                </View>
+                  <Text style={styles.champ_message}>Message</Text>
+                  <TextInput
+                  ref={(input) => { this.thirdTextInput = input; }}
+                    style={styles.bordure_message}
+                    onChangeText={(text) => this.setState({text})}
+                    placeholder='Votre message'
+                    placeholderTextColor='#232531'
+                  />
+                  <BoutonEnvoyer/>
+
               </KeyboardAwareScrollView>
             </View>
 
@@ -71,12 +73,6 @@ const styles = StyleSheet.create({
   main_container: {
     flex: 1,
     backgroundColor: '#232531',
-
-  },
-  touchableOpacity: {
-
-    justifyContent: 'center',
-    alignItems: 'center',
 
   },
   text_contact:{
@@ -111,28 +107,28 @@ const styles = StyleSheet.create({
   },
   bordure_mail:{
     height: 35,
-    borderColor: '#404040',
+    borderColor: '#4B4C56',
     marginBottom:18,
     marginLeft:6,
     marginRight:6,
     borderWidth: 1,
     borderRadius:25,
     overflow: 'hidden',
-    backgroundColor: '#404040',
+    backgroundColor: '#4B4C56',
     color: '#fff',
     paddingLeft: 7,
 
   },
   bordure_sujet:{
     height: 35,
-    borderColor: '#404040',
+    borderColor: '#4B4C56',
     marginTop: 1,
     marginLeft:6,
     marginRight:6,
     borderWidth: 1,
     borderRadius:25,
     overflow: 'hidden',
-    backgroundColor: '#404040',
+    backgroundColor: '#4B4C56',
     color: '#fff',
     paddingLeft: 7,
 
@@ -140,24 +136,15 @@ const styles = StyleSheet.create({
   },
   bordure_message:{
     height: 90,
-    borderColor: '#404040',
+    borderColor: '#4B4C56',
     marginTop: 1,
     marginLeft:6,
     marginRight:6,
     borderWidth: 1,
     borderRadius:25,
-    backgroundColor: '#404040',
+    backgroundColor: '#4B4C56',
     color: '#fff',
     paddingLeft: 7,
-
-  },
-  btn_envoie:{
-    borderWidth:1,
-    backgroundColor: '#ff5733',
-    borderRadius:30,
-    marginTop:25,
-    marginLeft:6,
-    marginRight:6,
 
   }
 
