@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="b75c33ca-0950-4e87-82d9-469c49ea37cc" name="PeopleFlux" url="https://peopleflux.gauthierbohyn.com/">
+        <fileTransfer host="gauthierbohyn.com" port="21" rootFolder="/peopleflux.gauthierbohyn.com">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

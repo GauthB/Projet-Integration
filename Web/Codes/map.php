@@ -1,5 +1,5 @@
-
 <?php
+
 
 require_once "db_connect.php";
 $eventInfoQuery = $dbh->query('SELECT * FROM Events ORDER BY event_name');
@@ -51,7 +51,6 @@ text-shadow:   0px 0px #000000;
     <?php endfor;?>
 
 
-<!--  ###################################################################################################################-->
     <script>
 
         <?php
@@ -68,10 +67,7 @@ text-shadow:   0px 0px #000000;
 
         $stageInfo = $stageQuery->fetchAll(PDO::FETCH_ASSOC);
 
-
-        //############################################################################################################
         // Créer les points sur la carte
-        //############################################################################################################
         foreach ($stageInfo as $stage) {
             echo "\n\t\t" . 'L.marker([ ' . $stage['stage_latitude'] . ', ' . $stage['stage_longitude'] . ']).bindPopup("<b>' . $stage['stage_name'] . '</b><br>Il y a 0 participant(s)!<br> Le nombre maximum de participant est estimé à ' . $stage['max_people'] . '").addTo(layer' . $stage['id_event'] . ');';
         }

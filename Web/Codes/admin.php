@@ -103,7 +103,8 @@ EOT;
                 <table class="tftable" border="1" data-aos="fade-up">
                     <h2 class="d-block mb-3 caption" data-aos="fade-up">Evènements</h2>
                     <tr><th>Nom</th><th>Date du début</th><th>Date de fin</th><th>Adresse</th></tr>
-                    <tr><td>
+                    <tr>
+                        <td>
                             <?php try {
                                 $sth2 = $dbh -> prepare($sql2);
                                 $sth2 -> execute();
@@ -115,15 +116,12 @@ EOT;
                                     $infos2[0]["date_to"].
                                     "</td> <td>".
                                     $infos2[0]["event_address"]);
-
                             } catch (Exception $e) {
                                 print "Erreur !:" .$e -> getMessage()."<br/>";
                                 die();
-
                             }?>
-
-
-                        </td></tr>
+                        </td>
+                    </tr>
                 </table>
             </div>
 
@@ -161,11 +159,9 @@ EOT;
                                     $infos3[0]["hour_from"].
                                     "</td> <td>".
                                     $infos3[0]["hour_to"]);
-
                             } catch (Exception $e) {
                                 print "Erreur !:" .$e -> getMessage()."<br/>";
                                 die();
-
                             }?>
                     </tr>
                     <tr><td>Row:2 Cell:1</td><td>Row:2 Cell:2</td><td>Row:2 Cell:3</td><td>Row:2 Cell:4</td><td>Row:2 Cell:5</td><td>Row:2 Cell:6</td><td>Row:2 Cell:6</td></tr>

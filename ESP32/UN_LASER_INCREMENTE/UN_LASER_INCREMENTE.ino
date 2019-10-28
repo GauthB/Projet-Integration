@@ -8,9 +8,9 @@
 
 // Network credentials
 const char* ssid = "WiFi-2.4-AA4C";
-const char* password = "******";
+const char* password = "";
 //const char* ssid = "VOO-540128";
-//const char* password = "******";
+//const char* password = "";
 const char* serverName = "http://peopleflux.gauthierbohyn.com/post-esp-data.php";
 String apiKeyValue = "12mAT5Ab3j7F9";
 boolean vrai = 0;  // VALEUR PRECEDENTE DU LASER AU COMPTEUR
@@ -31,14 +31,21 @@ void setup() {
   Serial.print("Connected to WiFi network with IP Address: ");
   Serial.println(WiFi.localIP());
 }
+void ledBlink(int x){
+  int i;
+  for(i=0;i<x;i++){
+    digitalWrite(12, HIGH);
+    delay(200);
+    digitalWrite(12, LOW);
+    delay(100);
+  }
+}
 int increment(){
   int valeur = (digitalRead(27)); // VALEUR RECEPTEUR LASER
   digitalWrite(25, HIGH); // EMETTEUR LASER
   if(valeur==1 && vrai == 1){
     vrai = 0;
-    digitalWrite(12, HIGH);
-    delay(200);
-    digitalWrite(12, LOW);
+    ledBlink(1);
     return 1;
   }
   else if(valeur == 0){

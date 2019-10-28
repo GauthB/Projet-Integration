@@ -43,7 +43,7 @@ class data{
         return $this->tot_sortie;
     }
     public function getActuel(){
-        return $this->tot_actuel;
+        return ($this->tot_actuel>0?$this->tot_actuel:0);
     }
     public function afficheStat($acces){
         // Create connection
@@ -52,20 +52,33 @@ class data{
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
-
-        if($acces == "public"){
+        if($acces == "total"){
             $sqlNbr = "SELECT SUM(nbr_entree), SUM(nbr_sortie) FROM Nbr_Personne";
             if ($result = $conn->query($sqlNbr)) {
                 while ($row = $result->fetch_assoc()) {
                     $this->setEntree($row["SUM(nbr_entree)"]);
                     $this->setSortie($row["SUM(nbr_sortie)"]);
-                    $this->setActuel($row["SUM(nbr_entree)"] - $row["SUM(nbr_sortie)"]);
+                    $total = $row["SUM(nbr_entree)"] - $row["SUM(nbr_sortie)"];
+                    $this->setActuel($total);
+                }
+                $result->free();
+            }
+            return $this->getActuel()+1;
+        }
+        elseif($acces == "public"){
+            $sqlNbr = "SELECT SUM(nbr_entree), SUM(nbr_sortie) FROM Nbr_Personne";
+            if ($result = $conn->query($sqlNbr)) {
+                while ($row = $result->fetch_assoc()) {
+                    $this->setEntree($row["SUM(nbr_entree)"]);
+                    $this->setSortie($row["SUM(nbr_sortie)"]);
+                    $total = $row["SUM(nbr_entree)"] - $row["SUM(nbr_sortie)"];
+                    $this->setActuel($total);
                 }
                 $result->free();
             }
             echo '<br>Nombre entree : '  . $this->getEntree() .
                 '<br>Nombre sortie : '  . $this->getSortie() .
-                '<br>Nombre actuel : '  . ($this->getActuel()>0?$this->getActuel():0);
+                '<br>Nombre actuel : '  . $this->getActuel();
 
         }
         elseif($acces == "prive"){
@@ -73,8 +86,8 @@ class data{
               <tr> 
                 <td>ID</td> 
                 <td>ID_Stage</td> 
-                <td>Nombre d\'entrées</td> 
-                <td>Nombre de sorties</td> 
+                <td>Entrées</td> 
+                <td>Sorties</td> 
                 <td>Nombre actuel</td> 
                 <td>Heure</td>
               </tr>';
