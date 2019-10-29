@@ -39,17 +39,16 @@ text-shadow:   0px 0px #000000;
         </div>
     <?php endfor;?>
 
-    <div id="mapid" style=" height: 480px "></div>
+    <div data-aos="fade-up" id="mapid" style=" height: 480px "></div>
 
 <!--  ####################################  Info sur les évènements   ################################################-->
-    <h2>Info</h2>
+    <h2 data-aos="fade-up">Info</h2>
 
     <?php for ($i=0; $i<count($eventInfos); $i++): ?>
-        <p id="description<?=$eventInfos[$i]['id_event']?>" class="eventInfo" <?php if($i != 0) echo 'style="display:none"'?>>
+        <p data-aos="fade-up" id="description<?=$eventInfos[$i]['id_event']?>" class="eventInfo" <?php if($i != 0) echo 'style="display:none"'?>>
             <?=nl2br($eventInfos[$i]['event_description'])?>
         </p>
     <?php endfor;?>
-
 
     <script>
 
@@ -78,7 +77,6 @@ text-shadow:   0px 0px #000000;
             zoom: 16,
             layers: [actifLayer]
         });
-
 
         L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
