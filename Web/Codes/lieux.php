@@ -51,7 +51,8 @@
       </div>
       <div class="site-mobile-menu-body"></div>
     </div>
-
+    
+    <!-- appel du header -->
     <?php include 'header.php'?>
 
 
@@ -72,7 +73,7 @@
 
 
     <div class="site-section">
-
+<!-- appel du fichier qui affichera les boutons, la maps avec ses boutons, informations sur l'evenement, etc ... -->
       <?php include("map.php"); ?>
 
     </div>
@@ -80,6 +81,7 @@
 
 
     <footer class="site-footer">
+      <!-- appel du footer -->
         <?php include("footer.php"); ?>
     </footer>
 
