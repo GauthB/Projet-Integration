@@ -23,7 +23,7 @@ border-radius: 12px;
 padding:       5px 12px;
 color:         #ffffff;
 display:       inline-block;
-font:          normal bold 24px/1 "Calibri", sans-serif;
+font:          "Calibri", sans-serif;
 text-align:    center;
 text-shadow:   0px 0px #000000;
 
@@ -108,6 +108,4 @@ text-shadow:   0px 0px #000000;
         <? endforeach;?>
 
     </script>
-
-
 </div>

@@ -25,12 +25,13 @@
     <div class="row">
         <div class="col-md-12 text-center">
 
-
+<!--
             <form action="addClient.php" method="post">
                 <br>
 
                     S'identifier en tant qu'admin:
                     <input style="width:100px; " type="password" name="mot_de_passe" />
+
                     <input style="
 
 
@@ -46,7 +47,7 @@ font:          normal bold 24px/1 "Calibri", sans-serif;
                     " type="submit" value="v" />
                 </p>
             </form>
-
+-->
 
             <div class="border-top pt-5">
                 <p>
