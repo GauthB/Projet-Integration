@@ -45,6 +45,7 @@ else {
     echo "No data posted with HTTP POST.";
 }
 
+//Fonction test pour voir si les données sont bien mise dans la base de données
 function test_input($data) {
     $data = trim($data);
     $data = stripslashes($data);
