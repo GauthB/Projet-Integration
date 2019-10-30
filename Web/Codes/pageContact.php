@@ -34,7 +34,8 @@
     </div>
 
     <?php include 'header.php'?>
-
+    
+    <!-- Le titre de la page-->
     <div class="site-section site-hero inner">
       <div class="container">
         <div class="row align-items-center">
@@ -45,25 +46,14 @@
         </div>
       </div>
     </div>
-
+    
+    <!-- Le formulaire de la page-->
     <div class="site-section">
       <div class="container">
         <div class="row">
           <div class="col-md-6" data-aos="fade-up">
             <form id= "formContact" class="contact-form" action="" method="post">
 
-<!--
-              <div class="row form-group">
-                <div class="col-md-6 mb-3 mb-md-0">
-                  <label class="" for="fname">First Name</label>
-                  <input type="text" id="fname" class="form-control">
-                </div>
-                <div class="col-md-6">
-                  <label class="" for="lname">Last Name</label>
-                  <input type="text" id="lname" class="form-control">
-                </div>
-              </div>
--->
                          <div class="row form-group">
 
                             <div class="col-md-12">
@@ -92,29 +82,9 @@
                               <input  name="envoi" type="submit" id="submitContact" value="Envoyer" class="btn btn-primary py-2 px-4 text-white">
                             </div>
                           </div>
-
-
-
-           <!--   <div class="col-md-8 col-md-offset-2">
-                <form id= "formContact" class="contact-form" action="" method="post">
-                   //<input type="text"  id="nom" class="input" name="nom" placeholder="Votre Nom">
-
-                  <input type="email"  id="email" class="input" name="votremail" placeholder="Votre email">
-
-                  <input type="text" id="objet"  class="input" name="objet" placeholder="Sujet">
-                  <textarea class="input" placeholder="Message" id="message" name="message" ></textarea>
-                  <input class="main-btn" name="envoi" type="submit" id="submitContact" value="Envoyer" >
-
-                </form>
-
-                <div id="errorContact"></div>
-
-              </div>-->
-
-
-
-
+              
             </form>
+            <!-- exemple -->
             <div id="errorContact"></div>
           </div>
           <div class="col-md-5 ml-auto" data-aos="fade-up" data-aos-delay="100">
