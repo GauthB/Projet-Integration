@@ -1,5 +1,5 @@
-
 <?php
+
 
 require_once "db_connect.php";
 $eventInfoQuery = $dbh->query('SELECT * FROM Events ORDER BY event_name');
@@ -23,7 +23,7 @@ border-radius: 12px;
 padding:       5px 12px;
 color:         #ffffff;
 display:       inline-block;
-font:          normal bold 24px/1 "Calibri", sans-serif;
+font:          "Calibri", sans-serif;
 text-align:    center;
 text-shadow:   0px 0px #000000;
 
@@ -39,19 +39,17 @@ text-shadow:   0px 0px #000000;
         </div>
     <?php endfor;?>
 
-    <div id="mapid" style=" height: 480px "></div>
+    <div data-aos="fade-up" id="mapid" style=" height: 480px "></div>
 
 <!--  ####################################  Info sur les évènements   ################################################-->
-    <h2>Info</h2>
+    <h2 data-aos="fade-up">Info</h2>
 
     <?php for ($i=0; $i<count($eventInfos); $i++): ?>
-        <p id="description<?=$eventInfos[$i]['id_event']?>" class="eventInfo" <?php if($i != 0) echo 'style="display:none"'?>>
+        <p data-aos="fade-up" id="description<?=$eventInfos[$i]['id_event']?>" class="eventInfo" <?php if($i != 0) echo 'style="display:none"'?>>
             <?=nl2br($eventInfos[$i]['event_description'])?>
         </p>
     <?php endfor;?>
 
-
-<!--  ###################################################################################################################-->
     <script>
 
         <?php
@@ -68,10 +66,7 @@ text-shadow:   0px 0px #000000;
 
         $stageInfo = $stageQuery->fetchAll(PDO::FETCH_ASSOC);
 
-
-        //############################################################################################################
         // Créer les points sur la carte
-        //############################################################################################################
         foreach ($stageInfo as $stage) {
             echo "\n\t\t" . 'L.marker([ ' . $stage['stage_latitude'] . ', ' . $stage['stage_longitude'] . ']).bindPopup("<b>' . $stage['stage_name'] . '</b><br>Il y a 0 participant(s)!<br> Le nombre maximum de participant est estimé à ' . $stage['max_people'] . '").addTo(layer' . $stage['id_event'] . ');';
         }
@@ -82,7 +77,6 @@ text-shadow:   0px 0px #000000;
             zoom: 16,
             layers: [actifLayer]
         });
-
 
         L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -114,6 +108,4 @@ text-shadow:   0px 0px #000000;
         <? endforeach;?>
 
     </script>
-
-
 </div>

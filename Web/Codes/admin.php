@@ -1,4 +1,14 @@
-<!DOCTYPE html>
+<!-- se connecter à la base de données -->
+
+<?php
+
+require_once "db_connect.php";
+require_once "esp-data.php";
+
+$eventInfoQuery = $dbh->query('SELECT * FROM Events ORDER BY event_name');
+$eventInfos = $eventInfoQuery->fetchAll(PDO::FETCH_ASSOC);
+
+?><!DOCTYPE html>
 <html lang="en">
 <head>
     <title>PeopleFlux - Interface</title>
@@ -21,13 +31,7 @@
     <link rel="icon" type="image/x-icon" href="LogoSmall.ico"/>
 </head>
 <body>
-<?php
 
-require_once "db_connect.php";
-$eventInfoQuery = $dbh->query('SELECT * FROM Events ORDER BY event_name');
-$eventInfos = $eventInfoQuery->fetchAll(PDO::FETCH_ASSOC);
-
-?>
 
 <div class="site-wrap">
 
@@ -39,9 +43,10 @@ $eventInfos = $eventInfoQuery->fetchAll(PDO::FETCH_ASSOC);
         </div>
         <div class="site-mobile-menu-body"></div>
     </div>
-
+<!-- appel du header -->
     <?php include 'header.php'?>
-
+    
+<!-- Selectionner la table clients -->
     <?php
     $sql1 = <<< EOT
             SELECT *  
@@ -56,6 +61,7 @@ EOT;
             <div class="row align-items-center">
                 <div class="col-md-10">
                     <span class="d-block mb-3 caption" data-aos="fade-up">Vous êtes connecté en tant que:
+                        <!-- pour afficher le nom du client qui se connecte au moment même -->
                         <?php try {
                             $sth1 = $dbh -> prepare($sql1);
                             $sth1 -> execute();
@@ -80,7 +86,7 @@ EOT;
 
     <div class="site-section">
         <div class="container">
-
+<!-- affiche les evennements liés au client -->
 <?php
             $sql2 = <<< EOT
             SELECT *  
@@ -125,7 +131,7 @@ EOT;
                 </table>
             </div>
 
-
+<!-- affiche les scenes liés au client -->
 
 <?php
 $sql3 = <<< EOT
@@ -168,19 +174,21 @@ EOT;
                     </tr>
                     <tr><td>Row:2 Cell:1</td><td>Row:2 Cell:2</td><td>Row:2 Cell:3</td><td>Row:2 Cell:4</td><td>Row:2 Cell:5</td><td>Row:2 Cell:6</td><td>Row:2 Cell:6</td></tr>
                 </table>
-
-
-
-
             </div>
-
-
-
-
+            <div class="d-block mb-3 caption" data-aos="fade-up"></br><h2>Statistique privé</h2>
+        
+        <!-- affiche les statistiques liés à un evennement -->
+                <table class="tftable" border="1" data-aos="fade-up">
+                    <?php $data = new data();
+                    echo '<br>' . $data->afficheStat("prive"). '</table>';
+                    echo '<br>' . $data->afficheStat("public");
+                    ?>
+            </div>
             <div class="row">
                 <div class="col-md-6" data-aos="fade-up">
                     <br id= "formContact" class="contact-form" action="" method="post">
-
+                        
+                    <!-- forumlaire pour que le client rajoute un evenement lui même -->
                         <form>
                         </br> <h2 class="d-block mb-3 caption" data-aos="fade-up">Ajouter un évènement</h2>
                                 <div class="border-top pt-5" data-aos="fade-up">
@@ -250,6 +258,7 @@ EOT;
                                                 </form>
                                          </div>
                                     </div>
+                                     <!-- forumlaire pour que le client rajoute une scene lui même -->
                                     <div class="row form-group" data-aos="fade-up">
                                         <div class="col-md-12">
                                             <label class="" for="message">Nom</label>

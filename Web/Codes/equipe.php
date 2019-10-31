@@ -30,7 +30,7 @@
         </div>
         <div class="site-mobile-menu-body"></div>
     </div>
-
+    <!-- appel du header -->
     <?php include 'header.php'?>
 
 <div class="site-section site-hero inner">
@@ -190,6 +190,7 @@
 
 
 <footer class="site-footer">
+    <!-- appel du footer -->
     <?php include("footer.php"); ?>
 </footer>
 

@@ -9,7 +9,7 @@ if (isset($_POST['message']))
     // La variable $verif va nous permettre d'analyser si la sémantique de l'email est bonne
     $verif='#^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,5}$#';
 
-    //quelques remplacements pour les specialchars
+    //quelques remplacements pour les cractères speciaux
     $message=preg_replace('#(<|>)#', '-', $_POST['message']);
     $message=str_replace('"', "'",$message);
     $message=str_replace('&', 'et',$message);
@@ -32,7 +32,7 @@ if (isset($_POST['message']))
     $objet=trim($objet);
 
 
-    /*On vérifie si l'e mail et le message sont pleins, et on agit en fonction.
+    /*On vérifie si l'e mail et le message sont plein, et on agit en fonction.
       (on affiche Apercu du resultat, tel ou tel champ est vide, etc...*/
     //Si ca ne vas pas (mal rempli, mail non valide...)
     if((empty($message))or(empty($objet))or(!preg_match($verif,$votremail)))

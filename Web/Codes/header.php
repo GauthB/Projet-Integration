@@ -15,6 +15,7 @@ session_start();
                         <li><a href="equipe.php">Groupe</a></li>
                         <li><a href="lieux.php">Lieux</a></li>
                         <li><a href="pageContact.php">Contact</a></li>
+                        <!-- Déc-id en fonction de si le client est connecté ou pas -->
                         <?php if(isset($_SESSION['id'])):?>
                             <li class="cta"><a href="logout.php">Déconnexion</a></li>
                         <?php else:?>
@@ -28,7 +29,7 @@ session_start();
     </div>
 
 </header>
-
+<!-- pour rajouter className=active, pour que la page selectionnée dans le menu soit soulignée -->
 <script>
     var url = window.location.href;
     var li = document.querySelectorAll('#header li a');
