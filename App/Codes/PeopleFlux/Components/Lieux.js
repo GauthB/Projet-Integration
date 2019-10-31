@@ -1,10 +1,11 @@
-import React from 'react'
+import React, {Component} from 'react'
 import { StyleSheet, View, Text, Picker } from 'react-native'
+import MapboxGL from '@react-native-mapbox-gl/maps';
 
+MapboxGL.setAccessToken('pk.eyJ1IjoidGhpYmF1dGhlcm1hbnQiLCJhIjoiY2sxejI0NGd5MGxmeTNobXZ0bmttZnI1OSJ9.qDZmXtEgBV2n5hCbUA2qow');
 
 
 class Lieux extends React.Component {
-  // Components/Search.js
 
   constructor(props) {
     super(props)
@@ -31,6 +32,13 @@ class Lieux extends React.Component {
               </Picker>
             </View>
           </View>
+
+          <MapboxGL.MapView
+          ref={(c) => this._map = c}
+          style={{flex: 1}}
+          zoomLevel={1}>
+        </MapboxGL.MapView>
+
       </View>
     )
   }
