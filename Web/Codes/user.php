@@ -82,7 +82,7 @@ if(isset($_POST['envoi'])) {
                     <form style="margin: 0 auto;
      width: 300px;" id= "formContact" class="contact-form" action="" method="post">
 
-                        <!-- formulaire-->
+                        <!--formulaire-->
                         <div class="row form-group">
                             <div " class="col-md-12">
                             <label class="" for="email">Votre adresse mail</label>
@@ -115,8 +115,7 @@ if(isset($_POST['envoi'])) {
 </div>
 </div>
 
-
-<!-- pied de page -->
+<!--pied de page-->
 <footer class="site-footer">
     <div class="container">
         <?php include("footer.php"); ?>
