@@ -1,7 +1,8 @@
+<!-- Connexion à la base de données-->
 <?php
 if(isset($_POST['envoi'])) {
     require_once "db_connect.php";
-
+    
     $sql = 'SELECT id_client, client_name, client_mail, client_password
     FROM Clients
   WHERE client_mail = :client_mail';
@@ -61,7 +62,8 @@ if(isset($_POST['envoi'])) {
     </div>
 
     <?php include 'header.php'?>
-
+    
+    //titre de la page
     <div class="site-section site-hero inner">
         <div class="container">
             <div class="row align-items-center">
@@ -80,22 +82,19 @@ if(isset($_POST['envoi'])) {
                     <form style="margin: 0 auto;
      width: 300px;" id= "formContact" class="contact-form" action="" method="post">
 
-
                         <div class="row form-group">
                             <div " class="col-md-12">
                             <label class="" for="email">Votre adresse mail</label>
                             <input type="email"  id="email" class="input form-control" name="votremail" placeholder="Mail">
                         </div>
                 </div>
-
+                                                                                                                          
                 <div class="row form-group">
-
                     <div class="col-md-12">
                         <label class="" >Mot de passe</label>
                         <input type="password" id="password"  class="input form-control" name="password" placeholder="Mdp">
                     </div>
                 </div>
-
 
                 <div class="row form-group">
                     <div class="col-md-12">
@@ -113,8 +112,6 @@ if(isset($_POST['envoi'])) {
     </div>
 </div>
 </div>
-
-
 
 <footer class="site-footer">
     <div class="container">
