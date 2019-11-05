@@ -1,9 +1,8 @@
 npm install --save react-navigation
 npm i --save react-navigation-stack
 npm i --save react-navigation-drawer
-expo install react-native-reanimated
+npm i --save react-native-reanimated
 npm i --save react-native-gesture-handler
 npm install express
 npm install body-parser
 npm install mysql
-npm i @react-native-mapbox-gl/maps --save
