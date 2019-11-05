@@ -42,6 +42,9 @@ const styles = StyleSheet.create({
     marginLeft:6,
     marginRight:6,
     backgroundColor: '#4B4C56',
+    borderRadius: 20,
+
+
   },
   bordure_description:{
     borderColor: '#ff5733',
@@ -49,7 +52,9 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginLeft:6,
     marginRight:6,
+    marginBottom: 5,
     backgroundColor: '#4B4C56',
+    borderRadius:10,
   },
   titre_description:{
     color: '#ff5733',
