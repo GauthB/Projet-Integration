@@ -1,6 +1,8 @@
 import React from 'react'
 import { StyleSheet, View, Text } from 'react-native'
 import eventData from '../Helpers/EventData'
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview'
+
 
 class EventDetail extends React.Component {
 
@@ -13,12 +15,15 @@ class EventDetail extends React.Component {
 
     return(
       <View style={styles.main_container}>
-
-        <Text style={styles.text_name}>{name}</Text>
-        <Text style={styles.text_date}>{date}</Text>
-        <Text style={styles.text_lieu}>{lieu}</Text>
-        <Text style={styles.text_description}>{description}</Text>
-
+        <View style={styles.bordure_titre}>
+          <Text style={styles.text_name}>{name}</Text>
+            <Text style={styles.text_date}> le {date}</Text>
+            <Text style={styles.text_lieu}> A {lieu}</Text>
+        </View>
+        <KeyboardAwareScrollView style={styles.bordure_description}>
+          <Text style={styles.titre_description}>Description : </Text>
+          <Text style={styles.text_description}>{description}</Text>
+        </KeyboardAwareScrollView>
       </View>
     )
   }
@@ -29,17 +34,60 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#232531',
   },
+  bordure_titre:{
+    height: 110,
+    borderColor: '#ff5733',
+    borderWidth: 2,
+    marginTop: 20,
+    marginLeft:6,
+    marginRight:6,
+    backgroundColor: '#4B4C56',
+  },
+  bordure_description:{
+    borderColor: '#ff5733',
+    borderWidth: 2,
+    marginTop: 10,
+    marginLeft:6,
+    marginRight:6,
+    backgroundColor: '#4B4C56',
+  },
+  titre_description:{
+    color: '#ff5733',
+    fontWeight: 'bold',
+    marginTop: 15,
+    marginLeft: 5
+  },
+
   text_name:{
-    marginTop: 50
+    fontWeight : 'bold',
+    fontSize: 25,
+    color: '#c70039',
+    textAlign: 'center',
+    marginTop: 15
+  },
+  date_lieu:{
+    flexDirection: 'row'
   },
   text_date:{
-    marginTop: 50
+    fontSize: 15,
+    color: '#fff',
+    marginTop: 10,
+    marginLeft: 10,
+
   },
   text_lieu:{
-    marginTop: 50
+    fontSize: 15,
+    color: '#fff',
+    marginTop: 5,
+    marginLeft: 10
+
   },
   text_description:{
-    marginTop: 50
+    marginTop: 15,
+    marginBottom: 10,
+    marginRight : 10,
+    marginLeft: 10,
+    color: '#fff'
   }
 })
 export default EventDetail
