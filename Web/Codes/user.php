@@ -63,7 +63,7 @@ if(isset($_POST['envoi'])) {
 
     <?php include 'header.php'?>
     
-    <!-- titre de la page-->
+    //titre de la page
     <div class="site-section site-hero inner">
         <div class="container">
             <div class="row align-items-center">
@@ -82,7 +82,6 @@ if(isset($_POST['envoi'])) {
                     <form style="margin: 0 auto;
      width: 300px;" id= "formContact" class="contact-form" action="" method="post">
 
-                        <!--formulaire-->
                         <div class="row form-group">
                             <div " class="col-md-12">
                             <label class="" for="email">Votre adresse mail</label>
@@ -97,7 +96,6 @@ if(isset($_POST['envoi'])) {
                     </div>
                 </div>
 
-                <!-- bouton-->
                 <div class="row form-group">
                     <div class="col-md-12">
 
@@ -115,7 +113,6 @@ if(isset($_POST['envoi'])) {
 </div>
 </div>
 
-<!--pied de page-->
 <footer class="site-footer">
     <div class="container">
         <?php include("footer.php"); ?>
