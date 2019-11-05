@@ -17,9 +17,8 @@ boolean vrai = 0;  // VALEUR PRECEDENTE DU LASER AU COMPTEUR
 
 void setup() {
   Serial.begin(115200);
-  pinMode(25, OUTPUT); // EMETTEUR LASER ENTRÉE
-  pinMode(27, INPUT);  // RECEPTEUR LASER ENTRÉE
-  pinMode(12, OUTPUT); // LED 
+  pinMode(18, INPUT);  // RECEPTEUR LASER ENTRÉE
+  pinMode(21, OUTPUT); // LED 
   
   WiFi.begin(ssid, password);
   Serial.println("Connecting");
@@ -34,24 +33,22 @@ void setup() {
 void ledBlink(int x){
   int i;
   for(i=0;i<x;i++){
-    digitalWrite(12, HIGH);
+    digitalWrite(21, HIGH);
     delay(200);
-    digitalWrite(12, LOW);
+    digitalWrite(21, LOW);
     delay(100);
   }
 }
-int increment(){
-  int valeur = (digitalRead(27)); // VALEUR RECEPTEUR LASER
-  digitalWrite(25, HIGH); // EMETTEUR LASER
-  if(valeur==1 && vrai == 1){
+int incremente(){
+  int valeur = (digitalRead(18)); // VALEUR RECEPTEUR LASER
+  if(valeur == 0 && vrai == 1){
     vrai = 0;
     ledBlink(1);
     return 1;
   }
-  else if(valeur == 0){
+  else if(valeur == 1){
     vrai = 1;
     return 0;
-    delay(300);
   }
 }
 void loop() {
@@ -69,10 +66,11 @@ void loop() {
                           + "&nbr_entree=" + "1";
     
     // Send HTTP POST request
-    if(increment() == 1){
+    if(incremente() == 1){
       int httpResponseCode = http.POST(httpRequestData);
       Serial.print("httpRequestData: ");
       Serial.println(httpRequestData);
+      delay(500);
       if (httpResponseCode>0) {
         Serial.print("HTTP Response code: ");
         Serial.println(httpResponseCode);
@@ -81,11 +79,15 @@ void loop() {
         Serial.print("Error code: ");
         Serial.println(httpResponseCode);
       }
+      if(httpResponseCode!=200){
+        ledBlink(3);
+      }
     }
     // Free resources
     http.end();
   }
   else {
     Serial.println("WiFi Disconnected");
+    ledBlink(2);
   } 
 }
