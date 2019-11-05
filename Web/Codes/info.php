@@ -30,7 +30,8 @@
         </div>
         <div class="site-mobile-menu-body"></div>
     </div>
-
+    
+    <!-- le header de la page -->
     <?php include 'header.php'?>
 
     <div class="site-section site-hero inner">
@@ -44,6 +45,7 @@
         </div>
     </div>
 
+    <!-- petite présentation du groupe -->
     <div class="site-section">
         <div class="container">
             <div class="row mb-5">
@@ -61,7 +63,8 @@
                     <img src="images/hero_01.jpg" alt="Image" class="img-fluid">
                 </div>
             </div>
-
+            
+            <!-- expliquation du projet -->
             <div class="col-md-4" data-aos="fade-up" data-aos-delay="400"><span class="text-primary">L'histoire ...</span></div>
             <div  data-aos="fade-up" data-aos-delay="500">
 
@@ -81,7 +84,7 @@
 
 
 
-
+    <!-- outils utilisés -->
     <div class="site-section">
         <div class="container">
             <div class="row mb-5">
@@ -125,7 +128,7 @@
 
 
 
-
+    <!-- le pied de page -->
     <footer class="site-footer">
         <?php include("footer.php"); ?>
     </footer>
