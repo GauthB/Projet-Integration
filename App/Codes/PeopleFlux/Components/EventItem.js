@@ -14,14 +14,14 @@ class EventItem extends React.Component {
     return (
           <View style={styles.main_container}>
             <TouchableOpacity
-              onPress={() => displayDetail(evenement.description)}
+              onPress={() => displayDetail(evenement.name, evenement.date, evenement.lieu, evenement.description)}
             >
               <View style={styles.bordure}>
                 <View style={styles.event_date}>
                   <Text style={styles.text_event}>{evenement.name}</Text>
                   <Text style={styles.text_date}>{evenement.date}</Text>
                 </View>
-                <Text style={styles.text_lieux}>{evenement.lieu}</Text>
+                <Text style={styles.text_lieu}>{evenement.lieu}</Text>
               </View>
             </TouchableOpacity>
           </View>
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 20
   },
-  text_lieux:{
+  text_lieu:{
     fontSize: 10,
     color: '#fff',
     marginLeft: 20,

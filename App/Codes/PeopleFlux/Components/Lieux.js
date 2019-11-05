@@ -1,8 +1,6 @@
 import React, {Component} from 'react'
 import { StyleSheet, View, Text, Picker } from 'react-native'
-import MapboxGL from '@react-native-mapbox-gl/maps';
 
-MapboxGL.setAccessToken('pk.eyJ1IjoidGhpYmF1dGhlcm1hbnQiLCJhIjoiY2sxejI0NGd5MGxmeTNobXZ0bmttZnI1OSJ9.qDZmXtEgBV2n5hCbUA2qow');
 
 
 class Lieux extends React.Component {
@@ -15,7 +13,7 @@ class Lieux extends React.Component {
   render() {
     return (
       <View style={styles.main_container}>
-        <Text style={styles.text_lieux}>Lieux</Text>
+        <Text style={styles.text_lieu}>Lieux</Text>
           <View styles={styles.head_container}>
             <Text style={styles.text_evenements}>Evenements : </Text>
             <View style={styles.picker_container}>
@@ -32,13 +30,6 @@ class Lieux extends React.Component {
               </Picker>
             </View>
           </View>
-
-          <MapboxGL.MapView
-          ref={(c) => this._map = c}
-          style={{flex: 1}}
-          zoomLevel={1}>
-        </MapboxGL.MapView>
-
       </View>
     )
   }
@@ -52,7 +43,7 @@ const styles = StyleSheet.create({
 
   },
 
-  text_lieux:{
+  text_lieu:{
     fontSize:30,
     color:'#c70039',
     marginLeft:10,
