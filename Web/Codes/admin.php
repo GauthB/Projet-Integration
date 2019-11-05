@@ -1,12 +1,13 @@
-<!-- se connecter à la base de données -->
-
 <?php
+session_start();
+
+if(!isset($_SESSION['id'])) {
+    header('Location: index.php');
+    exit;
+}
 
 require_once "db_connect.php";
 require_once "esp-data.php";
-
-$eventInfoQuery = $dbh->query('SELECT * FROM Events ORDER BY event_name');
-$eventInfos = $eventInfoQuery->fetchAll(PDO::FETCH_ASSOC);
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -45,35 +46,12 @@ $eventInfos = $eventInfoQuery->fetchAll(PDO::FETCH_ASSOC);
     </div>
 <!-- appel du header -->
     <?php include 'header.php'?>
-    
-<!-- Selectionner la table clients -->
-    <?php
-    $sql1 = <<< EOT
-            SELECT *  
-            FROM Clients
-            WHERE id_client=1;
-EOT;
-    ?>
-
 
     <div class="site-section site-hero inner ">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-10">
-                    <span class="d-block mb-3 caption" data-aos="fade-up">Vous êtes connecté en tant que:
-                        <!-- pour afficher le nom du client qui se connecte au moment même -->
-                        <?php try {
-                            $sth1 = $dbh -> prepare($sql1);
-                            $sth1 -> execute();
-                            $infos1 = $sth1 -> fetchAll(PDO::FETCH_ASSOC);
-                            print_r($infos1[0]["client_name"]);
-
-                        } catch (Exception $e) {
-                            print "Erreur !:" .$e -> getMessage()."<br/>";
-                            die();
-
-                        }?>
-                    </span>
+                    <span class="d-block mb-3 caption" data-aos="fade-up">Vous êtes connecté en tant que: <?=$_SESSION['name']?> </span>
                     <h1 class="d-block mb-4" data-aos="fade-up" data-aos-delay="100">Bienvenue dans l'interface!</h1>
 
                 </div>
@@ -81,21 +59,8 @@ EOT;
         </div>
     </div>
 
-
-
-
     <div class="site-section">
         <div class="container">
-<!-- affiche les evennements liés au client -->
-<?php
-            $sql2 = <<< EOT
-            SELECT *  
-            FROM Events
-            WHERE id_client=1;
-EOT;
-?>
-
-
             <div>
                 <style type="text/css">
                     .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #c70039;border-collapse: collapse;}
@@ -104,31 +69,29 @@ EOT;
                     .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #c70039;}
                 </style>
 
-                <table class="tftable" border="1" data-aos="fade-up">
-                    <h2 class="d-block mb-3 caption" data-aos="fade-up">Evènements</h2>
-                    <tr><th>Nom</th><th>Date du début</th><th>Date de fin</th><th>Adresse</th></tr>
-                    <tr><td>
-                           <?php try {
-                            $sth2 = $dbh -> prepare($sql2);
-                            $sth2 -> execute();
-                            $infos2 = $sth2 -> fetchAll(PDO::FETCH_ASSOC);
-                            print_r($infos2[0]["event_name"].
-                                "</td> <td>".
-                                $infos2[0]["date_from"].
-                               "</td> <td>".
-                               $infos2[0]["date_to"].
-                               "</td> <td>".
-                                $infos2[0]["event_address"]);
+                <h2 class="d-block mb-3 caption" data-aos="fade-up">Evènements</h2>
 
-                            } catch (Exception $e) {
-                            print "Erreur !:" .$e -> getMessage()."<br/>";
-                            die();
+                    <?php
 
-                            }?>
+                    $sth = $dbh -> prepare('SELECT * FROM Events WHERE id_client=:client_id');
+                    $sth->execute(array(':client_id' => $_SESSION['id']));
+                    $eventsInfo = $sth -> fetchAll(PDO::FETCH_ASSOC);
+                    $sth->closeCursor();
 
+                    if(empty($eventsInfo)) {
+                        echo '<p data-aos="fade-up">Vous n\'avez aucun évènements</p>';
+                    } else {
+                        echo '<table class="tftable" border="1" data-aos="fade-up">';
+                        echo '<tr><th>Nom</th><th>Date du début</th><th>Date de fin</th><th>Adresse</th></tr>';
 
-                        </td></tr>
-                </table>
+                        foreach ($eventsInfo as $event) {
+                            echo '<tr><td>' . $event["event_name"] . '</td><td>' . $event["date_from"] . '</td><td>' . $event["date_to"] . '</td><td>' . $event["event_address"] . '</td></tr>';
+                        }
+
+                        echo '</table>';
+                    }
+                    ?>
+
             </div>
 
 <!-- affiche les scenes liés au client -->
@@ -241,19 +204,8 @@ EOT;
                                                 <form>
                                                     <SELECT name="nom" size="1">
 
-                                                            <?php try {
-                                                                $sth2 = $dbh -> prepare($sql2);
-                                                                $sth2 -> execute();
-                                                                $infos2 = $sth2 -> fetchAll(PDO::FETCH_ASSOC);
-                                                                print_r("<OPTION>".
-                                                                    $infos2[0]["event_name"].
-                                                                "<OPTION>AUTRES");
 
-                                                            } catch (Exception $e) {
-                                                                print "Erreur !:" .$e -> getMessage()."<br/>";
-                                                                die();
 
-                                                            }?>
                                                     </SELECT>
                                                 </form>
                                          </div>

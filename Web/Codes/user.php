@@ -1,5 +1,7 @@
 <!-- Connexion à la base de données-->
 <?php
+session_start();
+
 if(isset($_POST['envoi'])) {
     require_once "db_connect.php";
     
@@ -63,7 +65,7 @@ if(isset($_POST['envoi'])) {
 
     <?php include 'header.php'?>
     
-    //titre de la page
+<!--    titre de la page-->
     <div class="site-section site-hero inner">
         <div class="container">
             <div class="row align-items-center">

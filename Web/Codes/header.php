@@ -17,6 +17,7 @@ session_start();
                         <li><a href="pageContact.php">Contact</a></li>
                         <!-- Déc-id en fonction de si le client est connecté ou pas -->
                         <?php if(isset($_SESSION['id'])):?>
+                            <li><a href="admin.php">Evènements</a></li>
                             <li class="cta"><a href="logout.php">Déconnexion</a></li>
                         <?php else:?>
                             <li class="cta"><a href="user.php">S'identifier</a></li>
