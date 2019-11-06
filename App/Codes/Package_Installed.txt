@@ -1,3 +1,4 @@
+npm install -g expo-cli
 npm install --save react-navigation
 npm i --save react-navigation-stack
 npm i --save react-navigation-drawer
