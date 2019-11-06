@@ -3,7 +3,7 @@ npm i --save react-navigation-stack
 npm i --save react-navigation-drawer
 npm i --save react-native-reanimated
 npm i --save react-native-gesture-handler
-npm install express
-npm install body-parser
-npm install mysql
+npm i --save express
+npm i --save body-parser
+npm i --save mysql
 npm install --save react-native-email
