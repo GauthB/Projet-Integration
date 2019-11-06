@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, TextInput, Text , Platform, Button, TouchableOpacity  } from 'react-native'
+import { StyleSheet, View, TextInput, Text , Platform, Button, TouchableOpacity, Alert  } from 'react-native'
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview'
 import email from 'react-native-email'
 
@@ -14,6 +14,15 @@ class Contact extends React.Component {
       sujet: '',
       corps :''
     }
+   }
+
+   _isMailCorrect() {
+     if(this.state.mail.includes('@') && this.state.mail.includes('.')){
+       return true;
+     }
+     else{
+       return false;
+     }
    }
 
   render() {
@@ -84,12 +93,25 @@ class Contact extends React.Component {
   }
 
   handleEmail = () => {
-        const to = 'thib.herm@gmail.com' // string or array of email addresses
-        email(to, {
-            // Optional additional arguments
-            subject: this.state.sujet,
-            body: this.state.corps + '\n\n' + ' email: ' + this.state.mail
-        }).catch(console.error)
+        const to = 'peopleflux@gmail.com' // string or array of email addresses
+        if(this._isMailCorrect()){
+          email(to, {
+              // Optional additional arguments
+              subject: this.state.sujet,
+              body: this.state.corps + '\n\n' + ' email: ' + this.state.mail
+          }).catch(console.error)
+        }
+        else{
+          Alert.alert(
+            'Mail incorrect',
+            'Veuillez entrer un email correct',
+            [
+              {text: 'OK', onPress: () => console.log('OK Pressed')},
+            ],
+            {cancelable: false},
+          );
+        }
+
 
     }
 }

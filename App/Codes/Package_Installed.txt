@@ -8,3 +8,10 @@ npm i --save express
 npm i --save body-parser
 npm i --save mysql
 npm install --save react-native-email
+
+### Test Unit
+
+npm i --save-dev enzyme
+npm i --save react react-dom
+npm i --save-dev react-test-renderer
+npm install --save-dev jest

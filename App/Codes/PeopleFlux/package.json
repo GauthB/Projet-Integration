@@ -5,7 +5,11 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "test": "jest"
+  },
+  "jest": {
+    "preset": "react-native"
   },
   "dependencies": {
     "@react-native-mapbox-gl/maps": "^7.0.8",
@@ -28,7 +32,14 @@
     "react-navigation-stack": "^1.10.3"
   },
   "devDependencies": {
-    "babel-preset-expo": "^7.0.0"
+    "babel-jest": "^24.9.0",
+    "babel-preset-airbnb": "^4.1.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-expo": "^7.0.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.15.1",
+    "jest": "^24.9.0",
+    "react-test-renderer": "^16.8.3"
   },
   "private": true
 }
