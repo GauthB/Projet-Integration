@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { StyleSheet, View, Text, Picker } from 'react-native'
+import { StyleSheet, View, Text, Picker, Image } from 'react-native'
 
 
 
@@ -29,6 +29,12 @@ class Lieux extends React.Component {
                 <Picker.Item label="Brussels Summer Festival" value="bsf" />
               </Picker>
             </View>
+          </View>
+          <View styles={styles.content_container}>
+            <Image
+              style ={styles.image}
+              source={require('../Images/lieux.jpg')}
+            />
           </View>
       </View>
     )
@@ -69,6 +75,19 @@ const styles = StyleSheet.create({
     color:'#c70039',
     backgroundColor:'white',
     height:30,
+
+
+  },
+  content_container:{
+    justifyContent:'center',
+    alignItems:'center',
+    flex:1
+  },
+  image:{
+    height:500,
+    width:350,
+    marginLeft:2,
+    marginTop:10
 
 
   }
