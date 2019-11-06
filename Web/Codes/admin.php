@@ -85,7 +85,11 @@ require_once "esp-data.php";
                         echo '<tr><th>Nom</th><th>Date du début</th><th>Date de fin</th><th>Adresse</th></tr>';
 
                         foreach ($eventsInfo as $event) {
-                            echo '<tr><td>' . $event["event_name"] . '</td><td>' . $event["date_from"] . '</td><td>' . $event["date_to"] . '</td><td>' . $event["event_address"] . '</td></tr>';
+                            echo '<tr><td>' .
+                                $event["event_name"] . '</td><td>' .
+                                $event["date_from"] . '</td><td>' .
+                                $event["date_to"] . '</td><td>' .
+                                $event["event_address"] . '</td></tr>';
                         }
 
                         echo '</table>';
@@ -96,47 +100,36 @@ require_once "esp-data.php";
 
 <!-- affiche les scenes liés au client -->
 
-<?php
-$sql3 = <<< EOT
-            SELECT *  
-            FROM Stages
-            WHERE id_stage=5;
-EOT;
-?>
-
             <div>
-                <table class="tftable" border="1" data-aos="fade-up">
-                </br><h2 class="d-block mb-3 caption" data-aos="fade-up">Scènes</h2>
-                    <tr><th>Nom de l'évènement</th><th>Nom de la scène</th><th>Latitude</th><th>Longitude</th><th>Max participants</th><th>Heure de début</th><th>Heure de fin</th></tr>
-                    <tr>
-                        <td>
-                            NOM DE L'EVENEMENT
-                        </td>
-                        <td>
-                            <?php try {
-                                $sth3 = $dbh -> prepare($sql3);
-                                $sth3 -> execute();
-                                $infos3 = $sth3 -> fetchAll(PDO::FETCH_ASSOC);
-                                print_r($infos3[0]["stage_name"].
-                                    "</td> <td>".
-                                    $infos3[0]["stage_latitude"].
-                                    "</td> <td>".
-                                    $infos3[0]["stage_longitude"].
-                                    "</td> <td>".
-                                    $infos3[0]["max_people"].
-                                    "</td> <td>".
-                                    $infos3[0]["hour_from"].
-                                    "</td> <td>".
-                                    $infos3[0]["hour_to"]);
+                <h2 class="d-block mb-3 caption" data-aos="fade-up">Scènes</h2>
+                <?php
+                $sth = $dbh -> prepare('SELECT event_name,stage_name,stage_latitude,stage_longitude,max_people,hour_from,hour_to FROM Stages JOIN Events ON Stages.id_event = Events.id_event WHERE id_client=:client_id');
+                $sth->execute(array(':client_id' => $_SESSION['id']));
+                $stageInfo = $sth -> fetchAll(PDO::FETCH_ASSOC);
+                $sth->closeCursor();
 
-                            } catch (Exception $e) {
-                                print "Erreur !:" .$e -> getMessage()."<br/>";
-                                die();
+                if(empty($stageInfo)) {
+                    echo '<p data-aos="fade-up">Vous n\'avez aucune stage</p>';
+                } else {
+                    echo '<table class="tftable" border="1" data-aos="fade-up">';
+                    echo '<tr><th>Nom de l\'évènement</th><th>Nom de la scène</th><th>Latitude</th><th>Longitude</th><th>Max participants</th><th>Heure de début</th><th>Heure de fin</th></tr>';
 
-                            }?>
-                    </tr>
-                    <tr><td>Row:2 Cell:1</td><td>Row:2 Cell:2</td><td>Row:2 Cell:3</td><td>Row:2 Cell:4</td><td>Row:2 Cell:5</td><td>Row:2 Cell:6</td><td>Row:2 Cell:6</td></tr>
-                </table>
+                    foreach ($stageInfo as $stage) {
+                        echo '<tr><td>' .
+                            $stage["event_name"] . '</td><td>' .
+                            $stage["stage_name"] . '</td><td>' .
+                            $stage["stage_latitude"] . '</td><td>' .
+                            $stage["stage_longitude"] . '</td><td>' .
+                            $stage["max_people"] . '</td><td>' .
+                            $stage["hour_from"] . '</td><td>' .
+                            $stage["hour_to"] . '</td></tr>';
+                    }
+
+                    echo '</table>';
+                }
+
+                ?>
+
             </div>
             <div class="d-block mb-3 caption" data-aos="fade-up"></br><h2>Statistique privé</h2>
         
