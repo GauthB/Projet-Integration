@@ -1,7 +1,6 @@
 import React from 'react'
 import { StyleSheet, View, TextInput, Text , Platform, Button, TouchableOpacity  } from 'react-native'
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview'
-import BoutonEnvoyer from './BoutonEnvoyer'
 import email from 'react-native-email'
 
 
@@ -188,7 +187,7 @@ const styles = StyleSheet.create({
     marginLeft:6,
     marginRight:6,
     height:50,
-    backgroundColor: Platform.OS === 'ios' ? '#fff' : '#ff5733',
+    backgroundColor:'#ff5733',
     alignItems:'center'
 
   },
