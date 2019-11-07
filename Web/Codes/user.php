@@ -87,14 +87,14 @@ if(isset($_POST['envoi'])) {
                         <div class="row form-group">
                             <div " class="col-md-12">
                             <label class="" for="email">Votre adresse mail</label>
-                            <input type="email"  id="email" class="input form-control" name="votremail" placeholder="Mail">
+                            <input type="email"  id="email" class="input form-control" name="votremail" placeholder="Mail" required>
                         </div>
                 </div>
                                                                                                                           
                 <div class="row form-group">
                     <div class="col-md-12">
-                        <label class="" >Mot de passe</label>
-                        <input type="password" id="password"  class="input form-control" name="password" placeholder="Mdp">
+                        <label class="" for="password">Mot de passe</label>
+                        <input type="password" id="password"  class="input form-control" name="password" placeholder="Mdp" required>
                     </div>
                 </div>
 

@@ -11,9 +11,9 @@ session_start();
                 <nav class="site-navigation position-relative text-right" role="navigation" id="header">
                     <ul class="site-menu js-clone-nav mx-auto d-none d-lg-block">
                         <li><a href="index.php">Accueil</a></li>
+                        <li><a href="lieux.php">Lieux</a></li>
                         <li><a href="info.php">A propos</a></li>
                         <li><a href="equipe.php">Groupe</a></li>
-                        <li><a href="lieux.php">Lieux</a></li>
                         <li><a href="pageContact.php">Contact</a></li>
                         <!-- Déc-id en fonction de si le client est connecté ou pas -->
                         <?php if(isset($_SESSION['id'])):?>

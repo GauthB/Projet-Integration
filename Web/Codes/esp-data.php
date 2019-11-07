@@ -45,6 +45,15 @@ class data{
     public function getActuel(){
         return ($this->tot_actuel>0?$this->tot_actuel:0);
     }
+    public function supprimerTable(){
+        $sql = "DELETE FROM `Nbr_Personne` WHERE `id_stage`= 1";
+
+        /*if ($conn->query($sql) === TRUE) {
+            echo "Record deleted successfully";
+        } else {
+            echo "Error deleting record: " . $conn->error;
+        }*/
+    }
     public function afficheStat($acces){
         // Create connection
         $conn = new mysqli($this->getServerName(), $this->getUsername(), $this->getPassword(), $this->getDbName());
@@ -58,12 +67,12 @@ class data{
                 while ($row = $result->fetch_assoc()) {
                     $this->setEntree($row["SUM(nbr_entree)"]);
                     $this->setSortie($row["SUM(nbr_sortie)"]);
-                    $total = $row["SUM(nbr_entree)"] - $row["SUM(nbr_sortie)"];
+                    $total = $row["SUM(nbr_entree)"] - $row["SUM(nbr_sortie)"] - 1;
                     $this->setActuel($total);
                 }
                 $result->free();
             }
-            return $this->getActuel()+1;
+            return $this->getActuel();
         }
         elseif($acces == "public"){
             $sqlNbr = "SELECT SUM(nbr_entree), SUM(nbr_sortie) FROM Nbr_Personne";

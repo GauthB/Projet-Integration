@@ -2,7 +2,7 @@
 
 
 require_once "db_connect.php";
-$eventInfoQuery = $dbh->query('SELECT * FROM Events ORDER BY event_name');
+$eventInfoQuery = $dbh->query('SELECT * FROM Events ORDER BY event_name ');
 $eventInfos = $eventInfoQuery->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
