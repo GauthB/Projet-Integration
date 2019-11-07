@@ -8,6 +8,7 @@ npm i --save express
 npm i --save body-parser
 npm i --save mysql
 npm install --save react-native-email
+npm i --save react-native-picker-select
 
 ### Test Unit
 
