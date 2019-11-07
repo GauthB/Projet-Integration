@@ -11,3 +11,5 @@ it('Test du formulaire de contact ',()=>{
   expect(ContactData._isMailCorrect()).toEqual(true)
 
 })
+
+//test unitaire inteface : Cellenium 

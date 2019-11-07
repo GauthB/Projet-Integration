@@ -14,6 +14,23 @@ import EventDetail from '../Components/EventDetail.js'
 
 
 const DrawerNavigator = createDrawerNavigator({
+  Calendrier: {
+    screen: Calendrier,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Calendrier Screen',
+      drawerLabel: 'Calendrier',
+      drawerIcon: () => <AntDesign name="calendar" size={20} color='#fff' />
+
+    })
+  },
+  Lieux: {
+    screen: Lieux,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Lieux Screen',
+      drawerLabel: 'Lieux',
+      drawerIcon: () => <MaterialIcons name="place" size={20} color='#fff' />
+    })
+  },
   APropos: {
     screen: APropos,
     navigationOptions: ({ navigation }) => ({
@@ -28,30 +45,8 @@ const DrawerNavigator = createDrawerNavigator({
       title: 'Contact Screen',
       drawerLabel: 'Contact',
       drawerIcon: () => <AntDesign name="contacts" size={20} color='#fff' />
-
-
-
     })
-  },
-    Lieux: {
-      screen: Lieux,
-      navigationOptions: ({ navigation }) => ({
-        title: 'Lieux Screen',
-        drawerLabel: 'Lieux',
-        drawerIcon: () => <MaterialIcons name="place" size={20} color='#fff' />
-
-      })
-    },
-    Calendrier: {
-      screen: Calendrier,
-      navigationOptions: ({ navigation }) => ({
-        title: 'Calendrier Screen',
-        drawerLabel: 'Calendrier',
-        drawerIcon: () => <AntDesign name="calendar" size={20} color='#fff' />
-
-      })
-    }
-
+  }
 
 },
   {
