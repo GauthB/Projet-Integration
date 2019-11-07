@@ -1,6 +1,6 @@
 import React from 'react';
 import { Ionicons, AntDesign, MaterialIcons } from '@expo/vector-icons'
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView, Platform } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createDrawerNavigator, DrawerActions } from 'react-navigation-drawer';
@@ -78,14 +78,14 @@ const StackNavigator = createStackNavigator({
 
         return {
           header: ({titleStyle}) =>(
-              <View style={styles.main_container}>
+              <SafeAreaView style={styles.main_container}>
                 <View style={styles.title_container}>
                   <Text style={styles.title_text_people}>People</Text><Text style={styles.title_text_flux}>Flux</Text>
                   <TouchableOpacity style={styles.menuOpen} onPress={() => {navigation.dispatch(DrawerActions.toggleDrawer())}}>
                     <Ionicons name="ios-menu"  size={50} color='#fff' />
                   </TouchableOpacity>
                 </View>
-              </View>
+              </SafeAreaView>
 
 
           )
@@ -102,14 +102,14 @@ const StackNavigator = createStackNavigator({
 
         return {
           header: ({titleStyle}) =>(
-              <View style={styles.main_container}>
+              <SafeAreaView style={styles.main_container}>
                 <View style={styles.title_container}>
                   <TouchableOpacity style={styles.back} onPress={() => navigation.navigate("Calendrier")}>
                     <Ionicons name="ios-arrow-round-back"  size={50} color='#ff5733' />
                   </TouchableOpacity>
                   <Text style={styles.title_text_people}>People</Text><Text style={styles.title_text_flux}>Flux</Text>
                 </View>
-              </View>
+              </SafeAreaView>
           )
         }
       }
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#232531'
   },
   title_container:{
-    marginTop : 30,
+    marginTop : Platform.OS === 'ios' ? 10 : 40,
     flexDirection:'row',
     textAlign:'center',
     justifyContent: 'center',
