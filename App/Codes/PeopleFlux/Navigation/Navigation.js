@@ -14,6 +14,7 @@ import EventDetail from '../Components/EventDetail.js'
 
 
 const DrawerNavigator = createDrawerNavigator({
+
   Calendrier: {
     screen: Calendrier,
     navigationOptions: ({ navigation }) => ({
@@ -23,14 +24,14 @@ const DrawerNavigator = createDrawerNavigator({
 
     })
   },
-  Lieux: {
-    screen: Lieux,
-    navigationOptions: ({ navigation }) => ({
-      title: 'Lieux Screen',
-      drawerLabel: 'Lieux',
-      drawerIcon: () => <MaterialIcons name="place" size={20} color='#fff' />
-    })
-  },
+    Lieux: {
+      screen: Lieux,
+      navigationOptions: ({ navigation }) => ({
+        title: 'Lieux Screen',
+        drawerLabel: 'Lieux',
+        drawerIcon: () => <MaterialIcons name="place" size={20} color='#fff' />
+      })
+    },
   APropos: {
     screen: APropos,
     navigationOptions: ({ navigation }) => ({
