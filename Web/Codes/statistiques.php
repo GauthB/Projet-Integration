@@ -32,10 +32,7 @@ require_once "esp-data.php";
     <link rel="icon" type="image/x-icon" href="LogoSmall.ico"/>
 </head>
 <body>
-
-
 <div class="site-wrap">
-
     <div class="site-mobile-menu">
         <div class="site-mobile-menu-header">
             <div class="site-mobile-menu-close mt-3">
@@ -44,7 +41,6 @@ require_once "esp-data.php";
         </div>
         <div class="site-mobile-menu-body"></div>
     </div>
-
 
     <header class="site-navbar py-3" role="banner">
         <div class="container-fluid">
@@ -57,103 +53,59 @@ require_once "esp-data.php";
                 <div class="d-inline-block d-xl-none ml-md-0 mr-auto py-3" style="position: relative; top: 3px;"><a href="#" class="site-menu-toggle js-menu-toggle text-white"><span class="icon-menu h3"></span></a></div>
             </div>
         </div>
-
     </header>
-
-
-
 
     <div class="site-section">
         <div class="container" data-aos="fade-up">
             <style type="text/css">
-
                 hr {
                     border-top: 1px solid red
                 }
             </style>
-<?php
-            $sth = $dbh -> prepare('SELECT * FROM Events WHERE id_client=:client_id');
-            $sth->execute(array(':client_id' => $_SESSION['id']));
-            $eventsInfo = $sth -> fetchAll(PDO::FETCH_ASSOC);
-            $sth->closeCursor();
+            <?php
+                $sth = $dbh -> prepare('SELECT * FROM Events WHERE id_client=:client_id');
+                $sth->execute(array(':client_id' => $_SESSION['id']));
+                $eventsInfo = $sth -> fetchAll(PDO::FETCH_ASSOC);
+                $sth->closeCursor();
 
             if(empty($eventsInfo)) {
-            echo '<p data-aos="fade-up">Vous n\'avez aucun évènements</p>';
-            } else {
-
-
-
+                echo '<p data-aos="fade-up">Vous n\'avez aucun évènements</p>';
+            }
+            else {
                 foreach ($eventsInfo as $event) {
+                    echo  '<input style="
+                            background:    #d84e31;
+                            border:        1px solid #000000;
+                            border-radius: 12px;
+                            padding:       5px 12px;
+                            color:         #ffffff;
+                            display:       inline-block;
+                            font:          "Calibri", sans-serif;
+                            text-align:    center;
+                            text-shadow:   0px 0px #000000;
+                            " type="button" value="' . $event["event_name"] .  $eventName['id_event']  . '"></br>';
+                    echo'<br>  <SELECT name="nom" size="1">';
+                        //$sth2->execute(array(':event_id' => $_EVENT['id_event']));
+                        $sth2 = $dbh -> prepare('SELECT stage_name FROM Stages WHERE id_event');
+                        $sth2->execute(array(':client_id' => $_SESSION['id']));
+                        $difEvent = $sth2 -> fetchAll(PDO::FETCH_ASSOC);
+                        $sth2->closeCursor();
 
-
-                    echo '<input style="
-
-background:    #d84e31;
-border:        1px solid #000000;
-border-radius: 12px;
-padding:       5px 12px;
-color:         #ffffff;
-display:       inline-block;
-font:          "Calibri", sans-serif;
-text-align:    center;
-text-shadow:   0px 0px #000000;
-
-" type="button" value="' . $event["event_name"] .  $eventName['id_event']  . '"></br>';
-
-
-                    echo' <SELECT name="nom" size="1">';
-
-
-
-
-                    //$sth2->execute(array(':event_id' => $_EVENT['id_event']));
-                    $sth2 = $dbh -> prepare('SELECT stage_name FROM Stages WHERE id_event');
-                    $sth2->execute(array(':client_id' => $_SESSION['id']));
-                    $difEvent = $sth2 -> fetchAll(PDO::FETCH_ASSOC);
-                    $sth2->closeCursor();
-
-                    if(empty($difEvent)) {
-                        echo '<option>Vous n\'avez aucune stage</option>';
-                    } else {
-
-                        foreach ($difEvent as $event) {
-                            echo ' <option>' .
+                        if(empty($difEvent)) {
+                            echo '<option>Vous n\'avez aucune stage</option>';
+                        }
+                        else {
+                            foreach ($difEvent as $event) {
+                                echo ' <option>' .
                                 $event["stage_name"] . '</option>' ;
+                            }
                         }
 
-
-                    }
-
-
-
-
-            echo'</SELECT><br><br>';
-
-echo'<hr>';
-
-
-
-
-
-
-
                 }
-
-
             }
             ?>
-
-<!--
-
--->
-
-
-
-
-
-
-
-
+                    </SELECT><br><br>
+        <hr>
             <div>
                 <style type="text/css">
                     .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #c70039;border-collapse: collapse;}
@@ -161,31 +113,25 @@ echo'<hr>';
                     .tftable tr {background-color:#FFFFFF;}
                     .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #c70039;}
                 </style>
-
-
-
             </div>
-
-
                 <!-- affiche les statistiques liés à un evennement -->
-
-                    <div class="d-block mb-3 caption" data-aos="fade-up"></br><h2>Statistiques public</h2>
+            <div class="d-block mb-3 caption" data-aos="fade-up"></br>
+                <h2>Statistiques public</h2>
                     <?php $data = new data();
                     echo '<table class="tftable" border="1" data-aos="fade-up">';
                     echo '<br>' . $data->afficheStat("public",$_SESSION['id']) .'</table>';
-
-                    echo'<div class="d-block mb-3 caption" data-aos="fade-up"></br><h2>Statistiques privées</h2>';
-
-                    echo '<input name="nombreAffiche" type="number" step="10">';
-                    echo '<table class="tftable" border="1" data-aos="fade-up">';
-                    echo '<tr><td>Nom Scene</td> <td>ID</td> <td>Entrées</td> <td>Sorties</td> <td>Actuel</td> <td>Heure</td> </tr>';
-                    echo '<br>' . $data->afficheStat("prive",$_SESSION['id']). '</table>';
-
                     ?>
             </div>
-
-        </div></div>
-
+        <hr>
+            <div class="d-block mb-3 caption" data-aos="fade-up"></br>
+                <h2>Statistiques privées</h2>
+                    Afficher derniers resultats : <input name="nombreAffiche" type="number" step="10" style="width: 3rem"><br>
+                    <table class="tftable" border="1" data-aos="fade-up">
+                        <tr><td>Nom Scene</td> <td>ID</td> <td>Entrées</td> <td>Sorties</td> <td>Actuel</td> <td>Heure</td> </tr>
+                        <?php echo '<br>' . $data->afficheStat("prive",$_SESSION['id']); ?>
+                    </table>
+            </div>
+        </div>
 
     <footer class="site-footer">
         <?php include("footer.php"); ?>
