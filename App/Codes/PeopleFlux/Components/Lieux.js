@@ -1,93 +1,58 @@
 import React, {Component} from 'react'
-import { StyleSheet, View, Text, Picker, Image, TouchableOpacity } from 'react-native'
-import RNPickerSelect from 'react-native-picker-select';
-import { connect } from 'react-redux'
+import { StyleSheet, View, Text, Picker } from 'react-native'
+import MapboxGL from '@react-native-mapbox-gl/maps';
 
+MapboxGL.setAccessToken('pk.eyJ1IjoidGhpYmF1dGhlcm1hbnQiLCJhIjoiY2sxejI0NGd5MGxmeTNobXZ0bmttZnI1OSJ9.qDZmXtEgBV2n5hCbUA2qow');
 
 
 class Lieux extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = {
-    }
-
+    this.state = { event: "" }
   }
 
-  _setLieu(value) {
-   const action = { type: "SET_LIEU", value: value }
-   this.props.dispatch(action)
- }
- componentDidUpdate(){
-   console.log(this.props.selectedLieu)
- }
-
   render() {
-
     return (
       <View style={styles.main_container}>
-        <Text style={styles.text_lieu}>Lieux</Text>
-
+        <Text style={styles.text_lieux}>Lieux</Text>
+          <View styles={styles.head_container}>
+            <Text style={styles.text_evenements}>Evenements : </Text>
             <View style={styles.picker_container}>
-              <View style={styles.evenements_text_container}>
-                <Text style={styles.text_evenements} >Evenements : </Text>
-              </View>
-              <View style={styles.pickerSelect_container}>
-                <RNPickerSelect
-                  style={pickerStyle}
-                  onValueChange={(value) => this._setLieu(value)}
-                  placeholder= {{ label: 'Selectionnez un lieu', value: null}}
-                  mode="dropdown"
-                  items={[
-                    { label: '24h Vélo', value: '24h vélo' },
-                    { label: 'Solidarité', value: 'Solidarité' },
-                    { label: 'WFS', value: 'WFS' },
-                    { label: 'BFS', value: 'BFS' },
-                  ]}
-                />
-              </View>
+              <Picker
+                selectedValue={this.state.event}
+                onValueChange={(itemValue, itemIndex) =>
+                  this.setState({event: itemValue})
+                }
+                style={styles.picker_events}>
+                <Picker.Item label="24H Vélo" value="24h" />
+                <Picker.Item label="Solidarités" value="soli" />
+                <Picker.Item label="Welcome Spring Festival" value="wsf" />
+                <Picker.Item label="Brussels Summer Festival" value="bsf" />
+              </Picker>
             </View>
-
-
-          <View styles={styles.content_container}>
-          <Text style={styles.lieu_selectionne}>{this.props.selectedLieu}</Text>
-            <Image
-              style ={styles.image}
-              source={require('../Images/lieux.jpg')}
-            />
           </View>
+
+          <MapboxGL.MapView
+          ref={(c) => this._map = c}
+          style={{flex: 1}}
+          zoomLevel={1}>
+        </MapboxGL.MapView>
+
       </View>
     )
   }
 }
 
-const pickerStyle = {
-	inputIOS: {
-		color: '#c70039',
-    fontSize:15,
-    textAlign:'center',
-
-
-	},
-	inputAndroid: {
-		color: '#c70039',
-    paddingLeft:10,
-    fontSize:15,
-
-    textAlign:'center'
-	},
-	placeholderColor: 'red',
-	underline: { borderTopWidth: 0 },
-
-};
-
 const styles = StyleSheet.create({
   main_container: {
     flex: 1,
-    backgroundColor: '#232531'
+    backgroundColor: '#232531',
+
+
   },
 
-  text_lieu:{
+  text_lieux:{
     fontSize:30,
     color:'#c70039',
     marginLeft:10,
@@ -102,58 +67,20 @@ const styles = StyleSheet.create({
     color:'white',
     marginLeft:10,
     marginTop:5,
-    width:150
+    width:200
 
   },
-
   picker_container:{
-    flexDirection:'row',
-
 
   },
-  evenements_text_container:{
-    flex:5,
-    color: 'white',
-    fontSize:20
-  },
-  pickerSelect_container:{
-    flex:6,
-    justifyContent:'center',
-    alignItems:'center',
+  picker_events:{
+    width:200,
     color:'#c70039',
     backgroundColor:'white',
     height:30,
-    borderRadius: 20,
-    borderWidth: 1,
-    borderColor: '#bdc3c7',
-    marginTop:3,
-    marginRight:50
 
 
-  },
-  content_container:{
-    justifyContent:'center',
-    alignItems:'center',
-    flex:1
-  },
-  image:{
-    height:500,
-    width:350,
-    marginLeft:5,
-    marginTop:20
-  },
-  lieu_selectionne:{
-    textAlign: 'center',
-    marginTop: 20,
-    fontSize: 30,
-    color: '#ff5733'
   }
 })
 
-const mapStateToProps = (state) => {
-  return{
-    selectedLieu: state.selectedLieu
-  }
-}
-
-export default connect(mapStateToProps)(Lieux)
+export default Lieux

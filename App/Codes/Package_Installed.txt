@@ -1,20 +1,8 @@
-npm install -g expo-cli
 npm install --save react-navigation
 npm i --save react-navigation-stack
 npm i --save react-navigation-drawer
 npm i --save react-native-reanimated
 npm i --save react-native-gesture-handler
-npm i --save express
-npm i --save body-parser
-npm i --save mysql
-npm install --save react-native-email
-npm i --save react-native-picker-select
-npm i --save react-redux
-npm i --save redux
-
-### Test Unit
-
-npm i --save-dev enzyme
-npm i --save react react-dom
-npm i --save-dev react-test-renderer
-npm install --save-dev jest
+npm install express
+npm install body-parser
+npm install mysql
