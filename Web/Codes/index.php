@@ -48,7 +48,7 @@
         </div>
     </div>
 
-<!-- appel du footer-->
+    <!-- appel du footer-->
     <footer class="site-footer">
         <?php include("footer.php"); ?>
     </footer>

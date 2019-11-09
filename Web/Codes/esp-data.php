@@ -37,15 +37,24 @@ class data{
         $this->tot_actuel = $actuel;
     }
     public function getEntree(){
-        return $this->tot_entree;
+        return ($this->tot_entree>0?$this->tot_entree:0);
     }
     public function getSortie(){
-        return $this->tot_sortie;
+        return ($this->tot_sortie>0?$this->tot_sortie:0);
     }
     public function getActuel(){
         return ($this->tot_actuel>0?$this->tot_actuel:0);
     }
-    public function afficheStat($acces){
+    public function supprimerTable(){
+        $sql = "DELETE FROM `Nbr_Personne` WHERE `id_stage`= 1";
+
+        /*if ($conn->query($sql) === TRUE) {
+            echo "Record deleted successfully";
+        } else {
+            echo "Error deleting record: " . $conn->error;
+        }*/
+    }
+    public function afficheStat($acces,$idClient){
         // Create connection
         $conn = new mysqli($this->getServerName(), $this->getUsername(), $this->getPassword(), $this->getDbName());
         // Check connection
@@ -53,20 +62,29 @@ class data{
             die("Connection failed: " . $conn->connect_error);
         }
         if($acces == "total"){
-            $sqlNbr = "SELECT SUM(nbr_entree), SUM(nbr_sortie) FROM Nbr_Personne";
+            $sqlNbr = "SELECT SUM(nbr_entree), SUM(nbr_sortie) 
+                       FROM Nbr_Personne
+                       join Stages on Nbr_Personne.id_stage = Stages.id_stage 
+                         join Events on Stages.id_event = Events.id_event 
+                         where Events.id_client = ". $idClient;
             if ($result = $conn->query($sqlNbr)) {
                 while ($row = $result->fetch_assoc()) {
                     $this->setEntree($row["SUM(nbr_entree)"]);
                     $this->setSortie($row["SUM(nbr_sortie)"]);
-                    $total = $row["SUM(nbr_entree)"] - $row["SUM(nbr_sortie)"];
+                    $total = $row["SUM(nbr_entree)"] - $row["SUM(nbr_sortie)"] - 1;
                     $this->setActuel($total);
                 }
                 $result->free();
             }
-            return $this->getActuel()+1;
+            return $this->getActuel();
         }
         elseif($acces == "public"){
-            $sqlNbr = "SELECT SUM(nbr_entree), SUM(nbr_sortie) FROM Nbr_Personne";
+            $sqlNbr = "SELECT SUM(nbr_entree), SUM(nbr_sortie) 
+                       FROM Nbr_Personne
+                       join Stages on Nbr_Personne.id_stage = Stages.id_stage 
+                       join Events on Stages.id_event = Events.id_event 
+                       where Events.id_client = ". $idClient;
+
             if ($result = $conn->query($sqlNbr)) {
                 while ($row = $result->fetch_assoc()) {
                     $this->setEntree($row["SUM(nbr_entree)"]);
@@ -84,28 +102,31 @@ class data{
         elseif($acces == "prive"){
             echo '
               <tr> 
+                <td>Nom Scene</td> 
                 <td>ID</td> 
-                <td>ID_Stage</td> 
                 <td>Entrées</td> 
                 <td>Sorties</td> 
-                <td>Nombre actuel</td> 
+                <td>Actuel</td> 
                 <td>Heure</td>
               </tr>';
 
-            $sqlTab = "SELECT * FROM Nbr_Personne";
+            $sqlTab =   "SELECT Stages.stage_name, id, Nbr_Personne.nbr_entree, Nbr_Personne.nbr_sortie, Nbr_Personne.nbr_actuel, Nbr_Personne.heure 
+                         FROM `Nbr_Personne`
+                         join Stages on Nbr_Personne.id_stage = Stages.id_stage 
+                         join Events on Stages.id_event = Events.id_event 
+                         where Events.id_client = ". $idClient;
             if ($result = $conn->query($sqlTab)) {
                 while ($row = $result->fetch_assoc()) {
+                    $row_name = $row["stage_name"];
                     $row_id = $row["id"];
-                    $row_id_stage = $row["id_stage"];
                     $row_nbr_entree = $row["nbr_entree"];
                     $row_nbr_sortie = $row["nbr_sortie"];
-                    $max_nbr_sortie = $row["SUM(nbr_sortie)"];
                     $row_nbr_actuel = $row["nbr_actuel"];
                     $row_heure = $row["heure"];
 
                     echo '<tr> 
+                <td>' . $row_name . '</td> 
                 <td>' . $row_id . '</td> 
-                <td>' . $row_id_stage . '</td>
                 <td>' . $row_nbr_entree . '</td> 
                 <td>' . $row_nbr_sortie . '</td> 
                 <td>' . $row_nbr_actuel . '</td> 

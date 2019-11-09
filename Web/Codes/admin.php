@@ -1,12 +1,13 @@
-<!-- se connecter à la base de données -->
-
 <?php
+session_start();
+
+if(!isset($_SESSION['id'])) {
+    header('Location: index.php');
+    exit;
+}
 
 require_once "db_connect.php";
 require_once "esp-data.php";
-
-$eventInfoQuery = $dbh->query('SELECT * FROM Events ORDER BY event_name');
-$eventInfos = $eventInfoQuery->fetchAll(PDO::FETCH_ASSOC);
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -45,35 +46,12 @@ $eventInfos = $eventInfoQuery->fetchAll(PDO::FETCH_ASSOC);
     </div>
 <!-- appel du header -->
     <?php include 'header.php'?>
-    
-<!-- Selectionner la table clients -->
-    <?php
-    $sql1 = <<< EOT
-            SELECT *  
-            FROM Clients
-            WHERE id_client=1;
-EOT;
-    ?>
-
 
     <div class="site-section site-hero inner ">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-10">
-                    <span class="d-block mb-3 caption" data-aos="fade-up">Vous êtes connecté en tant que:
-                        <!-- pour afficher le nom du client qui se connecte au moment même -->
-                        <?php try {
-                            $sth1 = $dbh -> prepare($sql1);
-                            $sth1 -> execute();
-                            $infos1 = $sth1 -> fetchAll(PDO::FETCH_ASSOC);
-                            print_r($infos1[0]["client_name"]);
-
-                        } catch (Exception $e) {
-                            print "Erreur !:" .$e -> getMessage()."<br/>";
-                            die();
-
-                        }?>
-                    </span>
+                    <span class="d-block mb-3 caption" data-aos="fade-up">Vous êtes connecté en tant que: <?=$_SESSION['name']?> </span>
                     <h1 class="d-block mb-4" data-aos="fade-up" data-aos-delay="100">Bienvenue dans l'interface!</h1>
 
                 </div>
@@ -81,21 +59,8 @@ EOT;
         </div>
     </div>
 
-
-
-
     <div class="site-section">
         <div class="container">
-<!-- affiche les evennements liés au client -->
-<?php
-            $sql2 = <<< EOT
-            SELECT *  
-            FROM Events
-            WHERE id_client=1;
-EOT;
-?>
-
-
             <div>
                 <style type="text/css">
                     .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #c70039;border-collapse: collapse;}
@@ -104,86 +69,70 @@ EOT;
                     .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #c70039;}
                 </style>
 
-                <table class="tftable" border="1" data-aos="fade-up">
-                    <h2 class="d-block mb-3 caption" data-aos="fade-up">Evènements</h2>
-                    <tr><th>Nom</th><th>Date du début</th><th>Date de fin</th><th>Adresse</th></tr>
-                    <tr><td>
-                           <?php try {
-                            $sth2 = $dbh -> prepare($sql2);
-                            $sth2 -> execute();
-                            $infos2 = $sth2 -> fetchAll(PDO::FETCH_ASSOC);
-                            print_r($infos2[0]["event_name"].
-                                "</td> <td>".
-                                $infos2[0]["date_from"].
-                               "</td> <td>".
-                               $infos2[0]["date_to"].
-                               "</td> <td>".
-                                $infos2[0]["event_address"]);
+                <h2 class="d-block mb-3 caption" data-aos="fade-up">Evènements</h2>
 
-                            } catch (Exception $e) {
-                            print "Erreur !:" .$e -> getMessage()."<br/>";
-                            die();
+                    <?php
 
-                            }?>
+                    $sth = $dbh -> prepare('SELECT * FROM Events WHERE id_client=:client_id');
+                    $sth->execute(array(':client_id' => $_SESSION['id']));
+                    $eventsInfo = $sth -> fetchAll(PDO::FETCH_ASSOC);
+                    $sth->closeCursor();
 
+                    if(empty($eventsInfo)) {
+                        echo '<p data-aos="fade-up">Vous n\'avez aucun évènements</p>';
+                    } else {
+                        echo '<table class="tftable" border="1" data-aos="fade-up">';
+                        echo '<tr><th>Nom</th><th>Date du début</th><th>Date de fin</th><th>Adresse</th></tr>';
 
-                        </td></tr>
-                </table>
+                        foreach ($eventsInfo as $event) {
+                            echo '<tr><td>' .
+                                $event["event_name"] . '</td><td>' .
+                                $event["date_from"] . '</td><td>' .
+                                $event["date_to"] . '</td><td>' .
+                                $event["event_address"] . '</td></tr>';
+                        }
+
+                        echo '</table>';
+                    }
+                    ?>
+
             </div>
 
 <!-- affiche les scenes liés au client -->
 
-<?php
-$sql3 = <<< EOT
-            SELECT *  
-            FROM Stages
-            WHERE id_stage=5;
-EOT;
-?>
-
             <div>
-                <table class="tftable" border="1" data-aos="fade-up">
-                </br><h2 class="d-block mb-3 caption" data-aos="fade-up">Scènes</h2>
-                    <tr><th>Nom de l'évènement</th><th>Nom de la scène</th><th>Latitude</th><th>Longitude</th><th>Max participants</th><th>Heure de début</th><th>Heure de fin</th></tr>
-                    <tr>
-                        <td>
-                            NOM DE L'EVENEMENT
-                        </td>
-                        <td>
-                            <?php try {
-                                $sth3 = $dbh -> prepare($sql3);
-                                $sth3 -> execute();
-                                $infos3 = $sth3 -> fetchAll(PDO::FETCH_ASSOC);
-                                print_r($infos3[0]["stage_name"].
-                                    "</td> <td>".
-                                    $infos3[0]["stage_latitude"].
-                                    "</td> <td>".
-                                    $infos3[0]["stage_longitude"].
-                                    "</td> <td>".
-                                    $infos3[0]["max_people"].
-                                    "</td> <td>".
-                                    $infos3[0]["hour_from"].
-                                    "</td> <td>".
-                                    $infos3[0]["hour_to"]);
+            <br><h2 class="d-block mb-3 caption" data-aos="fade-up">Scènes</h2>
+                <?php
+                $sth = $dbh -> prepare('SELECT event_name,stage_name,stage_latitude,stage_longitude,max_people,hour_from,hour_to FROM Stages JOIN Events ON Stages.id_event = Events.id_event WHERE id_client=:client_id');
+                $sth->execute(array(':client_id' => $_SESSION['id']));
+                $stageInfo = $sth -> fetchAll(PDO::FETCH_ASSOC);
+                $sth->closeCursor();
 
-                            } catch (Exception $e) {
-                                print "Erreur !:" .$e -> getMessage()."<br/>";
-                                die();
+                if(empty($stageInfo)) {
+                    echo '<p data-aos="fade-up">Vous n\'avez aucune stage</p>';
+                } else {
+                    echo '<table class="tftable" border="1" data-aos="fade-up">';
+                    echo '<tr><th>Nom de l\'évènement</th><th>Nom de la scène</th><th>Latitude</th><th>Longitude</th><th>Max participants</th><th>Heure de début</th><th>Heure de fin</th></tr>';
 
-                            }?>
-                    </tr>
-                    <tr><td>Row:2 Cell:1</td><td>Row:2 Cell:2</td><td>Row:2 Cell:3</td><td>Row:2 Cell:4</td><td>Row:2 Cell:5</td><td>Row:2 Cell:6</td><td>Row:2 Cell:6</td></tr>
-                </table>
+                    foreach ($stageInfo as $stage) {
+                        echo '<tr><td>' .
+                            $stage["event_name"] . '</td><td>' .
+                            $stage["stage_name"] . '</td><td>' .
+                            $stage["stage_latitude"] . '</td><td>' .
+                            $stage["stage_longitude"] . '</td><td>' .
+                            $stage["max_people"] . '</td><td>' .
+                            $stage["hour_from"] . '</td><td>' .
+                            $stage["hour_to"] . '</td></tr>';
+                    }
+
+                    echo '</table>';
+                    echo'<p data-aos="fade-up">Voir ses <a href="statistiques.php" target="_blank">statistiques</a>.</p>';
+                }
+
+                ?>
+
             </div>
-            <div class="d-block mb-3 caption" data-aos="fade-up"></br><h2>Statistique privé</h2>
-        
-        <!-- affiche les statistiques liés à un evennement -->
-                <table class="tftable" border="1" data-aos="fade-up">
-                    <?php $data = new data();
-                    echo '<br>' . $data->afficheStat("prive"). '</table>';
-                    echo '<br>' . $data->afficheStat("public");
-                    ?>
-            </div>
+
             <div class="row">
                 <div class="col-md-6" data-aos="fade-up">
                     <br id= "formContact" class="contact-form" action="" method="post">
@@ -197,36 +146,45 @@ EOT;
                                     <div class="row form-group" data-aos="fade-up">
 
                                         <div class="col-md-12">
-                                                <label class="" for="email">Nom de l'évènement</label>
-                                                <input type="email"  id="email" class="input form-control" name="votremail" placeholder="Nom de lévènement">
+                                                <label class="" for="nomEvenement">Nom de l'évènement*</label>
+                                                <input type="text"  id="nomEvenement" class="input form-control" name="nomEvenement" placeholder="Nom de lévènement" required>
                                         </div>
                                     </div>
 
                                     <div class="row form-group" data-aos="fade-up">
                                         <div class="col-md-12">
-                                            <label class="" >Dates</label>
-                                            <input type="text" id="objet"  class="input form-control" name="objet" placeholder="Date du début de l'évènement">
-                                            <input type="text" id="objet"  class="input form-control" name="objet" placeholder="Date de la fin de l'évènement">
+                                            <label class="" for="dates" >Dates*</label>
+                                            <input type="text" id="dates"  class="input form-control" name="dateFrom" placeholder="Date du début de l'évènement" required>
+                                            <input type="text" id="dates"  class="input form-control" name="dateTo" placeholder="Date de la fin de l'évènement" required>
                                         </div>
                                     </div>
                                     <div class="row form-group" data-aos="fade-up">
                                         <div class="col-md-12">
-                                            <label class="" >Adresse</label>
-                                            <input type="text" id="objet"  class="input form-control" name="objet" placeholder="L'adresse">
+                                            <label class="" for="adresseEvent">Adresse*</label>
+                                            <input type="text" id="adresseEvent"  class="input form-control" name="adresseEvent" placeholder="L'adresse de l'évènements (Village - Ville)" required>
                                         </div>
                                     </div>
                                     <div class="row form-group" data-aos="fade-up">
                                         <div class="col-md-12">
-                                            <label class="" for="message">Informations</label>
-                                            <textarea class="input form-control" placeholder="Informations utiles à savoir sur votre évènement" id="message" name="message" ></textarea>
+                                            <label class="" for="informationsEvent">Informations</label>
+                                            <textarea class="input form-control" placeholder="Informations utiles à savoir sur votre évènement" id="informationsEvent" name="informationsEvent" ></textarea>
                                         </div>
                                     </div>
                                     <div class="row form-group" data-aos="fade-up">
                                         <div class="col-md-12">
-                                            <input  name="envoi" type="submit" id="submitContact" value="Ajouter un évènement" class="btn btn-primary py-2 px-4 text-white">
+                                            <input  name="subEvent" type="submit" id="submitEvenement" value="Ajouter un évènement" class="btn btn-primary py-2 px-4 text-white">
                                         </div>
                                     </div>
                                 </h4>
+
+
+</form>
+                            <?php include("addEventAndStage.php"); ?>
+
+                    <form>
+
+
+
 
                             </br> <h2 class="d-block mb-3 caption" data-aos="fade-up">Ajouter une scène</h2>
                                 <div class="border-top pt-5" data-aos="fade-up">
@@ -241,48 +199,60 @@ EOT;
                                                 <form>
                                                     <SELECT name="nom" size="1">
 
-                                                            <?php try {
-                                                                $sth2 = $dbh -> prepare($sql2);
-                                                                $sth2 -> execute();
-                                                                $infos2 = $sth2 -> fetchAll(PDO::FETCH_ASSOC);
-                                                                print_r("<OPTION>".
-                                                                    $infos2[0]["event_name"].
-                                                                "<OPTION>AUTRES");
 
-                                                            } catch (Exception $e) {
-                                                                print "Erreur !:" .$e -> getMessage()."<br/>";
-                                                                die();
 
-                                                            }?>
+                                                    <?php
+                                                    $sth2 = $dbh -> prepare('SELECT * FROM Events WHERE id_client=:client_id');
+                                                    $sth2->execute(array(':client_id' => $_SESSION['id']));
+                                                    $difEvent = $sth2 -> fetchAll(PDO::FETCH_ASSOC);
+                                                    $sth2->closeCursor();
+
+                                                    if(empty($difEvent)) {
+                                                        echo '<option>Vous n\'avez aucune stage</option>';
+                                                    } else {
+
+                                                        foreach ($difEvent as $event) {
+                                                            echo ' <option>' .
+                                                                $event["event_name"] . '</option>' ;
+                                                        }
+
+
+                                                    }
+
+                                                    ?>
+
+
                                                     </SELECT>
+
+
                                                 </form>
                                          </div>
                                     </div>
                                      <!-- forumlaire pour que le client rajoute une scene lui même -->
                                     <div class="row form-group" data-aos="fade-up">
                                         <div class="col-md-12">
-                                            <label class="" for="message">Nom</label>
-                                            <input type="text" id="objet"  class="input form-control" name="objet" placeholder="Nom de la scène à ajouter">
+                                            <label class="" for="nom">Nom</label>
+                                            <input type="text" id="nom"  class="input form-control" name="objet" placeholder="Nom de la scène à ajouter" required>
                                         </div>
                                     </div>
                                     <div class="row form-group" data-aos="fade-up">
                                         <div class="col-md-12">
-                                            <label class="" for="message">Coordonnées</label>
-                                            <input type="text" id="objet"  class="input form-control" name="objet" placeholder="Latitude">
-                                            <input type="text" id="objet"  class="input form-control" name="objet" placeholder="Longitude">
+                                            <label class="" for="coordonnees">Coordonnées</label>
+                                            <input type="text" id="coordonnees"  class="input form-control" name="objet" placeholder="Latitude" required>
+                                            <input type="text" id="coordonnees"  class="input form-control" name="objet" placeholder="Longitude" required>
                                         </div>
                                     </div>
                                     <div class="row form-group" data-aos="fade-up">
                                         <div class="col-md-12">
-                                            <label class="" for="message">Nombre max de participants</label>
-                                            <input type="text" id="objet"  class="input form-control" name="objet" placeholder="Estimation">
+                                            <label class="" for="nbrParticipants">Nombre max de participants</label>
+                                            <input type="text" id="nbrParticipants"  class="input form-control" name="objet" placeholder="Estimation" required>
                                         </div>
                                     </div>
                                     <div class="row form-group" data-aos="fade-up">
                                         <div class="col-md-12">
-                                            <label class="" for="message">Horaires</label>
-                                            <input type="text" id="objet"  class="input form-control" name="objet" placeholder="Heure de début">
-                                            <input type="text" id="objet"  class="input form-control" name="objet" placeholder="Heure de fin">
+                                            <label class="" for="horaires">Horaires</label>
+                                            <input type="text" id="horaires"  class="input form-control" name="objet" placeholder="Heure de début">
+                                            <input type="text" id="horaires"  class="input form-control" name="objet" placeholder="Heure de fin">
                                         </div>
                                     </div>
                                     <div class="row form-group" data-aos="fade-up">
