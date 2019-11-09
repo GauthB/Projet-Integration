@@ -1,18 +1,28 @@
 import React from 'react'
-import { StyleSheet, View, TextInput, Text , Platform  } from 'react-native'
+import { StyleSheet, View, TextInput, Text , Platform, Button, TouchableOpacity, Alert  } from 'react-native'
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview'
-import BoutonEnvoyer from './BoutonEnvoyer'
-
+import email from 'react-native-email'
 
 
 
 class Contact extends React.Component {
 
   constructor(props) {
-     super(props);
-     this.state = { text: 'Votre email',};
-     this.sujet = { text: 'Votre sujet'};
-     this.message = { text : 'Votre message'}
+     super(props)
+     this.state = {
+      mail : '',
+      sujet: '',
+      corps :''
+    }
+   }
+
+   _isMailCorrect() {
+     if(this.state.mail.includes('@') && this.state.mail.includes('.')){
+       return true;
+     }
+     else{
+       return false;
+     }
    }
 
   render() {
@@ -30,9 +40,10 @@ class Contact extends React.Component {
 
                   <TextInput
                     style={styles.bordure_mail}
-                    onChangeText={(text) => this.setState({text})}
+                    value={this.state.mail}
+                    onChangeText={(mail) => this.setState({mail})}
                     placeholder='Votre email'
-                    placeholderTextColor='#232531'
+                    placeholderTextColor='#7c7e84'
                     returnKeyType = {"next"}
                     onSubmitEditing={() => { this.secondTextInput.focus(); }}
                     blurOnSubmit={false}
@@ -42,9 +53,10 @@ class Contact extends React.Component {
                   <TextInput
                     ref={(input) => { this.secondTextInput = input; }}
                     style={styles.bordure_sujet}
-                    onChangeText={(text) => this.setState({text})}
+                    value={this.state.sujet}
+                    onChangeText={(sujet) => this.setState({sujet})}
                     placeholder='Votre sujet'
-                    placeholderTextColor='#232531'
+                    placeholderTextColor='#7c7e84'
                     returnKeyType = {"next"}
                     onSubmitEditing={() => { this.thirdTextInput.focus(); }}
                     blurOnSubmit={false}
@@ -55,11 +67,23 @@ class Contact extends React.Component {
                   <TextInput
                   ref={(input) => { this.thirdTextInput = input; }}
                     style={styles.bordure_message}
-                    onChangeText={(text) => this.setState({text})}
+                    value={this.state.corps}
+                    multiline={true}
+                    numberOfLines={5}
+                    onChangeText={(corps) => this.setState({corps})}
                     placeholder='Votre message'
-                    placeholderTextColor='#232531'
+                    placeholderTextColor='#7c7e84'
                   />
-                  <BoutonEnvoyer/>
+
+                  <TouchableOpacity
+                      style={styles.btn_envoie}
+                      onPress={this.handleEmail}
+                    >
+                    <View style={styles.view_btn_envoie}>
+                      <Text style={styles.text_btn_envoie}> Envoyer </Text>
+                    </View>
+                  </TouchableOpacity>
+
 
               </KeyboardAwareScrollView>
             </View>
@@ -67,6 +91,29 @@ class Contact extends React.Component {
 
     )
   }
+
+  handleEmail = () => {
+        const to = 'peopleflux@gmail.com' // string or array of email addresses
+        if(this._isMailCorrect()){
+          email(to, {
+              // Optional additional arguments
+              subject: this.state.sujet,
+              body: this.state.corps + '\n\n' + ' email: ' + this.state.mail
+          }).catch(console.error)
+        }
+        else{
+          Alert.alert(
+            'Mail incorrect',
+            'Veuillez entrer un email correct',
+            [
+              {text: 'OK', onPress: () => console.log('OK Pressed')},
+            ],
+            {cancelable: false},
+          );
+        }
+
+
+    }
 }
 
 const styles = StyleSheet.create({
@@ -90,62 +137,88 @@ const styles = StyleSheet.create({
   champ_mail:{
     fontSize:20,
     color :'white',
-    marginLeft:15,
+    marginLeft:25,
     marginTop:18,
   },
   champ_sujet:{
     fontSize:20,
     color :'white',
-    marginLeft:15,
-    marginTop:1,
+    marginLeft:25,
+    marginTop:20,
   },
   champ_message:{
     fontSize:20,
     color :'white',
-    marginLeft:15,
+    marginLeft:25,
     marginTop:20,
   },
   bordure_mail:{
-    height: 35,
+    height: 40,
     borderColor: '#4B4C56',
-    marginBottom:18,
-    marginLeft:6,
-    marginRight:6,
+    marginTop:5,
+    marginLeft:10,
+    marginRight:10,
     borderWidth: 1,
     borderRadius:25,
     overflow: 'hidden',
     backgroundColor: '#4B4C56',
     color: '#fff',
-    paddingLeft: 7,
+    paddingLeft: 15,
 
   },
   bordure_sujet:{
-    height: 35,
+    height: 40,
     borderColor: '#4B4C56',
-    marginTop: 1,
-    marginLeft:6,
-    marginRight:6,
+    marginTop: 5,
+    marginLeft:10,
+    marginRight:10,
     borderWidth: 1,
     borderRadius:25,
     overflow: 'hidden',
     backgroundColor: '#4B4C56',
     color: '#fff',
-    paddingLeft: 7,
+    paddingLeft: 15,
 
 
   },
   bordure_message:{
     height: 90,
     borderColor: '#4B4C56',
-    marginTop: 1,
-    marginLeft:6,
-    marginRight:6,
+    marginTop: 5,
+    marginLeft:10,
+    marginRight:10,
     borderWidth: 1,
     borderRadius:25,
     backgroundColor: '#4B4C56',
     color: '#fff',
-    paddingLeft: 7,
+    paddingLeft: 15,
+    textAlignVertical: 'top',
 
+
+  },
+  view_btn_envoie:{
+    flex:1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  btn_envoie:{
+    flex:1,
+    borderWidth:1,
+    borderRadius:30,
+    marginTop:25,
+    marginLeft:6,
+    marginRight:6,
+    height:50,
+    backgroundColor:'#ff5733',
+    alignItems:'center'
+
+  },
+  text_btn_envoie:{
+
+    color: 'white',
+    alignItems: 'center',
+    fontSize:18,
+    textAlign:'center',
   }
 
 

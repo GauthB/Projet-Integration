@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1573076996130" clover="3.2.0">
+  <project timestamp="1573076996130" name="All files">
+    <metrics statements="20" coveredstatements="9" conditionals="6" coveredconditionals="3" methods="12" coveredmethods="5" elements="38" coveredelements="17" complexity="0" loc="20" ncloc="20" packages="1" files="1" classes="1"/>
+    <file name="Contact.js" path="C:\Users\USER1\Desktop\GitHub\Projet-Integration\App\Codes\PeopleFlux\Components\Contact.js">
+      <metrics statements="20" coveredstatements="9" conditionals="6" coveredconditionals="3" methods="12" coveredmethods="5"/>
+      <line num="11" count="1" type="stmt"/>
+      <line num="12" count="1" type="stmt"/>
+      <line num="20" count="1" type="cond" truecount="3" falsecount="1"/>
+      <line num="21" count="1" type="stmt"/>
+      <line num="24" count="0" type="stmt"/>
+      <line num="29" count="2" type="stmt"/>
+      <line num="44" count="0" type="stmt"/>
+      <line num="48" count="0" type="stmt"/>
+      <line num="54" count="3" type="stmt"/>
+      <line num="57" count="0" type="stmt"/>
+      <line num="61" count="0" type="stmt"/>
+      <line num="68" count="3" type="stmt"/>
+      <line num="73" count="0" type="stmt"/>
+      <line num="95" count="1" type="stmt"/>
+      <line num="96" count="0" type="stmt"/>
+      <line num="97" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="98" count="0" type="stmt"/>
+      <line num="105" count="0" type="stmt"/>
+      <line num="109" count="0" type="stmt"/>
+      <line num="119" count="1" type="stmt"/>
+    </file>
+  </project>
+</coverage>
