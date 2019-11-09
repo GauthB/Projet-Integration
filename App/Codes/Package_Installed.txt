@@ -9,6 +9,8 @@ npm i --save body-parser
 npm i --save mysql
 npm install --save react-native-email
 npm i --save react-native-picker-select
+npm i --save react-redux
+npm i --save redux
 
 ### Test Unit
 

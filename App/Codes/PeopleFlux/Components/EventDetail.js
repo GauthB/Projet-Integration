@@ -1,10 +1,21 @@
 import React from 'react'
-import { StyleSheet, View, Text } from 'react-native'
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native'
 import eventData from '../Helpers/EventData'
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview'
+import { Foundation  } from '@expo/vector-icons'
+import { connect } from 'react-redux'
+
+
 
 
 class EventDetail extends React.Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      selectedLieu: null,
+    }
+  }
 
 
   render(){
@@ -13,12 +24,27 @@ class EventDetail extends React.Component {
     const lieu = this.props.navigation.state.params.lieu
     const description = this.props.navigation.state.params.description
 
+    _onPressButtonMap = () =>{
+      this.props.navigation.navigate('Lieux')
+      const action = { type: "SET_LIEU", value: name }
+      this.props.dispatch(action)
+
+    }
+
+
     return(
       <View style={styles.main_container}>
         <View style={styles.bordure_titre}>
           <Text style={styles.text_name}>{name}</Text>
-            <Text style={styles.text_date}> le {date}</Text>
-            <Text style={styles.text_lieu}> A {lieu}</Text>
+          <View style={styles.info_bouton}>
+            <View style={styles.date_lieu}>
+              <Text style={styles.text_date}> le {date}</Text>
+              <Text style={styles.text_lieu}> A {lieu}</Text>
+            </View>
+            <TouchableOpacity style={styles.bouton_map} onPress={()=> _onPressButtonMap(this)}>
+              <Foundation name='map' size={50} color='#3796B3'/>
+            </TouchableOpacity>
+          </View>
         </View>
         <KeyboardAwareScrollView style={styles.bordure_description}>
           <Text style={styles.titre_description}>Description : </Text>
@@ -93,6 +119,22 @@ const styles = StyleSheet.create({
     marginRight : 10,
     marginLeft: 10,
     color: '#fff'
+  },
+  info_bouton:{
+    flexDirection: 'row'
+  },
+  date_lieu:{
+  },
+  bouton_map:{
+    position: 'absolute',
+    right: 30
   }
+
 })
-export default EventDetail
+const mapStateToProps = (state) => {
+  return{
+    selectedLieu: state.selectedLieu
+  }
+}
+
+export default connect(mapStateToProps)(EventDetail)

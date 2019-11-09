@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import { StyleSheet, View, Text, Picker, Image, TouchableOpacity } from 'react-native'
 import RNPickerSelect from 'react-native-picker-select';
+import { connect } from 'react-redux'
+
 
 
 class Lieux extends React.Component {
@@ -8,12 +10,20 @@ class Lieux extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      selectedValue: null,
     }
 
   }
 
+  _setLieu(value) {
+   const action = { type: "SET_LIEU", value: value }
+   this.props.dispatch(action)
+ }
+ componentDidUpdate(){
+   console.log(this.props.selectedLieu)
+ }
+
   render() {
+
     return (
       <View style={styles.main_container}>
         <Text style={styles.text_lieu}>Lieux</Text>
@@ -25,13 +35,14 @@ class Lieux extends React.Component {
               <View style={styles.pickerSelect_container}>
                 <RNPickerSelect
                   style={pickerStyle}
-                  onValueChange={(value) => this.setState({selectedValue: value})}
-                  placeholder= {{}}
+                  onValueChange={(value) => this._setLieu(value)}
+                  placeholder= {{ label: 'Selectionnez un lieu', value: null}}
                   mode="dropdown"
                   items={[
-                    { label: '24h Velo', value: '24hvelo' },
-                    { label: 'BSF', value: 'BSF' },
-                    { label: 'Welcome Spring', value: 'WelcomeSpring' },
+                    { label: '24h Vélo', value: '24h vélo' },
+                    { label: 'Solidarité', value: 'Solidarité' },
+                    { label: 'WFS', value: 'WFS' },
+                    { label: 'BFS', value: 'BFS' },
                   ]}
                 />
               </View>
@@ -39,6 +50,7 @@ class Lieux extends React.Component {
 
 
           <View styles={styles.content_container}>
+          <Text style={styles.lieu_selectionne}>{this.props.selectedLieu}</Text>
             <Image
               style ={styles.image}
               source={require('../Images/lieux.jpg')}
@@ -128,8 +140,20 @@ const styles = StyleSheet.create({
     height:500,
     width:350,
     marginLeft:5,
-    marginTop:50
+    marginTop:20
+  },
+  lieu_selectionne:{
+    textAlign: 'center',
+    marginTop: 20,
+    fontSize: 30,
+    color: '#ff5733'
   }
 })
 
-export default Lieux
+const mapStateToProps = (state) => {
+  return{
+    selectedLieu: state.selectedLieu
+  }
+}
+
+export default connect(mapStateToProps)(Lieux)
