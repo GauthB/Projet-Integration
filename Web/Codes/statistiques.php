@@ -168,11 +168,17 @@ echo'<hr>';
 
 
                 <!-- affiche les statistiques liés à un evennement -->
-                <table class="tftable" border="1" data-aos="fade-up">
+
+                    <div class="d-block mb-3 caption" data-aos="fade-up"></br><h2>Statistiques public</h2>
                     <?php $data = new data();
-                    echo '<div class="d-block mb-3 caption" data-aos="fade-up"></br><h2>Statistiques public</h2>';
-                    echo '<br>' . $data->afficheStat("public",$_SESSION['id']);
+                    echo '<table class="tftable" border="1" data-aos="fade-up">';
+                    echo '<br>' . $data->afficheStat("public",$_SESSION['id']) .'</table>';
+
                     echo'<div class="d-block mb-3 caption" data-aos="fade-up"></br><h2>Statistiques privées</h2>';
+
+                    echo '<input name="nombreAffiche" type="number" step="10">';
+                    echo '<table class="tftable" border="1" data-aos="fade-up">';
+                    echo '<tr><td>Nom Scene</td> <td>ID</td> <td>Entrées</td> <td>Sorties</td> <td>Actuel</td> <td>Heure</td> </tr>';
                     echo '<br>' . $data->afficheStat("prive",$_SESSION['id']). '</table>';
 
                     ?>

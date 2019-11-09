@@ -100,21 +100,13 @@ class data{
 
         }
         elseif($acces == "prive"){
-            echo '
-              <tr> 
-                <td>Nom Scene</td> 
-                <td>ID</td> 
-                <td>Entrées</td> 
-                <td>Sorties</td> 
-                <td>Actuel</td> 
-                <td>Heure</td>
-              </tr>';
 
             $sqlTab =   "SELECT Stages.stage_name, id, Nbr_Personne.nbr_entree, Nbr_Personne.nbr_sortie, Nbr_Personne.nbr_actuel, Nbr_Personne.heure 
                          FROM `Nbr_Personne`
                          join Stages on Nbr_Personne.id_stage = Stages.id_stage 
                          join Events on Stages.id_event = Events.id_event 
-                         where Events.id_client = ". $idClient;
+                         where Events.id_client = ". $idClient . " 
+                         order by Nbr_Personne.heure desc limit 10";
             if ($result = $conn->query($sqlTab)) {
                 while ($row = $result->fetch_assoc()) {
                     $row_name = $row["stage_name"];
