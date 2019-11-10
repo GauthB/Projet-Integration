@@ -15,7 +15,7 @@ export default eventData = [
    },
    {
       id:3,
-      name:"WSF",
+      name:"Welcome Spring Festival",
       date:"28-23 août 2020",
       lieu:"Louvain-La-Neuve",
       description:"description de l'événement 3 "

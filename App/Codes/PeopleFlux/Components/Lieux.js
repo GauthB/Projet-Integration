@@ -41,7 +41,7 @@ class Lieux extends React.Component {
                   items={[
                     { label: '24h Vélo', value: '24h vélo' },
                     { label: 'Solidarité', value: 'Solidarité' },
-                    { label: 'WFS', value: 'WFS' },
+                    { label: 'Welcome Spring Festival', value: 'Welcome Spring Festival' },
                     { label: 'BFS', value: 'BFS' },
                   ]}
                 />

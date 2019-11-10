@@ -61,7 +61,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#232531',
   },
   bordure_titre:{
-    height: 110,
     borderColor: '#ff5733',
     borderWidth: 2,
     marginTop: 20,
@@ -121,7 +120,8 @@ const styles = StyleSheet.create({
     color: '#fff'
   },
   info_bouton:{
-    flexDirection: 'row'
+    flexDirection: 'row',
+    marginBottom: 5
   },
   date_lieu:{
   },
