@@ -23,16 +23,16 @@ require_once "esp-data.php";
     <link rel="stylesheet" href="css/jquery-ui.css">
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
     <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
     <link rel="stylesheet" href="css/aos.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script type="text/javascript" src="js/contact.js"></script>
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/x-icon" href="LogoSmall.ico"/>
+
+    <script src="js/jquery-3.4.1.min.js"></script>
+
 </head>
 <body>
-
 
 <div class="site-wrap">
 
@@ -132,10 +132,10 @@ require_once "esp-data.php";
 
             </div>
 
+            <!-- forumlaire pour que le client rajoute un evenement lui même -->
             <div class="row">
                 <div class="col-md-6" data-aos="fade-up">
-                    <!-- forumlaire pour que le client rajoute un evenement lui même -->
-                    <form id= "formEvent" class="event-form" action="" method="post">
+                    <form id= "formEvent" class="event-form" action="addEvent.php" method="post">
                         <h2 class="d-block mb-3 caption" data-aos="fade-up">Ajouter un évènement</h2>
                         <div class="row form-group" data-aos="fade-up">
                             <div class="col-md-12">
@@ -146,9 +146,10 @@ require_once "esp-data.php";
 
                         <div class="row form-group" data-aos="fade-up">
                             <div class="col-md-12">
-                                <label class="" for="dates" >Dates*</label>
-                                <input type="text" id="dates"  class="input form-control" name="dateFrom" placeholder="Date du début de l'évènement" required>
-                                <input type="text" id="dates"  class="input form-control" name="dateTo" placeholder="Date de la fin de l'évènement" required>
+                                <label class="" for="dateFrom" >Dates*</label>
+                                <input type="text" id="dateFrom"  class="input form-control" name="dateFrom" placeholder="Date du début de l'évènement" required>
+                                <input type="text" id="dateTo"  class="input form-control" name="dateTo" placeholder="Date de la fin de l'évènement" required>
+
                             </div>
                         </div>
                         <div class="row form-group" data-aos="fade-up">
@@ -170,7 +171,7 @@ require_once "esp-data.php";
                         </div>
                     </form>
 
-                    <form id= "formStage" class="stage-form" action="" method="post">
+                    <form id= "formStage" class="stage-form" action="addStage.php" method="post">
                         <h2 class="d-block mb-3 caption" data-aos="fade-up">Ajouter une scène</h2>
                         <div class="row form-group" data-aos="fade-up">
                             <div class="col-md-12">
@@ -236,7 +237,6 @@ require_once "esp-data.php";
 
 </div>
 
-<script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/jquery-migrate-3.0.1.min.js"></script>
 <script src="js/jquery-ui.js"></script>
 <script src="js/popper.min.js"></script>
@@ -245,7 +245,6 @@ require_once "esp-data.php";
 <script src="js/jquery.stellar.min.js"></script>
 <script src="js/jquery.countdown.min.js"></script>
 <script src="js/jquery.magnific-popup.min.js"></script>
-<script src="js/bootstrap-datepicker.min.js"></script>
 <script src="js/aos.js"></script>
 
 <script src="js/main.js"></script>

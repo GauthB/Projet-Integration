@@ -14,13 +14,13 @@
 
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
     <link rel="stylesheet" href="css/aos.css">
     <link rel="stylesheet" href="css/add.css">
     <link rel="icon" type="image/x-icon" href="LogoSmall.ico"/>
     <link rel="stylesheet" href="css/style.css">
 
+    <script src="js/jquery-3.4.1.min.js"></script>
 
 
 
@@ -34,9 +34,6 @@
     <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
             integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
             crossorigin=""></script>
-
-
-
 
 </head>
 <body>
@@ -87,7 +84,6 @@
 
 </div>
 
-<script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/jquery-migrate-3.0.1.min.js"></script>
 <script src="js/jquery-ui.js"></script>
 <script src="js/popper.min.js"></script>
@@ -96,7 +92,6 @@
 <script src="js/jquery.stellar.min.js"></script>
 <script src="js/jquery.countdown.min.js"></script>
 <script src="js/jquery.magnific-popup.min.js"></script>
-<script src="js/bootstrap-datepicker.min.js"></script>
 <script src="js/aos.js"></script>
 
 <script src="js/main.js"></script>

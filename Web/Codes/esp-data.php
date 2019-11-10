@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<html>
-<body>
 <?php
 class data{
     private $servername = "91.216.107.248";
@@ -131,8 +128,3 @@ class data{
         }
     }
 }
-?>
-
-
-</body>
-</html>
