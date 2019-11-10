@@ -71,37 +71,36 @@ require_once "esp-data.php";
 
                 <h2 class="d-block mb-3 caption" data-aos="fade-up">Evènements</h2>
 
-                    <?php
+                <?php
 
-                    $sth = $dbh -> prepare('SELECT * FROM Events WHERE id_client=:client_id');
-                    $sth->execute(array(':client_id' => $_SESSION['id']));
-                    $eventsInfo = $sth -> fetchAll(PDO::FETCH_ASSOC);
-                    $sth->closeCursor();
+                $sth = $dbh -> prepare('SELECT * FROM Events WHERE id_client=:client_id');
+                $sth->execute(array(':client_id' => $_SESSION['id']));
+                $eventsInfo = $sth -> fetchAll(PDO::FETCH_ASSOC);
+                $sth->closeCursor();
 
-                    if(empty($eventsInfo)) {
-                        echo '<p data-aos="fade-up">Vous n\'avez aucun évènements</p>';
-                    } else {
-                        echo '<table class="tftable" border="1" data-aos="fade-up">';
-                        echo '<tr><th>Nom</th><th>Date du début</th><th>Date de fin</th><th>Adresse</th></tr>';
+                if(empty($eventsInfo)) {
+                    echo '<p data-aos="fade-up">Vous n\'avez aucun évènements</p>';
+                } else {
+                    echo '<table class="tftable" border="1" data-aos="fade-up">';
+                    echo '<tr><th>Nom</th><th>Date du début</th><th>Date de fin</th><th>Adresse</th></tr>';
 
-                        foreach ($eventsInfo as $event) {
-                            echo '<tr><td>' .
-                                $event["event_name"] . '</td><td>' .
-                                $event["date_from"] . '</td><td>' .
-                                $event["date_to"] . '</td><td>' .
-                                $event["event_address"] . '</td></tr>';
-                        }
-
-                        echo '</table>';
+                    foreach ($eventsInfo as $event) {
+                        echo '<tr><td>' .
+                            $event["event_name"] . '</td><td>' .
+                            $event["date_from"] . '</td><td>' .
+                            $event["date_to"] . '</td><td>' .
+                            $event["event_address"] . '</td></tr>';
                     }
-                    ?>
+
+                    echo '</table>';
+                }
+                ?>
 
             </div>
 
-<!-- affiche les scenes liés au client -->
-
+            <!-- affiche les scenes liés au client -->
             <div>
-            <br><h2 class="d-block mb-3 caption" data-aos="fade-up">Scènes</h2>
+                <h2 class="d-block mb-3 caption" data-aos="fade-up">Scènes</h2>
                 <?php
                 $sth = $dbh -> prepare('SELECT event_name,stage_name,stage_latitude,stage_longitude,max_people,hour_from,hour_to FROM Stages JOIN Events ON Stages.id_event = Events.id_event WHERE id_client=:client_id');
                 $sth->execute(array(':client_id' => $_SESSION['id']));
@@ -135,141 +134,101 @@ require_once "esp-data.php";
 
             <div class="row">
                 <div class="col-md-6" data-aos="fade-up">
-                    <br id= "formContact" class="contact-form" action="" method="post">
-                        
                     <!-- forumlaire pour que le client rajoute un evenement lui même -->
-                        <form>
-                        </br> <h2 class="d-block mb-3 caption" data-aos="fade-up">Ajouter un évènement</h2>
-                                <div class="border-top pt-5" data-aos="fade-up">
-                                </div>
-                                <h4>
-                                    <div class="row form-group" data-aos="fade-up">
+                    <form id= "formEvent" class="event-form" action="" method="post">
+                        <h2 class="d-block mb-3 caption" data-aos="fade-up">Ajouter un évènement</h2>
+                        <div class="row form-group" data-aos="fade-up">
+                            <div class="col-md-12">
+                                <label class="" for="nomEvenement">Nom de l'évènement*</label>
+                                <input type="text"  id="nomEvenement" class="input form-control" name="nomEvenement" placeholder="Nom de lévènement" required>
+                            </div>
+                        </div>
 
-                                        <div class="col-md-12">
-                                                <label class="" for="nomEvenement">Nom de l'évènement*</label>
-                                                <input type="text"  id="nomEvenement" class="input form-control" name="nomEvenement" placeholder="Nom de lévènement" required>
-                                        </div>
-                                    </div>
+                        <div class="row form-group" data-aos="fade-up">
+                            <div class="col-md-12">
+                                <label class="" for="dates" >Dates*</label>
+                                <input type="text" id="dates"  class="input form-control" name="dateFrom" placeholder="Date du début de l'évènement" required>
+                                <input type="text" id="dates"  class="input form-control" name="dateTo" placeholder="Date de la fin de l'évènement" required>
+                            </div>
+                        </div>
+                        <div class="row form-group" data-aos="fade-up">
+                            <div class="col-md-12">
+                                <label class="" for="adresseEvent">Adresse*</label>
+                                <input type="text" id="adresseEvent"  class="input form-control" name="adresseEvent" placeholder="L'adresse de l'évènements (Village - Ville)" required>
+                            </div>
+                        </div>
+                        <div class="row form-group" data-aos="fade-up">
+                            <div class="col-md-12">
+                                <label class="" for="informationsEvent">Informations</label>
+                                <textarea class="input form-control" placeholder="Informations utiles à savoir sur votre évènement" id="informationsEvent" name="informationsEvent" ></textarea>
+                            </div>
+                        </div>
+                        <div class="row form-group" data-aos="fade-up">
+                            <div class="col-md-12">
+                                <input  name="subEvent" type="submit" id="submitEvenement" value="Ajouter un évènement" class="btn btn-primary py-2 px-4 text-white">
+                            </div>
+                        </div>
+                    </form>
 
-                                    <div class="row form-group" data-aos="fade-up">
-                                        <div class="col-md-12">
-                                            <label class="" for="dates" >Dates*</label>
-                                            <input type="text" id="dates"  class="input form-control" name="dateFrom" placeholder="Date du début de l'évènement" required>
-                                            <input type="text" id="dates"  class="input form-control" name="dateTo" placeholder="Date de la fin de l'évènement" required>
-                                        </div>
-                                    </div>
-                                    <div class="row form-group" data-aos="fade-up">
-                                        <div class="col-md-12">
-                                            <label class="" for="adresseEvent">Adresse*</label>
-                                            <input type="text" id="adresseEvent"  class="input form-control" name="adresseEvent" placeholder="L'adresse de l'évènements (Village - Ville)" required>
-                                        </div>
-                                    </div>
-                                    <div class="row form-group" data-aos="fade-up">
-                                        <div class="col-md-12">
-                                            <label class="" for="informationsEvent">Informations</label>
-                                            <textarea class="input form-control" placeholder="Informations utiles à savoir sur votre évènement" id="informationsEvent" name="informationsEvent" ></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="row form-group" data-aos="fade-up">
-                                        <div class="col-md-12">
-                                            <input  name="subEvent" type="submit" id="submitEvenement" value="Ajouter un évènement" class="btn btn-primary py-2 px-4 text-white">
-                                        </div>
-                                    </div>
-                                </h4>
+                    <form id= "formStage" class="stage-form" action="" method="post">
+                        <h2 class="d-block mb-3 caption" data-aos="fade-up">Ajouter une scène</h2>
+                        <div class="row form-group" data-aos="fade-up">
+                            <div class="col-md-12">
+                                <label class="" for="nomEvent">Evènement</label>
+                                <select id="nomEvent" name="nom" size="1">
 
+                                <?php
 
-</form>
-                            <?php include("addEventAndStage.php"); ?>
+                                if(empty($eventsInfo)) {
+                                    echo '<option>Aucun évenements</option>';
+                                } else {
+                                    foreach ($eventsInfo as $event) {
+                                        echo '<option value="' . $event["id_event"] . '">' . $event["event_name"] . '</option>' ;
+                                    }
+                                }
 
-                    <form>
+                                ?>
 
-
-
-
-                            </br> <h2 class="d-block mb-3 caption" data-aos="fade-up">Ajouter une scène</h2>
-                                <div class="border-top pt-5" data-aos="fade-up">
-
-                                </div>
-
-
-                                <h4>
-                                    <div class="row form-group" data-aos="fade-up">
-                                        <div class="col-md-12">
-                                            <label class="" for="message">Evènement</label>
-                                                <form>
-                                                    <SELECT name="nom" size="1">
-
-
-
-                                                    <?php
-                                                    $sth2 = $dbh -> prepare('SELECT * FROM Events WHERE id_client=:client_id');
-                                                    $sth2->execute(array(':client_id' => $_SESSION['id']));
-                                                    $difEvent = $sth2 -> fetchAll(PDO::FETCH_ASSOC);
-                                                    $sth2->closeCursor();
-
-                                                    if(empty($difEvent)) {
-                                                        echo '<option>Vous n\'avez aucune stage</option>';
-                                                    } else {
-
-                                                        foreach ($difEvent as $event) {
-                                                            echo ' <option>' .
-                                                                $event["event_name"] . '</option>' ;
-                                                        }
-
-
-                                                    }
-
-                                                    ?>
-
-
-                                                    </SELECT>
-
-
-                                                </form>
-                                         </div>
-                                    </div>
-                                     <!-- forumlaire pour que le client rajoute une scene lui même -->
-                                    <div class="row form-group" data-aos="fade-up">
-                                        <div class="col-md-12">
-                                            <label class="" for="nom">Nom</label>
-                                            <input type="text" id="nom"  class="input form-control" name="objet" placeholder="Nom de la scène à ajouter" required>
-                                        </div>
-                                    </div>
-                                    <div class="row form-group" data-aos="fade-up">
-                                        <div class="col-md-12">
-                                            <label class="" for="coordonnees">Coordonnées</label>
-                                            <input type="text" id="coordonnees"  class="input form-control" name="objet" placeholder="Latitude" required>
-                                            <input type="text" id="coordonnees"  class="input form-control" name="objet" placeholder="Longitude" required>
-                                        </div>
-                                    </div>
-                                    <div class="row form-group" data-aos="fade-up">
-                                        <div class="col-md-12">
-                                            <label class="" for="nbrParticipants">Nombre max de participants</label>
-                                            <input type="text" id="nbrParticipants"  class="input form-control" name="objet" placeholder="Estimation" required>
-                                        </div>
-                                    </div>
-                                    <div class="row form-group" data-aos="fade-up">
-                                        <div class="col-md-12">
-                                            <label class="" for="horaires">Horaires</label>
-                                            <input type="text" id="horaires"  class="input form-control" name="objet" placeholder="Heure de début">
-                                            <input type="text" id="horaires"  class="input form-control" name="objet" placeholder="Heure de fin">
-                                        </div>
-                                    </div>
-                                    <div class="row form-group" data-aos="fade-up">
-                                        <div class="col-md-12">
-                                            <input  name="envoi" type="submit" id="submitContact" value="Ajouter une scène" class="btn btn-primary py-2 px-4 text-white">
-                                        </div>
-                                    </div>
-                                </h4>
-                        </form>
-                    <div id="errorContact"></div>
+                                </select>
+                            </div>
+                        </div>
+                         <!-- forumlaire pour que le client rajoute une scene lui même -->
+                        <div class="row form-group" data-aos="fade-up">
+                            <div class="col-md-12">
+                                <label class="" for="nom">Nom*</label>
+                                <input type="text" id="nom"  class="input form-control" name="objet" placeholder="Nom de la scène à ajouter" required>
+                            </div>
+                        </div>
+                        <div class="row form-group" data-aos="fade-up">
+                            <div class="col-md-12">
+                                <label class="" for="coordonnees">Coordonnées*</label>
+                                <input type="text" id="coordonnees"  class="input form-control" name="objet" placeholder="Latitude" required>
+                                <input type="text" id="coordonnees"  class="input form-control" name="objet" placeholder="Longitude" required>
+                            </div>
+                        </div>
+                        <div class="row form-group" data-aos="fade-up">
+                            <div class="col-md-12">
+                                <label class="" for="nbrParticipants">Nombre max de participants*</label>
+                                <input type="text" id="nbrParticipants"  class="input form-control" name="objet" placeholder="Estimation" required>
+                            </div>
+                        </div>
+                        <div class="row form-group" data-aos="fade-up">
+                            <div class="col-md-12">
+                                <label class="" for="horaires">Horaires</label>
+                                <input type="text" id="horaires"  class="input form-control" name="objet" placeholder="Heure de début">
+                                <input type="text" id="horaires"  class="input form-control" name="objet" placeholder="Heure de fin">
+                            </div>
+                        </div>
+                        <div class="row form-group" data-aos="fade-up">
+                            <div class="col-md-12">
+                                <input  name="envoi" type="submit" id="submitContact" value="Ajouter une scène" class="btn btn-primary py-2 px-4 text-white">
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-
-
-
 
     <footer class="site-footer">
         <?php include("footer.php"); ?>
