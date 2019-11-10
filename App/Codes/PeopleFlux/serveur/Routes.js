@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({extended : true }))
     connection.getConnection(function (err, connection) {
 
     // Executing the MySQL query (select all data from the 'users' table).
-    connection.query('SELECT * FROM Events', function (error, results, fields) {
+    connection.query('SELECT * FROM `Events`', function (error, results, fields) {
       // If some error occurs, we throw an error.
       if (error) throw error;
 
