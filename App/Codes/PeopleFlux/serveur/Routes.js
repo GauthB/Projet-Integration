@@ -1,3 +1,4 @@
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
@@ -6,16 +7,21 @@ const connection = mysql.createPool({
   host     : '91.216.107.248',
   user     : 'gauth1148636_1fzru',
   password : 'n7ttg6wdjq',
-  database : 'gauth1148636_1fzru'
+  database : 'gauth1148636_1fzru',
+  port: 21
 });
 
+
+// We're still in routes.js! Right below everything else.
 
 // Starting our app.
 const app = express();
 
 // Creating a GET route that returns data from the 'users' table.
-app.get('/Events', function (req, res) {
-    // Connecting to the database.
+app.get('/users', function (req, res) {
+app.use(bodyParser.json({type: 'application/json'}))
+app.use(bodyParser.urlencoded({extended : true }))
+  // Connecting to the database.
     connection.getConnection(function (err, connection) {
 
     // Executing the MySQL query (select all data from the 'users' table).
@@ -31,5 +37,5 @@ app.get('/Events', function (req, res) {
 
 // Starting our server.
 app.listen(3000, () => {
- console.log('Go to http://91.216.107.248:3000/Events so you can see the data.');
+ console.log('Go to http://localhost:3000/users so you can see the data.');
 });
