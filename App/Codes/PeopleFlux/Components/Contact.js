@@ -192,6 +192,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#4B4C56',
     color: '#fff',
     paddingLeft: 15,
+    paddingTop: 5,
+    paddingRight: 10,
     textAlignVertical: 'top',
 
 
