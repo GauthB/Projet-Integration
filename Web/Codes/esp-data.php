@@ -51,7 +51,7 @@ class data{
             echo "Error deleting record: " . $conn->error;
         }*/
     }
-    public function afficheStat($acces,$idClient){
+    public function afficheStat($acces,$idClient,$stageName,$cpt){
         // Create connection
         $conn = new mysqli($this->getServerName(), $this->getUsername(), $this->getPassword(), $this->getDbName());
         // Check connection
@@ -80,7 +80,8 @@ class data{
                        FROM Nbr_Personne
                        join Stages on Nbr_Personne.id_stage = Stages.id_stage 
                        join Events on Stages.id_event = Events.id_event 
-                       where Events.id_client = ". $idClient;
+                       where Events.id_client = ". $idClient . " 
+                         and Stages.stage_name = \"" . $stageName . "\"";
 
             if ($result = $conn->query($sqlNbr)) {
                 while ($row = $result->fetch_assoc()) {
@@ -103,7 +104,8 @@ class data{
                          join Stages on Nbr_Personne.id_stage = Stages.id_stage 
                          join Events on Stages.id_event = Events.id_event 
                          where Events.id_client = ". $idClient . " 
-                         order by Nbr_Personne.heure desc limit 10";
+                         and Stages.stage_name = \"" . $stageName . "\"
+                         order by Nbr_Personne.heure desc limit " . $cpt;
             if ($result = $conn->query($sqlTab)) {
                 while ($row = $result->fetch_assoc()) {
                     $row_name = $row["stage_name"];

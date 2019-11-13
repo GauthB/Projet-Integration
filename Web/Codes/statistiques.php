@@ -83,13 +83,15 @@ require_once "esp-data.php";
                             text-align:    center;
                             text-shadow:   0px 0px #000000;
                             " type="button" value="' . $event["event_name"] .  $eventName['id_event']  . '"></br>';
-                    echo'<br>  <SELECT name="nom" size="1">';
+                    echo'<br>
+                         <form method="get"> 
+                         <SELECT name="nom" size="1" value="';
                         //$sth2->execute(array(':event_id' => $_EVENT['id_event']));
                         $sth2 = $dbh -> prepare('SELECT stage_name FROM Stages WHERE id_event');
                         $sth2->execute(array(':client_id' => $_SESSION['id']));
                         $difEvent = $sth2 -> fetchAll(PDO::FETCH_ASSOC);
                         $sth2->closeCursor();
-
+                    echo $_GET["NOM"].'">';
                         if(empty($difEvent)) {
                             echo '<option>Vous n\'avez aucune stage</option>';
                         }
@@ -103,7 +105,9 @@ require_once "esp-data.php";
                 }
             }
             ?>
-                    </SELECT><br><br>
+                    </SELECT>
+            <input type="submit">
+            <br><br>
         <hr>
             <div>
                 <style type="text/css">
@@ -118,16 +122,21 @@ require_once "esp-data.php";
                 <h2>Statistiques public</h2>
                     <?php $data = new data();
                     echo '<table class="tftable" border="1" data-aos="fade-up">';
-                    echo '<br>' . $data->afficheStat("public",$_SESSION['id']) .'</table>';
+                    echo '<br>' . $data->afficheStat("public",$_SESSION['id'],$_GET['nom'],0) .'</table>';
                     ?>
             </div>
         <hr>
-            <div class="d-block mb-3 caption" data-aos="fade-up"></br>
+            <form class="d-block mb-3 caption" data-aos="fade-up"></br>
                 <h2>Statistiques privées</h2>
-                    Afficher derniers resultats : <input name="nombreAffiche" type="number" step="10" style="width: 3rem"><br>
+
+                    Afficher derniers resultats :
+                <input name="cpt" type="number" step="10" value="10" min="10" style="width: 3rem">
+                <input type="submit">
+            </form>
+
                     <table class="tftable" border="1" data-aos="fade-up">
                         <tr><td>Nom Scene</td> <td>ID</td> <td>Entrées</td> <td>Sorties</td> <td>Actuel</td> <td>Heure</td> </tr>
-                        <?php echo '<br>' . $data->afficheStat("prive",$_SESSION['id']); ?>
+                        <?php echo '<br>' . $data->afficheStat("prive",$_SESSION['id'],$_GET['nom'],$_GET['cpt']); ?>
                     </table>
             </div>
         </div>
