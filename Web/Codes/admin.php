@@ -125,7 +125,7 @@ require_once "esp-data.php";
                     }
 
                     echo '</table>';
-                    echo'<p data-aos="fade-up">Voir ses <a href="statistiques.php" target="_blank">statistiques</a>.</p>';
+                    echo'<p data-aos="fade-up">Voir ses <a href="statistiques.php">statistiques</a>.</p>';
                 }
 
                 ?>
