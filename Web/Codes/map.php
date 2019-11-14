@@ -60,12 +60,10 @@ text-shadow:   0px 0px #000000;
 
 
     <!--  ####################################  Carte   ################################################-->
+
     <div data-aos="fade-up" id="mapid" style=" height: 480px "></div>
-    <div><img src="images/Ephec2.png" alt="" id="ephec" style="height: 480px", width="1110px" /></div>
-    <div>
-mapEphec.onload    </div>
-
-
+    <div><img src="images/Ephec2.png" alt="" id="ephec" , style="display: none", width="1110px" /></div>
+    
 
 
 
@@ -139,28 +137,13 @@ mapEphec.onload    </div>
 
                 }
             };
-        <? endforeach;?>
 
-    </script>
-</div>
+    document.getElementById("btn3").onclick = function() {
 
-        <?foreach ($eventInfos as $eventName) :?>
-            document.getElementById('btn<?=$eventName['id_event']?>').onclick = function () {
-                if (!mymap.hasLayer(layer<?=$eventName['id_event']?>)) {
-                    mymap.removeLayer(actifLayer);
-                    mymap.addLayer(layer<?=$eventName['id_event']?>);
-                    actifLayer = layer<?=$eventName['id_event']?>;
+        document.getElementById("mapid").style.display = "none";
 
-                    var eventInfo = document.getElementsByClassName('eventInfo');
-                    for (var i = 0; i < eventInfo.length; i++) {
-                        eventInfo[i].style.display = 'none';
-                    }
-                    document.getElementById("title<?=$eventName['id_event']?>").style.display = 'block';
-                    document.getElementById("description<?=$eventName['id_event']?>").style.display = 'block';
-                    document.getElementById("dates<?=$eventName['id_event']?>").style.display = 'block';
-
-                }
-            };
+        document.getElementById("ephec").style.display = "block";
+    }
         <? endforeach;?>
 
     </script>
