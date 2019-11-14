@@ -2,8 +2,14 @@ import React, {Component} from 'react'
 import { StyleSheet, View, Text, Picker, Image, TouchableOpacity } from 'react-native'
 import RNPickerSelect from 'react-native-picker-select';
 import { connect } from 'react-redux'
+import MapboxGL from "@react-native-mapbox-gl/maps";
 
 
+MapboxGL.setAccessToken("pk.eyJ1IjoidGhpYmF1dGhlcm1hbnQiLCJhIjoiY2sxejI0NGd5MGxmeTNobXZ0bmttZnI1OSJ9.qDZmXtEgBV2n5hCbUA2qow");
+
+const lln = [
+  50.6682,4.61288
+];
 
 class Lieux extends React.Component {
 
@@ -21,6 +27,8 @@ class Lieux extends React.Component {
  componentDidUpdate(){
    console.log(this.props.selectedLieu)
  }
+
+
 
   render() {
 
@@ -48,14 +56,19 @@ class Lieux extends React.Component {
               </View>
             </View>
 
+            <Text style={styles.lieu_selectionne}>{this.props.selectedLieu}</Text>
 
-          <View styles={styles.content_container}>
-          <Text style={styles.lieu_selectionne}>{this.props.selectedLieu}</Text>
-            <Image
-              style ={styles.image}
-              source={require('../Images/lieux.jpg')}
-            />
-          </View>
+            <View style={styles.container_map}>
+              <MapboxGL.MapView
+                ref={(c) => this._map = c}
+                style={styles.map}
+                zoomLevel={5}
+                centerCoordinate={[50.1512,4.32691]}
+
+              />
+            </View>
+
+
       </View>
     )
   }
@@ -144,10 +157,28 @@ const styles = StyleSheet.create({
   },
   lieu_selectionne:{
     textAlign: 'center',
-    marginTop: 20,
+    marginTop: 10,
     fontSize: 30,
     color: '#ff5733'
-  }
+  },
+
+  page: {
+   flex: 1,
+   justifyContent: "center",
+   alignItems: "center",
+   backgroundColor: "#F5FCFF"
+ },
+ container_map: {
+   flex:1,
+   marginTop:5,
+   marginRight:10,
+   marginLeft:10,
+   marginBottom:30,
+   backgroundColor: "#ff5733"
+ },
+ map: {
+   flex: 1
+ }
 })
 
 const mapStateToProps = (state) => {
