@@ -10,6 +10,15 @@ $eventInfos = $eventInfoQuery->fetchAll(PDO::FETCH_ASSOC);
 
 <div class="container">
 
+
+
+
+   <!-- http://api.openweathermap.org/data/2.5/forecast/daily?lat=50.6702&lon=4.61523&cnt=14&mode=json&units=metric&lang=fr -->
+
+
+
+
+
     <link rel="stylesheet" href="css/add.css">
     <ul>
 <!-- ################################    Boutton Event  ####################################-->
@@ -39,19 +48,29 @@ text-shadow:   0px 0px #000000;
         </div>
     <?php endfor;?>
 
-   <!--  ####################################  Date   ################################################-->
+
+    <!--  ####################################  Date   ################################################-->
     <?php for ($i=0; $i<count($eventInfos); $i++): ?>
         <div id="dates<?=$eventInfos[$i]['id_event']?>" class="eventInfo" <?php if($i != 0) echo 'style="display:none"'?>>
-            <span class="d-block mb-3 caption" data-aos="fade-up" style="text-align: center;"><i><?=$eventInfos[$i]['date_from']?> - <?=$eventInfos[$i]['date_to']?></i></span>
+            <span class="d-block mb-3 caption" data-aos="fade-up" style="text-align: center;"><i><?=$eventInfos[$i]['date_from']?><br><?=$eventInfos[$i]['date_to']?></i></span>
 
         </div>
     <?php endfor;?>
 
 
+
     <!--  ####################################  Carte   ################################################-->
     <div data-aos="fade-up" id="mapid" style=" height: 480px "></div>
+    <div><img src="images/Ephec2.png" alt="" id="ephec" style="height: 480px", width="1110px" /></div>
+    <div>
+mapEphec.onload    </div>
 
-<!--  ####################################  Info sur les évènements   ################################################-->
+
+
+
+
+
+    <!--  ####################################  Info sur les évènements   ################################################-->
     <h2 data-aos="fade-up">Info</h2>
 
     <?php for ($i=0; $i<count($eventInfos); $i++): ?>
@@ -73,7 +92,10 @@ text-shadow:   0px 0px #000000;
         $stageQuery = $dbh->query("
         SELECT id_stage, stage_name, stage_latitude, stage_longitude, max_people, id_event
         FROM `Stages`");
-
+        /* SELECT *
+        FROM Stages JOIN Nbr_Personne ON Stages.id_stage = Nbr_Personne.id_stage
+        WHERE Nbr_Personne.id_stage = 1
+        */
         $stageInfo = $stageQuery->fetchAll(PDO::FETCH_ASSOC);
 
         // Créer les points sur la carte
@@ -95,9 +117,32 @@ text-shadow:   0px 0px #000000;
             accessToken: 'pk.eyJ1IjoiZ2F1dGhpZXJiIiwiYSI6ImNrMTQzODZuZDBlcDkzb29henlhMndvMnEifQ.nrVFAyoW00lvhk94CeCz0Q'
         }).addTo(mymap);
 
+
         //############################################################################################################
         // ############ Affiche de nouveau points lorsque l'on clique sur un boutton  ################################
         //############################################################################################################
+
+        <?foreach ($eventInfos as $eventName) :?>
+            document.getElementById('btn<?=$eventName['id_event']?>').onclick = function () {
+                if (!mymap.hasLayer(layer<?=$eventName['id_event']?>)) {
+                    mymap.removeLayer(actifLayer);
+                    mymap.addLayer(layer<?=$eventName['id_event']?>);
+                    actifLayer = layer<?=$eventName['id_event']?>;
+
+                    var eventInfo = document.getElementsByClassName('eventInfo');
+                    for (var i = 0; i < eventInfo.length; i++) {
+                        eventInfo[i].style.display = 'none';
+                    }
+                    document.getElementById("title<?=$eventName['id_event']?>").style.display = 'block';
+                    document.getElementById("description<?=$eventName['id_event']?>").style.display = 'block';
+                    document.getElementById("dates<?=$eventName['id_event']?>").style.display = 'block';
+
+                }
+            };
+        <? endforeach;?>
+
+    </script>
+</div>
 
         <?foreach ($eventInfos as $eventName) :?>
             document.getElementById('btn<?=$eventName['id_event']?>').onclick = function () {
