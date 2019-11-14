@@ -47,7 +47,7 @@ require_once "esp-data.php";
                 <div class="col-11 col-xl-2" data-aos="fade-up">
                     <h1 class="mb-0"><a href="index.php" class="text-white h2 mb-0">People<span class="text-primary">Flux</span> </a></h1>
                     <span class="d-block mb-3 caption">Compte: <?=$_SESSION['name']?> </span>
-                    <a href="admin.php" ><button class="btn btn-primary py-2 px-4 text-white" style="height: 2.5rem">Retour</button></a>
+                    <a href="admin.php" ><button class="boutonstats">Retour</button></a>
                 </div>
 
                 <div class="d-inline-block d-xl-none ml-md-0 mr-auto py-3" style="position: relative; top: 3px;"><a href="#" class="site-menu-toggle js-menu-toggle text-white"><span class="icon-menu h3"></span></a></div>
@@ -74,20 +74,10 @@ require_once "esp-data.php";
             }
             else {
                 foreach ($eventsInfo as $event) {
-                    echo  '<input style="
-                            background:    #d84e31;
-                            border:        1px solid #000000;
-                            border-radius: 12px;
-                            padding:       5px 12px;
-                            color:         #ffffff;
-                            display:       inline-block;
-                            font:          "Calibri", sans-serif;
-                            text-align:    center;
-                            text-shadow:   0px 0px #000000;
-                            " type="button" value="' . $event["event_name"] .  $eventName['id_event']  . '"></br>';
-                    echo'<br>
-                         <form method="get"> 
-                         <SELECT name="nom" size="1" value="';
+                    echo  ' <form method="get">
+                            <input class="boutonstats" type="button" value="' . $event["event_name"] .  $eventName['id_event']  . '">';
+                    echo'<br> 
+                         <br><SELECT name="nom" size="1" value="';
                         //$sth2->execute(array(':event_id' => $_EVENT['id_event']));
                         $sth2 = $dbh -> prepare('SELECT stage_name FROM Stages WHERE id_event');
                         $sth2->execute(array(':client_id' => $_SESSION['id']));
@@ -99,7 +89,7 @@ require_once "esp-data.php";
                         }
                         else {
                             foreach ($difEvent as $event) {
-                                echo ' <option>' .
+                                echo ' <br><option>' .
                                 $event["stage_name"] . '</option>' ;
                             }
                         }
@@ -107,14 +97,14 @@ require_once "esp-data.php";
                 }
             }
             ?>
-                    </SELECT>
-            <input type="submit" class="btn btn-primary py-2 px-4 text-white" style="height: 2.5rem">
+            </SELECT>
+            <input type="submit" class="boutonstats">
             <br>
         <hr>
             <div>
                 <style type="text/css">
                     .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #c70039;border-collapse: collapse;}
-                    .tftable th {font-size:14px;background-color:#c70039;border-width: 1px;padding: 8px;border-style: solid;border-color: #c70039;text-align:left;}
+                    .tftable th {font-size:14px;background-color:#d84e31;border-width: 1px;padding: 8px;border-style: solid;border-color: #c70039;text-align:left;}
                     .tftable tr {background-color:#FFFFFF;}
                     .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #c70039;}
                 </style>
@@ -133,7 +123,7 @@ require_once "esp-data.php";
 
                     Afficher derniers resultats :
                 <input name="cpt" type="number" step="10" value="10" min="10" style="width: 3rem">
-                <input type="submit" class="btn btn-primary py-2 px-4 text-white" style="height: 2.5rem">
+                <input type="submit" class="boutonstats">
             </form>
 
                     <table class="tftable" border="1" data-aos="fade-up">
