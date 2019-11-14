@@ -2,8 +2,10 @@ import React from 'react'
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native'
 import eventData from '../Helpers/EventData'
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview'
-import { Foundation  } from '@expo/vector-icons'
 import { connect } from 'react-redux'
+
+import Icon from 'react-native-vector-icons/Foundation'
+
 
 
 
@@ -42,7 +44,7 @@ class EventDetail extends React.Component {
               <Text style={styles.text_lieu}> A {lieu}</Text>
             </View>
             <TouchableOpacity style={styles.bouton_map} onPress={()=> _onPressButtonMap(this)}>
-              <Foundation name='map' size={50} color='#3796B3'/>
+              <Icon name="map" size={50} color="#3796B3" />
             </TouchableOpacity>
           </View>
         </View>
