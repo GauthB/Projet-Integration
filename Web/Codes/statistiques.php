@@ -44,9 +44,10 @@ require_once "esp-data.php";
     <header class="site-navbar py-3" role="banner">
         <div class="container-fluid">
             <div class="row align-items-center">
-                <div class="col-11 col-xl-2">
+                <div class="col-11 col-xl-2" data-aos="fade-up">
                     <h1 class="mb-0"><a href="index.php" class="text-white h2 mb-0">People<span class="text-primary">Flux</span> </a></h1>
-                    <span class="d-block mb-3 caption" data-aos="fade-up">Compte: <?=$_SESSION['name']?> </span>
+                    <span class="d-block mb-3 caption">Compte: <?=$_SESSION['name']?> </span>
+                    <a href="admin.php" ><button class="btn btn-primary py-2 px-4 text-white" style="height: 2.5rem">Retour</button></a>
                 </div>
 
                 <div class="d-inline-block d-xl-none ml-md-0 mr-auto py-3" style="position: relative; top: 3px;"><a href="#" class="site-menu-toggle js-menu-toggle text-white"><span class="icon-menu h3"></span></a></div>
@@ -61,6 +62,7 @@ require_once "esp-data.php";
                     border-top: 1px solid red
                 }
             </style>
+            <br>
             <?php
                 $sth = $dbh -> prepare('SELECT * FROM Events WHERE id_client=:client_id');
                 $sth->execute(array(':client_id' => $_SESSION['id']));
@@ -83,13 +85,15 @@ require_once "esp-data.php";
                             text-align:    center;
                             text-shadow:   0px 0px #000000;
                             " type="button" value="' . $event["event_name"] .  $eventName['id_event']  . '"></br>';
-                    echo'<br>  <SELECT name="nom" size="1">';
+                    echo'<br>
+                         <form method="get"> 
+                         <SELECT name="nom" size="1" value="';
                         //$sth2->execute(array(':event_id' => $_EVENT['id_event']));
                         $sth2 = $dbh -> prepare('SELECT stage_name FROM Stages WHERE id_event');
                         $sth2->execute(array(':client_id' => $_SESSION['id']));
                         $difEvent = $sth2 -> fetchAll(PDO::FETCH_ASSOC);
                         $sth2->closeCursor();
-
+                    echo $_GET["NOM"].'">';
                         if(empty($difEvent)) {
                             echo '<option>Vous n\'avez aucune stage</option>';
                         }
@@ -103,7 +107,9 @@ require_once "esp-data.php";
                 }
             }
             ?>
-                    </SELECT><br><br>
+                    </SELECT>
+            <input type="submit" class="btn btn-primary py-2 px-4 text-white" style="height: 2.5rem">
+            <br>
         <hr>
             <div>
                 <style type="text/css">
@@ -118,16 +124,21 @@ require_once "esp-data.php";
                 <h2>Statistiques public</h2>
                     <?php $data = new data();
                     echo '<table class="tftable" border="1" data-aos="fade-up">';
-                    echo '<br>' . $data->afficheStat("public",$_SESSION['id']) .'</table>';
+                    echo '<br>' . $data->afficheStat("public",$_SESSION['id'],$_GET['nom'],0) .'</table>';
                     ?>
             </div>
         <hr>
-            <div class="d-block mb-3 caption" data-aos="fade-up"></br>
+            <form class="d-block mb-3 caption" data-aos="fade-up"></br>
                 <h2>Statistiques privées</h2>
-                    Afficher derniers resultats : <input name="nombreAffiche" type="number" step="10" style="width: 3rem"><br>
+
+                    Afficher derniers resultats :
+                <input name="cpt" type="number" step="10" value="10" min="10" style="width: 3rem">
+                <input type="submit" class="btn btn-primary py-2 px-4 text-white" style="height: 2.5rem">
+            </form>
+
                     <table class="tftable" border="1" data-aos="fade-up">
-                        <tr><td>Nom Scene</td> <td>ID</td> <td>Entrées</td> <td>Sorties</td> <td>Actuel</td> <td>Heure</td> </tr>
-                        <?php echo '<br>' . $data->afficheStat("prive",$_SESSION['id']); ?>
+                        <tr><th>Nom Scene</th> <th>ID</th> <th>Entrées</th> <th>Sorties</th> <th>Actuel</th> <th>Heure</th> </tr>
+                        <?php echo '<br>' . $data->afficheStat("prive",$_SESSION['id'],$_GET['nom'],$_GET['cpt']); ?>
                     </table>
             </div>
         </div>

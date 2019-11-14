@@ -39,6 +39,16 @@ text-shadow:   0px 0px #000000;
         </div>
     <?php endfor;?>
 
+   <!--  ####################################  Date   ################################################-->
+    <?php for ($i=0; $i<count($eventInfos); $i++): ?>
+        <div id="dates<?=$eventInfos[$i]['id_event']?>" class="eventInfo" <?php if($i != 0) echo 'style="display:none"'?>>
+            <span class="d-block mb-3 caption" data-aos="fade-up" style="text-align: center;"><i><?=$eventInfos[$i]['date_from']?> - <?=$eventInfos[$i]['date_to']?></i></span>
+
+        </div>
+    <?php endfor;?>
+
+
+    <!--  ####################################  Carte   ################################################-->
     <div data-aos="fade-up" id="mapid" style=" height: 480px "></div>
 
 <!--  ####################################  Info sur les évènements   ################################################-->
@@ -102,6 +112,7 @@ text-shadow:   0px 0px #000000;
                     }
                     document.getElementById("title<?=$eventName['id_event']?>").style.display = 'block';
                     document.getElementById("description<?=$eventName['id_event']?>").style.display = 'block';
+                    document.getElementById("dates<?=$eventName['id_event']?>").style.display = 'block';
 
                 }
             };
