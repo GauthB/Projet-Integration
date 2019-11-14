@@ -1,5 +1,4 @@
 import React from 'react';
-import { Ionicons, AntDesign, MaterialIcons } from '@expo/vector-icons'
 import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView, Platform } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
@@ -10,6 +9,10 @@ import Lieux from '../Components/Lieux.js'
 import Calendrier from '../Components/Calendrier.js'
 import EventDetail from '../Components/EventDetail.js'
 import Test from '../Components/Test'
+import Icon from 'react-native-vector-icons/Foundation'
+
+
+
 
 
 
@@ -21,7 +24,9 @@ const DrawerNavigator = createDrawerNavigator({
     navigationOptions: ({ navigation }) => ({
       title: 'Calendrier Screen',
       drawerLabel: 'Calendrier',
-      drawerIcon: () => <AntDesign name="calendar" size={20} color='#fff' />
+      drawerIcon: () => <Icon name="calendar" size={20} color='#fff' />
+
+
 
     })
   },
@@ -30,7 +35,9 @@ const DrawerNavigator = createDrawerNavigator({
       navigationOptions: ({ navigation }) => ({
         title: 'Lieux Screen',
         drawerLabel: 'Lieux',
-        drawerIcon: () => <MaterialIcons name="place" size={20} color='#fff' />
+        drawerIcon: () => <Icon name="map" size={20} color='#fff' />
+
+
       })
     },
   APropos: {
@@ -38,7 +45,9 @@ const DrawerNavigator = createDrawerNavigator({
     navigationOptions: ({ navigation }) => ({
       title: 'APropos Screen',
       drawerLabel: 'A Propos',
-      drawerIcon: () => <AntDesign name="team" size={20} color='#fff' />
+      drawerIcon: () => <Icon name="torsos-all" size={20} color='#fff' />
+
+
     })
   },
   Contact: {
@@ -46,7 +55,9 @@ const DrawerNavigator = createDrawerNavigator({
     navigationOptions: ({ navigation }) => ({
       title: 'Contact Screen',
       drawerLabel: 'Contact',
-      drawerIcon: () => <AntDesign name="contacts" size={20} color='#fff' />
+      drawerIcon: () => <Icon name="mail" size={20} color='#fff' />
+
+
     })
   },
   Test: {
@@ -54,7 +65,9 @@ const DrawerNavigator = createDrawerNavigator({
     navigationOptions: ({ navigation }) => ({
       title: 'Test Screen',
       drawerLabel: 'Test',
-      drawerIcon: () => <AntDesign name="contacts" size={20} color='#fff' />
+      drawerIcon: () => <Icon name="mail" size={20} color='#fff' />
+
+
     })
   }
 
@@ -88,7 +101,7 @@ const StackNavigator = createStackNavigator({
                 <View style={styles.title_container}>
                   <Text style={styles.title_text_people}>People</Text><Text style={styles.title_text_flux}>Flux</Text>
                   <TouchableOpacity style={styles.menuOpen} onPress={() => {navigation.dispatch(DrawerActions.toggleDrawer())}}>
-                    <Ionicons name="ios-menu"  size={50} color='#fff' />
+                  <Icon name="list"  size={50} color='#fff' />
                   </TouchableOpacity>
                 </View>
               </SafeAreaView>
@@ -111,7 +124,7 @@ const StackNavigator = createStackNavigator({
               <SafeAreaView style={styles.main_container}>
                 <View style={styles.title_container}>
                   <TouchableOpacity style={styles.back} onPress={() => navigation.navigate("Calendrier")}>
-                    <Ionicons name="ios-arrow-round-back"  size={50} color='#ff5733' />
+                    <Icon name="arrow-left"  size={40} color='#ff5733' />
                   </TouchableOpacity>
                   <Text style={styles.title_text_people}>People</Text><Text style={styles.title_text_flux}>Flux</Text>
                 </View>
