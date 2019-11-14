@@ -63,7 +63,10 @@ text-shadow:   0px 0px #000000;
         $stageQuery = $dbh->query("
         SELECT id_stage, stage_name, stage_latitude, stage_longitude, max_people, id_event
         FROM `Stages`");
-
+        /* SELECT *
+        FROM Stages JOIN Nbr_Personne ON Stages.id_stage = Nbr_Personne.id_stage
+        WHERE Nbr_Personne.id_stage = 1
+        */
         $stageInfo = $stageQuery->fetchAll(PDO::FETCH_ASSOC);
 
         // Créer les points sur la carte
