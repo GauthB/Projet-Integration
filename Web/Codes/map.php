@@ -87,19 +87,19 @@ text-shadow:   0px 0px #000000;
         echo 'var actifLayer = layer' . $eventInfos[0]['id_event'] . ';';
 
         // récupère les information sur les stages
-        $stageQuery = $dbh->query("
-        SELECT id_stage, stage_name, stage_latitude, stage_longitude, max_people, id_event
-        FROM `Stages`");
+        $stageQuery = $dbh->query(
+        " SELECT * FROM `Stages` as s join Nbr_Personne as p where s.id_stage = p.id_stage GROUP BY s.id_stage" );
         /* SELECT *
         FROM Stages JOIN Nbr_Personne ON Stages.id_stage = Nbr_Personne.id_stage
         WHERE Nbr_Personne.id_stage = 1
         */
         $stageInfo = $stageQuery->fetchAll(PDO::FETCH_ASSOC);
-
         // Créer les points sur la carte
+
         foreach ($stageInfo as $stage) {
-            echo "\n\t\t" . 'L.marker([ ' . $stage['stage_latitude'] . ', ' . $stage['stage_longitude'] . ']).bindPopup("<b>' . $stage['stage_name'] . '</b><br>Il y a 0 participant(s)!<br> Le nombre maximum de participant est estimé à ' . $stage['max_people'] . '").addTo(layer' . $stage['id_event'] . ');';
+            echo "\n\t\t" . 'L.marker([ ' . $stage['stage_latitude'] . ', ' . $stage['stage_longitude'] . ']).bindPopup("<b>' . $stage['stage_name'] . '</b><br>Il y a ' . $stage['nbr_actuel'] . ' participant(s)!<br> Le nombre maximum de participant est estimé à ' . $stage['max_people'] . '").addTo(layer' . $stage['id_event'] . ');';
         }
+
         ?>
 
         var mymap = L.map('mapid', {
@@ -115,13 +115,18 @@ text-shadow:   0px 0px #000000;
             accessToken: 'pk.eyJ1IjoiZ2F1dGhpZXJiIiwiYSI6ImNrMTQzODZuZDBlcDkzb29henlhMndvMnEifQ.nrVFAyoW00lvhk94CeCz0Q'
         }).addTo(mymap);
 
+        
+
 
         //############################################################################################################
         // ############ Affiche de nouveau points lorsque l'on clique sur un boutton  ################################
         //############################################################################################################
 
         <?foreach ($eventInfos as $eventName) :?>
+        if ( 'btn<?=$eventName['id_event']?>' == 'btn3') {
             document.getElementById('btn<?=$eventName['id_event']?>').onclick = function () {
+
+
                 if (!mymap.hasLayer(layer<?=$eventName['id_event']?>)) {
                     mymap.removeLayer(actifLayer);
                     mymap.addLayer(layer<?=$eventName['id_event']?>);
@@ -136,24 +141,40 @@ text-shadow:   0px 0px #000000;
                     document.getElementById("dates<?=$eventName['id_event']?>").style.display = 'block';
 
                 }
-            }
-        <? endforeach;?>
 
-        <?php for ($i=0; $i<count($eventInfos); $i++): ?>
-       if ('btn' + <?=$eventInfos[$i]['id_event']?> == 'btn3') {
-           document.getElementById("btn3").onclick = function () {
-               document.getElementById("mapid").style.display = "block";
-               document.getElementById("ephec").style.display = "block";
-           }
-       }
-       else {
-            document.getElementById('btn' + <?=$eventInfos[$i]['id_event']?>).onclick = function () {
                 document.getElementById("mapid").style.display = "block";
-                document.getElementById("ephec").style.display = "none";
+                document.getElementById("ephec").style.display = "block";
             }
         }
 
-        <?php endfor;?>
+        else {
+            document.getElementById('btn<?=$eventName['id_event']?>').onclick = function () {
+
+
+                if (!mymap.hasLayer(layer<?=$eventName['id_event']?>)) {
+                    mymap.removeLayer(actifLayer);
+                    mymap.addLayer(layer<?=$eventName['id_event']?>);
+                    actifLayer = layer<?=$eventName['id_event']?>;
+
+                    var eventInfo = document.getElementsByClassName('eventInfo');
+                    for (var i = 0; i < eventInfo.length; i++) {
+                        eventInfo[i].style.display = 'none';
+                    }
+                    document.getElementById("title<?=$eventName['id_event']?>").style.display = 'block';
+                    document.getElementById("description<?=$eventName['id_event']?>").style.display = 'block';
+                    document.getElementById("dates<?=$eventName['id_event']?>").style.display = 'block';
+
+                }
+
+                document.getElementById("mapid").style.display = "block";
+                document.getElementById("ephec").style.display = "none";
+            }
+
+        }
+
+
+        <? endforeach;?>
+
 
 
     </script>
