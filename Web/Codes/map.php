@@ -142,7 +142,7 @@ text-shadow:   0px 0px #000000;
         <?php for ($i=0; $i<count($eventInfos); $i++): ?>
        if ('btn' + <?=$eventInfos[$i]['id_event']?> == 'btn3') {
            document.getElementById("btn3").onclick = function () {
-               document.getElementById("mapid").style.display = "none";
+               document.getElementById("mapid").style.display = "block";
                document.getElementById("ephec").style.display = "block";
            }
        }
