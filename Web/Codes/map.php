@@ -63,7 +63,7 @@ text-shadow:   0px 0px #000000;
 
     <div data-aos="fade-up" id="mapid" style=" height: 480px "></div>
     <div><img src="images/Ephec2.png" alt="" id="ephec" , style="display: none", width="1110px" /></div>
-    
+
 
 
 
@@ -136,15 +136,25 @@ text-shadow:   0px 0px #000000;
                     document.getElementById("dates<?=$eventName['id_event']?>").style.display = 'block';
 
                 }
-            };
-
-    document.getElementById("btn3").onclick = function() {
-
-        document.getElementById("mapid").style.display = "none";
-
-        document.getElementById("ephec").style.display = "block";
-    }
+            }
         <? endforeach;?>
+
+        <?php for ($i=0; $i<count($eventInfos); $i++): ?>
+       if ('btn' + <?=$eventInfos[$i]['id_event']?> == 'btn3') {
+           document.getElementById("btn3").onclick = function () {
+               document.getElementById("mapid").style.display = "none";
+               document.getElementById("ephec").style.display = "block";
+           }
+       }
+       else {
+            document.getElementById('btn' + <?=$eventInfos[$i]['id_event']?>).onclick = function () {
+                document.getElementById("mapid").style.display = "block";
+                document.getElementById("ephec").style.display = "none";
+            }
+        }
+
+        <?php endfor;?>
+
 
     </script>
 </div>
