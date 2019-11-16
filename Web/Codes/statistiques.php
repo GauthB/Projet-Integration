@@ -123,7 +123,7 @@ require_once "esp-data.php";
 
                 Afficher derniers resultats :
                 <input name="cpt" type="number" step="10" value="10" min="10" style="width: 3rem">
-                <input type="submit" class="boutonstats">
+                <input type="submit" class="boutonstats" id="boutonstats">
             </form>
 
             <table class="tftable" border="1" data-aos="fade-up">
@@ -132,17 +132,30 @@ require_once "esp-data.php";
             </table>
         </div>
     </div>
-    <canvas id="myChart" width="20%" height="5%"></canvas>
+
+    <button name="button" id="boutongraphe" class="boutonstats"> Observer son graphique</button>
+    <button name="button" id="grapheannule" class="boutonstats"> Annuler </button>
+
+
+    <canvas id="myChart" width="20%" height="5%" style="display: none"></canvas>
 
     <script>
 var i = 0;
 var heures = [];
 var nbrAct = [];
+
+document.getElementById("boutongraphe").onclick = function() {
+    document.getElementById("myChart").style.display = "block";
+}
+document.getElementById("grapheannule").onclick = function() {
+    document.getElementById("myChart").style.display = "none";
+}
         <?php
 $grapheQuery = $dbh->query(
     " SELECT * FROM `Nbr_Personne` WHERE id_stage = 1
 " );
         $grapheInfo = $grapheQuery->fetchAll(PDO::FETCH_ASSOC);
+
 
 
         ?>
@@ -174,24 +187,14 @@ var myChart = new Chart(ctx, {
             labels: [ heures[0], heures[1],heures[2],heures[3],heures[4],heures[5],heures[6],heures[7],heures[8],heures[9], heures[10]],
 
         datasets: [{
-            label: '# of Votes',
+            label: 'Observer ici le nombre de personne présente en fonction de la soirée !',
             data: [nbrAct[0], nbrAct[1], nbrAct[2], nbrAct[3], nbrAct[4], nbrAct[5],nbrAct[6],nbrAct[7],nbrAct[8],nbrAct[9],nbrAct[10]],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
+            backgroundColor:
+                'rgba(255, 99, 132, 0.2)'
+            ,
+            borderColor:
+                'rgba(255, 99, 132, 1)'
+            ,
             borderWidth: 1
         }]
     },
