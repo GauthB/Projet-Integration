@@ -27,7 +27,7 @@ require_once "esp-data.php";
     <link rel="stylesheet" href="css/aos.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/x-icon" href="LogoSmall.ico"/>
-
+    <script src="js/Chart.js"></script>
     <script src="js/jquery-3.4.1.min.js"></script>
 </head>
 <body>
@@ -64,10 +64,10 @@ require_once "esp-data.php";
             </style>
             <br>
             <?php
-                $sth = $dbh -> prepare('SELECT * FROM Events WHERE id_client=:client_id');
-                $sth->execute(array(':client_id' => $_SESSION['id']));
-                $eventsInfo = $sth -> fetchAll(PDO::FETCH_ASSOC);
-                $sth->closeCursor();
+            $sth = $dbh -> prepare('SELECT * FROM Events WHERE id_client=:client_id');
+            $sth->execute(array(':client_id' => $_SESSION['id']));
+            $eventsInfo = $sth -> fetchAll(PDO::FETCH_ASSOC);
+            $sth->closeCursor();
 
             if(empty($eventsInfo)) {
                 echo '<p data-aos="fade-up">Vous n\'avez aucun évènements</p>';
@@ -78,21 +78,21 @@ require_once "esp-data.php";
                             <input class="boutonstats" type="button" value="' . $event["event_name"] .  $eventName['id_event']  . '">';
                     echo'<br> 
                          <br><SELECT name="nom" size="1" value="';
-                        //$sth2->execute(array(':event_id' => $_EVENT['id_event']));
-                        $sth2 = $dbh -> prepare('SELECT stage_name FROM Stages WHERE id_event');
-                        $sth2->execute(array(':client_id' => $_SESSION['id']));
-                        $difEvent = $sth2 -> fetchAll(PDO::FETCH_ASSOC);
-                        $sth2->closeCursor();
+                    //$sth2->execute(array(':event_id' => $_EVENT['id_event']));
+                    $sth2 = $dbh -> prepare('SELECT stage_name FROM Stages WHERE id_event');
+                    $sth2->execute(array(':client_id' => $_SESSION['id']));
+                    $difEvent = $sth2 -> fetchAll(PDO::FETCH_ASSOC);
+                    $sth2->closeCursor();
                     echo $_GET["NOM"].'">';
-                        if(empty($difEvent)) {
-                            echo '<option>Vous n\'avez aucune stage</option>';
-                        }
-                        else {
-                            foreach ($difEvent as $event) {
-                                echo ' <br><option>' .
+                    if(empty($difEvent)) {
+                        echo '<option>Vous n\'avez aucune stage</option>';
+                    }
+                    else {
+                        foreach ($difEvent as $event) {
+                            echo ' <br><option>' .
                                 $event["stage_name"] . '</option>' ;
-                            }
                         }
+                    }
 
                 }
             }
@@ -100,7 +100,7 @@ require_once "esp-data.php";
             </SELECT>
             <input type="submit" class="boutonstats">
             <br>
-        <hr>
+            <hr>
             <div>
                 <style type="text/css">
                     .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #c70039;border-collapse: collapse;}
@@ -109,30 +109,70 @@ require_once "esp-data.php";
                     .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #c70039;}
                 </style>
             </div>
-                <!-- affiche les statistiques liés à un evennement -->
+            <!-- affiche les statistiques liés à un evennement -->
             <div class="d-block mb-3 caption" data-aos="fade-up"></br>
                 <h2>Statistiques public</h2>
-                    <?php $data = new data();
-                    echo '<table class="tftable" border="1" data-aos="fade-up">';
-                    echo '<br>' . $data->afficheStat("public",$_SESSION['id'],$_GET['nom'],0) .'</table>';
-                    ?>
+                <?php $data = new data();
+                echo '<table class="tftable" border="1" data-aos="fade-up">';
+                echo '<br>' . $data->afficheStat("public",$_SESSION['id'],$_GET['nom'],0) .'</table>';
+                ?>
             </div>
-        <hr>
+            <hr>
             <form class="d-block mb-3 caption" data-aos="fade-up"></br>
                 <h2>Statistiques privées</h2>
 
-                    Afficher derniers resultats :
+                Afficher derniers resultats :
                 <input name="cpt" type="number" step="10" value="10" min="10" style="width: 3rem">
                 <input type="submit" class="boutonstats">
             </form>
 
-                    <table class="tftable" border="1" data-aos="fade-up">
-                        <tr><th>Nom Scene</th> <th>ID</th> <th>Entrées</th> <th>Sorties</th> <th>Actuel</th> <th>Heure</th> </tr>
-                        <?php echo '<br>' . $data->afficheStat("prive",$_SESSION['id'],$_GET['nom'],$_GET['cpt']); ?>
-                    </table>
-            </div>
+            <table class="tftable" border="1" data-aos="fade-up">
+                <tr><th>Nom Scene</th> <th>ID</th> <th>Entrées</th> <th>Sorties</th> <th>Actuel</th> <th>Heure</th> </tr>
+                <?php echo '<br>' . $data->afficheStat("prive",$_SESSION['id'],$_GET['nom'],$_GET['cpt']); ?>
+            </table>
         </div>
+    </div>
+    <canvas id="myChart" width="20%" height="5%"></canvas>
 
+    <script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [12, 19, 3, 5, 2, 3],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
     <footer class="site-footer">
         <?php include("footer.php"); ?>
     </footer>
