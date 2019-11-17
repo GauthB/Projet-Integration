@@ -97,13 +97,38 @@ require_once "esp-data.php";
                     echo '</table>';
                 }
                 ?>
-                <div id="dialog"></div>
+                <div id="dialog"><p>Êtes-vous sûr de vouloir supprimer <span id="spnEventName"></span></p></div>
                 <script>
                     $(function() {
+                        $( "#dialog" ).dialog({
+                            title: "Êtes-vous sûr?",
+                            autoOpen: false,
+                            modal: true,
+                            resizable: false,
+                            draggable: false,
+                            closeOnEscape: false,
+                            buttons: [
+                                {
+                                    text: "Oui",
+                                    click: function() {
+                                        $( this ).dialog( "close" );
+                                    }
+                                },
+                                {
+                                    text: "Non",
+                                    click: function() {
+                                        $( this ).dialog( "close" );
+                                    }
+                                }
+                            ],
+                            open: function() { $(".ui-dialog-titlebar-close").hide(); }
+                        });
 
                         // next add the onclick handler
                         $(".btnDelEvent").click(function() {
-                            $("#dialog").dialog("");
+                            $('#spnEventName').html($(this).closest('tr').children().first().html());
+                            $("#dialog").dialog("open");
+                            return false;
                         });
                     });
                 </script>
@@ -146,7 +171,7 @@ require_once "esp-data.php";
 
             <!-- forumlaire pour que le client rajoute un evenement lui même -->
             <div class="row">
-                <div class="col-md-6" >
+                <div class="col-md-6" data-aos="fade-up">
                     <form id= "formEvent" class="event-form" action="addEvent.php" method="post">
                         <h2 class="d-block mb-3 caption" data-aos="fade-up">Ajouter un évènement</h2>
                         <div class="row form-group" data-aos="fade-up">
@@ -185,7 +210,7 @@ require_once "esp-data.php";
 
                     <form id= "formStage" class="stage-form" action="addStage.php" method="post">
                         <h2 class="d-block mb-3 caption" data-aos="fade-up">Ajouter une scène</h2>
-                        <div class="row form-group">
+                        <div class="row form-group" data-aos="fade-up">
                             <div class="col-md-12">
                                 <label class="" for="nomEvent">Evènement</label>
                                 <select id="nomEvent" name="nomEvent" size="1">
@@ -249,15 +274,15 @@ require_once "esp-data.php";
 
 </div>
 
-<!--<script src="js/jquery-migrate-3.0.1.min.js"></script>-->
-<!--<script src="js/popper.min.js"></script>-->
-<!--<script src="js/bootstrap.min.js"></script>-->
-<!--<script src="js/owl.carousel.min.js"></script>-->
-<!--<script src="js/jquery.stellar.min.js"></script>-->
-<!--<script src="js/jquery.countdown.min.js"></script>-->
-<!--<script src="js/jquery.magnific-popup.min.js"></script>-->
+<script src="js/jquery-migrate-3.0.1.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/jquery.stellar.min.js"></script>
+<script src="js/jquery.countdown.min.js"></script>
+<script src="js/jquery.magnific-popup.min.js"></script>
 <script src="js/aos.js"></script>
-<!---->
+
 <script src="js/main.js"></script>
 
 </body>
