@@ -20,7 +20,7 @@ require_once "esp-data.php";
     <link rel="stylesheet" href="fonts/icomoon/style.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/magnific-popup.css">
-    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="css/jquery-ui.min.css">
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
     <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
@@ -30,6 +30,7 @@ require_once "esp-data.php";
     <link rel="icon" type="image/x-icon" href="LogoSmall.ico"/>
 
     <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
 
 </head>
 <body>
@@ -70,7 +71,7 @@ require_once "esp-data.php";
                 </style>
 
                 <h2 class="d-block mb-3 caption" data-aos="fade-up">Evènements</h2>
-
+<!--            Table des évènements-->
                 <?php
 
                 $sth = $dbh -> prepare('SELECT * FROM Events WHERE id_client=:client_id');
@@ -82,20 +83,30 @@ require_once "esp-data.php";
                     echo '<p data-aos="fade-up">Vous n\'avez aucun évènements</p>';
                 } else {
                     echo '<table class="tftable" border="1" data-aos="fade-up">';
-                    echo '<tr><th>Nom</th><th>Date du début</th><th>Date de fin</th><th>Adresse</th></tr>';
+                    echo '<tr><th>Nom</th><th>Date du début</th><th>Date de fin</th><th>Adresse</th><th></th></tr>';
 
                     foreach ($eventsInfo as $event) {
                         echo '<tr><td>' .
                             $event["event_name"] . '</td><td>' .
                             $event["date_from"] . '</td><td>' .
                             $event["date_to"] . '</td><td>' .
-                            $event["event_address"] . '</td></tr>';
+                            $event["event_address"] . '</td><td>' .
+                            '<span class="close btnDelEvent" data-idEvent="' . $event["id_event"] . '">&times;</span></td></tr>';
                     }
 
                     echo '</table>';
                 }
                 ?>
+                <div id="dialog"></div>
+                <script>
+                    $(function() {
 
+                        // next add the onclick handler
+                        $(".btnDelEvent").click(function() {
+                            $("#dialog").dialog("");
+                        });
+                    });
+                </script>
             </div>
 
             <!-- affiche les scenes liés au client -->
@@ -111,7 +122,7 @@ require_once "esp-data.php";
                     echo '<p data-aos="fade-up">Vous n\'avez aucune stage</p>';
                 } else {
                     echo '<table class="tftable" border="1" data-aos="fade-up">';
-                    echo '<tr><th>Nom de l\'évènement</th><th>Nom de la scène</th><th>Latitude</th><th>Longitude</th><th>Max participants</th><th>Heure de début</th><th>Heure de fin</th></tr>';
+                    echo '<tr><th>Nom de l\'évènement</th><th>Nom de la scène</th><th>Latitude</th><th>Longitude</th><th>Max participants</th><th>Heure de début</th><th>Heure de fin</th><th></th></tr>';
 
                     foreach ($stageInfo as $stage) {
                         echo '<tr><td>' .
@@ -121,7 +132,8 @@ require_once "esp-data.php";
                             $stage["stage_longitude"] . '</td><td>' .
                             $stage["max_people"] . '</td><td>' .
                             $stage["hour_from"] . '</td><td>' .
-                            $stage["hour_to"] . '</td></tr>';
+                            $stage["hour_to"] . '</td><td>' .
+                            '<span class="close btnDelStage" data-idStage="' . $stage["id_stage"] . '">&times;</span></td></tr>';
                     }
 
                     echo '</table>';
@@ -134,7 +146,7 @@ require_once "esp-data.php";
 
             <!-- forumlaire pour que le client rajoute un evenement lui même -->
             <div class="row">
-                <div class="col-md-6" data-aos="fade-up">
+                <div class="col-md-6" >
                     <form id= "formEvent" class="event-form" action="addEvent.php" method="post">
                         <h2 class="d-block mb-3 caption" data-aos="fade-up">Ajouter un évènement</h2>
                         <div class="row form-group" data-aos="fade-up">
@@ -173,7 +185,7 @@ require_once "esp-data.php";
 
                     <form id= "formStage" class="stage-form" action="addStage.php" method="post">
                         <h2 class="d-block mb-3 caption" data-aos="fade-up">Ajouter une scène</h2>
-                        <div class="row form-group" data-aos="fade-up">
+                        <div class="row form-group">
                             <div class="col-md-12">
                                 <label class="" for="nomEvent">Evènement</label>
                                 <select id="nomEvent" name="nomEvent" size="1">
@@ -237,16 +249,15 @@ require_once "esp-data.php";
 
 </div>
 
-<script src="js/jquery-migrate-3.0.1.min.js"></script>
-<script src="js/jquery-ui.js"></script>
-<script src="js/popper.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/jquery.stellar.min.js"></script>
-<script src="js/jquery.countdown.min.js"></script>
-<script src="js/jquery.magnific-popup.min.js"></script>
+<!--<script src="js/jquery-migrate-3.0.1.min.js"></script>-->
+<!--<script src="js/popper.min.js"></script>-->
+<!--<script src="js/bootstrap.min.js"></script>-->
+<!--<script src="js/owl.carousel.min.js"></script>-->
+<!--<script src="js/jquery.stellar.min.js"></script>-->
+<!--<script src="js/jquery.countdown.min.js"></script>-->
+<!--<script src="js/jquery.magnific-popup.min.js"></script>-->
 <script src="js/aos.js"></script>
-
+<!---->
 <script src="js/main.js"></script>
 
 </body>
