@@ -106,7 +106,7 @@ require_once "esp-data.php";
                 <div id="dialogStage"><p>Êtes-vous sûr de vouloir supprimer <span id="spnStageName"></span></p></div>
                 <h2 class="d-block mb-3 caption" data-aos="fade-up">Scènes</h2>
                 <?php
-                $sth = $dbh -> prepare('SELECT event_name,stage_name,stage_latitude,stage_longitude,max_people,hour_from,hour_to FROM Stages JOIN Events ON Stages.id_event = Events.id_event WHERE id_client=:client_id');
+                $sth = $dbh -> prepare('SELECT * FROM Stages JOIN Events ON Stages.id_event = Events.id_event WHERE id_client=:client_id');
                 $sth->execute(array(':client_id' => $_SESSION['id']));
                 $stageInfo = $sth -> fetchAll(PDO::FETCH_ASSOC);
                 $sth->closeCursor();
