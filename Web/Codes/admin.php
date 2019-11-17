@@ -182,7 +182,7 @@ require_once "esp-data.php";
                         <div class="row form-group" data-aos="fade-up">
                             <div class="col-md-12">
                                 <label class="" for="nomEvent">Evènement</label>
-                                <select id="nomEvent" name="nomEvent" size="1">
+                                <select id="idEvent" name="idEvent" size="1">
 
                                 <?php
 
@@ -202,7 +202,7 @@ require_once "esp-data.php";
                         <div class="row form-group" data-aos="fade-up">
                             <div class="col-md-12">
                                 <label class="" for="nom">Nom*</label>
-                                <input type="text" id="nom"  class="input form-control" name="nameStage" placeholder="Nom de la scène à ajouter" required>
+                                <input type="text" id="stageName"  class="input form-control" name="stageName" placeholder="Nom de la scène à ajouter" required>
                             </div>
                         </div>
                         <div class="row form-group" data-aos="fade-up">

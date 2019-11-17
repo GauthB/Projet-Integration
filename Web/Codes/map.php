@@ -86,9 +86,9 @@ text-shadow:   0px 0px #000000;
         }
         echo 'var actifLayer = layer' . $eventInfos[0]['id_event'] . ';';
 
-        // récupère les information sur les stages
+        // récupère les informations sur les scènes
         $stageQuery = $dbh->query(
-        " SELECT * FROM `Stages` as s join Nbr_Personne as p where s.id_stage = p.id_stage GROUP BY s.id_stage" );
+        "SELECT * FROM Stages LEFT JOIN Nbr_Personne ON Stages.id_stage = Nbr_Personne.id_stage GROUP BY Stages.id_stage" );
         /* SELECT *
         FROM Stages JOIN Nbr_Personne ON Stages.id_stage = Nbr_Personne.id_stage
         WHERE Nbr_Personne.id_stage = 1
