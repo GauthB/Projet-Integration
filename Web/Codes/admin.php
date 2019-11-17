@@ -63,6 +63,7 @@ require_once "esp-data.php";
     <div class="site-section">
         <div class="container">
             <div>
+                <div id="dialogEvent"><p>Êtes-vous sûr de vouloir supprimer <span id="spnEventName"></span></p></div>
                 <style type="text/css">
                     .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #c70039;border-collapse: collapse;}
                     .tftable th {font-size:14px;background-color:#c70039;border-width: 1px;padding: 8px;border-style: solid;border-color: #c70039;text-align:left;}
@@ -97,45 +98,12 @@ require_once "esp-data.php";
                     echo '</table>';
                 }
                 ?>
-                <div id="dialog"><p>Êtes-vous sûr de vouloir supprimer <span id="spnEventName"></span></p></div>
-                <script>
-                    $(function() {
-                        $( "#dialog" ).dialog({
-                            title: "Êtes-vous sûr?",
-                            autoOpen: false,
-                            modal: true,
-                            resizable: false,
-                            draggable: false,
-                            closeOnEscape: false,
-                            buttons: [
-                                {
-                                    text: "Oui",
-                                    click: function() {
-                                        $( this ).dialog( "close" );
-                                    }
-                                },
-                                {
-                                    text: "Non",
-                                    click: function() {
-                                        $( this ).dialog( "close" );
-                                    }
-                                }
-                            ],
-                            open: function() { $(".ui-dialog-titlebar-close").hide(); }
-                        });
 
-                        // next add the onclick handler
-                        $(".btnDelEvent").click(function() {
-                            $('#spnEventName').html($(this).closest('tr').children().first().html());
-                            $("#dialog").dialog("open");
-                            return false;
-                        });
-                    });
-                </script>
             </div>
 
             <!-- affiche les scenes liés au client -->
             <div>
+                <div id="dialogStage"><p>Êtes-vous sûr de vouloir supprimer <span id="spnStageName"></span></p></div>
                 <h2 class="d-block mb-3 caption" data-aos="fade-up">Scènes</h2>
                 <?php
                 $sth = $dbh -> prepare('SELECT event_name,stage_name,stage_latitude,stage_longitude,max_people,hour_from,hour_to FROM Stages JOIN Events ON Stages.id_event = Events.id_event WHERE id_client=:client_id');
@@ -172,7 +140,7 @@ require_once "esp-data.php";
             <!-- forumlaire pour que le client rajoute un evenement lui même -->
             <div class="row">
                 <div class="col-md-6" data-aos="fade-up">
-                    <form id= "formEvent" class="event-form" action="addEvent.php" method="post">
+                    <form id= "formEvent" class="event-form" action="stageEvent/addEvent.php" method="post">
                         <h2 class="d-block mb-3 caption" data-aos="fade-up">Ajouter un évènement</h2>
                         <div class="row form-group" data-aos="fade-up">
                             <div class="col-md-12">
@@ -208,7 +176,8 @@ require_once "esp-data.php";
                         </div>
                     </form>
 
-                    <form id= "formStage" class="stage-form" action="addStage.php" method="post">
+                    <!-- forumlaire pour que le client rajoute une scene lui même -->
+                    <form id= "formStage" class="stage-form" action="stageEvent/addStage.php" method="post">
                         <h2 class="d-block mb-3 caption" data-aos="fade-up">Ajouter une scène</h2>
                         <div class="row form-group" data-aos="fade-up">
                             <div class="col-md-12">
@@ -230,7 +199,6 @@ require_once "esp-data.php";
                                 </select>
                             </div>
                         </div>
-                         <!-- forumlaire pour que le client rajoute une scene lui même -->
                         <div class="row form-group" data-aos="fade-up">
                             <div class="col-md-12">
                                 <label class="" for="nom">Nom*</label>
@@ -273,6 +241,77 @@ require_once "esp-data.php";
     </footer>
 
 </div>
+<script>
+    $(function() {
+        // Dialog confirmation supression évènements
+        $( "#dialogEvent" ).dialog({
+            title: "Êtes-vous sûr?",
+            autoOpen: false,
+            modal: true,
+            resizable: false,
+            draggable: false,
+            closeOnEscape: false,
+            buttons: [
+                {
+                    text: "Oui",
+                    click: function() {
+                        $.post('stageEvent/delEvent.php', {id: $("#dialogEvent").data('idEvent')}, function (data) {
+                            location.reload();
+                        });
+                        $( this ).dialog( "close" );
+                    }
+                },
+                {
+                    text: "Non",
+                    click: function() {
+                        $( this ).dialog( "close" );
+                    }
+                }
+            ],
+            open: function() { $(".ui-dialog-titlebar-close").hide(); }
+        });
+
+        $(".btnDelEvent").click(function() {
+            $('#spnEventName').html($(this).closest('tr').children().first().html());
+            $("#dialogEvent").data('idEvent', $(this).attr('data-idEvent')).dialog("open");
+            return false;
+        });
+
+        // Dialog confirmation supression scène
+        $( "#dialogStage" ).dialog({
+            title: "Êtes-vous sûr?",
+            autoOpen: false,
+            modal: true,
+            resizable: false,
+            draggable: false,
+            closeOnEscape: false,
+            buttons: [
+                {
+                    text: "Oui",
+                    click: function() {
+                        $.post('stageEvent/delStage.php', {id: $("#dialogStage").data('idStage')}, function (data) {
+                            location.reload();
+                        });
+                        $( this ).dialog( "close" );
+                    }
+                },
+                {
+                    text: "Non",
+                    click: function() {
+                        $( this ).dialog( "close" );
+                    }
+                }
+            ],
+            open: function() { $(".ui-dialog-titlebar-close").hide(); }
+        });
+
+        $(".btnDelStage").click(function() {
+            $('#spnStageName').html($(this).closest('tr').children().first().next().html());
+            $("#dialogStage").data('idStage', $(this).attr('data-idStage')).dialog("open");
+            return false;
+        });
+    });
+</script>
 
 <script src="js/jquery-migrate-3.0.1.min.js"></script>
 <script src="js/popper.min.js"></script>
