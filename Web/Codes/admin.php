@@ -176,12 +176,12 @@ require_once "esp-data.php";
                         <div class="row form-group" data-aos="fade-up">
                             <div class="col-md-12">
                                 <label class="" for="nomEvent">Evènement</label>
-                                <select id="nomEvent" name="nom" size="1">
+                                <select id="nomEvent" name="nomEvent" size="1">
 
                                 <?php
 
                                 if(empty($eventsInfo)) {
-                                    echo '<option>Aucun évenements</option>';
+                                    echo '<option value="-1">Aucun évenements</option>';
                                 } else {
                                     foreach ($eventsInfo as $event) {
                                         echo '<option value="' . $event["id_event"] . '">' . $event["event_name"] . '</option>' ;
@@ -197,27 +197,27 @@ require_once "esp-data.php";
                         <div class="row form-group" data-aos="fade-up">
                             <div class="col-md-12">
                                 <label class="" for="nom">Nom*</label>
-                                <input type="text" id="nom"  class="input form-control" name="objet" placeholder="Nom de la scène à ajouter" required>
+                                <input type="text" id="nom"  class="input form-control" name="nameStage" placeholder="Nom de la scène à ajouter" required>
                             </div>
                         </div>
                         <div class="row form-group" data-aos="fade-up">
                             <div class="col-md-12">
                                 <label class="" for="coordonnees">Coordonnées*</label>
-                                <input type="text" id="coordonnees"  class="input form-control" name="objet" placeholder="Latitude" required>
-                                <input type="text" id="coordonnees"  class="input form-control" name="objet" placeholder="Longitude" required>
+                                <input type="text" id="coordonnees"  class="input form-control" name="lat" placeholder="Latitude" required>
+                                <input type="text" id="coordonnees"  class="input form-control" name="long" placeholder="Longitude" required>
                             </div>
                         </div>
                         <div class="row form-group" data-aos="fade-up">
                             <div class="col-md-12">
                                 <label class="" for="nbrParticipants">Nombre max de participants*</label>
-                                <input type="text" id="nbrParticipants"  class="input form-control" name="objet" placeholder="Estimation" required>
+                                <input type="text" id="nbrParticipants"  class="input form-control" name="nbPart" placeholder="Estimation" required>
                             </div>
                         </div>
                         <div class="row form-group" data-aos="fade-up">
                             <div class="col-md-12">
                                 <label class="" for="horaires">Horaires</label>
-                                <input type="text" id="horaires"  class="input form-control" name="objet" placeholder="Heure de début">
-                                <input type="text" id="horaires"  class="input form-control" name="objet" placeholder="Heure de fin">
+                                <input type="text" id="horaires"  class="input form-control" name="heureDebut" placeholder="Heure de début">
+                                <input type="text" id="horaires"  class="input form-control" name="heurefin" placeholder="Heure de fin">
                             </div>
                         </div>
                         <div class="row form-group" data-aos="fade-up">
