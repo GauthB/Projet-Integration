@@ -77,7 +77,7 @@ require_once "esp-data.php";
                     echo  ' <form method="get">
                             <input class="boutonstats" type="button" value="' . $event["event_name"] .  $eventName['id_event']  . '">';
                     echo'<br> 
-                         <br><SELECT name="nom" size="1" value="';
+                         <br><SELECT name="nom" size="1"  id="yo" value="';
                     //$sth2->execute(array(':event_id' => $_EVENT['id_event']));
                     $sth2 = $dbh -> prepare('SELECT stage_name FROM Stages WHERE id_event');
                     $sth2->execute(array(':client_id' => $_SESSION['id']));
@@ -89,7 +89,7 @@ require_once "esp-data.php";
                     }
                     else {
                         foreach ($difEvent as $event) {
-                            echo ' <br><option>' .
+                            echo ' <br><option id="' . $event["id_stage"] . '">' .
                                 $event["stage_name"] . '</option>' ;
                         }
                     }
@@ -140,9 +140,7 @@ require_once "esp-data.php";
     <canvas id="myChart" width="20%" height="5%" style="display: none"></canvas>
 
     <script>
-var i = 0;
-var heures = [];
-var nbrAct = [];
+
 
 document.getElementById("boutongraphe").onclick = function() {
     document.getElementById("myChart").style.display = "block";
@@ -150,9 +148,12 @@ document.getElementById("boutongraphe").onclick = function() {
 document.getElementById("grapheannule").onclick = function() {
     document.getElementById("myChart").style.display = "none";
 }
+
+
+
         <?php
 $grapheQuery = $dbh->query(
-    " SELECT * FROM `Nbr_Personne` WHERE id_stage = 1
+    " SELECT * FROM `Nbr_Personne` as p join Stages as s WHERE p.id_stage = s.id_stage
 " );
         $grapheInfo = $grapheQuery->fetchAll(PDO::FETCH_ASSOC);
 
@@ -160,56 +161,58 @@ $grapheQuery = $dbh->query(
 
         ?>
 
+var variableRecuperee = <?php echo json_encode($grapheInfo); ?>;
 
-        <?foreach ($grapheInfo as $graphe) :?>
+    document.getElementById("yo").onchange = function graphe() {
+        var i = 0;
+        var heures = [];
+        var nbrAct = [];
+        for (e = 0; e < variableRecuperee.length; e++) {
+
+            if (document.getElementById('yo').value == variableRecuperee[e]['stage_name']) {
 
 
-        if ( '<?=$graphe['id_stage']?>' == 1 ) {
-
-                heures[i] = '<?=$graphe['heure']?>'
-                nbrAct[i] = '<?=$graphe['nbr_actuel']?>'
-            i++;
+                heures[i] = variableRecuperee[e]['heure']
+                nbrAct[i] = variableRecuperee[e]['nbr_actuel']
+                i++;
+            } else {
             }
 
 
-
-        else {
-
         }
 
 
-        <? endforeach;?>
-var ctx = document.getElementById('myChart').getContext('2d');
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
 
-            labels: [ heures[0], heures[1],heures[2],heures[3],heures[4],heures[5],heures[6],heures[7],heures[8],heures[9], heures[10]],
+                labels: [heures[0], heures[1], heures[2], heures[3], heures[4], heures[5], heures[6], heures[7], heures[8], heures[9], heures[10]],
 
-        datasets: [{
-            label: 'Observer ici le nombre de personne présente en fonction de la soirée !',
-            data: [nbrAct[0], nbrAct[1], nbrAct[2], nbrAct[3], nbrAct[4], nbrAct[5],nbrAct[6],nbrAct[7],nbrAct[8],nbrAct[9],nbrAct[10]],
-            backgroundColor:
-                'rgba(255, 99, 132, 0.2)'
-            ,
-            borderColor:
-                'rgba(255, 99, 132, 1)'
-            ,
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
+                datasets: [{
+                    label: 'Observer ici le nombre de personne présente en fonction de la soirée !',
+                    data: [nbrAct[0], nbrAct[1], nbrAct[2], nbrAct[3], nbrAct[4], nbrAct[5], nbrAct[6], nbrAct[7], nbrAct[8], nbrAct[9], nbrAct[10]],
+                    backgroundColor:
+                        'rgba(255, 99, 132, 0.2)'
+                    ,
+                    borderColor:
+                        'rgba(255, 99, 132, 1)'
+                    ,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
                 }
-            }]
-        }
+            }
+        });
+
     }
-});
-
-
 
 </script>
 
