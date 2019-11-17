@@ -187,11 +187,11 @@ var variableRecuperee = <?php echo json_encode($grapheInfo); ?>;
             type: 'bar',
             data: {
 
-                labels: [heures[0], heures[1], heures[2], heures[3], heures[4], heures[5], heures[6], heures[7], heures[8], heures[9], heures[10]],
+                labels: heures,
 
                 datasets: [{
                     label: 'Observer ici le nombre de personne présente en fonction de la soirée !',
-                    data: [nbrAct[0], nbrAct[1], nbrAct[2], nbrAct[3], nbrAct[4], nbrAct[5], nbrAct[6], nbrAct[7], nbrAct[8], nbrAct[9], nbrAct[10]],
+                    data: nbrAct,
                     backgroundColor:
                         'rgba(255, 99, 132, 0.2)'
                     ,
