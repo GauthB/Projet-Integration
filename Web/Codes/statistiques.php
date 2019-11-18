@@ -142,18 +142,13 @@ require_once "esp-data.php";
     <script>
 
 
-document.getElementById("boutongraphe").onclick = function() {
-    document.getElementById("myChart").style.display = "block";
-}
-document.getElementById("grapheannule").onclick = function() {
-    document.getElementById("myChart").style.display = "none";
-}
+
 
 
 
         <?php
-$grapheQuery = $dbh->query(
-    " SELECT * FROM `Nbr_Personne` as p join Stages as s WHERE p.id_stage = s.id_stage
+        $grapheQuery = $dbh->query(
+            " SELECT * FROM `Nbr_Personne` as p join Stages as s WHERE p.id_stage = s.id_stage
 " );
         $grapheInfo = $grapheQuery->fetchAll(PDO::FETCH_ASSOC);
 
@@ -161,64 +156,74 @@ $grapheQuery = $dbh->query(
 
         ?>
 
-var variableRecuperee = <?php echo json_encode($grapheInfo); ?>;
-
-    document.getElementById("yo").onchange = function graphe() {
-        var i = 0;
-        var heures = [];
-        var nbrAct = [];
-        for (e = 0; e < variableRecuperee.length; e++) {
-
-            if (document.getElementById('yo').value == variableRecuperee[e]['stage_name']) {
 
 
-                heures[i] = variableRecuperee[e]['heure']
-                nbrAct[i] = variableRecuperee[e]['nbr_actuel']
-                i++;
-            } else {
+
+
+        document.getElementById("yo").onchange = function graphe() {
+            var variableRecuperee = <?php echo json_encode($grapheInfo); ?>;
+            var i = 0;
+            var heures = [];
+            var nbrAct = [];
+            var myChart = null;
+            var ctx = null;
+            for (e = 0; e < variableRecuperee.length; e++) {
+
+                if (document.getElementById('yo').value == variableRecuperee[e]['stage_name']) {
+
+
+                    heures[i] = variableRecuperee[e]['heure']
+                    nbrAct[i] = variableRecuperee[e]['nbr_actuel']
+                    i++;
+                } else {
+                }
+
+
             }
 
 
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+
+                    labels: heures,
+
+                    datasets: [{
+                        label: 'Observer ici le nombre de personne présente en fonction de la soirée !',
+                        data: nbrAct,
+                        backgroundColor:
+                            'rgb(0,0,0,0.1)'
+                        ,
+                        borderColor:
+                            'rgb(255, 0, 35)'
+                        ,
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+            document.getElementById("boutongraphe").onclick = function() {
+                document.getElementById("myChart").style.display = "block";
+            }
+            document.getElementById("grapheannule").onclick = function() {
+                document.getElementById("myChart").style.display = "none";
+            }
         }
 
+    </script>
 
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-
-                labels: heures,
-
-                datasets: [{
-                    label: 'Observer ici le nombre de personne présente en fonction de la soirée !',
-                    data: nbrAct,
-                    backgroundColor:
-                        'rgba(255, 99, 132, 0.2)'
-                    ,
-                    borderColor:
-                        'rgba(255, 99, 132, 1)'
-                    ,
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                }
-            }
-        });
-
-    }
-
-</script>
-
-<footer class="site-footer">
-<?php include("footer.php"); ?>
-</footer>
+    <footer class="site-footer">
+        <?php include("footer.php"); ?>
+    </footer>
 
 </div>
 
