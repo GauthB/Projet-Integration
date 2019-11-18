@@ -18,7 +18,7 @@ class Test extends React.Component
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                  event:"24hVelo"
+                  id_event:1
                 })
 
             }).then((response) => response.text()).then((responseJsonFromServer) =>
