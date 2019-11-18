@@ -10,8 +10,8 @@ const {Builder, By, Key, until} = require('selenium-webdriver');
     await driver.sleep(1500);
     await driver.findElement(By.id('message')).sendKeys('Ceci est un test d interface', Key.TAB);
     await driver.sleep(1500);
-    await driver.findElement(By.id('submitContact')).sendKeys(Key.ENTER);
-    await driver.sleep(500);
+    //await driver.findElement(By.id('submitContact')).sendKeys(Key.ENTER);
+    //await driver.sleep(500);
 
   } finally {
     await driver.quit();
