@@ -83,7 +83,7 @@ require_once "esp-data.php";
             else {
                 foreach ($eventsInfo as $event) {
                     echo '<br><br><span class="boutonstats" style="margin-bottom: 10px">' .$event["event_name"] .  $eventName['id_event'] . '</span>
-                          <br><SELECT name="nom" size="1"  id="yo" value="' . $_GET["NOM"].'">';
+                          <br><SELECT name="nom" size="1"  id="yo" onchange="graphe();" value="' . $_GET["NOM"].'">';
                     if(empty($difEvent)) {
                         echo '<option>Vous n\'avez aucune stage</option>';
                     }
@@ -146,13 +146,7 @@ require_once "esp-data.php";
 
 
         ?>
-
-
-
-
-
-        document.getElementById("yo").onchange = function graphe() {
-            var variableRecuperee = <?php echo json_encode($grapheInfo); ?>;
+        function graphe() {
             var i = 0;
             var heures = [];
             var nbrAct = [];
@@ -209,6 +203,15 @@ require_once "esp-data.php";
                 document.getElementById("myChart").style.display = "none";
             }
         }
+
+        var variableRecuperee = <?php echo json_encode($grapheInfo); ?>;
+
+            for (e = 0; e < variableRecuperee.length; e++) {
+                if (document.getElementById('yo').value == variableRecuperee[e]['stage_name']) {
+                    graphe();
+                }
+            }
+
 
     </script>
 
