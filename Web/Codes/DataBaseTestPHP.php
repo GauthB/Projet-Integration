@@ -4,8 +4,9 @@ try {
     $dbh = new PDO('mysql:host=91.216.107.248;dbname=gauth1148636_1fzru','gauth1148636_1fzru','n7ttg6wdjq');
 
 
+
 } catch (Exception $e) {
-    print "Erreur !:" .$e -> getMessage()."<br/>";
+    echo "Erreur !:" .$e -> getMessage()."<br/>";
     die();
 
 }
@@ -18,8 +19,9 @@ try {
     $sth = $dbh -> prepare($sql);
     $sth -> execute();
     $infos = $sth -> fetchAll(PDO::FETCH_ASSOC);
-    $json = json_encode($infos);
-    echo $json;
+
+    print_r($infos);
+
     $dbh=null;
 
 } catch (Exception $e) {

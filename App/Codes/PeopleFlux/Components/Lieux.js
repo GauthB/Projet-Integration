@@ -7,8 +7,8 @@ import MapboxGL from "@react-native-mapbox-gl/maps";
 
 MapboxGL.setAccessToken("pk.eyJ1IjoidGhpYmF1dGhlcm1hbnQiLCJhIjoiY2sxejI0NGd5MGxmeTNobXZ0bmttZnI1OSJ9.qDZmXtEgBV2n5hCbUA2qow");
 
-const lln = [
-  50.6682,4.61288
+const coordonnes = [
+  4.61288,50.6682
 ];
 
 class Lieux extends React.Component {
@@ -16,6 +16,7 @@ class Lieux extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      coordonnes:coordonnes
     }
 
   }
@@ -62,10 +63,14 @@ class Lieux extends React.Component {
               <MapboxGL.MapView
                 ref={(c) => this._map = c}
                 style={styles.map}
-                zoomLevel={5}
-                centerCoordinate={[50.1512,4.32691]}
+              >
+                <MapboxGL.Camera
+                  zoomLevel={14}
+                  centerCoordinate={this.state.coordonnes}
+                />
 
-              />
+              </MapboxGL.MapView>
+
             </View>
 
 

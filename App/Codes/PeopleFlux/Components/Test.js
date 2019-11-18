@@ -9,7 +9,7 @@ class Test extends React.Component
     show_Events = () =>{
 
             fetch(
-              '../Helpers/DataBaseTestPHP.php',
+              'https://peopleflux.gauthierbohyn.com/DataBaseTestPHP.php',
             {
                 method: 'POST',
                 headers:
@@ -17,9 +17,11 @@ class Test extends React.Component
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({})
+                body: JSON.stringify({
+                  event:"24hVelo"
+                })
 
-            }).then((response) => response.json()).then((responseJsonFromServer) =>
+            }).then((response) => response.text()).then((responseJsonFromServer) =>
             {
                 console.log(responseJsonFromServer);
 
