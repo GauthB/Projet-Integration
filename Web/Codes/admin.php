@@ -64,13 +64,6 @@ require_once "esp-data.php";
         <div class="container">
             <div>
                 <div id="dialogEvent"><p>Êtes-vous sûr de vouloir supprimer <span id="spnEventName"></span></p></div>
-                <style type="text/css">
-                    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #c70039;border-collapse: collapse;}
-                    .tftable th {font-size:14px;background-color:#c70039;border-width: 1px;padding: 8px;border-style: solid;border-color: #c70039;text-align:left;}
-                    .tftable tr {background-color:#FFFFFF;}
-                    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #c70039;}
-                </style>
-
                 <h2 class="d-block mb-3 caption" data-aos="fade-up">Evènements</h2>
 <!--            Table des évènements-->
                 <?php

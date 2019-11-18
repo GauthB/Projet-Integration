@@ -42,14 +42,40 @@ class data{
     public function getActuel(){
         return ($this->tot_actuel>0?$this->tot_actuel:0);
     }
-    public function supprimerTable(){
-        $sql = "DELETE FROM `Nbr_Personne` WHERE `id_stage`= 1";
-
+    public function supprimerTable($id){
+        $sql = "DELETE FROM `Nbr_Personne` WHERE `id_stage`=  1";
+        $dbh -> exec ($sql);
         /*if ($conn->query($sql) === TRUE) {
             echo "Record deleted successfully";
         } else {
             echo "Error deleting record: " . $conn->error;
         }*/
+    }
+    public function getQueryTotal($idClient){
+        $sqlNbr = "SELECT SUM(nbr_entree), SUM(nbr_sortie) 
+                       FROM Nbr_Personne
+                       join Stages on Nbr_Personne.id_stage = Stages.id_stage 
+                         join Events on Stages.id_event = Events.id_event 
+                         where Events.id_client = ". $idClient;
+    }
+    public function getQueryPublic($idClient,$stageName){
+        $sqlNbr = "SELECT SUM(nbr_entree), SUM(nbr_sortie) 
+                       FROM Nbr_Personne
+                       join Stages on Nbr_Personne.id_stage = Stages.id_stage 
+                       join Events on Stages.id_event = Events.id_event 
+                       where Events.id_client = ". $idClient . " 
+                         and Stages.stage_name = \"" . $stageName . "\"";
+        return $sqlNbr;
+    }
+    public function getQueryPrive($idClient,$stageName,$cpt){
+        $sqlNbr =   "SELECT Stages.stage_name, id, Nbr_Personne.nbr_entree, Nbr_Personne.nbr_sortie, Nbr_Personne.nbr_actuel, Nbr_Personne.heure 
+                         FROM `Nbr_Personne`
+                         join Stages on Nbr_Personne.id_stage = Stages.id_stage 
+                         join Events on Stages.id_event = Events.id_event 
+                         where Events.id_client = ". $idClient . " 
+                         and Stages.stage_name = \"" . $stageName . "\"
+                         order by Nbr_Personne.heure desc limit " . $cpt;
+        return $sqlNbr;
     }
     public function afficheStat($acces,$idClient,$stageName,$cpt){
         // Create connection
@@ -59,11 +85,7 @@ class data{
             die("Connection failed: " . $conn->connect_error);
         }
         if($acces == "total"){
-            $sqlNbr = "SELECT SUM(nbr_entree), SUM(nbr_sortie) 
-                       FROM Nbr_Personne
-                       join Stages on Nbr_Personne.id_stage = Stages.id_stage 
-                         join Events on Stages.id_event = Events.id_event 
-                         where Events.id_client = ". $idClient;
+            $sqlNbr = $this->getQueryTotal($idClient);
             if ($result = $conn->query($sqlNbr)) {
                 while ($row = $result->fetch_assoc()) {
                     $this->setEntree($row["SUM(nbr_entree)"]);
@@ -76,13 +98,7 @@ class data{
             return $this->getActuel();
         }
         elseif($acces == "public"){
-            $sqlNbr = "SELECT SUM(nbr_entree), SUM(nbr_sortie) 
-                       FROM Nbr_Personne
-                       join Stages on Nbr_Personne.id_stage = Stages.id_stage 
-                       join Events on Stages.id_event = Events.id_event 
-                       where Events.id_client = ". $idClient . " 
-                         and Stages.stage_name = \"" . $stageName . "\"";
-
+            $sqlNbr = $this->getQueryPublic($idClient,$stageName);
             if ($result = $conn->query($sqlNbr)) {
                 while ($row = $result->fetch_assoc()) {
                     $this->setEntree($row["SUM(nbr_entree)"]);
@@ -98,14 +114,7 @@ class data{
 
         }
         elseif($acces == "prive"){
-
-            $sqlTab =   "SELECT Stages.stage_name, id, Nbr_Personne.nbr_entree, Nbr_Personne.nbr_sortie, Nbr_Personne.nbr_actuel, Nbr_Personne.heure 
-                         FROM `Nbr_Personne`
-                         join Stages on Nbr_Personne.id_stage = Stages.id_stage 
-                         join Events on Stages.id_event = Events.id_event 
-                         where Events.id_client = ". $idClient . " 
-                         and Stages.stage_name = \"" . $stageName . "\"
-                         order by Nbr_Personne.heure desc limit " . $cpt;
+            $sqlTab = $this->getQueryPrive($idClient,$stageName,$cpt);
             if ($result = $conn->query($sqlTab)) {
                 while ($row = $result->fetch_assoc()) {
                     $row_name = $row["stage_name"];
