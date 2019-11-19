@@ -51,3 +51,6 @@ target 'PeopleFlux-tvOS' do
   end
 
 end
+
+  # Mapbox
+  pod 'react-native-mapbox-gl', :path => '../node_modules/@mapbox/react-native-mapbox-gl'
