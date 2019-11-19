@@ -14,7 +14,8 @@ npm i --save redux
 npm uninstall --save @expo/vector-icons
 npm i --save react-native-keyboard-aware-scrollview
 npm install --save react-native-vector-icons
-npm install @react-native-mapbox-gl/maps --save
+npm uninstall @react-native-mapbox-gl/maps --save
+npm install https://github.com/nitaliano/react-native-mapbox-gl/tarball/master
 
 
 ### Test Unit
