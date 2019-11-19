@@ -83,13 +83,14 @@ require_once "esp-data.php";
             else {
                 foreach ($eventsInfo as $event) {
                     echo '<br><br><span class="boutonstats" style="margin-bottom: 10px">' .$event["event_name"] .  $eventName['id_event'] . '</span>
-                          <br><SELECT name="nom" size="1"  id="yo" onchange="graphe();" value="' . $_GET["NOM"].'">';
+                          <br><SELECT name="nom" size="1"  id="yo" onchange="graphe();" value="' . $_GET["nom"].'">';
                     if(empty($difEvent)) {
                         echo '<option>Vous n\'avez aucune stage</option>';
                     }
                     else {
                         foreach ($difEvent as $event) {
-                            echo '<option id="' . $event["id_stage"] . '">' .
+                            $res = ($_GET['nom']==$event["stage_name"]?"selected":"");
+                            echo '<option id="' . $event["id_stage"] . '" '. $res .'>' .
                                 $event["stage_name"] . '</option>' ;
                         }
                     }
@@ -122,6 +123,7 @@ require_once "esp-data.php";
                 <?php echo '<br>' . $data->afficheStat("prive",$_SESSION['id'],$_GET['nom'],$_GET['cpt']); ?>
             </table>
             <br>
+            <hr>
             <button name="button" id="boutongraphe" class="boutonstats"> Observer son graphique</button>
             <button name="button" id="grapheannule" class="boutonstats"> Annuler </button>
 

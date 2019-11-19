@@ -2,7 +2,9 @@ import React, {Component} from 'react'
 import { StyleSheet, View, Text, Picker, Image, TouchableOpacity } from 'react-native'
 import RNPickerSelect from 'react-native-picker-select';
 import { connect } from 'react-redux'
-import MapboxGL from "@react-native-mapbox-gl/maps";
+import MapboxGL from "@mapbox/react-native-mapbox-gl";
+import { PermissionsAndroid } from 'react-native';
+
 
 
 MapboxGL.setAccessToken("pk.eyJ1IjoidGhpYmF1dGhlcm1hbnQiLCJhIjoiY2sxejI0NGd5MGxmeTNobXZ0bmttZnI1OSJ9.qDZmXtEgBV2n5hCbUA2qow");
@@ -25,10 +27,21 @@ class Lieux extends React.Component {
    const action = { type: "SET_LIEU", value: value }
    this.props.dispatch(action)
  }
- componentDidUpdate(){
-   console.log(this.props.selectedLieu)
- }
+ componentDidMount() {
 
+  PermissionsAndroid.requestMultiple(
+             [PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+             PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION],
+             {
+                 title: 'Give Location Permission',
+             message: 'App needs location permission to find your position.'
+         }
+     ).then(granted => {
+         console.log(granted);
+     }).catch(err => {
+         console.warn(err);
+     });
+ }
 
 
   render() {
@@ -62,12 +75,12 @@ class Lieux extends React.Component {
             <View style={styles.container_map}>
               <MapboxGL.MapView
                 ref={(c) => this._map = c}
+                styleURL={MapboxGL.StyleURL.Street}
                 style={styles.map}
+                showUserLocation ={true}
+                zoomLevel={14}
+                centerCoordinate={this.state.coordonnes}
               >
-                <MapboxGL.Camera
-                  zoomLevel={14}
-                  centerCoordinate={this.state.coordonnes}
-                />
 
               </MapboxGL.MapView>
 
