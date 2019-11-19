@@ -10,7 +10,8 @@ import { PermissionsAndroid } from 'react-native';
 MapboxGL.setAccessToken("pk.eyJ1IjoidGhpYmF1dGhlcm1hbnQiLCJhIjoiY2sxejI0NGd5MGxmeTNobXZ0bmttZnI1OSJ9.qDZmXtEgBV2n5hCbUA2qow");
 
 const coordonnes = [
-  4.61288,50.6682
+  [4.61288,50.6682],
+  [4.612069434158341,50.66590045123987]
 ];
 
 class Lieux extends React.Component {
@@ -27,6 +28,7 @@ class Lieux extends React.Component {
    const action = { type: "SET_LIEU", value: value }
    this.props.dispatch(action)
  }
+
  componentDidMount() {
 
   PermissionsAndroid.requestMultiple(
@@ -42,6 +44,40 @@ class Lieux extends React.Component {
          console.warn(err);
      });
  }
+
+ renderAnnotation (counter) {
+   const id = `pointAnnotation${counter}`;
+   const coordinate = this.state.coordonnes[counter];
+   const title = `Longitude: ${this.state.coordonnes[counter][0]} Latitude: ${this.state.coordonnes[counter][1]}`;
+
+   return (
+     <MapboxGL.PointAnnotation
+       key={id}
+       id={id}
+       title={title}
+       coordinate={coordinate}>
+
+       <Image
+       source={require('../Images/marker.png')}
+       style={{
+         flex: 1,
+         resizeMode: 'contain',
+         width: 50,
+         height: 50
+         }}/>
+     </MapboxGL.PointAnnotation>
+   );
+ }
+
+ renderAnnotations () {
+    const items = [];
+
+    for (let i = 0; i < this.state.coordonnes.length; i++) {
+      items.push(this.renderAnnotation(i));
+    }
+
+    return items;
+  }
 
 
   render() {
@@ -79,9 +115,9 @@ class Lieux extends React.Component {
                 style={styles.map}
                 showUserLocation ={true}
                 zoomLevel={14}
-                centerCoordinate={this.state.coordonnes}
+                centerCoordinate={this.state.coordonnes[0]}
               >
-
+              {this.renderAnnotations()}
               </MapboxGL.MapView>
 
             </View>
