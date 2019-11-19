@@ -9,7 +9,7 @@ class Test extends React.Component
     show_Events = () =>{
 
             fetch(
-              'https://peopleflux.gauthierbohyn.com/DataBaseTestPHP.php',
+              'https://peopleflux.gauthierbohyn.com/app/dbReturnNbrPers.php',
             {
                 method: 'POST',
                 headers:
@@ -18,7 +18,7 @@ class Test extends React.Component
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                  id_event:1
+                  id:1 //Correspond à id_event ou id_stage suivant la page qu'on appelle
                 })
 
             }).then((response) => response.text()).then((responseJsonFromServer) =>
