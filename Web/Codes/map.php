@@ -16,7 +16,6 @@ $data = new data();
 
 <div class="container">
 
-    <link rel="stylesheet" href="css/add.css">
     <ul>
 <!-- ################################    Boutton Event  ####################################-->
         <?php
@@ -46,19 +45,25 @@ $data = new data();
     <div data-aos="fade-up" id="mapid" style=" height: 480px "></div>
     <div><img src="images/Ephec2.png" alt="" id="ephec" , style="display: none", width="1110px" /></div>
 
+
+    <!--  ####################################  Météo   ################################################-->
     <div class="mt-3">
-        <div id="openweathermap-widget-14"></div>
+        <div id="openweathermap-widget" class="bg-dark" style="width: 20rem; border-radius: 1rem"></div>
         <script>
-            window.myWidgetParam ? window.myWidgetParam : window.myWidgetParam = [];
-            window.myWidgetParam.push({id: 14,cityid: '2792073',appid: '7c1c7cea880e80eec79983b920138a3f',units: 'metric',containerid: 'openweathermap-widget-14',  });
-            (function() {
-                var script = document.createElement('script');
-                script.async = true;
-                script.charset = "utf-8";
-                script.src = "//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/weather-widget-generator.js";
-                var s = document.getElementsByTagName('script')[0];
-                s.parentNode.insertBefore(script, s);
-            })();
+            var openweathermapapi = 'https://api.openweathermap.org/data/2.5/weather';
+            $.getJSON( openweathermapapi, {
+                    q: "Louvain-la-Neuve",
+                    units: "metric",
+                    lang: 'fr',
+                    appid: "7c1c7cea880e80eec79983b920138a3f"
+                },
+                function (data) {
+                    var widget = $('#openweathermap-widget');
+                    widget.append('<div id="weather-city" class="d-inline-block px-3 py-1">' + data.name + '</div>');
+                    widget.append('<div class="d-inline-block" style="background-color: #B2B1B1"><img src="http://openweathermap.org/img/wn/' + data.weather[0].icon + '.png"></div>');
+                    widget.append('<div class="d-inline-block px-3 py-1">' + Math.round(data.main.temp) + '°C</div>');
+                    widget.append('<div class="text-center" style="background-color: #e74c3c">' + data.weather[0].description + '</div>');
+                });
         </script>
     </div>
 
