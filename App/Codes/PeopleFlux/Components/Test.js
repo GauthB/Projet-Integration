@@ -9,33 +9,25 @@ class Test extends React.Component
   constructor(props) {
     super(props)
     this.state = {
-      events:[]
+      events: []
     }
 
   }
+  componentDidMount(){
 
-    show_Events = () =>{
-      Events().then(response => {this.setState({events:response})})
+     Events(0,'id_event').then(response => this.setState({
+       events : response
+     }));
+  }
 
-      console.log(this.state.events)
 
-
-    }
 
     render()
     {
         return(
 
             <View style = { styles.MainContainer }>
-
-                <TouchableOpacity
-                  activeOpacity = { 0.5 }
-                  style = { styles.TouchableOpacityStyle }
-                  onPress = {this.show_Events}>
-
-                    <Text style = { styles.TextStyle }>Show Events in console</Text>
-
-                </TouchableOpacity>
+              <Text></Text>
 
             </View>
         );
