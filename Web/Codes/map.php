@@ -16,8 +16,6 @@ $data = new data();
 
 <div class="container">
 
-   <!-- http://api.openweathermap.org/data/2.5/forecast/daily?lat=50.6702&lon=4.61523&cnt=14&mode=json&units=metric&lang=fr -->
-
     <link rel="stylesheet" href="css/add.css">
     <ul>
 <!-- ################################    Boutton Event  ####################################-->
@@ -47,6 +45,22 @@ $data = new data();
 
     <div data-aos="fade-up" id="mapid" style=" height: 480px "></div>
     <div><img src="images/Ephec2.png" alt="" id="ephec" , style="display: none", width="1110px" /></div>
+
+    <div class="mt-3">
+        <div id="openweathermap-widget-14"></div>
+        <script>
+            window.myWidgetParam ? window.myWidgetParam : window.myWidgetParam = [];
+            window.myWidgetParam.push({id: 14,cityid: '2792073',appid: '7c1c7cea880e80eec79983b920138a3f',units: 'metric',containerid: 'openweathermap-widget-14',  });
+            (function() {
+                var script = document.createElement('script');
+                script.async = true;
+                script.charset = "utf-8";
+                script.src = "//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/weather-widget-generator.js";
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(script, s);
+            })();
+        </script>
+    </div>
 
     <!--  ####################################  Info sur les évènements   ################################################-->
     <h2 data-aos="fade-up">Info</h2>
