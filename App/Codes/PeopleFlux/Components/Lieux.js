@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { StyleSheet, View, Text, Picker, Image, TouchableOpacity } from 'react-native'
+import { StyleSheet, View, Text, Picker, Image, TouchableOpacity, ActivityIndicator } from 'react-native'
 import RNPickerSelect from 'react-native-picker-select';
 import { connect } from 'react-redux'
 import MapboxGL from "@mapbox/react-native-mapbox-gl";
@@ -19,10 +19,20 @@ class Lieux extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      coordonnes:coordonnes
+      coordonnes:coordonnes,
+      isLoading: true
     }
 
   }
+  _displayLoading() {
+if (this.state.isLoading) {
+  return (
+    <View style={styles.loading_container}>
+      <ActivityIndicator size='large' color='#c70039' />
+    </View>
+  )
+}
+}
 
   _setLieu(value) {
    const action = { type: "SET_LIEU", value: value }
@@ -43,6 +53,11 @@ class Lieux extends React.Component {
      }).catch(err => {
          console.warn(err);
      });
+     this.setState({
+       isLoading: false
+     })
+
+
  }
 
  renderAnnotation (counter) {
@@ -109,6 +124,7 @@ class Lieux extends React.Component {
             <Text style={styles.lieu_selectionne}>{this.props.selectedLieu}</Text>
 
             <View style={styles.container_map}>
+            {this._displayLoading()}
               <MapboxGL.MapView
                 ref={(c) => this._map = c}
                 styleURL={MapboxGL.StyleURL.Street}
@@ -232,6 +248,15 @@ const styles = StyleSheet.create({
  },
  map: {
    flex: 1
+ },
+ loading_container:{
+   position: 'absolute',
+ left: 0,
+ right: 0,
+ top: 0,
+ bottom: 0,
+ alignItems: 'center',
+ justifyContent: 'center'
  }
 })
 
