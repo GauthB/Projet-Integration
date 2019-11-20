@@ -1,33 +1,37 @@
 import React, { Component } from 'react';
 
-import { StyleSheet, View, TextInput, Text, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, TextInput, Text, ActivityIndicator, TouchableOpacity, FlatList } from 'react-native';
 import {Events} from '../Helpers/Utils'
+
+
 
 class Test extends React.Component
 {
 
   constructor(props) {
-    super(props)
-    this.state = {
-      events: []
+     super(props)
+     this.state = {
+      data:[]
     }
-
-  }
-  componentDidMount(){
-
-     Events(0,'id_event').then(response => this.setState({
-       events : response
-     }));
-  }
+   }
 
 
+componentDidMount(){
+  Events().then((data) => {this.setState({data})})
+
+}
 
     render()
     {
         return(
-
             <View style = { styles.MainContainer }>
-              <Text></Text>
+
+
+              <FlatList
+                 data={this.state.data}
+                 renderItem={({ item }) => <Text> {item.event_address} </Text>}
+                 keyExtractor={item => item.event_id}
+               />
 
             </View>
         );

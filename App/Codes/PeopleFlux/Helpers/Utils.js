@@ -1,4 +1,4 @@
-export function Events(indice, attribut){
+export function Events(){
    return fetch('https://peopleflux.gauthierbohyn.com/app/dbReturnEvent.php',
    {
      method: "GET",
@@ -9,7 +9,7 @@ export function Events(indice, attribut){
    })
    .then((response) => response.json())
    .then((responseData) => {
-     return responseData[indice][attribut];
+     return responseData;
    })
    .catch(error => console.warn(error));
  }
