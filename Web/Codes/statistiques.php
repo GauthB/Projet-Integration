@@ -29,7 +29,16 @@ require_once "esp-data.php";
     <link rel="icon" type="image/x-icon" href="LogoSmall.ico"/>
     <script src="js/Chart.js"></script>
     <script src="js/jquery-3.4.1.min.js"></script>
+
+    <style type="text/css">
+        @media print {
+            .boutonstats, .boutonstats, #yo, .boutonstats, .d-block mb-3 caption,.site-footer{
+                display: none;
+            }
+        }
+    </style>
 </head>
+
 <body>
 <div class="site-wrap">
     <div class="site-mobile-menu">
@@ -101,6 +110,9 @@ require_once "esp-data.php";
             <br><br><input type="submit" class="boutonstats">
             <br>
             <hr>
+
+            <!--<br><select id="eventt" onchange="stage();"></select></br>
+            <br><select id="stagee" ></select></br>-->
             <!-- affiche les statistiques liés à un evennement -->
             <div class="d-block mb-3 caption" data-aos="fade-up"></br>
                 <h2>Statistiques public</h2>
@@ -126,18 +138,18 @@ require_once "esp-data.php";
             <hr>
             <button name="button" id="boutongraphe" class="boutonstats"> Observer son graphique</button>
             <button name="button" id="grapheannule" class="boutonstats"> Annuler </button>
+            <button name="button" id="boutonimprimer" class="boutonstats" onClick="window.print();"> Imprimer la page</button>
 
 
             <canvas id="myChart" width="20%" height="5%" style="display: none"></canvas>
         </div>
     </div>
 
+
+
+
+
     <script>
-
-
-
-
-
 
         <?php
         $grapheQuery = $dbh->query(
@@ -145,9 +157,45 @@ require_once "esp-data.php";
 " );
         $grapheInfo = $grapheQuery->fetchAll(PDO::FETCH_ASSOC);
 
+        $clientQuery = $dbh->query(
+            " SELECT * FROM `Clients` as c join Events as e where c.id_client=e.id_client
+" );
+        $clientInfo = $clientQuery->fetchAll(PDO::FETCH_ASSOC);
 
+        $stageQuery = $dbh->query(
+            " SELECT * FROM `Events` as e join Stages as s where e.id_event = s.id_event
+" );
+        $stageInfo = $stageQuery->fetchAll(PDO::FETCH_ASSOC);
 
         ?>
+
+       /* var variableClient = <?php echo json_encode($clientInfo); ?>;
+
+
+
+            for (a = 0; a < variableClient.length; a++) {
+                document.getElementById("eventt").innerHTML += "<option " + variableClient[a]['id_event'] + ">" + variableClient[a]['event_name']+"</option>"
+            }
+
+        var variableStage = <?php echo json_encode($stageInfo); ?>;
+
+        function stage() {
+            document.getElementById("stagee").innerHTML = "";
+                if ( document.getElementById("eventt").value == "Welcome Spring Festival") {
+                    for (p = 0; p < variableStage.length; p++) {
+                        if ( variableStage[p]['id_event'] == 2 ) {
+                            document.getElementById("stagee").innerHTML += "<option>" + variableStage[p]['stage_name'] + "</option>"
+                        }
+                        }
+                    }
+
+            for (p = 0; p < variableStage.length; p++) {
+                if (document.getElementById("eventt").value == variableStage[p]['event_name']) {
+                    document.getElementById("stagee").innerHTML += "<option>" + variableStage[p]['stage_name'] + "</option>"
+                }
+            }
+        }
+        */
         function graphe() {
             var i = 0;
             var heures = [];

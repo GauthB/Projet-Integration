@@ -8,25 +8,25 @@ class EventItem extends React.Component {
 
 
   render() {
-    const evenement=this.props.event
     const displayDetail = this.props.displayDetail
+    const event = this.props.event
 
     return (
           <View style={styles.main_container}>
             <TouchableOpacity
-              onPress={() => displayDetail(evenement.name, evenement.date, evenement.lieu, evenement.description)}
+              onPress={() => displayDetail(event.event_name, event.date_from, event.event_city, event.event_description)}
             >
               <View style={styles.bordure}>
                 <View style={styles.event_date}>
                   <View style={styles.name_lieu}>
                     <View style={styles.name_container}>
-                      <Text style={styles.text_event}>{evenement.name}</Text>
+                      <Text style={styles.text_event}>{event.event_name}</Text>
                     </View>
                     <View style={styles.lieu_container}>
-                      <Text style={styles.text_lieu}>{evenement.lieu}</Text>
+                      <Text style={styles.text_lieu}>{event.event_city}</Text>
                     </View>
                   </View>
-                  <Text style={styles.text_date}>{evenement.date}</Text>
+                  <Text style={styles.text_date}>{event.date_from}</Text>
                 </View>
 
               </View>
