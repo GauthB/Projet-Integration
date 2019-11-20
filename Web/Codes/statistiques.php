@@ -29,7 +29,16 @@ require_once "esp-data.php";
     <link rel="icon" type="image/x-icon" href="LogoSmall.ico"/>
     <script src="js/Chart.js"></script>
     <script src="js/jquery-3.4.1.min.js"></script>
+
+    <style type="text/css">
+        @media print {
+            .mb-0, .boutonstats, .boutonstats, #yo, .boutonstats, .d-block mb-3 caption,.site-footer{
+                display: none;
+            }
+        }
+    </style>
 </head>
+
 <body>
 <div class="site-wrap">
     <div class="site-mobile-menu">
@@ -126,6 +135,7 @@ require_once "esp-data.php";
             <hr>
             <button name="button" id="boutongraphe" class="boutonstats"> Observer son graphique</button>
             <button name="button" id="grapheannule" class="boutonstats"> Annuler </button>
+            <button name="button" id="boutonimprimer" class="boutonstats" onClick="window.print(); return false;"> Imprimer la page</button>
 
 
             <canvas id="myChart" width="20%" height="5%" style="display: none"></canvas>
