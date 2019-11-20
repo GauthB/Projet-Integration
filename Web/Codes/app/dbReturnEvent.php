@@ -4,7 +4,7 @@ require_once('../db_connect.php');
 
 
 $sql = <<< EOT
-        SELECT * FROM Events WHERE id_event = ? ;
+        SELECT * FROM Events;
 EOT;
 
 try {
@@ -15,10 +15,10 @@ try {
 
 
     $sth = $dbh -> prepare($sql);
-    $sth -> execute(array($event));
+    $sth -> execute();
     $infos = $sth -> fetchAll(PDO::FETCH_ASSOC);
 
-    print_r($infos);
+    echo json_encode($infos);
 
     $dbh=null;
 

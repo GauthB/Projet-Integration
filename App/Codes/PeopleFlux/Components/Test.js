@@ -1,35 +1,24 @@
 import React, { Component } from 'react';
 
 import { StyleSheet, View, TextInput, Text, ActivityIndicator, TouchableOpacity } from 'react-native';
+import {Events} from '../Helpers/Utils'
 
 class Test extends React.Component
 {
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      events:[]
+    }
+
+  }
 
     show_Events = () =>{
+      Events().then(response => {this.setState({events:response})})
 
-            fetch(
-              'https://peopleflux.gauthierbohyn.com/app/dbReturnNbrPers.php',
-            {
-                method: 'POST',
-                headers:
-                {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                  id:1 //Correspond à id_event ou id_stage suivant la page qu'on appelle
-                })
+      console.log(this.state.events)
 
-            }).then((response) => response.text()).then((responseJsonFromServer) =>
-            {
-                console.log(responseJsonFromServer);
-
-            }).catch((error) =>
-            {
-                console.error(error);
-
-            });
 
     }
 
@@ -42,7 +31,7 @@ class Test extends React.Component
                 <TouchableOpacity
                   activeOpacity = { 0.5 }
                   style = { styles.TouchableOpacityStyle }
-                  onPress = { this.show_Events }>
+                  onPress = {this.show_Events}>
 
                     <Text style = { styles.TextStyle }>Show Events in console</Text>
 
