@@ -18,7 +18,6 @@ class Test extends React.Component
 
 componentDidMount(){
   Events().then((data) => {this.setState({data})})
-
 }
 
     render()

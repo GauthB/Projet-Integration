@@ -1,8 +1,25 @@
 import React from 'react'
-import { StyleSheet, View, Text, Image } from 'react-native'
+import { StyleSheet, View, Text, Image, ActivityIndicator } from 'react-native'
 
 
 class EquipeItem extends React.Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      isLoading: true
+    }
+
+  }
+  _displayLoading() {
+if (this.state.isLoading) {
+  return (
+    <View style={styles.loading_container}>
+      <ActivityIndicator size='large' color='#c70039' />
+    </View>
+  )
+}
+}
 
 
   render() {
@@ -12,6 +29,7 @@ class EquipeItem extends React.Component {
     return (
       <View style={styles.main_container}>
         <View style={styles.image_container}>
+        {this._displayLoading()}
           <Image
           style ={styles.image}
           source={{uri: 'https://peopleflux.gauthierbohyn.com/images/'+ equipe.picture}} />
@@ -37,7 +55,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   image_container:{
-
+    marginLeft: 15
   },
   image: {
     width: 50,
@@ -76,6 +94,15 @@ const styles = StyleSheet.create({
     fontStyle: 'italic',
     color: '#ff5733',
     marginTop:5
+  },
+  loading_container:{
+    position: 'absolute',
+  left: 0,
+  right: 0,
+  top: 0,
+  bottom: 0,
+  alignItems: 'center',
+  justifyContent: 'center'
   }
 })
 
