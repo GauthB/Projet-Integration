@@ -73,39 +73,51 @@ require_once "esp-data.php";
             </style><br>
             <?php
 
-            $sth = $dbh -> prepare('SELECT * FROM Events WHERE id_client=:client_id');
+            $sth = $dbh -> prepare('SELECT *
+                                            FROM Events 
+                                            join Clients ON Events.id_client = Clients.id_client 
+                                            WHERE Clients.id_client =:client_id');
             $sth->execute(array(':client_id' => $_SESSION['id']));
             $eventsInfo = $sth -> fetchAll(PDO::FETCH_ASSOC);
             $sth->closeCursor();
 
             //$sth2->execute(array(':event_id' => $_EVENT['id_event']));
-            $sth2 = $dbh -> prepare('SELECT stage_name FROM Stages WHERE id_event');
+            $sth2 = $dbh -> prepare('SELECT * 
+                                              FROM Stages 
+                                              join Events on Stages.id_event = Events.id_event
+                                              join Clients on Events.id_client = Clients.id_client
+                                              where Clients.id_client =:client_id');
             $sth2->execute(array(':client_id' => $_SESSION['id']));
-            $difEvent = $sth2 -> fetchAll(PDO::FETCH_ASSOC);
+            $difStage = $sth2 -> fetchAll(PDO::FETCH_ASSOC);
             $sth2->closeCursor();
 
-            echo  ' <form method="get">';
+            echo  ' <br><br><form method="get">';
 
             if(empty($eventsInfo)) {
                 echo '<p data-aos="fade-up">Vous n\'avez aucun évènements</p>';
             }
             else {
+                echo '<select>';
                 foreach ($eventsInfo as $event) {
-                    echo '<br><br><span class="boutonstats" style="margin-bottom: 10px">' .$event["event_name"] .  $eventName['id_event'] . '</span>
-                          <br><SELECT name="nom" size="1"  id="yo" onchange="graphe();" value="' . $_GET["nom"].'">';
-                    if(empty($difEvent)) {
-                        echo '<option>Vous n\'avez aucune stage</option>';
-                    }
-                    else {
-                        foreach ($difEvent as $event) {
-                            $res = ($_GET['nom']==$event["stage_name"]?"selected":"");
-                            echo '<option id="' . $event["id_stage"] . '" '. $res .'>' .
-                                $event["stage_name"] . '</option>' ;
-                        }
-                    }
-                    echo '</SELECT>';
+                    //$res = ($_GET['nom']==$event["event_name"]?"selected":"");
+                    echo '<option id="event_'.$event["id_event"].'">' .
+                          $event["event_name"] . '</option></span>';
+                }
+                echo '</SELECT><br>';
+            }
+
+            if(empty($difStage)) {
+                echo '<option>Vous n\'avez aucune stage</option>';
+            }
+            else {
+                echo '<br><SELECT name="nom" size="1"  id="yo" onchange="graphe();">';
+                foreach ($difStage as $stage) {
+                    $res = ($_GET['nom']==$stage["stage_name"]?"selected":"");
+                    echo '<option id="stage_' . $stage["id_stage"] . '" '. $res .'>' .
+                        $stage["stage_name"] . '</option>' ;
                 }
             }
+            echo '</select>';
             ?>
             <br><br><input type="submit" class="boutonstats">
             <br>
@@ -129,7 +141,6 @@ require_once "esp-data.php";
                 <input name="cpt" type="number" step="10" value="10" min="10" style="width: 3rem">
                 <input type="submit" class="boutonstats" id="boutonstats">
             </form>
-
             <table class="tftable" border="1" data-aos="fade-up">
                 <tr><th>Nom Scene</th> <th>ID</th> <th>Entrées</th> <th>Sorties</th> <th>Actuel</th> <th>Heure</th> </tr>
                 <?php echo '<br>' . $data->afficheStat("prive",$_SESSION['id'],$_GET['nom'],$_GET['cpt']); ?>
@@ -169,7 +180,7 @@ require_once "esp-data.php";
 
         ?>
 
-       /* var variableClient = <?php echo json_encode($clientInfo); ?>;
+       /* var variableClient = <?php //echo json_encode($clientInfo); //?>;
 
 
 
@@ -177,7 +188,7 @@ require_once "esp-data.php";
                 document.getElementById("eventt").innerHTML += "<option " + variableClient[a]['id_event'] + ">" + variableClient[a]['event_name']+"</option>"
             }
 
-        var variableStage = <?php echo json_encode($stageInfo); ?>;
+        var variableStage = <?php //echo json_encode($stageInfo); //?>;
 
         function stage() {
             document.getElementById("stagee").innerHTML = "";
@@ -185,7 +196,6 @@ require_once "esp-data.php";
                     for (p = 0; p < variableStage.length; p++) {
                         if ( variableStage[p]['id_event'] == 2 ) {
                             document.getElementById("stagee").innerHTML += "<option>" + variableStage[p]['stage_name'] + "</option>"
-                        }
                         }
                     }
 
