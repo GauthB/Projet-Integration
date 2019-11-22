@@ -37,7 +37,7 @@
 
     <?php include 'header.php'?>
 
-    <div class="site-section site-hero">
+    <div style="margin-bottom: 200px" class="site-section site-hero">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-10">

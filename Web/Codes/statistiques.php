@@ -92,7 +92,7 @@ require_once "esp-data.php";
             $difStage = $sth2 -> fetchAll(PDO::FETCH_ASSOC);
             $sth2->closeCursor();
 
-            echo  ' <br><br><form method="get">';
+            /* echo  ' <br><br><form method="get">';
 
             if(empty($eventsInfo)) {
                 echo '<p data-aos="fade-up">Vous n\'avez aucun évènements</p>';
@@ -123,10 +123,12 @@ require_once "esp-data.php";
             <br><br><input type="submit" class="boutonstats">
             <br>
             <hr>
+            */
 
             <br><select id="eventt" onchange="stage();"></select></br>
-            <br><select id="stagee" ></select></br>
-            <input id="cocopops" type="submit" class="boutonstats">
+            <br><select id="stagee" onchange="tableau();"></select></br>
+            <button name="button" type="button" id="tab" class="boutonstats" onclick="tableau()"> Afficher ses statistiques </button>
+            <button name="button" type="button" id="tab" class="boutonstats" onclick="tbleau()"> Ne plus afficher </button>
 
             <bouton
             <!-- affiche les statistiques liés à un evennement -->
@@ -142,12 +144,12 @@ require_once "esp-data.php";
                 <h2>Statistiques privées</h2>
 
                 Afficher derniers resultats :
-                <input name="cpt" id="cpt" type="number" step="10" value="" onsubmit="jaune();" min="10" style="width: 3rem">
-                <input type="submit" class="boutonstats" id="boutonstats">
+                <input name="cpt" id="cpt" type="number" step="10" value="10" min="10" style="width: 3rem">
+                <button name="button" type="button" id="tab" class="boutonstats" onclick="number()"> Actualiser </button>
             </form>
 
 
-            <table class="tftable" id="table" border="1" data-aos="fade-up">
+            <table class="tftable" id="tablee" border="1" data-aos="fade-up" >
                 <tr><th>Nom Scene</th> <th>ID</th> <th>Entrées</th> <th>Sorties</th> <th>Actuel</th> <th>Heure</th> </tr>
                  <?php // echo '<br>' . $data->afficheStat("prive",$_SESSION['id'],$_GET['nom'],$_GET['cpt']); ?>
             </table>
@@ -216,19 +218,37 @@ require_once "esp-data.php";
             }
         }
 
-          document.getElementById("cocopops").onsubmit = function() {
-
-
-                document.getElementById("table").innerHTML += "<tr>";
+            function number() {
+            indica = document.getElementById("cpt").value;
+            var indic = 0;
+                document.getElementById("tablee").innerHTML =  "<tr><th>Nom Scene</th> <th>ID</th> <th>Entrées</th> <th>Sorties</th> <th>Actuel</th> <th>Heure</th> </tr>";
+                document.getElementById("tablee").innerHTML += "<tr>";
                 for (c = 0; c < variableRecuperee.length; c++) {
                     if (document.getElementById("stagee").value == variableRecuperee[c]['stage_name']) {
-                        document.getElementById("table").innerHTML += "<th>" + variableRecuperee[c]['stage_name'] + "</th><th>" + variableRecuperee[c]['id_stage'] + "</th><th>" + variableRecuperee[c]['nbr_entree'] + "</th><th>" + variableRecuperee[c]['nbr_entree'] + "</th><th>" + variableRecuperee[c]['nbr_actuel'] + "</th><th>" + variableRecuperee[c]['heure'] + "</th>"
-
-                    }
+                        indic++
+                        if( indic <= indica) {
+                            document.getElementById("tablee").innerHTML += "<td>" + variableRecuperee[c]['stage_name'] + "</td><td>" + variableRecuperee[c]['id_stage'] + "</td><td>" + variableRecuperee[c]['nbr_entree'] + "</td><td>" + variableRecuperee[c]['nbr_entree'] + "</td><td>" + variableRecuperee[c]['nbr_actuel'] + "</td><td>" + variableRecuperee[c]['heure'] + "</td>"
+                        }
+                        }
                 }
-                document.getElementById("table").innerHTML += "</tr>";
+                document.getElementById("tablee").innerHTML += "</tr>";
             }
 
+            function tableau() {
+
+                document.getElementById("tablee").innerHTML =  "<tr><th>Nom Scene</th> <th>ID</th> <th>Entrées</th> <th>Sorties</th> <th>Actuel</th> <th>Heure</th> </tr>";
+                document.getElementById("tablee").innerHTML += "<tr>";
+                for (c = 0; c < variableRecuperee.length; c++) {
+                    if (document.getElementById("stagee").value == variableRecuperee[c]['stage_name']) {
+                        document.getElementById("tablee").innerHTML += "<td>" + variableRecuperee[c]['stage_name'] + "</td><td>" + variableRecuperee[c]['id_stage'] + "</td><td>" + variableRecuperee[c]['nbr_entree'] + "</td><td>" + variableRecuperee[c]['nbr_entree'] + "</td><td>" + variableRecuperee[c]['nbr_actuel'] + "</td><td>" + variableRecuperee[c]['heure'] + "</td>"
+                    }
+                }
+                document.getElementById("tablee").innerHTML += "</tr>";
+            }
+
+            function tbleau() {
+                document.getElementById("tablee").innerHTML =  "<tr><th>Nom Scene</th> <th>ID</th> <th>Entrées</th> <th>Sorties</th> <th>Actuel</th> <th>Heure</th> </tr>";
+            }
 
         function graphe() {
             var i = 0;

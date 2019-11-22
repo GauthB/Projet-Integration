@@ -57,7 +57,7 @@ $data = new data();
 
 
     <!--  ####################################  Météo   ################################################-->
-   
+
     <div  id="title<?=$eventInfos[$i]['id_event']?>" class="mt-3" data-aos="fade-up">
         <center><div id="openweathermap-widget" class="bg-dark" style="width: 20rem; border-radius: 1rem"></div></center>
         <script>
