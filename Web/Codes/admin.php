@@ -63,7 +63,7 @@ require_once "esp-data.php";
     <div style="margin-bottom: 200px;">
         <div class="container">
             <div>
-                <div id="dialogEvent"><p>Êtes-vous sûr de vouloir supprimer <span id="spnEventName"></span></p></div>
+                <div id="dialogEvent"><p>Êtes-vous sûr de vouloir supprimer l'évènement "<span id="spnEventName"></span>"?</p>Vous pourrez faire cette action si vous avez supprimé auparavant toutes les scènes liées à cette évènement!</div>
                 <h2 class="d-block mb-3 caption" data-aos="fade-up">Evènements</h2>
 <!--            Table des évènements-->
                 <?php
@@ -96,8 +96,8 @@ require_once "esp-data.php";
 
             <!-- affiche les scenes liés au client -->
             <div>
-                <div id="dialogStage"><p>Êtes-vous sûr de vouloir supprimer <span id="spnStageName"></span></p></div>
-                <h2 class="d-block mb-3 caption" data-aos="fade-up">Scènes</h2>
+                <div id="dialogStage"><p>Êtes-vous sûr de vouloir supprimer la scène "<span id="spnStageName"></span>"?</p></div>
+                <br><h2 class="d-block mb-3 caption" data-aos="fade-up">Scènes</h2>
                 <?php
                 $sth = $dbh -> prepare('SELECT * FROM Stages JOIN Events ON Stages.id_event = Events.id_event WHERE id_client=:client_id');
                 $sth->execute(array(':client_id' => $_SESSION['id']));
@@ -152,8 +152,8 @@ require_once "esp-data.php";
                         <div class="row form-group" data-aos="fade-up">
                             <div class="col-md-12">
                                 <label class="" for="dateFrom" >Dates*</label>
-                                <input type="text" id="dateFrom"  class="input form-control" name="dateFrom" placeholder="Date du début de l'évènement" required>
-                                <input type="text" id="dateTo"  class="input form-control" name="dateTo" placeholder="Date de la fin de l'évènement" required>
+                                <input type="text" id="dateFrom"  class="input form-control" name="dateFrom" placeholder="Début (0000-00-00 24:00:00)" required>
+                                <input type="text" id="dateTo"  class="input form-control" name="dateTo" placeholder="Fin (0000-00-00 24:00:00)" required>
 
                             </div>
                         </div>
