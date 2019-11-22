@@ -66,6 +66,7 @@ function validate_phone_number($phone)
     <script type="text/javascript" src="js/contact.js"></script>
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/x-icon" href="LogoSmall.ico"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
     <script src="js/jquery-3.4.1.min.js"></script>
 </head>

@@ -31,6 +31,7 @@ require_once "esp-data.php";
 
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
 </head>
 <body>
@@ -65,7 +66,7 @@ require_once "esp-data.php";
             <div>
                 <div id="dialogEvent"><p>Êtes-vous sûr de vouloir supprimer l'évènement "<span id="spnEventName"></span>"?</p>Vous pourrez faire cette action si vous avez supprimé auparavant toutes les scènes liées à cette évènement!</div>
                 <h2 class="d-block mb-3 caption" data-aos="fade-up">Evènements</h2>
-<!--            Table des évènements-->
+                <!-- Table des évènements-->
                 <?php
 
                 $sth = $dbh -> prepare('SELECT * FROM Events WHERE id_client=:client_id');

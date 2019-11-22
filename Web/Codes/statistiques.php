@@ -29,6 +29,7 @@ require_once "esp-data.php";
     <link rel="icon" type="image/x-icon" href="LogoSmall.ico"/>
     <script src="js/Chart.js"></script>
     <script src="js/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
     <style type="text/css">
         @media print {

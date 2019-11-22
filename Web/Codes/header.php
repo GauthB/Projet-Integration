@@ -19,6 +19,7 @@ session_start();
                         <!-- Déc-id en fonction de si le client est connecté ou pas -->
                         <?php if(isset($_SESSION['id'])):?>
                             <li><a href="admin.php">Evènements</a></li>
+                            <a href="statistiques.php"> <i class="fas fa-chart-bar"></i></a>
                             <li class="cta"><a href="logout.php">Déconnexion</a></li>
                         <?php else:?>
                             <li class="cta"><a href="user.php">S'identifier</a></li>
@@ -41,3 +42,4 @@ session_start();
         }
     }
 </script>
+
