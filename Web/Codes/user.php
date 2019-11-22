@@ -18,11 +18,23 @@ if(isset($_POST['envoi'])) {
         echo "connection refusé";
     } else {
         if($isPasswordCorrect) {
+
+
+            if($user['client_mail']=='peopleflux@gmail.com'){
+                session_start();
+                $_SESSION['id'] = $user['id_client'];
+                $_SESSION['name'] = $user['client_name'];
+
+                echo 'Vous êtes connecté !';
+                header('Location: addclient.php');
+            }
+            else{
             session_start();
             $_SESSION['id'] = $user['id_client'];
             $_SESSION['name'] = $user['client_name'];
             echo 'Vous êtes connecté !';
             header('Location: admin.php');
+            }
         }
         else {
             echo 'Mauvais identifiant ou mot de passe !';
