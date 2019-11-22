@@ -107,7 +107,6 @@ if(!isset($_SESSION['id'])) {
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-10">
-                    <span class="d-block mb-3 caption" data-aos="fade-up">Vous êtes connecté en tant que: <?=$_SESSION['name']?> </span>
                     <h1 class="d-block mb-4" data-aos="fade-up" data-aos-delay="100">Ajout d'un client</h1>
                 </div>
             </div>

@@ -64,7 +64,6 @@ if(!isset($_SESSION['id'])) {
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-10">
-                    <span class="d-block mb-3 caption" data-aos="fade-up">Vous êtes connecté en tant que: <?=$_SESSION['name']?> </span>
                     <h1 class="d-block mb-4" data-aos="fade-up" data-aos-delay="100">Suppression d'un client</h1>
                 </div>
             </div>
@@ -89,13 +88,15 @@ if(!isset($_SESSION['id'])) {
 
 
 
+
                 echo '<table class="tftable" border="1" data-aos="fade-up">';
-                echo '<tr><th>Nom</th><th>Mail</th><th></th></tr>';
+                echo '<tr><th>Nom</th><th>Mail</th><th>Tél.</th><th>Suppression</th></tr>';
 
         foreach ($eventInfos as $client) {
             echo '<tr><td>' .
                 $client["client_name"] . '</td><td>' .
-                $client["client_mail"] . '</td><td style="text-align: right;">'
+                $client["client_mail"] . '</td><td>' .
+                $client["client_phone"] . '</td><td style="text-align: right;">'
                 ?>
 
             <?php

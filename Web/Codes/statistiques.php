@@ -38,6 +38,7 @@ require_once "esp-data.php";
             }
         }
     </style>
+   
 </head>
 
 <body>
@@ -72,7 +73,7 @@ require_once "esp-data.php";
                     border-top: 1px solid red
                 }
             </style><br>
-            <?php
+             <?php /*
 
             $sth = $dbh -> prepare('SELECT *
                                             FROM Events 
@@ -92,7 +93,7 @@ require_once "esp-data.php";
             $difStage = $sth2 -> fetchAll(PDO::FETCH_ASSOC);
             $sth2->closeCursor();
 
-            /* echo  ' <br><br><form method="get">';
+             echo  ' <br><br><form method="get">';
 
             if(empty($eventsInfo)) {
                 echo '<p data-aos="fade-up">Vous n\'avez aucun évènements</p>';
@@ -124,10 +125,11 @@ require_once "esp-data.php";
             <br>
             <hr>
             */
-
-            <br><select id="eventt" onchange="stage();"></select></br>
-            <br><select id="stagee" onchange="tableau();"></select></br>
-            <button name="button" type="button" id="tab" class="boutonstats" onclick="tableau()"> Afficher ses statistiques </button>
+            ?>
+            <br><select id="eventt"  class="yop" onchange="stage();"></select></br>
+            <br><select id="stagee"  onchange="number();"></select></br>
+            <br style="margin-top=20px">
+            <button name="button" type="button" id="tab" class="boutonstats" onclick="number()"> Afficher ses statistiques </button>
             <button name="button" type="button" id="tab" class="boutonstats" onclick="tbleau()"> Ne plus afficher </button>
 
             <bouton
@@ -215,6 +217,20 @@ require_once "esp-data.php";
                 if (document.getElementById("eventt").value == variableStage[p]['event_name']) {
                     document.getElementById("stagee").innerHTML += "<option>" + variableStage[p]['stage_name'] + "</option>"
                 }
+            }
+        }
+
+        document.getElementById("stagee").innerHTML = "";
+        if (document.getElementById("eventt").value == "Welcome Spring Festival") {
+            for (p = 0; p < variableStage.length; p++) {
+                if (variableStage[p]['id_event'] == 2) {
+                    document.getElementById("stagee").innerHTML += "<option>" + variableStage[p]['stage_name'] + "</option>"
+                }
+            }
+        }
+        for (p = 0; p < variableStage.length; p++) {
+            if (document.getElementById("eventt").value == variableStage[p]['event_name']) {
+                document.getElementById("stagee").innerHTML += "<option>" + variableStage[p]['stage_name'] + "</option>"
             }
         }
 
