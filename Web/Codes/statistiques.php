@@ -148,7 +148,7 @@ require_once "esp-data.php";
 
             <table class="tftable" border="1" data-aos="fade-up">
                 <tr><th>Nom Scene</th> <th>ID</th> <th>Entrées</th> <th>Sorties</th> <th>Actuel</th> <th>Heure</th> </tr>
-                <?php echo '<br>' . $data->afficheStat("prive",$_SESSION['id'],$_GET['nom'],$_GET['cpt']); ?>
+                 <?php // echo '<br>' . $data->afficheStat("prive",$_SESSION['id'],$_GET['nom'],$_GET['cpt']); ?>
             </table>
             <br>
             <hr>
@@ -188,16 +188,13 @@ require_once "esp-data.php";
             document.getElementById("cpt").value = "25";
         }
 
+
+        var idclient = <?php echo json_encode($_SESSION['id']); ?>;
         var variableClient = <?php echo json_encode($clientInfo); ?>;
-
-
-
             for (a = 0; a < variableClient.length; a++) {
                 document.getElementById("eventt").innerHTML += "<option " + variableClient[a]['id_event'] + ">" + variableClient[a]['event_name']+"</option>"
             }
-
         var variableStage = <?php echo json_encode($stageInfo); ?>;
-
         function stage() {
             document.getElementById("stagee").innerHTML = "";
             if (document.getElementById("eventt").value == "Welcome Spring Festival") {

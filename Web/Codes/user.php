@@ -25,7 +25,7 @@ if(isset($_POST['envoi'])) {
                 $_SESSION['id'] = $user['id_client'];
                 $_SESSION['name'] = $user['client_name'];
                 $_SESSION['mail']=$user['client_mail'];
-                $connect == true;
+                $ifAdmin=true;
 
                 echo 'Vous êtes connecté !';
                 header('Location: addclient.php');
@@ -34,6 +34,7 @@ if(isset($_POST['envoi'])) {
             session_start();
             $_SESSION['id'] = $user['id_client'];
             $_SESSION['name'] = $user['client_name'];
+                $ifAdmin="";
             echo 'Vous êtes connecté !';
             header('Location: admin.php');
             }

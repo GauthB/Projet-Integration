@@ -55,6 +55,8 @@ if(!isset($_SESSION['mail'])){
     exit;
 }
 
+
+
 if(!isset($_SESSION['id'])) {
     header('Location: index.php');
     exit;

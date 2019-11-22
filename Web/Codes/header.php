@@ -17,15 +17,29 @@ session_start();
                         <li><a href="equipe.php">Groupe</a></li>
                         <li><a href="pageContact.php">Contact</a></li>
                         <!-- Déc-id en fonction de si le client est connecté ou pas -->
-
-
                         <?php if(isset($_SESSION['id'])):?>
                             <li><a href="admin.php">Evènements</a></li>
                             <a href="statistiques.php"> <i class="fas fa-chart-bar"></i></a>
+                        <?php endif?>
+
+
+
+
+                        <?php if(isset($_SESSION['id'])):?>
+
+
                             <li class="cta"><a href="logout.php">Déconnexion</a></li>
+
+
                         <?php else:?>
+
                             <li class="cta"><a href="user.php">S'identifier</a></li>
                         <?php endif?>
+                        <?php if(isset($_SESSION['mail'])):?>
+                            <a href="addclient.php"> <i class="fas fa-user-plus"></i></a>
+                        <?php endif?>
+
+
                     </ul>
                 </nav>
             </div>
