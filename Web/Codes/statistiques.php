@@ -125,8 +125,9 @@ require_once "esp-data.php";
             <hr>
 
             <br><select id="eventt" onchange="stage();"></select></br>
-            <br><select id="stagee"></select></br>
-            <input type="submit" class="boutonstats">
+            <br><select id="stagee" ></select></br>
+            <input id="cocopops" type="submit" class="boutonstats">
+
             <bouton
             <!-- affiche les statistiques liés à un evennement -->
             <div class="d-block mb-3 caption" data-aos="fade-up"></br>
@@ -146,7 +147,7 @@ require_once "esp-data.php";
             </form>
 
 
-            <table class="tftable" border="1" data-aos="fade-up">
+            <table class="tftable" id="table" border="1" data-aos="fade-up">
                 <tr><th>Nom Scene</th> <th>ID</th> <th>Entrées</th> <th>Sorties</th> <th>Actuel</th> <th>Heure</th> </tr>
                  <?php // echo '<br>' . $data->afficheStat("prive",$_SESSION['id'],$_GET['nom'],$_GET['cpt']); ?>
             </table>
@@ -190,7 +191,7 @@ require_once "esp-data.php";
 
 
         var idclient = <?php echo json_encode($_SESSION['id']); ?>;
-
+        var variableRecuperee = <?php echo json_encode($grapheInfo); ?>;
         var variableClient = <?php echo json_encode($clientInfo); ?>;
 
             for (a = 0; a < variableClient.length; a++) {
@@ -214,6 +215,20 @@ require_once "esp-data.php";
                 }
             }
         }
+
+          document.getElementById("cocopops").onsubmit = function() {
+
+
+                document.getElementById("table").innerHTML += "<tr>";
+                for (c = 0; c < variableRecuperee.length; c++) {
+                    if (document.getElementById("stagee").value == variableRecuperee[c]['stage_name']) {
+                        document.getElementById("table").innerHTML += "<th>" + variableRecuperee[c]['stage_name'] + "</th><th>" + variableRecuperee[c]['id_stage'] + "</th><th>" + variableRecuperee[c]['nbr_entree'] + "</th><th>" + variableRecuperee[c]['nbr_entree'] + "</th><th>" + variableRecuperee[c]['nbr_actuel'] + "</th><th>" + variableRecuperee[c]['heure'] + "</th>"
+
+                    }
+                }
+                document.getElementById("table").innerHTML += "</tr>";
+            }
+
 
         function graphe() {
             var i = 0;
@@ -273,7 +288,7 @@ require_once "esp-data.php";
             }
         }
 
-        var variableRecuperee = <?php echo json_encode($grapheInfo); ?>;
+
 
             for (e = 0; e < variableRecuperee.length; e++) {
                 if (document.getElementById('yo').value == variableRecuperee[e]['stage_name']) {

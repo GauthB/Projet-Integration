@@ -47,19 +47,23 @@ $data = new data();
         </div>
     <?php endfor;?>
 
+
     <!--  ####################################  Carte   ################################################-->
 
     <div data-aos="fade-up" id="mapid" style=" height: 480px "></div>
     <div><img src="images/Ephec2.png" alt="" id="ephec" , style="display: none", width="1110px" /></div>
 
 
+
+
     <!--  ####################################  Météo   ################################################-->
-    <div class="mt-3" data-aos="fade-up">
+   
+    <div  id="title<?=$eventInfos[$i]['id_event']?>" class="mt-3" data-aos="fade-up">
         <center><div id="openweathermap-widget" class="bg-dark" style="width: 20rem; border-radius: 1rem"></div></center>
         <script>
             var openweathermapapi = 'https://api.openweathermap.org/data/2.5/weather';
             $.getJSON( openweathermapapi, {
-                    q: "Louvain-la-Neuve",
+                    q: " Louvain-La-Neuve",
                     units: "metric",
                     lang: 'fr',
                     appid: "7c1c7cea880e80eec79983b920138a3f"
@@ -73,6 +77,7 @@ $data = new data();
                 });
         </script>
     </div>
+
 
     <!--  ####################################  Info sur les évènements   ################################################-->
     <h2 data-aos="fade-up">Info</h2>

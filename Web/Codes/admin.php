@@ -9,7 +9,8 @@ if(!isset($_SESSION['id'])) {
 require_once "db_connect.php";
 require_once "esp-data.php";
 
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <title>PeopleFlux - Interface</title>
@@ -78,15 +79,16 @@ require_once "esp-data.php";
                     echo '<p data-aos="fade-up">Vous n\'avez aucun évènements</p>';
                 } else {
                     echo '<table class="tftable" border="1" data-aos="fade-up">';
-                    echo '<tr><th>Nom</th><th>Date du début</th><th>Date de fin</th><th>Adresse</th><th></th></tr>';
+                    echo '<tr><th>Nom</th><th>Date du début</th><th>Date de fin</th><th>Ville</th><th>Adresse</th><th></th></tr>';
 
                     foreach ($eventsInfo as $event) {
                         echo '<tr><td>' .
                             $event["event_name"] . '</td><td>' .
                             $event["date_from"] . '</td><td>' .
                             $event["date_to"] . '</td><td>' .
+                            $event["event_city"] . '</td><td>' .
                             $event["event_address"] . '</td><td>' .
-                            '<span class="close btnDelEvent" data-idEvent="' . $event["id_event"] . '">&times;</span></td></tr>';
+                            '<span class="close btnDelEvent" data-idEvent="' . $event["id_event"] . '"><i class="fas fa-backspace"></i></span></td></tr>';
                     }
 
                     echo '</table>';
@@ -120,7 +122,7 @@ require_once "esp-data.php";
                             $stage["max_people"] . '</td><td>' .
                             $stage["hour_from"] . '</td><td>' .
                             $stage["hour_to"] . '</td><td>' .
-                            '<span class="close btnDelStage" data-idStage="' . $stage["id_stage"] . '">&times;</span></td></tr>';
+                            '<span class="close btnDelStage" data-idStage="' . $stage["id_stage"] . '"><i class="fas fa-backspace"></i></span></td></tr>';
                     }
 
                     echo '</table>';
@@ -135,6 +137,13 @@ require_once "esp-data.php";
                     border-top: 1px solid red
                 }
             </style>
+
+
+
+
+
+
+
 
             <!-- forumlaire pour que le client rajoute un evenement lui même -->
             <div class="row">
@@ -155,12 +164,33 @@ require_once "esp-data.php";
                                 <input type="text" id="dateFrom"  class="input form-control" name="dateFrom" placeholder="Début (0000-00-00 24:00:00)" required>
                                 <input type="text" id="dateTo"  class="input form-control" name="dateTo" placeholder="Fin (0000-00-00 24:00:00)" required>
 
+
+
+
+
+
+
+   <!--                             <iframe name="InlineFrame1" id="InlineFrame1" style="width:180px;height:220px;" src="https://www.mathieuweb.fr/calendrier/calendrier-des-semaines.php?nb_mois=1&nb_mois_ligne=4&mois=&an=&langue=fr&texte_color=B9CBDD&week_color=DAE9F8&week_end_color=C7DAED&police_color=453413&sel=true" scrolling="no" frameborder="0" allowtransparency="true"></iframe>
+-->
+
+
+
+
+
+
+
+                            </div>
+                        </div>
+                        <div class="row form-group" data-aos="fade-up">
+                            <div class="col-md-12">
+                                <label class="" for="villeEvent">Ville*</label>
+                                <input type="text" id="villeEvent"  class="input form-control" name="villeEvent" placeholder="La ville de l'évènements" required>
                             </div>
                         </div>
                         <div class="row form-group" data-aos="fade-up">
                             <div class="col-md-12">
                                 <label class="" for="adresseEvent">Adresse*</label>
-                                <input type="text" id="adresseEvent"  class="input form-control" name="adresseEvent" placeholder="L'adresse de l'évènements (Village - Ville)" required>
+                                <input type="text" id="adresseEvent"  class="input form-control" name="adresseEvent" placeholder="La rue et numéro de l'évènement" required>
                             </div>
                         </div>
                         <div class="row form-group" data-aos="fade-up">
