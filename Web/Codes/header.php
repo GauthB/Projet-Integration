@@ -35,7 +35,7 @@ session_start();
 
                             <li class="cta"><a href="user.php">S'identifier</a></li>
                         <?php endif?>
-                        <?php if(isset($_SESSION['mail'])):?>
+                        <?php if($_SESSION['ifAdmin']==true):?>
                             <a href="addclient.php"> <i class="fas fa-user-plus"></i></a>
                         <?php endif?>
 

@@ -50,7 +50,7 @@ function validate_phone_number($phone)
 <?php
 session_start();
 
-if(!isset($_SESSION['mail'])){
+if($_SESSION['ifAdmin']!=true){
     header('Location: index.php');
     exit;
 }

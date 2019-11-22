@@ -190,10 +190,14 @@ require_once "esp-data.php";
 
 
         var idclient = <?php echo json_encode($_SESSION['id']); ?>;
+
         var variableClient = <?php echo json_encode($clientInfo); ?>;
+
             for (a = 0; a < variableClient.length; a++) {
-                document.getElementById("eventt").innerHTML += "<option " + variableClient[a]['id_event'] + ">" + variableClient[a]['event_name']+"</option>"
-            }
+                if ( idclient == variableClient[a]['id_client']) {
+                    document.getElementById("eventt").innerHTML += "<option " + variableClient[a]['id_event'] + ">" + variableClient[a]['event_name'] + "</option>"
+                }
+                }
         var variableStage = <?php echo json_encode($stageInfo); ?>;
         function stage() {
             document.getElementById("stagee").innerHTML = "";
