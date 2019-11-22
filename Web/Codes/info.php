@@ -45,7 +45,7 @@
         </div>
     </div>
 
-    <div class="site-section">
+    <div>
         <div class="container">
             <div class="row mb-5">
                 <div class="col-lg-4 ">

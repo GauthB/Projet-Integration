@@ -49,7 +49,7 @@
         </div>
     </div>
 
-    <div class="site-section">
+    <div >
         <div class="container">
 
             <!-- ################## Gauthier Bohyn ################## -->

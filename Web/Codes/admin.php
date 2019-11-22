@@ -60,7 +60,7 @@ require_once "esp-data.php";
         </div>
     </div>
 
-    <div class="site-section">
+    <div style="margin-bottom: 200px;">
         <div class="container">
             <div>
                 <div id="dialogEvent"><p>Êtes-vous sûr de vouloir supprimer <span id="spnEventName"></span></p></div>
@@ -130,10 +130,17 @@ require_once "esp-data.php";
 
             </div>
 
+            <style type="text/css">
+                hr {
+                    border-top: 1px solid red
+                }
+            </style>
+
             <!-- forumlaire pour que le client rajoute un evenement lui même -->
             <div class="row">
                 <div class="col-md-6" data-aos="fade-up">
                     <form id= "formEvent" class="event-form" action="stageEvent/addEvent.php" method="post">
+                        <br><hr data-aos="fade-up">
                         <h2 class="d-block mb-3 caption" data-aos="fade-up">Ajouter un évènement</h2>
                         <div class="row form-group" data-aos="fade-up">
                             <div class="col-md-12">
@@ -171,6 +178,7 @@ require_once "esp-data.php";
 
                     <!-- forumlaire pour que le client rajoute une scene lui même -->
                     <form id= "formStage" class="stage-form" action="stageEvent/addStage.php" method="post">
+                        <br><hr data-aos="fade-up">
                         <h2 class="d-block mb-3 caption" data-aos="fade-up">Ajouter une scène</h2>
                         <div class="row form-group" data-aos="fade-up">
                             <div class="col-md-12">

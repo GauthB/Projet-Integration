@@ -69,7 +69,7 @@
 
 
 
-    <div class="site-section">
+    <div style="margin-bottom: 200px;">
         <!-- appel du fichier qui affichera les boutons, la maps avec ses boutons, informations sur l'evenement, etc ... -->
         <?php include("map.php"); ?>
 

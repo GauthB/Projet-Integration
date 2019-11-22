@@ -48,7 +48,7 @@
     </div>
 
     <!-- Le formulaire de la page-->
-    <div class="site-section">
+    <div style="margin-bottom: 200px;">
         <div class="container">
             <div class="row">
                 <div class="col-md-6" data-aos="fade-up">
