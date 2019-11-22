@@ -47,6 +47,21 @@ function validate_phone_number($phone)
 
 ?>
 
+<?php
+session_start();
+
+if(!isset($_SESSION['mail'])){
+    header('Location: index.php');
+    exit;
+}
+
+if(!isset($_SESSION['id'])) {
+    header('Location: index.php');
+    exit;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -91,6 +106,7 @@ function validate_phone_number($phone)
             <div class="row align-items-center">
                 <div class="col-md-10">
                     <h1 class="d-block mb-4" data-aos="fade-up" data-aos-delay="100">Ajout d'un client</h1>
+                    <span class="d-block mb-3 caption" data-aos="fade-up">Vous êtes connecté en tant que: <?=$_SESSION['name']?> </span>
                 </div>
             </div>
         </div>

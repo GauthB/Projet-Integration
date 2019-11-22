@@ -17,6 +17,8 @@ session_start();
                         <li><a href="equipe.php">Groupe</a></li>
                         <li><a href="pageContact.php">Contact</a></li>
                         <!-- Déc-id en fonction de si le client est connecté ou pas -->
+
+
                         <?php if(isset($_SESSION['id'])):?>
                             <li><a href="admin.php">Evènements</a></li>
                             <a href="statistiques.php"> <i class="fas fa-chart-bar"></i></a>
