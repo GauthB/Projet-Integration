@@ -123,8 +123,10 @@ require_once "esp-data.php";
             <br>
             <hr>
 
-            <!--<br><select id="eventt" onchange="stage();"></select></br>
-            <br><select id="stagee" ></select></br>-->
+            <br><select id="eventt" onchange="stage();"></select></br>
+            <br><select id="stagee"></select></br>
+            <input type="submit" class="boutonstats">
+            <bouton
             <!-- affiche les statistiques liés à un evennement -->
             <div class="d-block mb-3 caption" data-aos="fade-up"></br>
                 <h2>Statistiques public</h2>
@@ -138,9 +140,11 @@ require_once "esp-data.php";
                 <h2>Statistiques privées</h2>
 
                 Afficher derniers resultats :
-                <input name="cpt" type="number" step="10" value="10" min="10" style="width: 3rem">
+                <input name="cpt" id="cpt" type="number" step="10" value="" onsubmit="jaune();" min="10" style="width: 3rem">
                 <input type="submit" class="boutonstats" id="boutonstats">
             </form>
+
+
             <table class="tftable" border="1" data-aos="fade-up">
                 <tr><th>Nom Scene</th> <th>ID</th> <th>Entrées</th> <th>Sorties</th> <th>Actuel</th> <th>Heure</th> </tr>
                 <?php echo '<br>' . $data->afficheStat("prive",$_SESSION['id'],$_GET['nom'],$_GET['cpt']); ?>
@@ -179,8 +183,11 @@ require_once "esp-data.php";
         $stageInfo = $stageQuery->fetchAll(PDO::FETCH_ASSOC);
 
         ?>
+        function jaune() {
+            document.getElementById("cpt").value = "25";
+        }
 
-       /* var variableClient = <?php //echo json_encode($clientInfo); //?>;
+        var variableClient = <?php echo json_encode($clientInfo); ?>;
 
 
 
@@ -188,24 +195,24 @@ require_once "esp-data.php";
                 document.getElementById("eventt").innerHTML += "<option " + variableClient[a]['id_event'] + ">" + variableClient[a]['event_name']+"</option>"
             }
 
-        var variableStage = <?php //echo json_encode($stageInfo); //?>;
+        var variableStage = <?php echo json_encode($stageInfo); ?>;
 
         function stage() {
             document.getElementById("stagee").innerHTML = "";
-                if ( document.getElementById("eventt").value == "Welcome Spring Festival") {
-                    for (p = 0; p < variableStage.length; p++) {
-                        if ( variableStage[p]['id_event'] == 2 ) {
-                            document.getElementById("stagee").innerHTML += "<option>" + variableStage[p]['stage_name'] + "</option>"
-                        }
+            if (document.getElementById("eventt").value == "Welcome Spring Festival") {
+                for (p = 0; p < variableStage.length; p++) {
+                    if (variableStage[p]['id_event'] == 2) {
+                        document.getElementById("stagee").innerHTML += "<option>" + variableStage[p]['stage_name'] + "</option>"
                     }
-
+                }
+            }
             for (p = 0; p < variableStage.length; p++) {
                 if (document.getElementById("eventt").value == variableStage[p]['event_name']) {
                     document.getElementById("stagee").innerHTML += "<option>" + variableStage[p]['stage_name'] + "</option>"
                 }
             }
         }
-        */
+
         function graphe() {
             var i = 0;
             var heures = [];
@@ -270,6 +277,12 @@ require_once "esp-data.php";
                 if (document.getElementById('yo').value == variableRecuperee[e]['stage_name']) {
                     graphe();
                 }
+            }
+
+            function tab() {
+
+
+
             }
 
 

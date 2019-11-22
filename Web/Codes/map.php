@@ -3,12 +3,19 @@ require_once "db_connect.php";
 $eventInfoQuery = $dbh->query('SELECT * FROM Events ORDER BY event_name ');
 $eventInfos = $eventInfoQuery->fetchAll(PDO::FETCH_ASSOC);
 
+//SELECT Stages.id_stage, stage_name, stage_latitude, stage_longitude, max_people, hour_from, hour_to, id_event, COUNT(nbr_entree) as nbr_entree, COUNT(nbr_sortie) as nbr_sortie, MAX(heure) as heure
+//FROM Stages LEFT JOIN Nbr_Personne
+//ON Stages.id_stage = Nbr_Personne.id_stage
+//GROUP BY Stages.id_stage, stage_name, stage_latitude, stage_longitude, max_people, hour_from, hour_to, id_event
+
 // récupère les informations sur les scènes
 $stageQuery = $dbh->query("SELECT * 
                   FROM Stages LEFT JOIN Nbr_Personne 
                   ON Stages.id_stage = Nbr_Personne.id_stage 
                   GROUP BY Stages.id_stage" );
 $stageInfo = $stageQuery->fetchAll(PDO::FETCH_ASSOC);
+
+
 
 require_once "esp-data.php";
 $data = new data();
@@ -20,7 +27,7 @@ $data = new data();
 <!-- ################################    Boutton Event  ####################################-->
         <?php
         foreach ($eventInfos as $eventName) {
-            echo '<span class="boutonstats" value="' . $eventName['event_name'] . '" id="btn' . $eventName['id_event'] . '">'. $eventName['event_name'] .'</span></br></br>';
+            echo '<span data-aos="fade-up" class="boutonstats" value="' . $eventName['event_name'] . '" id="btn' . $eventName['id_event'] . '">'. $eventName['event_name'] .'</span></br></br>';
         }
         ?>
    </ul>
@@ -47,8 +54,8 @@ $data = new data();
 
 
     <!--  ####################################  Météo   ################################################-->
-    <div class="mt-3">
-        <div id="openweathermap-widget" class="bg-dark" style="width: 20rem; border-radius: 1rem"></div>
+    <div class="mt-3" data-aos="fade-up">
+        <center><div id="openweathermap-widget" class="bg-dark" style="width: 20rem; border-radius: 1rem"></div></center>
         <script>
             var openweathermapapi = 'https://api.openweathermap.org/data/2.5/weather';
             $.getJSON( openweathermapapi, {
@@ -92,7 +99,7 @@ $data = new data();
                 $stage['stage_latitude'] . ', ' .
                 $stage['stage_longitude'] . ']).bindPopup("<b>' .
                 $stage['stage_name'] . '</b><br>Il y a ' .
-                '0' . ' participant(s)!<br>'.
+                $stage['nbr_actuel'] . ' participant(s)!<br>'.
                 'Le nombre maximum de participant est estimé à ' .
                 $stage['max_people'] . '").addTo(layer' . $stage['id_event'] . ');';
         }

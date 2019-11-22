@@ -5,7 +5,8 @@ session_start();
     <div class="container-fluid">
         <div class="row align-items-center">
             <div class="col-11 col-xl-2   ">
-                <h1 class="mb-0"><a href="index.php" class="text-white h2 mb-0">People<span class="text-primary" style="color: #e74c3c">Flux</span> </a></h1>
+                <h1 class="mb-0"><a href="index.php" class="text-white h2 mb-0"><img src="images/LogoSmall.png" height="100px"></span> </a></h1>
+                <!-- <h1 class="mb-0"><a href="index.php" class="text-white h2 mb-0">People<span class="text-primary" style="color: #e74c3c">Flux</span> </a></h1>-->
             </div>
             <div class="col-12 col-md-10 d-none d-xl-block">
                 <nav class="site-navigation position-relative text-right" role="navigation" id="header">
