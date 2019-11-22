@@ -24,6 +24,8 @@ if(isset($_POST['envoi'])) {
                 session_start();
                 $_SESSION['id'] = $user['id_client'];
                 $_SESSION['name'] = $user['client_name'];
+                $_SESSION['mail']=$user['client_mail'];
+                $connect == true;
 
                 echo 'Vous êtes connecté !';
                 header('Location: addclient.php');
