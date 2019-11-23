@@ -338,12 +338,12 @@ window.onload = function() {
 
 
     </script>
-<!--
+
     <footer class="site-footer">
         <?php include("footer.php"); ?>
     </footer>
 
-</div> -->
+
 
 <script src="js/jquery-migrate-3.0.1.min.js"></script>
 <script src="js/jquery-ui.js"></script>
