@@ -5,7 +5,7 @@ session_start();
 if(isset($_POST['envoi'])) {
     require_once "db_connect.php";
     
-    $sql = 'SELECT id_client, client_name, client_mail, client_password
+    $sql = 'SELECT id_client, client_name, client_mail, client_password, client_phone
     FROM Clients
   WHERE client_mail = :client_mail';
     $sth = $dbh->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
@@ -24,6 +24,9 @@ if(isset($_POST['envoi'])) {
                 session_start();
                 $_SESSION['id'] = $user['id_client'];
                 $_SESSION['name'] = $user['client_name'];
+                $_SESSION['mail'] = $user['client_mail'];
+                $_SESSION['mdp'] = $user['client_password'];
+                $_SESSION['phone'] = $user['client_phone'];
                 $_SESSION['ifAdmin']=true;
 
                 echo 'Vous êtes connecté !';
@@ -33,6 +36,9 @@ if(isset($_POST['envoi'])) {
             session_start();
             $_SESSION['id'] = $user['id_client'];
             $_SESSION['name'] = $user['client_name'];
+            $_SESSION['mail'] = $user['client_mail'];
+            $_SESSION['mdp'] = $user['client_password'];
+            $_SESSION['phone'] = $user['client_phone'];
             echo 'Vous êtes connecté !';
             header('Location: admin.php');
             }

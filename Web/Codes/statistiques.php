@@ -157,8 +157,8 @@ require_once "esp-data.php";
             </table>
             <br>
             <hr>
-            <button name="button" id="boutongraphe" class="boutonstats"> Observer son graphique</button>
-            <button name="button" id="grapheannule" class="boutonstats"> Annuler </button>
+            <button name="button" id="boutongraphe" class="boutonstats" onclick="afficher()"> Observer son graphique</button>
+            <button name="button" id="grapheannule" class="boutonstats" onclick="annuler()"> Annuler </button>
             <button name="button" id="boutonimprimer" class="boutonstats" onClick="window.print();"> Imprimer la page</button>
 
 
@@ -195,90 +195,23 @@ require_once "esp-data.php";
         var idclient = <?php echo json_encode($_SESSION['id']); ?>;
         var variableRecuperee = <?php echo json_encode($grapheInfo); ?>;
         var variableClient = <?php echo json_encode($clientInfo); ?>;
-
-            for (a = 0; a < variableClient.length; a++) {
-                if ( idclient == variableClient[a]['id_client']) {
-                    document.getElementById("eventt").innerHTML += "<option " + variableClient[a]['id_event'] + ">" + variableClient[a]['event_name'] + "</option>"
-                }
-                }
         var variableStage = <?php echo json_encode($stageInfo); ?>;
-        function stage() {
-            document.getElementById("stagee").innerHTML = "";
-            if (document.getElementById("eventt").value == "Welcome Spring Festival") {
-                for (p = 0; p < variableStage.length; p++) {
-                    if (variableStage[p]['id_event'] == 2) {
-                        document.getElementById("stagee").innerHTML += "<option>" + variableStage[p]['stage_name'] + "</option>"
-                    }
-                }
-            }
-            for (p = 0; p < variableStage.length; p++) {
-                if (document.getElementById("eventt").value == variableStage[p]['event_name']) {
-                    document.getElementById("stagee").innerHTML += "<option>" + variableStage[p]['stage_name'] + "</option>"
-                }
-            }
-        }
-
-        document.getElementById("stagee").innerHTML = "";
-        if (document.getElementById("eventt").value == "Welcome Spring Festival") {
-            for (p = 0; p < variableStage.length; p++) {
-                if (variableStage[p]['id_event'] == 2) {
-                    document.getElementById("stagee").innerHTML += "<option>" + variableStage[p]['stage_name'] + "</option>"
-                }
-            }
-        }
-        for (p = 0; p < variableStage.length; p++) {
-            if (document.getElementById("eventt").value == variableStage[p]['event_name']) {
-                document.getElementById("stagee").innerHTML += "<option>" + variableStage[p]['stage_name'] + "</option>"
-            }
-        }
-
-            function number() {
-            indica = document.getElementById("cpt").value;
-            var indic = 0;
-                document.getElementById("tablee").innerHTML =  "<tr><th>Nom Scene</th> <th>ID</th> <th>Entrées</th> <th>Sorties</th> <th>Actuel</th> <th>Heure</th> </tr>";
-                document.getElementById("tablee").innerHTML += "<tr>";
-                for (c = 0; c < variableRecuperee.length; c++) {
-                    if (document.getElementById("stagee").value == variableRecuperee[c]['stage_name']) {
-                        indic++
-                        if( indic <= indica) {
-                            document.getElementById("tablee").innerHTML += "<td>" + variableRecuperee[c]['stage_name'] + "</td><td>" + variableRecuperee[c]['id_stage'] + "</td><td>" + variableRecuperee[c]['nbr_entree'] + "</td><td>" + variableRecuperee[c]['nbr_sortie'] + "</td><td>" + variableRecuperee[c]['nbr_actuel'] + "</td><td>" + variableRecuperee[c]['heure'] + "</td>"
-                        }
-                        }
-                }
-                document.getElementById("tablee").innerHTML += "</tr>";
-            }
-
-            function tableau() {
-
-                document.getElementById("tablee").innerHTML =  "<tr><th>Nom Scene</th> <th>ID</th> <th>Entrées</th> <th>Sorties</th> <th>Actuel</th> <th>Heure</th> </tr>";
-                document.getElementById("tablee").innerHTML += "<tr>";
-                for (c = 0; c < variableRecuperee.length; c++) {
-                    if (document.getElementById("stagee").value == variableRecuperee[c]['stage_name']) {
-                        document.getElementById("tablee").innerHTML += "<td>" + variableRecuperee[c]['stage_name'] + "</td><td>" + variableRecuperee[c]['id_stage'] + "</td><td>" + variableRecuperee[c]['nbr_entree'] + "</td><td>" + variableRecuperee[c]['nbr_entree'] + "</td><td>" + variableRecuperee[c]['nbr_actuel'] + "</td><td>" + variableRecuperee[c]['heure'] + "</td>"
-                    }
-                }
-                document.getElementById("tablee").innerHTML += "</tr>";
-            }
-
-            function tbleau() {
-                document.getElementById("tablee").innerHTML =  "<tr><th>Nom Scene</th> <th>ID</th> <th>Entrées</th> <th>Sorties</th> <th>Actuel</th> <th>Heure</th> </tr>";
-            }
 
         function graphe() {
+            var grapheInfo = <?php echo json_encode($grapheInfo); ?>;
             var i = 0;
             var heures = [];
             var nbrAct = [];
             var myChart = null;
             var ctx = null;
-            for (e = 0; e < variableRecuperee.length; e++) {
+            for (f = 0; f < grapheInfo.length; f++) {
 
-                if (document.getElementById('stagee').value == variableRecuperee[e]['stage_name']) {
+                if (document.getElementById("stagee").value == grapheInfo[f]['stage_name']) {
 
 
-                    heures[i] = variableRecuperee[e]['heure']
-                    nbrAct[i] = variableRecuperee[e]['nbr_actuel']
+                    heures[i] = grapheInfo[f]['heure']
+                    nbrAct[i] = grapheInfo[f]['nbr_actuel']
                     i++;
-                } else {
                 }
 
 
@@ -314,32 +247,103 @@ require_once "esp-data.php";
                     }
                 }
             });
-            document.getElementById("boutongraphe").onclick = function() {
-                document.getElementById("myChart").style.display = "block";
+        }
+        function stage() {
+            document.getElementById("stagee").innerHTML = "";
+            if (document.getElementById("eventt").value == "Welcome Spring Festival") {
+                for (p = 0; p < variableStage.length; p++) {
+                    if (variableStage[p]['id_event'] == 2) {
+                        document.getElementById("stagee").innerHTML += "<option>" + variableStage[p]['stage_name'] + "</option>"
+                    }
+                }
             }
-            document.getElementById("grapheannule").onclick = function() {
-                document.getElementById("myChart").style.display = "none";
+            for (p = 0; p < variableStage.length; p++) {
+                if (document.getElementById("eventt").value == variableStage[p]['event_name']) {
+                    document.getElementById("stagee").innerHTML += "<option>" + variableStage[p]['stage_name'] + "</option>"
+                }
             }
         }
 
 
-        var variableRecuperee = <?php echo json_encode($grapheInfo); ?>;
-            for (e = 0; e < variableRecuperee.length; e++) {
-                if (document.getElementById('stagee').value == variableRecuperee[e]['stage_name']) {
-                    graphe();
+            function number() {
+            indica = document.getElementById("cpt").value;
+            var indic = 0;
+                document.getElementById("tablee").innerHTML =  "<tr><th>Nom Scene</th> <th>ID</th> <th>Entrées</th> <th>Sorties</th> <th>Actuel</th> <th>Heure</th> </tr>";
+                document.getElementById("tablee").innerHTML += "<tr>";
+                for (c = 0; c < variableRecuperee.length; c++) {
+                    if (document.getElementById("stagee").value == variableRecuperee[c]['stage_name']) {
+                        indic++
+                        if( indic <= indica) {
+                            document.getElementById("tablee").innerHTML += "<td>" + variableRecuperee[c]['stage_name'] + "</td><td>" + variableRecuperee[c]['id_stage'] + "</td><td>" + variableRecuperee[c]['nbr_entree'] + "</td><td>" + variableRecuperee[c]['nbr_sortie'] + "</td><td>" + variableRecuperee[c]['nbr_actuel'] + "</td><td>" + variableRecuperee[c]['heure'] + "</td>"
+                        }
+                        }
                 }
+                document.getElementById("tablee").innerHTML += "</tr>";
             }
+
+            function tableau() {
+
+                document.getElementById("tablee").innerHTML =  "<tr><th>Nom Scene</th> <th>ID</th> <th>Entrées</th> <th>Sorties</th> <th>Actuel</th> <th>Heure</th> </tr>";
+                document.getElementById("tablee").innerHTML += "<tr>";
+                for (c = 0; c < variableRecuperee.length; c++) {
+                    if (document.getElementById("stagee").value == variableRecuperee[c]['stage_name']) {
+                        document.getElementById("tablee").innerHTML += "<td>" + variableRecuperee[c]['stage_name'] + "</td><td>" + variableRecuperee[c]['id_stage'] + "</td><td>" + variableRecuperee[c]['nbr_entree'] + "</td><td>" + variableRecuperee[c]['nbr_entree'] + "</td><td>" + variableRecuperee[c]['nbr_actuel'] + "</td><td>" + variableRecuperee[c]['heure'] + "</td>"
+                    }
+                }
+                document.getElementById("tablee").innerHTML += "</tr>";
+            }
+
+            function tbleau() {
+                document.getElementById("tablee").innerHTML =  "<tr><th>Nom Scene</th> <th>ID</th> <th>Entrées</th> <th>Sorties</th> <th>Actuel</th> <th>Heure</th> </tr>";
+            }
+
+
+window.onload = function() {
+    for (a = 0; a < variableClient.length; a++) {
+        if (idclient == variableClient[a]['id_client']) {
+            document.getElementById("eventt").innerHTML += "<option " + variableClient[a]['id_event'] + ">" + variableClient[a]['event_name'] + "</option>"
+        }
+    }
+
+
+    for (e = 0; e < variableRecuperee.length; e++) {
+        if (document.getElementById('stagee').value == variableRecuperee[e]['stage_name']) {
+
+        }
+    }
+
+    if (document.getElementById("eventt").value == "Welcome Spring Festival") {
+        for (p = 0; p < variableStage.length; p++) {
+            if (variableStage[p]['id_event'] == 2) {
+                document.getElementById("stagee").innerHTML += "<option>" + variableStage[p]['stage_name'] + "</option>"
+            }
+        }
+    }
+    for (p = 0; p < variableStage.length; p++) {
+        if (document.getElementById("eventt").value == variableStage[p]['event_name']) {
+            document.getElementById("stagee").innerHTML += "<option>" + variableStage[p]['stage_name'] + "</option>"
+        }
+    }
+}
+
+        function afficher() {
+        document.getElementById("myChart").style.display = "block";
+    }
+    function annuler() {
+
+            document.getElementById("myChart").style.display = "none";
+        }
 
 
 
 
     </script>
-
+<!--
     <footer class="site-footer">
         <?php include("footer.php"); ?>
     </footer>
 
-</div>
+</div> -->
 
 <script src="js/jquery-migrate-3.0.1.min.js"></script>
 <script src="js/jquery-ui.js"></script>

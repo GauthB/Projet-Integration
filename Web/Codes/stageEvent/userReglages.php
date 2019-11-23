@@ -8,6 +8,12 @@ $messages = array();
 <?php
 session_start();
 
+if($_SESSION['ifAdmin']!=true){
+    header('Location: index.php');
+    exit;
+}
+
+
 
 if(!isset($_SESSION['id'])) {
     header('Location: index.php');
@@ -59,7 +65,6 @@ if(!isset($_SESSION['id'])) {
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-10">
-                    <h1 class="d-block mb-4" data-aos="fade-up" data-aos-delay="100">En construction</h1>
                     <h1 class="d-block mb-4" data-aos="fade-up" data-aos-delay="100">Info compte <?=$_SESSION['name']?></h1>
                 </div>
             </div>
@@ -74,31 +79,28 @@ if(!isset($_SESSION['id'])) {
 
                     <form style="margin: 0 auto; width: 300px;" class="contact-form"  id ="form_inscription" action="" method="post">
 
-
-
-
-
                         <div class="row form-group">
 
                             <div " class="col-md-12">
-                            <label class="" for="email"><i class="fas fa-redo-alt"></i> Votre nom:</label>
-                            <input type="text" name="nom" value="" placeholder="<?php echo$_SESSION['name'];  ?> "   class="input form-control" >
-                            </div>
-                         </div>
+                            <label class="" for="email">Nom du client*</label>
+                            <input type="text" name="nom" value="" placeholder="Nom."   class="input form-control" >
+                        </div>
+                </div>
+
 
 
                 <div class="row form-group">
 
                     <div class="col-md-12">
-                        <label class="" >Adresse mail</label>
-                        <input type="email" name="mail" value="" placeholder="<?php echo $_SESSION['mail'];  ?>"  class="input form-control" >
+                        <label class="" >Adresse mail*</label>
+                        <input type="email" name="mail" value="" placeholder="E-Mail."  class="input form-control" >
                     </div>
                 </div>
                 <div class="row form-group">
 
                     <div class="col-md-12">
-                        <label class="" >Mot de passe</label>
-                        <input type="password" name="password" value="" placeholder="******" required class="input form-control" >
+                        <label class="" >Mot de passe*</label>
+                        <input type="password" name="password" value="" placeholder="Créé lui un mot de passe." required class="input form-control" >
                     </div>
                 </div>
 
@@ -106,7 +108,7 @@ if(!isset($_SESSION['id'])) {
 
                     <div class="col-md-12">
                         <label class="" >Numéro de tél.</label>
-                        <input type="text"  class="input form-control" name="tel" placeholder="<?php echo $_SESSION['phone'];  ?>">
+                        <input type="text"  class="input form-control" name="tel" placeholder="Téléphone.">
                     </div>
                 </div>
 
@@ -116,7 +118,7 @@ if(!isset($_SESSION['id'])) {
                 <div class="row form-group">
                     <div class="col-md-12">
 
-                       <!-- <input type="submit" name="sub" value="mise à jour" class="btn btn-primary py-2 px-4 text-white">-->
+                        <input type="submit" name="sub" value="Ajouter" class="btn btn-primary py-2 px-4 text-white">
 
                     </div>
                 </div>
