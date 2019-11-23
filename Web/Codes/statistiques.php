@@ -157,15 +157,13 @@ require_once "esp-data.php";
             </table>
             <br>
             <hr>
-            <button name="button" id="boutongraphe" class="boutonstats" onclick="afficher()"> Observer son graphique</button>
-            <button name="button" id="grapheannule" class="boutonstats" onclick="annuler()"> Annuler </button>
+            <button name="button" id="boutongraphe" class="boutonstats" onclick="afficher(),graphe();"> Observer son graphique</button>
+            <button name="button" id="grapheannule" class="boutonstats" onclick="annuler();"> Annuler </button>
             <button name="button" id="boutonimprimer" class="boutonstats" onClick="window.print();"> Imprimer la page</button>
 
-
-            <canvas id="myChart" width="20%" height="5%" style="display: none"></canvas>
         </div>
     </div>
-
+    <canvas id="myChart" width="20%" height="5%" style="display: none"></canvas>
 
 
 
@@ -197,20 +195,92 @@ require_once "esp-data.php";
         var variableClient = <?php echo json_encode($clientInfo); ?>;
         var variableStage = <?php echo json_encode($stageInfo); ?>;
 
+        window.onload = function() {
+            for (a = 0; a < variableClient.length; a++) {
+                if (idclient == variableClient[a]['id_client']) {
+                    document.getElementById("eventt").innerHTML += "<option " + variableClient[a]['id_event'] + ">" + variableClient[a]['event_name'] + "</option>"
+                }
+            }
+
+
+            for (e = 0; e < variableRecuperee.length; e++) {
+                if (document.getElementById('stagee').value == variableRecuperee[e]['stage_name']) {
+
+                }
+            }
+
+            if (document.getElementById("eventt").value == "Welcome Spring Festival") {
+                for (p = 0; p < variableStage.length; p++) {
+                    if (variableStage[p]['id_event'] == 2) {
+                        document.getElementById("stagee").innerHTML += "<option>" + variableStage[p]['stage_name'] + "</option>"
+                    }
+                }
+            }
+            for (p = 0; p < variableStage.length; p++) {
+                if (document.getElementById("eventt").value == variableStage[p]['event_name']) {
+                    document.getElementById("stagee").innerHTML += "<option>" + variableStage[p]['stage_name'] + "</option>"
+                }
+            }
+        }
+
+        function afficher() {
+            document.getElementById("myChart").style.display = "block";
+        }
+        function annuler() {
+
+            document.getElementById("myChart").style.display = "none";
+        }
+        window.onload = function() {
+            for (a = 0; a < variableClient.length; a++) {
+                if (idclient == variableClient[a]['id_client']) {
+                    document.getElementById("eventt").innerHTML += "<option " + variableClient[a]['id_event'] + ">" + variableClient[a]['event_name'] + "</option>"
+                }
+            }
+
+
+            for (e = 0; e < variableRecuperee.length; e++) {
+                if (document.getElementById('stagee').value == variableRecuperee[e]['stage_name']) {
+
+                }
+            }
+
+            if (document.getElementById("eventt").value == "Welcome Spring Festival") {
+                for (p = 0; p < variableStage.length; p++) {
+                    if (variableStage[p]['id_event'] == 2) {
+                        document.getElementById("stagee").innerHTML += "<option>" + variableStage[p]['stage_name'] + "</option>"
+                    }
+                }
+            }
+            for (p = 0; p < variableStage.length; p++) {
+                if (document.getElementById("eventt").value == variableStage[p]['event_name']) {
+                    document.getElementById("stagee").innerHTML += "<option>" + variableStage[p]['stage_name'] + "</option>"
+                }
+            }
+        }
+
+        function afficher() {
+            document.getElementById("myChart").style.display = "block";
+        }
+        function annuler() {
+
+            document.getElementById("myChart").style.display = "none";
+        }
+
+
         function graphe() {
-            var grapheInfo = <?php echo json_encode($grapheInfo); ?>;
+
             var i = 0;
             var heures = [];
             var nbrAct = [];
             var myChart = null;
             var ctx = null;
-            for (f = 0; f < grapheInfo.length; f++) {
+            for (f = 0; f < variableRecuperee.length; f++) {
 
-                if (document.getElementById("stagee").value == grapheInfo[f]['stage_name']) {
+                if (document.getElementById("stagee").value == variableRecuperee[f]["stage_name"]) {
 
 
-                    heures[i] = grapheInfo[f]['heure']
-                    nbrAct[i] = grapheInfo[f]['nbr_actuel']
+                    heures[i] = variableRecuperee[f]["heure"];
+                    nbrAct[i] = variableRecuperee[f]["nbr_actuel"];
                     i++;
                 }
 
@@ -298,41 +368,6 @@ require_once "esp-data.php";
             }
 
 
-window.onload = function() {
-    for (a = 0; a < variableClient.length; a++) {
-        if (idclient == variableClient[a]['id_client']) {
-            document.getElementById("eventt").innerHTML += "<option " + variableClient[a]['id_event'] + ">" + variableClient[a]['event_name'] + "</option>"
-        }
-    }
-
-
-    for (e = 0; e < variableRecuperee.length; e++) {
-        if (document.getElementById('stagee').value == variableRecuperee[e]['stage_name']) {
-
-        }
-    }
-
-    if (document.getElementById("eventt").value == "Welcome Spring Festival") {
-        for (p = 0; p < variableStage.length; p++) {
-            if (variableStage[p]['id_event'] == 2) {
-                document.getElementById("stagee").innerHTML += "<option>" + variableStage[p]['stage_name'] + "</option>"
-            }
-        }
-    }
-    for (p = 0; p < variableStage.length; p++) {
-        if (document.getElementById("eventt").value == variableStage[p]['event_name']) {
-            document.getElementById("stagee").innerHTML += "<option>" + variableStage[p]['stage_name'] + "</option>"
-        }
-    }
-}
-
-        function afficher() {
-        document.getElementById("myChart").style.display = "block";
-    }
-    function annuler() {
-
-            document.getElementById("myChart").style.display = "none";
-        }
 
 
 
