@@ -21,6 +21,7 @@ if(!isset($_SESSION['id'])) {
 
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -73,16 +74,16 @@ if(!isset($_SESSION['id'])) {
     <div style="margin-bottom: 200px;">
         <div class="container">
             <div>
-   <!--
+
                 <div id="dialogClient"><p>Êtes-vous sûr de vouloir supprimer l'évènement "<span id="spnClientName"></span>"?</p>Vous pourrez faire cette action si vous avez supprimé auparavant toutes les scènes liées à cette évènement!</div>
 
--->                <h2 class="d-block mb-3 caption" data-aos="fade-up">Clients</h2>
+              <h2 class="d-block mb-3 caption" data-aos="fade-up">Clients</h2>
                 <!-- Table des clients-->
                 <?php
 
                 $eventInfoQuery = $dbh->query('SELECT * FROM Clients ');
                 $eventInfos = $eventInfoQuery->fetchAll(PDO::FETCH_ASSOC);
-
+                $eventInfoQuery->closeCursor();
 
 
 
@@ -96,23 +97,16 @@ if(!isset($_SESSION['id'])) {
             echo '<tr><td>' .
                 $client["client_name"] . '</td><td>' .
                 $client["client_mail"] . '</td><td>' .
-                $client["client_phone"] . '</td><td style="text-align: right;">'
-                ?>
+                $client["client_phone"] . '</td><td style="text-align: right;">';
 
-            <?php
             if($client['client_mail']=='peopleflux@gmail.com'){
                 echo'<i  class="fas fa-user-lock"></i>';
 
             }
             else{
-                echo'<span class="close btnDuClient" data-idClient="' . $client["id_client"].'" ><i class="fas fa-backspace"></i></span>';
+                echo'<span  class="close btnDuClient" data-idClient="' . $client["id_client"].'" ><i class="fas fa-backspace"></i></span>';
 
             }
-
-
-
-            ?>
-                <?php
 
                 echo'</td></tr>';
         }
@@ -121,6 +115,14 @@ if(!isset($_SESSION['id'])) {
 
 
 
+                <?php
+             //   if($_POST['sub']){
+
+             //       $sth = $dbh -> prepare('DELETE FROM Clients WHERE id_client = data-idClient');
+         //           $sth->execute([$_POST['id']]);
+           //     }
+
+                ?>
 
 
             </div>
@@ -142,23 +144,54 @@ if(!isset($_SESSION['id'])) {
 </footer>
 
 </div>
+<script>
+
+    $( "#dialogClient" ).dialog({
+        title: "Êtes-vous sûr?",
+        autoOpen: false,
+        modal: true,
+        resizable: false,
+        draggable: false,
+        closeOnEscape: false,
+        buttons: [
+            {
+                text: "Oui",
+                click: function() {
+                    $.post('stageEvent/delClient.php', {id: $("#dialogClient").data('idClient')}, function (data) {
+                        location.reload();
+                    });
+                    $( this ).dialog( "close" );
+                }
+            },
+            {
+                text: "Non",
+                click: function() {
+                    $( this ).dialog( "close" );
+                }
+            }
+        ],
+        open: function() { $(".ui-dialog-titlebar-close").hide(); }
+    });
+
+    $(".btnDuClient").click(function() {
+        $('#spnClientName').html($(this).closest('tr').children().first().html());
+        $("#dialogClient").data('idClient', $(this).attr('data-idClient')).dialog("open");
+        return false;
+    });
+
+
+</script>
 
 <script>
-    $(function() {
+ /*   $(function() {
         // Dialog confirmation supression client
-
-
                         $.post('stageEvent/delClient.php', {id: $("#dialogClient").data('idClient')}, function (data) {
                             location.reload();
                         });
                         $( this ).dialog( "close" );
                     }
+*/
 
-
-
-
-
-    });
 </script>
 
 <script src="js/jquery-migrate-3.0.1.min.js"></script>

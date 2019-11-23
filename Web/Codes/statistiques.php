@@ -126,8 +126,8 @@ require_once "esp-data.php";
             <hr>
             */
             ?>
-            <br><select id="eventt"  class="yop" onchange="stage();"></select></br>
-            <br><select id="stagee"  onchange="number();"></select></br>
+            <br><select id="eventt"  class="yop" onchange="stage();number();"></select></br>
+            <br><select id="stagee"  onchange="number();graphe();"></select></br>
             <br style="margin-top=20px">
             <button name="button" type="button" id="tab" class="boutonstats" onclick="number()"> Afficher ses statistiques </button>
             <button name="button" type="button" id="tab" class="boutonstats" onclick="tbleau()"> Ne plus afficher </button>
@@ -189,9 +189,7 @@ require_once "esp-data.php";
         $stageInfo = $stageQuery->fetchAll(PDO::FETCH_ASSOC);
 
         ?>
-        function jaune() {
-            document.getElementById("cpt").value = "25";
-        }
+
 
 
         var idclient = <?php echo json_encode($_SESSION['id']); ?>;
@@ -243,7 +241,7 @@ require_once "esp-data.php";
                     if (document.getElementById("stagee").value == variableRecuperee[c]['stage_name']) {
                         indic++
                         if( indic <= indica) {
-                            document.getElementById("tablee").innerHTML += "<td>" + variableRecuperee[c]['stage_name'] + "</td><td>" + variableRecuperee[c]['id_stage'] + "</td><td>" + variableRecuperee[c]['nbr_entree'] + "</td><td>" + variableRecuperee[c]['nbr_entree'] + "</td><td>" + variableRecuperee[c]['nbr_actuel'] + "</td><td>" + variableRecuperee[c]['heure'] + "</td>"
+                            document.getElementById("tablee").innerHTML += "<td>" + variableRecuperee[c]['stage_name'] + "</td><td>" + variableRecuperee[c]['id_stage'] + "</td><td>" + variableRecuperee[c]['nbr_entree'] + "</td><td>" + variableRecuperee[c]['nbr_sortie'] + "</td><td>" + variableRecuperee[c]['nbr_actuel'] + "</td><td>" + variableRecuperee[c]['heure'] + "</td>"
                         }
                         }
                 }
@@ -274,7 +272,7 @@ require_once "esp-data.php";
             var ctx = null;
             for (e = 0; e < variableRecuperee.length; e++) {
 
-                if (document.getElementById('yo').value == variableRecuperee[e]['stage_name']) {
+                if (document.getElementById('stagee').value == variableRecuperee[e]['stage_name']) {
 
 
                     heures[i] = variableRecuperee[e]['heure']
@@ -325,18 +323,14 @@ require_once "esp-data.php";
         }
 
 
-
+        var variableRecuperee = <?php echo json_encode($grapheInfo); ?>;
             for (e = 0; e < variableRecuperee.length; e++) {
-                if (document.getElementById('yo').value == variableRecuperee[e]['stage_name']) {
+                if (document.getElementById('stagee').value == variableRecuperee[e]['stage_name']) {
                     graphe();
                 }
             }
 
-            function tab() {
 
-
-
-            }
 
 
     </script>
