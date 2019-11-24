@@ -15,7 +15,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $id_stage = test_input($_POST["id_stage"]);
         $nbr_entree = test_input($_POST["nbr_entree"]);
         $nbr_sortie = test_input($_POST["nbr_sortie"]);
-        //$nbr_actuel = test_input($data->afficheStat('total'));
         $nbr_actuel = 0;
 
         // Create connection

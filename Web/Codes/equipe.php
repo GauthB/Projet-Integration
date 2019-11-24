@@ -17,6 +17,10 @@
     <link rel="icon" type="image/x-icon" href="LogoSmall.ico"/>
     <link rel="stylesheet" href="css/style.css">
 
+    <!-- https://fontawesome.com - Icon -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+
     <script src="js/jquery-3.4.1.min.js"></script>
 </head>
 <body>
@@ -45,7 +49,7 @@
         </div>
     </div>
 
-    <div class="site-section">
+    <div >
         <div class="container">
 
             <!-- ################## Gauthier Bohyn ################## -->
@@ -61,7 +65,8 @@
                             Je m’occuperai également de l’impression 3D.
                         </p>
                         <p data-aos="fade-right" data-aos-delay="500">
-                            <a target="_blank" href="https://www.facebook.com/gauthier.bohyn" class="p-2"><span class="icon-facebook"></span></a>
+                            <a target="_blank" href="https://github.com/GauthB" class="p-2"><i class="fab fa-github"></i></a>
+                            <a target="_blank" href="https://www.linkedin.com/in/gauthier-bohyn-20899715a/" class="p-2"><i class="fab fa-linkedin-in"> </i></a>
                         </p>
                     </div>
                 </div>
@@ -77,8 +82,9 @@
                     <div class="bio pr-lg-5">
                         <span class="text-uppercase text-primary d-block mb-3" data-aos="fade-left" data-aos-delay="300">Scrum Master</span>
                         <p class="mb-4" data-aos="fade-left" data-aos-delay="400">Je suis polyvalent et je maîtrise assez bien les matières pour travailler seul ou en groupe. De plus, je m’adapte vite à un travail en cours que ce soit de la programmation ou autre, ce qui me permet d’aider un peu tout le monde.</p>
-                        <p data-aos="fade-left" data-aos-delay="500">
-                            <a target="_blank" href="https://www.facebook.com/aymeric.ponjee" class="p-2"><span class="icon-facebook"></span></a>
+                        <p data-aos="fade-right" data-aos-delay="500">
+                            <a target="_blank" href="https://github.com/Tryggon" class="p-2"><i class="fab fa-github"></i></a>
+                            <a target="_blank" href="  " class="p-2"><i class="fab fa-linkedin-in"> </i></a>
                         </p>
                     </div>
                 </div>
@@ -98,7 +104,8 @@
                             Ce ne sera donc pas un problème pour moi d'apprendre ce langage.
                         </p>
                         <p data-aos="fade-right" data-aos-delay="500">
-                            <a target="_blank" href="https://www.facebook.com/thibaut.hermant" class="p-2"><span class="icon-facebook"></span></a>
+                            <a target="_blank" href="https://github.com/thibauth01" class="p-2"><i class="fab fa-github"></i></a>
+                            <a target="_blank" href="https://www.linkedin.com/in/thibaut-hermant-1ab537178/" class="p-2"><i class="fab fa-linkedin-in"> </i></a>
                         </p>
                     </div>
                 </div>
@@ -116,8 +123,9 @@
                         <p class="mb-4" data-aos="fade-left" data-aos-delay="400">J'ai déjà utilisé certains modules en électronique. Je suis en possession de plusieurs esp32 et un raspberry pi avec lesquels j'ai déjà bidouillé.
                             Je suis un peu plus à l'aise avec la programmation telle que celle de la carte électronique que nous allons utiliser mais aussi avec la programmation d'application.
                         </p>
-                        <p data-aos="fade-left" data-aos-delay="500">
-                            <a target="_blank" href="https://www.facebook.com/robinp12" class="p-2"><span class="icon-facebook"></span></a>
+                        <p data-aos="fade-right" data-aos-delay="500">
+                            <a target="_blank" href="https://github.com/robinp12" class="p-2"><i class="fab fa-github"></i></a>
+                            <a target="_blank" href="https://www.linkedin.com/in/robin-paquet-558b43174/" class="p-2"><i class="fab fa-linkedin-in"> </i></a>
                         </p>
                     </div>
                 </div>
@@ -134,7 +142,7 @@
                         <p class="mb-4" data-aos="fade-right" data-aos-delay="400">Je suis très à l’aise dans l’environnement de Proteus et je peux donc réaliser la plupart des montages électroniques.
                             Également, j’ai une bonne compréhension des composants et je peux donc faire fonctionner un montage disposant d’un code C. Bonnes connaissances dans la gestion des BDD et dans le développement Web.</p>
                         <p data-aos="fade-right" data-aos-delay="500">
-                            <a target="_blank" href="https://www.facebook.com/ludo.vandendorpe.5" class="p-2"><span class="icon-facebook"></span></a>
+                            <a target="_blank" href="https://github.com/VludZ45" class="p-2"><i class="fab fa-github"></i></a>
                         </p>
                     </div>
                 </div>
@@ -154,8 +162,8 @@
                             Au niveau du travail en groupe je trouve que j’ai facile à m’adapter et j’apprends vite.
                             Autre point fort, je suis bon en orthographe et aussi au niveau des tournures de phrase. Je pourrai donc m’occuper de la relecture des documents à rendre ou encore les écrits sur le site web/application mobile.
                         </p>
-                        <p data-aos="fade-left" data-aos-delay="500">
-                            <a target="_blank" href="https://www.facebook.com/tristan.pestiaux" class="p-2"><span class="icon-facebook"></span></a>
+                        <p data-aos="fade-right" data-aos-delay="500">
+                            <a target="_blank" href="https://github.com/abyssin14" class="p-2"><i class="fab fa-github"></i></a>
                         </p>
                     </div>
                 </div>
@@ -172,7 +180,7 @@
                         <p class="mb-4" data-aos="fade-right" data-aos-delay="400">Je suis meilleur dans la programmation et en électronique. Je peux donc aider à faire le php et faire les circuits électroniques
                             qui permettent de compter le nombre de personnes qui passent. Et puis j'aime apprendre de nouvelles choses et utiliser de nouveaux langages. </p>
                         <p data-aos="fade-right" data-aos-delay="500">
-                            <a target="_blank" href="https://www.facebook.com/brian.hanquet" class="p-2"><span class="icon-facebook"></span></a>
+                            <a target="_blank" href="https://github.com/hanquetbrian" class="p-2"><i class="fab fa-github"></i></a>
                         </p>
                     </div>
                 </div>

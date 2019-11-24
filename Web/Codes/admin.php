@@ -9,7 +9,8 @@ if(!isset($_SESSION['id'])) {
 require_once "db_connect.php";
 require_once "esp-data.php";
 
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <title>PeopleFlux - Interface</title>
@@ -31,6 +32,7 @@ require_once "esp-data.php";
 
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
 </head>
 <body>
@@ -52,20 +54,21 @@ require_once "esp-data.php";
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-10">
-                    <span class="d-block mb-3 caption" data-aos="fade-up">Vous êtes connecté en tant que: <?=$_SESSION['name']?> </span>
                     <h1 class="d-block mb-4" data-aos="fade-up" data-aos-delay="100">Bienvenue dans l'interface!</h1>
+
+
 
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="site-section">
+    <div style="margin-bottom: 200px;">
         <div class="container">
             <div>
-                <div id="dialogEvent"><p>Êtes-vous sûr de vouloir supprimer <span id="spnEventName"></span></p></div>
+                <div id="dialogEvent"><p>Êtes-vous sûr de vouloir supprimer l'évènement "<span id="spnEventName"></span>"?</p>Vous pourrez faire cette action si vous avez supprimé auparavant toutes les scènes liées à cette évènement!</div>
                 <h2 class="d-block mb-3 caption" data-aos="fade-up">Evènements</h2>
-<!--            Table des évènements-->
+                <!-- Table des évènements-->
                 <?php
 
                 $sth = $dbh -> prepare('SELECT * FROM Events WHERE id_client=:client_id');
@@ -77,15 +80,16 @@ require_once "esp-data.php";
                     echo '<p data-aos="fade-up">Vous n\'avez aucun évènements</p>';
                 } else {
                     echo '<table class="tftable" border="1" data-aos="fade-up">';
-                    echo '<tr><th>Nom</th><th>Date du début</th><th>Date de fin</th><th>Adresse</th><th></th></tr>';
+                    echo '<tr><th>Nom</th><th>Date du début</th><th>Date de fin</th><th>Ville</th><th>Adresse</th><th></th></tr>';
 
                     foreach ($eventsInfo as $event) {
                         echo '<tr><td>' .
                             $event["event_name"] . '</td><td>' .
                             $event["date_from"] . '</td><td>' .
                             $event["date_to"] . '</td><td>' .
+                            $event["event_city"] . '</td><td>' .
                             $event["event_address"] . '</td><td>' .
-                            '<span class="close btnDelEvent" data-idEvent="' . $event["id_event"] . '">&times;</span></td></tr>';
+                            '<span class="close btnDelEvent" data-idEvent="' . $event["id_event"] . '"><i class="fas fa-backspace"></i></span></td></tr>';
                     }
 
                     echo '</table>';
@@ -96,8 +100,8 @@ require_once "esp-data.php";
 
             <!-- affiche les scenes liés au client -->
             <div>
-                <div id="dialogStage"><p>Êtes-vous sûr de vouloir supprimer <span id="spnStageName"></span></p></div>
-                <h2 class="d-block mb-3 caption" data-aos="fade-up">Scènes</h2>
+                <div id="dialogStage"><p>Êtes-vous sûr de vouloir supprimer la scène "<span id="spnStageName"></span>"?</p></div>
+                <br><h2 class="d-block mb-3 caption" data-aos="fade-up">Scènes</h2>
                 <?php
                 $sth = $dbh -> prepare('SELECT * FROM Stages JOIN Events ON Stages.id_event = Events.id_event WHERE id_client=:client_id');
                 $sth->execute(array(':client_id' => $_SESSION['id']));
@@ -119,21 +123,34 @@ require_once "esp-data.php";
                             $stage["max_people"] . '</td><td>' .
                             $stage["hour_from"] . '</td><td>' .
                             $stage["hour_to"] . '</td><td>' .
-                            '<span class="close btnDelStage" data-idStage="' . $stage["id_stage"] . '">&times;</span></td></tr>';
+                            '<span class="close btnDelStage" data-idStage="' . $stage["id_stage"] . '"><i class="fas fa-backspace"></i></span></td></tr>';
                     }
 
                     echo '</table>';
-                    echo'<p data-aos="fade-up">Voir ses <a href="statistiques.php">statistiques</a>.</p>';
                 }
 
                 ?>
 
             </div>
 
+            <style type="text/css">
+                hr {
+                    border-top: 1px solid red
+                }
+            </style>
+
+
+
+
+
+
+
+
             <!-- forumlaire pour que le client rajoute un evenement lui même -->
             <div class="row">
                 <div class="col-md-6" data-aos="fade-up">
                     <form id= "formEvent" class="event-form" action="stageEvent/addEvent.php" method="post">
+                        <br><hr data-aos="fade-up">
                         <h2 class="d-block mb-3 caption" data-aos="fade-up">Ajouter un évènement</h2>
                         <div class="row form-group" data-aos="fade-up">
                             <div class="col-md-12">
@@ -145,15 +162,36 @@ require_once "esp-data.php";
                         <div class="row form-group" data-aos="fade-up">
                             <div class="col-md-12">
                                 <label class="" for="dateFrom" >Dates*</label>
-                                <input type="text" id="dateFrom"  class="input form-control" name="dateFrom" placeholder="Date du début de l'évènement" required>
-                                <input type="text" id="dateTo"  class="input form-control" name="dateTo" placeholder="Date de la fin de l'évènement" required>
+                                <input type="text" id="dateFrom"  class="input form-control" name="dateFrom" placeholder="Début (0000-00-00 24:00:00)" required>
+                                <input type="text" id="dateTo"  class="input form-control" name="dateTo" placeholder="Fin (0000-00-00 24:00:00)" required>
+
+
+
+
+
+
+
+   <!--                             <iframe name="InlineFrame1" id="InlineFrame1" style="width:180px;height:220px;" src="https://www.mathieuweb.fr/calendrier/calendrier-des-semaines.php?nb_mois=1&nb_mois_ligne=4&mois=&an=&langue=fr&texte_color=B9CBDD&week_color=DAE9F8&week_end_color=C7DAED&police_color=453413&sel=true" scrolling="no" frameborder="0" allowtransparency="true"></iframe>
+-->
+
+
+
+
+
+
 
                             </div>
                         </div>
                         <div class="row form-group" data-aos="fade-up">
                             <div class="col-md-12">
+                                <label class="" for="villeEvent">Ville*</label>
+                                <input type="text" id="villeEvent"  class="input form-control" name="villeEvent" placeholder="La ville de l'évènements" required>
+                            </div>
+                        </div>
+                        <div class="row form-group" data-aos="fade-up">
+                            <div class="col-md-12">
                                 <label class="" for="adresseEvent">Adresse*</label>
-                                <input type="text" id="adresseEvent"  class="input form-control" name="adresseEvent" placeholder="L'adresse de l'évènements (Village - Ville)" required>
+                                <input type="text" id="adresseEvent"  class="input form-control" name="adresseEvent" placeholder="La rue et numéro de l'évènement" required>
                             </div>
                         </div>
                         <div class="row form-group" data-aos="fade-up">
@@ -171,6 +209,7 @@ require_once "esp-data.php";
 
                     <!-- forumlaire pour que le client rajoute une scene lui même -->
                     <form id= "formStage" class="stage-form" action="stageEvent/addStage.php" method="post">
+                        <br><hr data-aos="fade-up">
                         <h2 class="d-block mb-3 caption" data-aos="fade-up">Ajouter une scène</h2>
                         <div class="row form-group" data-aos="fade-up">
                             <div class="col-md-12">
