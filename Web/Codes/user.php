@@ -21,7 +21,6 @@ if(isset($_POST['envoi'])) {
             $_SESSION['id'] = $user['id_client'];
             $_SESSION['name'] = $user['client_name'];
             $_SESSION['mail'] = $user['client_mail'];
-            $_SESSION['mdp'] = $user['client_password'];
             $_SESSION['phone'] = $user['client_phone'];
 
             echo 'Vous êtes connecté !';
