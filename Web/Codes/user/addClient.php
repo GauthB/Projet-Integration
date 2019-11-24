@@ -72,20 +72,20 @@ if(!isset($_SESSION['id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
-    <link rel="stylesheet" href="fonts/icomoon/style.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/magnific-popup.css">
-    <link rel="stylesheet" href="css/jquery-ui.css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-    <link rel="stylesheet" href="css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
-    <link rel="stylesheet" href="css/aos.css">
-    <script type="text/javascript" src="js/contact.js"></script>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" type="image/x-icon" href="LogoSmall.ico"/>
+    <link rel="stylesheet" href="../fonts/icomoon/style.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/magnific-popup.css">
+    <link rel="stylesheet" href="../css/jquery-ui.css">
+    <link rel="stylesheet" href="../css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="../fonts/flaticon/font/flaticon.css">
+    <link rel="stylesheet" href="../css/aos.css">
+    <script type="text/javascript" src="../js/contact.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" type="image/x-icon" href="../LogoSmall.ico"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
-    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="../js/jquery-3.4.1.min.js"></script>
 </head>
 <body>
 
@@ -101,7 +101,7 @@ if(!isset($_SESSION['id'])) {
         <div class="site-mobile-menu-body"></div>
     </div>
 
-    <?php include 'header.php'?>
+    <?php include 'header.php' ?>
 
     <div class="site-section site-hero inner">
         <div class="container">
@@ -199,17 +199,17 @@ if(!isset($_SESSION['id'])) {
 
 </div>
 
-<script src="js/jquery-migrate-3.0.1.min.js"></script>
-<script src="js/jquery-ui.js"></script>
-<script src="js/popper.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/jquery.stellar.min.js"></script>
-<script src="js/jquery.countdown.min.js"></script>
-<script src="js/jquery.magnific-popup.min.js"></script>
-<script src="js/aos.js"></script>
+<script src="../js/jquery-migrate-3.0.1.min.js"></script>
+<script src="../js/jquery-ui.js"></script>
+<script src="../js/popper.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/owl.carousel.min.js"></script>
+<script src="../js/jquery.stellar.min.js"></script>
+<script src="../js/jquery.countdown.min.js"></script>
+<script src="../js/jquery.magnific-popup.min.js"></script>
+<script src="../js/aos.js"></script>
 
-<script src="js/main.js"></script>
+<script src="../js/main.js"></script>
 
 </body>
 </html>

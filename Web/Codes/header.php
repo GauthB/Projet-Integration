@@ -28,14 +28,14 @@ session_start();
                         <li><a href="admin.php">Evènements</a></li>
                         <a href="statistiques.php"> <i class="fas fa-chart-bar"></i></a>
                         <li class="cta"><a href="logout.php">Déconnexion<br></a></li>
-                        <a href="userReglages.php"><i class="fas fa-user-cog"></i></a>
+                        <a href="user/userReglages.php"><i class="fas fa-user-cog"></i></a>
 
                         <?php else:?>
                             <li class="cta"><a href="user.php">S'identifier</a></li>
                         <?php endif?>
                         <?php if($_SESSION['ifAdmin']==true):?>
-                            <a href="addclient.php"> <i class="fas fa-user-plus"></i></a>
-                            <a href="delClient.php"><i class="fas fa-user-minus"></i></a>
+                            <a href="user/addclient.php"> <i class="fas fa-user-plus"></i></a>
+                            <a href="user/delClient.php"><i class="fas fa-user-minus"></i></a>
                         <?php endif?>
 
 
