@@ -1,4 +1,4 @@
-export function Events(){
+export function getEvents(){
    return fetch('https://peopleflux.gauthierbohyn.com/app/dbReturnEvent.php',
    {
      method: "GET",
