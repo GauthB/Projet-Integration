@@ -58,24 +58,32 @@ $data = new data();
 
     <!--  ####################################  Météo   ################################################-->
 
-    <pre style="color: white;" id="testweather"></pre>
-    <div id="openweathermap-widget" class="bg-dark mx-auto mt-4" style="width: 20rem; border-radius: 1rem"></div>
+<!--    <pre style="color: white;" id="testweather"></pre>-->
+    <div id="openweathermap-widget" class="container"></div>
+    <?php
+    $citiesQuery = $dbh->query('SELECT DISTINCT event_city FROM Events');
+    $cities = $citiesQuery->fetchAll(PDO::FETCH_NUM);
+    ?>
     <script>
         var openweathermapapi = 'https://api.openweathermap.org/data/2.5/weather';
-        $.getJSON( openweathermapapi, {
-                q: " Louvain-La-Neuve",
+
+        <?foreach ($cities as $city) :?>
+        $.getJSON(openweathermapapi, {
+                q: "<?=$city[0]?>",
                 units: "metric",
                 lang: 'fr',
                 appid: "7c1c7cea880e80eec79983b920138a3f"
             },
             function (data) {
-                $('#testweather').html(JSON.stringify(data, undefined, 2));
-                var widget = $('#openweathermap-widget');
+                // $('#testweather').html(JSON.stringify(data, undefined, 2));
+                var widget = $('<div id="openweathermap-widget-<?=$city[0]?>" class="bg-dark mx-auto mt-4" style="width: 20rem; border-radius: 1rem"></div>');
                 widget.append('<div id="weather-city" class="d-inline-block px-3 py-1">' + data.name + '</div>');
                 widget.append('<div class="d-inline-block" style="background-color: #B2B1B1"><img src="http://openweathermap.org/img/wn/' + data.weather[0].icon + '.png"></div>');
                 widget.append('<div class="d-inline-block px-3 py-1">' + Math.round(data.main.temp) + '°C</div>');
                 widget.append('<div class="text-center" style="background-color: #e74c3c">' + data.weather[0].description + '</div>');
+                $('#openweathermap-widget').append(widget);
             });
+        <?endforeach;?>
     </script>
 </div>
 <div class="container">
