@@ -19,8 +19,8 @@ if($_POST['sub']){
         $phone = validate_phone_number($_POST['tel']);
     }
 
-    if($mail && !empty($_POST['nom']) && !empty($_POST['password'])) {
-        if(!$phone) {
+    if($mail && !empty($_POST['nom']) && !empty($_POST['password']) && $phone) {
+        if($phone == true) {
             $phone = null;
         }
         $clientInfo = $dbh->prepare('SELECT client_name, client_mail FROM Clients WHERE client_mail = ?');

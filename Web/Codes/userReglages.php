@@ -98,8 +98,7 @@ if(!empty($_POST)) {
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md-10">
-                <h1 class="d-block mb-4" data-aos="fade-up" data-aos-delay="100">En construction</h1>
-                <h1 class="d-block mb-4" data-aos="fade-up" data-aos-delay="100">Info compte <?=$_SESSION['name']?></h1>
+                <h1 class="d-block mb-4" data-aos="fade-up" data-aos-delay="100">Modification de votre compte</h1>
             </div>
         </div>
     </div>
