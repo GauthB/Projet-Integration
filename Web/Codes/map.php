@@ -159,31 +159,25 @@ $data = new data();
 
 
         $('.boutonstats').click(function () {
-            //alert($(this).attr('id').slice(3));
+            var idEvent = $(this).attr('id').slice(3);
+            if(idEvent !== actifId) {
+                $('.id_event'+actifId).hide();
+                $('.id_event'+idEvent).show();
 
-        });
-        <?foreach ($eventInfos as $eventName) :?>
 
-        $('#btn<?=$eventName['id_event']?>').click(function () {
-            if (!mymap.hasLayer(layer<?=$eventName['id_event']?>)) {
-                mymap.removeLayer(actifLayer);
-                mymap.addLayer(layer<?=$eventName['id_event']?>);
-                actifLayer = layer<?=$eventName['id_event']?>;
-
-                $('.eventInfo').hide();
-                $('.id_event<?=$eventName['id_event']?>').show();
-
-                <?php
-                if($eventName['id_event'] == 3) {
-                    echo "$('#ephec').show();";
-                } else {
-                    echo "$('#ephec').hide();";
+                if(idEvent == 3) {
+                    $('#ephec').show();
+                } else if(actifId == 3) {
+                    $('#ephec').hide();
                 }
-                ?>
-            }
-        });
 
-        <? endforeach;?>
+
+                mymap.removeLayer(layers[actifId]);
+                mymap.addLayer(layers[idEvent]);
+                actifId = idEvent;
+            }
+
+        });
 
     </script>
 </div>
