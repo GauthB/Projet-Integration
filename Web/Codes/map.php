@@ -27,7 +27,7 @@ $data = new data();
 <!-- ################################    Boutton Event  ####################################-->
         <?php
         foreach ($eventInfos as $eventName) {
-            echo '<span data-aos="fade-up" class="boutonstats" value="' . $eventName['event_name'] . '" id="btn' . $eventName['id_event'] . '" style="cursor:pointer">'. $eventName['event_name'] .'</span></br></br>';
+            echo '<span data-aos="fade-up" data-city="weather-' . strtolower($eventName['event_city']) . '" class="boutonstats" value="' . $eventName['event_name'] . '" id="btn' . $eventName['id_event'] . '" style="cursor:pointer">'. $eventName['event_name'] .'</span></br></br>';
         }
         ?>
    </ul>
@@ -76,8 +76,8 @@ $data = new data();
             },
             function (data) {
                 // $('#testweather').html(JSON.stringify(data, undefined, 2));
-                var widget = $('<div id="openweathermap-widget-<?=$cities[$i][0]?>" class="weather-city bg-dark mx-auto mt-4 <?php if($i != 0) echo "d-none"?>" style="width: 20rem; border-radius: 1rem"></div>');
-                widget.append('<div id="weather-city" class="d-inline-block px-3 py-1">' + data.name + '</div>');
+                var widget = $('<div id="weather-<?php echo strtolower($cities[$i][0])?>" class="weather-city bg-dark mx-auto mt-4" style="width: 20rem; border-radius: 1rem <?php if($i != 0) echo ";display:none"?>"></div>');
+                widget.append('<div class="d-inline-block px-3 py-1">' + data.name + '</div>');
                 widget.append('<div class="d-inline-block" style="background-color: #B2B1B1"><img src="http://openweathermap.org/img/wn/' + data.weather[0].icon + '.png"></div>');
                 widget.append('<div class="d-inline-block px-3 py-1">' + Math.round(data.main.temp) + '°C</div>');
                 widget.append('<div class="text-center" style="background-color: #e74c3c">' + data.weather[0].description + '</div>');
@@ -100,33 +100,13 @@ $data = new data();
 
     <script>
 
-        <?php
-//        // Layer
-//        foreach ($eventInfos as $eventName) {
-//            echo "\n\t\t" . 'var layer' . $eventName['id_event'] . ' = L.layerGroup();';
-//        }
-//        echo 'var actifLayer = layer' . $eventInfos[0]['id_event'] . ';';
-//
-//        // Créer les points sur la carte
-//        foreach ($stageInfo as $stage) {
-//
-//            echo "\n\t\t" . 'L.marker([ ' .
-//                $stage['stage_latitude'] . ', ' .
-//                $stage['stage_longitude'] . ']).bindPopup("<b>' .
-//                $stage['stage_name'] . '</b><br>Il y a ' .
-//                $stage['nbr_actuel'] . ' participant(s)!<br>'.
-//                'Le nombre maximum de participant est estimé à ' .
-//                $stage['max_people'] . '").addTo(layer' . $stage['id_event'] . ');';
-//        }
-        ?>
-
         // Layers
         var layers = [];
         <?php foreach ($eventInfos as $eventName): ?>
             layers[<?=$eventName['id_event']?>] = L.layerGroup();
         <?php endforeach;?>
 
-        var actifId = <?=$eventInfos[0]['id_event']?>;
+        var actifId = ''+<?=$eventInfos[0]['id_event']?>;
 
         // Créer les points sur la carte
         <?php foreach ($stageInfo as $stage): ?>
@@ -161,17 +141,26 @@ $data = new data();
         $('.boutonstats').click(function () {
             var idEvent = $(this).attr('id').slice(3);
             if(idEvent !== actifId) {
+                // Change les informations affiché de l'évènement
                 $('.id_event'+actifId).hide();
                 $('.id_event'+idEvent).show();
 
-
+                // affiche la carte de l'Ephec
                 if(idEvent == 3) {
                     $('#ephec').show();
                 } else if(actifId == 3) {
                     $('#ephec').hide();
                 }
 
+                // Met à jour la météo
+                var weatherWidget = $('.weather-city:visible');
+                if($(this).data('city') !== weatherWidget.attr('id')) {
+                    weatherWidget.hide();
+                    $('#' + $(this).data('city')).show();
+                }
 
+
+                // Met les points de l'évènement cliqué
                 mymap.removeLayer(layers[actifId]);
                 mymap.addLayer(layers[idEvent]);
                 actifId = idEvent;
