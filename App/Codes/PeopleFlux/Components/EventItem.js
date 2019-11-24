@@ -1,6 +1,8 @@
 import React from 'react'
 import { StyleSheet, View, Text, Platform, TouchableOpacity } from 'react-native'
 import EventDetail from './EventDetail'
+import moment from 'moment'
+
 
 
 class EventItem extends React.Component {
@@ -10,11 +12,14 @@ class EventItem extends React.Component {
   render() {
     const displayDetail = this.props.displayDetail
     const event = this.props.event
+    var idLocale = require('moment/locale/fr');
+    moment.locale('fr', idLocale);
+
 
     return (
           <View style={styles.main_container}>
             <TouchableOpacity
-              onPress={() => displayDetail(event.event_name, event.date_from, event.event_city, event.event_description)}
+              onPress={() => displayDetail(event.event_name, event.date_from, event.event_city, event.event_description, event.date_to, event.event_address)}
             >
               <View style={styles.bordure}>
                 <View style={styles.event_date}>
@@ -26,7 +31,7 @@ class EventItem extends React.Component {
                       <Text style={styles.text_lieu}>{event.event_city}</Text>
                     </View>
                   </View>
-                  <Text style={styles.text_date}>{event.date_from}</Text>
+                  <Text style={styles.text_date}>{moment(event.date_from).format('LL')}</Text>
                 </View>
 
               </View>

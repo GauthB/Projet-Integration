@@ -49,8 +49,8 @@ class Calendrier extends React.Component {
      getEvents().then((data) => {this.setState({data :data, isLoading: false})})
    }
 
-   _displayDetail = (name, date, lieu, description) => {
-  this.props.navigation.navigate("EventDetail", {name: name, date: date, lieu: lieu, description: description})
+   _displayDetail = (name, dateFrom, lieu, description, dateTo, address) => {
+  this.props.navigation.navigate("EventDetail", {name: name, dateFrom: dateFrom, lieu: lieu, description: description, dateTo: dateTo, address: address})
   }
 
   render() {
