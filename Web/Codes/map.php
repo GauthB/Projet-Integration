@@ -1,6 +1,6 @@
 <?php
 require_once "db_connect.php";
-$eventInfoQuery = $dbh->query('SELECT * FROM Events ORDER BY event_name ');
+$eventInfoQuery = $dbh->query('SELECT * FROM Events ORDER BY date_from DESC');
 $eventInfos = $eventInfoQuery->fetchAll(PDO::FETCH_ASSOC);
 
 //SELECT Stages.id_stage, stage_name, stage_latitude, stage_longitude, max_people, hour_from, hour_to, id_event, COUNT(nbr_entree) as nbr_entree, COUNT(nbr_sortie) as nbr_sortie, MAX(heure) as heure
