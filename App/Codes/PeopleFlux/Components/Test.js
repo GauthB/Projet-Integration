@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { StyleSheet, View, TextInput, Text, ActivityIndicator, TouchableOpacity, FlatList } from 'react-native';
-import {Events} from '../Helpers/Utils'
+import {getEvents} from '../Helpers/Utils'
 
 
 
@@ -17,7 +17,8 @@ class Test extends React.Component
 
 
 componentDidMount(){
-  Events().then((data) => {this.setState({data})})
+  getEvents().then((data) => {this.setState({data})})
+
 }
 
     render()
