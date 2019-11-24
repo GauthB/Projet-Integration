@@ -48,15 +48,16 @@ $data = new data();
     <?php endfor;?>
 
 
+
+
     <!--  ####################################  Carte   ################################################-->
 
     <div data-aos="fade-up" id="mapid" style=" height: 480px "></div>
     <div><img src="images/Ephec2.png" alt="" id="ephec" , style="display: none", width="1110px" /></div>
 
 
-
-
     <!--  ####################################  Météo   ################################################-->
+
 
     <div  id="title<?=$eventInfos[$i]['id_event']?>" class="mt-3" data-aos="fade-up">
         <center><div id="openweathermap-widget" class="bg-dark" style="width: 20rem; border-radius: 1rem"></div></center>
@@ -129,6 +130,7 @@ $data = new data();
 
         <?foreach ($eventInfos as $eventName) :?>
         if ( 'btn<?=$eventName['id_event']?>' == 'btn3') {
+            
             document.getElementById('btn<?=$eventName['id_event']?>').onclick = function () {
 
                 if (!mymap.hasLayer(layer<?=$eventName['id_event']?>)) {
@@ -149,6 +151,7 @@ $data = new data();
             }
         }
         else {
+
             document.getElementById('btn<?=$eventName['id_event']?>').onclick = function () {
 
                 if (!mymap.hasLayer(layer<?=$eventName['id_event']?>)) {
