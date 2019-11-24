@@ -58,27 +58,27 @@ $data = new data();
 
     <!--  ####################################  Météo   ################################################-->
 
-
-    <div  id="title<?=$eventInfos[$i]['id_event']?>" class="mt-3" data-aos="fade-up">
-        <center><div id="openweathermap-widget" class="bg-dark" style="width: 20rem; border-radius: 1rem"></div></center>
-        <script>
-            var openweathermapapi = 'https://api.openweathermap.org/data/2.5/weather';
-            $.getJSON( openweathermapapi, {
-                    q: " Louvain-La-Neuve",
-                    units: "metric",
-                    lang: 'fr',
-                    appid: "7c1c7cea880e80eec79983b920138a3f"
-                },
-                function (data) {
-                    var widget = $('#openweathermap-widget');
-                    widget.append('<div id="weather-city" class="d-inline-block px-3 py-1">' + data.name + '</div>');
-                    widget.append('<div class="d-inline-block" style="background-color: #B2B1B1"><img src="http://openweathermap.org/img/wn/' + data.weather[0].icon + '.png"></div>');
-                    widget.append('<div class="d-inline-block px-3 py-1">' + Math.round(data.main.temp) + '°C</div>');
-                    widget.append('<div class="text-center" style="background-color: #e74c3c">' + data.weather[0].description + '</div>');
-                });
-        </script>
-    </div>
-
+    <pre style="color: white;" id="testweather"></pre>
+    <div id="openweathermap-widget" class="bg-dark mx-auto mt-4" style="width: 20rem; border-radius: 1rem"></div>
+    <script>
+        var openweathermapapi = 'https://api.openweathermap.org/data/2.5/weather';
+        $.getJSON( openweathermapapi, {
+                q: " Louvain-La-Neuve",
+                units: "metric",
+                lang: 'fr',
+                appid: "7c1c7cea880e80eec79983b920138a3f"
+            },
+            function (data) {
+                $('#testweather').html(JSON.stringify(data, undefined, 2));
+                var widget = $('#openweathermap-widget');
+                widget.append('<div id="weather-city" class="d-inline-block px-3 py-1">' + data.name + '</div>');
+                widget.append('<div class="d-inline-block" style="background-color: #B2B1B1"><img src="http://openweathermap.org/img/wn/' + data.weather[0].icon + '.png"></div>');
+                widget.append('<div class="d-inline-block px-3 py-1">' + Math.round(data.main.temp) + '°C</div>');
+                widget.append('<div class="text-center" style="background-color: #e74c3c">' + data.weather[0].description + '</div>');
+            });
+    </script>
+</div>
+<div class="container">
 
     <!--  ####################################  Info sur les évènements   ################################################-->
     <h2 data-aos="fade-up">Info</h2>
@@ -130,7 +130,7 @@ $data = new data();
 
         <?foreach ($eventInfos as $eventName) :?>
         if ( 'btn<?=$eventName['id_event']?>' == 'btn3') {
-            
+
             document.getElementById('btn<?=$eventName['id_event']?>').onclick = function () {
 
                 if (!mymap.hasLayer(layer<?=$eventName['id_event']?>)) {
