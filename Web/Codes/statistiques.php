@@ -29,14 +29,16 @@ require_once "esp-data.php";
     <link rel="icon" type="image/x-icon" href="LogoSmall.ico"/>
     <script src="js/Chart.js"></script>
     <script src="js/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
     <style type="text/css">
         @media print {
-            .mb-0, .boutonstats, .boutonstats, #yo, .boutonstats, .d-block mb-3 caption,.site-footer{
+            .boutonstats, .boutonstats, #yo, .boutonstats, .d-block mb-3 caption,.site-footer{
                 display: none;
             }
         }
     </style>
+   
 </head>
 
 <body>
@@ -71,45 +73,66 @@ require_once "esp-data.php";
                     border-top: 1px solid red
                 }
             </style><br>
-            <?php
+             <?php /*
 
-            $sth = $dbh -> prepare('SELECT * FROM Events WHERE id_client=:client_id');
+            $sth = $dbh -> prepare('SELECT *
+                                            FROM Events 
+                                            join Clients ON Events.id_client = Clients.id_client 
+                                            WHERE Clients.id_client =:client_id');
             $sth->execute(array(':client_id' => $_SESSION['id']));
             $eventsInfo = $sth -> fetchAll(PDO::FETCH_ASSOC);
             $sth->closeCursor();
 
             //$sth2->execute(array(':event_id' => $_EVENT['id_event']));
-            $sth2 = $dbh -> prepare('SELECT stage_name FROM Stages WHERE id_event');
+            $sth2 = $dbh -> prepare('SELECT * 
+                                              FROM Stages 
+                                              join Events on Stages.id_event = Events.id_event
+                                              join Clients on Events.id_client = Clients.id_client
+                                              where Clients.id_client =:client_id');
             $sth2->execute(array(':client_id' => $_SESSION['id']));
-            $difEvent = $sth2 -> fetchAll(PDO::FETCH_ASSOC);
+            $difStage = $sth2 -> fetchAll(PDO::FETCH_ASSOC);
             $sth2->closeCursor();
 
-            echo  ' <form method="get">';
+             echo  ' <br><br><form method="get">';
 
             if(empty($eventsInfo)) {
                 echo '<p data-aos="fade-up">Vous n\'avez aucun évènements</p>';
             }
             else {
+                echo '<select>';
                 foreach ($eventsInfo as $event) {
-                    echo '<br><br><span class="boutonstats" style="margin-bottom: 10px">' .$event["event_name"] .  $eventName['id_event'] . '</span>
-                          <br><SELECT name="nom" size="1"  id="yo" onchange="graphe();" value="' . $_GET["nom"].'">';
-                    if(empty($difEvent)) {
-                        echo '<option>Vous n\'avez aucune stage</option>';
-                    }
-                    else {
-                        foreach ($difEvent as $event) {
-                            $res = ($_GET['nom']==$event["stage_name"]?"selected":"");
-                            echo '<option id="' . $event["id_stage"] . '" '. $res .'>' .
-                                $event["stage_name"] . '</option>' ;
-                        }
-                    }
-                    echo '</SELECT>';
+                    //$res = ($_GET['nom']==$event["event_name"]?"selected":"");
+                    echo '<option id="event_'.$event["id_event"].'">' .
+                          $event["event_name"] . '</option></span>';
+                }
+                echo '</SELECT><br>';
+            }
+
+            if(empty($difStage)) {
+                echo '<option>Vous n\'avez aucune stage</option>';
+            }
+            else {
+                echo '<br><SELECT name="nom" size="1"  id="yo" onchange="graphe();">';
+                foreach ($difStage as $stage) {
+                    $res = ($_GET['nom']==$stage["stage_name"]?"selected":"");
+                    echo '<option id="stage_' . $stage["id_stage"] . '" '. $res .'>' .
+                        $stage["stage_name"] . '</option>' ;
                 }
             }
+            echo '</select>';
             ?>
             <br><br><input type="submit" class="boutonstats">
             <br>
             <hr>
+            */
+            ?>
+            <br><select id="eventt"  class="yop" onchange="stage();number();"></select></br>
+            <br><select id="stagee"  onchange="number();graphe();"></select></br>
+            <br style="margin-top=20px">
+            <button name="button" type="button" id="tab" class="boutonstats" onclick="number()"> Afficher ses statistiques </button>
+            <button name="button" type="button" id="tab" class="boutonstats" onclick="tbleau()"> Ne plus afficher </button>
+
+            <bouton
             <!-- affiche les statistiques liés à un evennement -->
             <div class="d-block mb-3 caption" data-aos="fade-up"></br>
                 <h2>Statistiques public</h2>
@@ -123,31 +146,29 @@ require_once "esp-data.php";
                 <h2>Statistiques privées</h2>
 
                 Afficher derniers resultats :
-                <input name="cpt" type="number" step="10" value="10" min="10" style="width: 3rem">
-                <input type="submit" class="boutonstats" id="boutonstats">
+                <input name="cpt" id="cpt" type="number" step="10" value="10" min="10" style="width: 3rem">
+                <button name="button" type="button" id="tab" class="boutonstats" onclick="number()"> Actualiser </button>
             </form>
 
-            <table class="tftable" border="1" data-aos="fade-up">
+
+            <table class="tftable" id="tablee" border="1" data-aos="fade-up" >
                 <tr><th>Nom Scene</th> <th>ID</th> <th>Entrées</th> <th>Sorties</th> <th>Actuel</th> <th>Heure</th> </tr>
-                <?php echo '<br>' . $data->afficheStat("prive",$_SESSION['id'],$_GET['nom'],$_GET['cpt']); ?>
+                 <?php // echo '<br>' . $data->afficheStat("prive",$_SESSION['id'],$_GET['nom'],$_GET['cpt']); ?>
             </table>
             <br>
             <hr>
-            <button name="button" id="boutongraphe" class="boutonstats"> Observer son graphique</button>
-            <button name="button" id="grapheannule" class="boutonstats"> Annuler </button>
-            <button name="button" id="boutonimprimer" class="boutonstats" onClick="window.print(); return false;"> Imprimer la page</button>
+            <button name="button" id="boutongraphe" class="boutonstats" onclick="afficher(),graphe();"> Observer son graphique</button>
+            <button name="button" id="grapheannule" class="boutonstats" onclick="annuler();"> Annuler </button>
+            <button name="button" id="boutonimprimer" class="boutonstats" onClick="window.print();"> Imprimer la page</button>
 
-
-            <canvas id="myChart" width="20%" height="5%" style="display: none"></canvas>
         </div>
     </div>
+    <canvas id="myChart" width="20%" height="5%" style="display: none"></canvas>
+
+
+
 
     <script>
-
-
-
-
-
 
         <?php
         $grapheQuery = $dbh->query(
@@ -155,24 +176,112 @@ require_once "esp-data.php";
 " );
         $grapheInfo = $grapheQuery->fetchAll(PDO::FETCH_ASSOC);
 
+        $clientQuery = $dbh->query(
+            " SELECT * FROM `Clients` as c join Events as e where c.id_client=e.id_client
+" );
+        $clientInfo = $clientQuery->fetchAll(PDO::FETCH_ASSOC);
 
+        $stageQuery = $dbh->query(
+            " SELECT * FROM `Events` as e join Stages as s where e.id_event = s.id_event
+" );
+        $stageInfo = $stageQuery->fetchAll(PDO::FETCH_ASSOC);
 
         ?>
+
+
+
+        var idclient = <?php echo json_encode($_SESSION['id']); ?>;
+        var variableRecuperee = <?php echo json_encode($grapheInfo); ?>;
+        var variableClient = <?php echo json_encode($clientInfo); ?>;
+        var variableStage = <?php echo json_encode($stageInfo); ?>;
+
+        window.onload = function() {
+            for (a = 0; a < variableClient.length; a++) {
+                if (idclient == variableClient[a]['id_client']) {
+                    document.getElementById("eventt").innerHTML += "<option " + variableClient[a]['id_event'] + ">" + variableClient[a]['event_name'] + "</option>"
+                }
+            }
+
+
+            for (e = 0; e < variableRecuperee.length; e++) {
+                if (document.getElementById('stagee').value == variableRecuperee[e]['stage_name']) {
+
+                }
+            }
+
+            if (document.getElementById("eventt").value == "Welcome Spring Festival") {
+                for (p = 0; p < variableStage.length; p++) {
+                    if (variableStage[p]['id_event'] == 2) {
+                        document.getElementById("stagee").innerHTML += "<option>" + variableStage[p]['stage_name'] + "</option>"
+                    }
+                }
+            }
+            for (p = 0; p < variableStage.length; p++) {
+                if (document.getElementById("eventt").value == variableStage[p]['event_name']) {
+                    document.getElementById("stagee").innerHTML += "<option>" + variableStage[p]['stage_name'] + "</option>"
+                }
+            }
+        }
+
+        function afficher() {
+            document.getElementById("myChart").style.display = "block";
+        }
+        function annuler() {
+
+            document.getElementById("myChart").style.display = "none";
+        }
+        window.onload = function() {
+            for (a = 0; a < variableClient.length; a++) {
+                if (idclient == variableClient[a]['id_client']) {
+                    document.getElementById("eventt").innerHTML += "<option " + variableClient[a]['id_event'] + ">" + variableClient[a]['event_name'] + "</option>"
+                }
+            }
+
+
+            for (e = 0; e < variableRecuperee.length; e++) {
+                if (document.getElementById('stagee').value == variableRecuperee[e]['stage_name']) {
+
+                }
+            }
+
+            if (document.getElementById("eventt").value == "Welcome Spring Festival") {
+                for (p = 0; p < variableStage.length; p++) {
+                    if (variableStage[p]['id_event'] == 2) {
+                        document.getElementById("stagee").innerHTML += "<option>" + variableStage[p]['stage_name'] + "</option>"
+                    }
+                }
+            }
+            for (p = 0; p < variableStage.length; p++) {
+                if (document.getElementById("eventt").value == variableStage[p]['event_name']) {
+                    document.getElementById("stagee").innerHTML += "<option>" + variableStage[p]['stage_name'] + "</option>"
+                }
+            }
+        }
+
+        function afficher() {
+            document.getElementById("myChart").style.display = "block";
+        }
+        function annuler() {
+
+            document.getElementById("myChart").style.display = "none";
+        }
+
+
         function graphe() {
+
             var i = 0;
             var heures = [];
             var nbrAct = [];
             var myChart = null;
             var ctx = null;
-            for (e = 0; e < variableRecuperee.length; e++) {
+            for (f = 0; f < variableRecuperee.length; f++) {
 
-                if (document.getElementById('yo').value == variableRecuperee[e]['stage_name']) {
+                if (document.getElementById("stagee").value == variableRecuperee[f]["stage_name"]) {
 
 
-                    heures[i] = variableRecuperee[e]['heure']
-                    nbrAct[i] = variableRecuperee[e]['nbr_actuel']
+                    heures[i] = variableRecuperee[f]["heure"];
+                    nbrAct[i] = variableRecuperee[f]["nbr_actuel"];
                     i++;
-                } else {
                 }
 
 
@@ -208,21 +317,59 @@ require_once "esp-data.php";
                     }
                 }
             });
-            document.getElementById("boutongraphe").onclick = function() {
-                document.getElementById("myChart").style.display = "block";
+        }
+        function stage() {
+            document.getElementById("stagee").innerHTML = "";
+            if (document.getElementById("eventt").value == "Welcome Spring Festival") {
+                for (p = 0; p < variableStage.length; p++) {
+                    if (variableStage[p]['id_event'] == 2) {
+                        document.getElementById("stagee").innerHTML += "<option>" + variableStage[p]['stage_name'] + "</option>"
+                    }
+                }
             }
-            document.getElementById("grapheannule").onclick = function() {
-                document.getElementById("myChart").style.display = "none";
+            for (p = 0; p < variableStage.length; p++) {
+                if (document.getElementById("eventt").value == variableStage[p]['event_name']) {
+                    document.getElementById("stagee").innerHTML += "<option>" + variableStage[p]['stage_name'] + "</option>"
+                }
             }
         }
 
-        var variableRecuperee = <?php echo json_encode($grapheInfo); ?>;
 
-            for (e = 0; e < variableRecuperee.length; e++) {
-                if (document.getElementById('yo').value == variableRecuperee[e]['stage_name']) {
-                    graphe();
+            function number() {
+            indica = document.getElementById("cpt").value;
+            var indic = 0;
+                document.getElementById("tablee").innerHTML =  "<tr><th>Nom Scene</th> <th>ID</th> <th>Entrées</th> <th>Sorties</th> <th>Actuel</th> <th>Heure</th> </tr>";
+                document.getElementById("tablee").innerHTML += "<tr>";
+                for (c = 0; c < variableRecuperee.length; c++) {
+                    if (document.getElementById("stagee").value == variableRecuperee[c]['stage_name']) {
+                        indic++
+                        if( indic <= indica) {
+                            document.getElementById("tablee").innerHTML += "<td>" + variableRecuperee[c]['stage_name'] + "</td><td>" + variableRecuperee[c]['id_stage'] + "</td><td>" + variableRecuperee[c]['nbr_entree'] + "</td><td>" + variableRecuperee[c]['nbr_sortie'] + "</td><td>" + variableRecuperee[c]['nbr_actuel'] + "</td><td>" + variableRecuperee[c]['heure'] + "</td>"
+                        }
+                        }
                 }
+                document.getElementById("tablee").innerHTML += "</tr>";
             }
+
+            function tableau() {
+
+                document.getElementById("tablee").innerHTML =  "<tr><th>Nom Scene</th> <th>ID</th> <th>Entrées</th> <th>Sorties</th> <th>Actuel</th> <th>Heure</th> </tr>";
+                document.getElementById("tablee").innerHTML += "<tr>";
+                for (c = 0; c < variableRecuperee.length; c++) {
+                    if (document.getElementById("stagee").value == variableRecuperee[c]['stage_name']) {
+                        document.getElementById("tablee").innerHTML += "<td>" + variableRecuperee[c]['stage_name'] + "</td><td>" + variableRecuperee[c]['id_stage'] + "</td><td>" + variableRecuperee[c]['nbr_entree'] + "</td><td>" + variableRecuperee[c]['nbr_entree'] + "</td><td>" + variableRecuperee[c]['nbr_actuel'] + "</td><td>" + variableRecuperee[c]['heure'] + "</td>"
+                    }
+                }
+                document.getElementById("tablee").innerHTML += "</tr>";
+            }
+
+            function tbleau() {
+                document.getElementById("tablee").innerHTML =  "<tr><th>Nom Scene</th> <th>ID</th> <th>Entrées</th> <th>Sorties</th> <th>Actuel</th> <th>Heure</th> </tr>";
+            }
+
+
+
+
 
 
     </script>
@@ -231,7 +378,7 @@ require_once "esp-data.php";
         <?php include("footer.php"); ?>
     </footer>
 
-</div>
+
 
 <script src="js/jquery-migrate-3.0.1.min.js"></script>
 <script src="js/jquery-ui.js"></script>

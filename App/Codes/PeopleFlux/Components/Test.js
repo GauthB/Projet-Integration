@@ -29,7 +29,7 @@ componentDidMount(){
 
               <FlatList
                  data={this.state.data}
-                 renderItem={({ item }) => <Text> {item.event_address} </Text>}
+                 renderItem={({ item }) => <Text> {item.event_description} </Text>}
                  keyExtractor={item => item.event_id}
                />
 

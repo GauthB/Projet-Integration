@@ -19,6 +19,7 @@
 
     <script src="js/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="js/contact.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 </head>
 <body>
 
@@ -48,7 +49,7 @@
     </div>
 
     <!-- Le formulaire de la page-->
-    <div class="site-section">
+    <div style="margin-bottom: 200px;">
         <div class="container">
             <div class="row">
                 <div class="col-md-6" data-aos="fade-up">

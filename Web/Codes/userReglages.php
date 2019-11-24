@@ -3,58 +3,10 @@ require_once "db_connect.php";
 $errors = array();
 $messages = array();
 
-if($_POST['sub']){
-    $mail = filter_var($_POST['mail'], FILTER_SANITIZE_EMAIL);
-    $phone = true;
-    if(!empty($_POST['tel'])) {
-        $phone = validate_phone_number($_POST['tel']);
-    }
-
-    if($mail && !empty($_POST['nom']) && !empty($_POST['password']) && $phone) {
-        $clientInfo = $dbh->prepare('SELECT client_name, client_mail FROM Clients WHERE client_mail = ?');
-        $clientInfo->execute([$mail]);
-        $client = $clientInfo->fetchAll(PDO::FETCH_ASSOC);
-        $clientInfo->closeCursor();
-
-        if(count($client)>0) {
-            array_push($errors, 'Cette adresse mail est déjà utilisé.');
-        } else {
-            $sql1 = 'INSERT INTO Clients (client_name, client_mail, client_phone ,client_password ) VALUES (?,?,?,?)';
-
-            $sth = $dbh -> prepare($sql1);
-            $sth -> execute([$_POST['nom'],$mail,$_POST['tel'],password_hash($_POST['password'],PASSWORD_DEFAULT)]);
-            array_push($messages, 'Nouveau client ajouté');
-        }
-    } else {
-        array_push($errors, 'Erreur lors de l\'encodage');
-    }
-}
-
-function validate_phone_number($phone)
-{
-    // Allow +, - and . in phone number
-    $filtered_phone_number = filter_var($phone, FILTER_SANITIZE_NUMBER_INT);
-    // Remove "-" from number
-    $phone_to_check = str_replace("-", "", $filtered_phone_number);
-    // Check the lenght of number
-    // This can be customized if you want phone number from a specific country
-    if (strlen($phone_to_check) < 9  || strlen($phone_to_check) > 14) {
-        return false;
-    } else {
-        return $phone_to_check;
-    }
-}
-
 ?>
 
 <?php
 session_start();
-
-if($_SESSION['ifAdmin']!=true){
-    header('Location: index.php');
-    exit;
-}
-
 
 
 if(!isset($_SESSION['id'])) {
@@ -67,7 +19,7 @@ if(!isset($_SESSION['id'])) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>PeopleFlux - Ajout client</title>
+    <title>PeopleFlux - Reglages</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -107,7 +59,8 @@ if(!isset($_SESSION['id'])) {
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-10">
-                    <h1 class="d-block mb-4" data-aos="fade-up" data-aos-delay="100">Ajout d'un client</h1>
+                    <h1 class="d-block mb-4" data-aos="fade-up" data-aos-delay="100">En construction</h1>
+                    <h1 class="d-block mb-4" data-aos="fade-up" data-aos-delay="100">Info compte <?=$_SESSION['name']?></h1>
                 </div>
             </div>
         </div>
@@ -120,46 +73,32 @@ if(!isset($_SESSION['id'])) {
 
 
                     <form style="margin: 0 auto; width: 300px;" class="contact-form"  id ="form_inscription" action="" method="post">
-                        <?php
-                        if(count($errors) > 0) {
-                            echo '<div class="alert alert-danger">';
-                            foreach ($errors as $error) {
-                                echo $error . '<br>';
-                            }
-                            echo '</div>';
-                        }
 
-                        if(count($messages) > 0) {
-                            echo '<div class="alert alert-success">';
-                            foreach ($messages as $message) {
-                                echo $message . '<br>';
-                            }
-                            echo '</div>';
-                        }
 
-                        ?>
+
+
+
                         <div class="row form-group">
 
                             <div " class="col-md-12">
-                            <label class="" for="email">Nom du client*</label>
-                            <input type="text" name="nom" value="" placeholder="Nom."   class="input form-control" >
-                        </div>
-                </div>
-
+                            <label class="" for="email"><i class="fas fa-redo-alt"></i> Votre nom:</label>
+                            <input type="text" name="nom" value="" placeholder="<?php echo$_SESSION['name'];  ?> "   class="input form-control" >
+                            </div>
+                         </div>
 
 
                 <div class="row form-group">
 
                     <div class="col-md-12">
-                        <label class="" >Adresse mail*</label>
-                        <input type="email" name="mail" value="" placeholder="E-Mail."  class="input form-control" >
+                        <label class="" >Adresse mail</label>
+                        <input type="email" name="mail" value="" placeholder="<?php echo $_SESSION['mail'];  ?>"  class="input form-control" >
                     </div>
                 </div>
                 <div class="row form-group">
 
                     <div class="col-md-12">
-                        <label class="" >Mot de passe*</label>
-                        <input type="password" name="password" value="" placeholder="Créé lui un mot de passe." required class="input form-control" >
+                        <label class="" >Mot de passe</label>
+                        <input type="password" name="password" value="" placeholder="******" required class="input form-control" >
                     </div>
                 </div>
 
@@ -167,7 +106,7 @@ if(!isset($_SESSION['id'])) {
 
                     <div class="col-md-12">
                         <label class="" >Numéro de tél.</label>
-                        <input type="text"  class="input form-control" name="tel" placeholder="Téléphone.">
+                        <input type="text"  class="input form-control" name="tel" placeholder="<?php echo $_SESSION['phone'];  ?>">
                     </div>
                 </div>
 
@@ -177,7 +116,7 @@ if(!isset($_SESSION['id'])) {
                 <div class="row form-group">
                     <div class="col-md-12">
 
-                        <input type="submit" name="sub" value="Ajouter" class="btn btn-primary py-2 px-4 text-white">
+                       <!-- <input type="submit" name="sub" value="mise à jour" class="btn btn-primary py-2 px-4 text-white">-->
 
                     </div>
                 </div>
@@ -190,12 +129,12 @@ if(!isset($_SESSION['id'])) {
     </div>
 </div>
 
-    <footer class="site-footer">
+<footer class="site-footer">
 
-        <?php
-        include("footer.php");
-        ?>
-    </footer>
+    <?php
+    include("footer.php");
+    ?>
+</footer>
 
 </div>
 

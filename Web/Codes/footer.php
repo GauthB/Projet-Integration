@@ -17,7 +17,7 @@
         <div class="col-md-4">
             <h2 class="footer-heading text-uppercase mb-4">Contactez-nous</h2>
             <p>
-                <a href="mailto:peopleflux@gmail.com" class="p-2 pl-0"><span> People Flux </span></a>
+                <a href="pageContact.php" class="p-2 pl-0"><span> People Flux </span></a>
 
             </p>
         </div>

@@ -5,7 +5,7 @@ session_start();
 if(isset($_POST['envoi'])) {
     require_once "db_connect.php";
     
-    $sql = 'SELECT id_client, client_name, client_mail, client_password
+    $sql = 'SELECT id_client, client_name, client_mail, client_password, client_phone
     FROM Clients
   WHERE client_mail = :client_mail';
     $sth = $dbh->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
@@ -18,11 +18,30 @@ if(isset($_POST['envoi'])) {
         echo "connection refusé";
     } else {
         if($isPasswordCorrect) {
+
+
+            if($user['client_mail']=='peopleflux@gmail.com'){
+                session_start();
+                $_SESSION['id'] = $user['id_client'];
+                $_SESSION['name'] = $user['client_name'];
+                $_SESSION['mail'] = $user['client_mail'];
+                $_SESSION['mdp'] = $user['client_password'];
+                $_SESSION['phone'] = $user['client_phone'];
+                $_SESSION['ifAdmin']=true;
+
+                echo 'Vous êtes connecté !';
+                header('Location: addclient.php');
+            }
+            else{
             session_start();
             $_SESSION['id'] = $user['id_client'];
             $_SESSION['name'] = $user['client_name'];
+            $_SESSION['mail'] = $user['client_mail'];
+            $_SESSION['mdp'] = $user['client_password'];
+            $_SESSION['phone'] = $user['client_phone'];
             echo 'Vous êtes connecté !';
             header('Location: admin.php');
+            }
         }
         else {
             echo 'Mauvais identifiant ou mot de passe !';
@@ -51,6 +70,7 @@ if(isset($_POST['envoi'])) {
     <link rel="stylesheet" href="css/style.css">
 
     <script src="js/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 </head>
 <body>
 <div class="site-wrap">
@@ -78,7 +98,7 @@ if(isset($_POST['envoi'])) {
         </div>
     </div>
 
-    <div class="site-section">
+    <div style="margin-bottom: 200px;">
         <div class="container">
             <div class="row">
                 <div class="col-md-6" data-aos="fade-up">

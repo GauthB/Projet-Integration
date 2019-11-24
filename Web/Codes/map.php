@@ -3,6 +3,11 @@ require_once "db_connect.php";
 $eventInfoQuery = $dbh->query('SELECT * FROM Events ORDER BY event_name ');
 $eventInfos = $eventInfoQuery->fetchAll(PDO::FETCH_ASSOC);
 
+//SELECT Stages.id_stage, stage_name, stage_latitude, stage_longitude, max_people, hour_from, hour_to, id_event, COUNT(nbr_entree) as nbr_entree, COUNT(nbr_sortie) as nbr_sortie, MAX(heure) as heure
+//FROM Stages LEFT JOIN Nbr_Personne
+//ON Stages.id_stage = Nbr_Personne.id_stage
+//GROUP BY Stages.id_stage, stage_name, stage_latitude, stage_longitude, max_people, hour_from, hour_to, id_event
+
 // récupère les informations sur les scènes
 $stageQuery = $dbh->query("SELECT * 
                   FROM Stages LEFT JOIN Nbr_Personne 
@@ -10,20 +15,19 @@ $stageQuery = $dbh->query("SELECT *
                   GROUP BY Stages.id_stage" );
 $stageInfo = $stageQuery->fetchAll(PDO::FETCH_ASSOC);
 
+
+
 require_once "esp-data.php";
 $data = new data();
 ?>
 
 <div class="container">
 
-   <!-- http://api.openweathermap.org/data/2.5/forecast/daily?lat=50.6702&lon=4.61523&cnt=14&mode=json&units=metric&lang=fr -->
-
-    <link rel="stylesheet" href="css/add.css">
     <ul>
 <!-- ################################    Boutton Event  ####################################-->
         <?php
         foreach ($eventInfos as $eventName) {
-            echo '<span class="boutonstats" value="' . $eventName['event_name'] . '" id="btn' . $eventName['id_event'] . '">'. $eventName['event_name'] .'</span></br></br>';
+            echo '<span data-aos="fade-up" class="boutonstats" value="' . $eventName['event_name'] . '" id="btn' . $eventName['id_event'] . '">'. $eventName['event_name'] .'</span></br></br>';
         }
         ?>
    </ul>
@@ -43,10 +47,38 @@ $data = new data();
         </div>
     <?php endfor;?>
 
+
+
+
     <!--  ####################################  Carte   ################################################-->
 
     <div data-aos="fade-up" id="mapid" style=" height: 480px "></div>
     <div><img src="images/Ephec2.png" alt="" id="ephec" , style="display: none", width="1110px" /></div>
+
+
+    <!--  ####################################  Météo   ################################################-->
+
+    <pre style="color: white;" id="testweather"></pre>
+    <div id="openweathermap-widget" class="bg-dark mx-auto mt-4" style="width: 20rem; border-radius: 1rem"></div>
+    <script>
+        var openweathermapapi = 'https://api.openweathermap.org/data/2.5/weather';
+        $.getJSON( openweathermapapi, {
+                q: " Louvain-La-Neuve",
+                units: "metric",
+                lang: 'fr',
+                appid: "7c1c7cea880e80eec79983b920138a3f"
+            },
+            function (data) {
+                $('#testweather').html(JSON.stringify(data, undefined, 2));
+                var widget = $('#openweathermap-widget');
+                widget.append('<div id="weather-city" class="d-inline-block px-3 py-1">' + data.name + '</div>');
+                widget.append('<div class="d-inline-block" style="background-color: #B2B1B1"><img src="http://openweathermap.org/img/wn/' + data.weather[0].icon + '.png"></div>');
+                widget.append('<div class="d-inline-block px-3 py-1">' + Math.round(data.main.temp) + '°C</div>');
+                widget.append('<div class="text-center" style="background-color: #e74c3c">' + data.weather[0].description + '</div>');
+            });
+    </script>
+</div>
+<div class="container">
 
     <!--  ####################################  Info sur les évènements   ################################################-->
     <h2 data-aos="fade-up">Info</h2>
@@ -73,7 +105,7 @@ $data = new data();
                 $stage['stage_latitude'] . ', ' .
                 $stage['stage_longitude'] . ']).bindPopup("<b>' .
                 $stage['stage_name'] . '</b><br>Il y a ' .
-                '0' . ' participant(s)!<br>'.
+                $stage['nbr_actuel'] . ' participant(s)!<br>'.
                 'Le nombre maximum de participant est estimé à ' .
                 $stage['max_people'] . '").addTo(layer' . $stage['id_event'] . ');';
         }
@@ -98,6 +130,7 @@ $data = new data();
 
         <?foreach ($eventInfos as $eventName) :?>
         if ( 'btn<?=$eventName['id_event']?>' == 'btn3') {
+
             document.getElementById('btn<?=$eventName['id_event']?>').onclick = function () {
 
                 if (!mymap.hasLayer(layer<?=$eventName['id_event']?>)) {
@@ -118,6 +151,7 @@ $data = new data();
             }
         }
         else {
+
             document.getElementById('btn<?=$eventName['id_event']?>').onclick = function () {
 
                 if (!mymap.hasLayer(layer<?=$eventName['id_event']?>)) {
