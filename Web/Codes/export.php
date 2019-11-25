@@ -12,4 +12,3 @@ $req->execute();
 $data = $req->fetchAll();
 require 'class_csv.php';
 CSV::export($data,'stat_event');
-?>
