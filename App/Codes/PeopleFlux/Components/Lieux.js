@@ -66,21 +66,24 @@ if (this.state.isLoading) {
    const title = `Longitude: ${this.state.coordonnes[counter][0]} Latitude: ${this.state.coordonnes[counter][1]}`;
 
    return (
-     <MapboxGL.PointAnnotation
-       key={id}
-       id={id}
-       title={title}
-       coordinate={coordinate}>
 
-       <Image
-       source={require('../Images/marker.png')}
-       style={{
-         flex: 1,
-         resizeMode: 'contain',
-         width: 50,
-         height: 50
-         }}/>
-     </MapboxGL.PointAnnotation>
+       <MapboxGL.PointAnnotation
+         key={id}
+         id={id}
+         title=''
+         coordinate={coordinate}>
+
+         <Image
+         source={require('../Images/marker.png')}
+         style={{
+           flex: 1,
+           resizeMode: 'contain',
+           width: 50,
+           height: 50
+           }}/>
+           <MapboxGL.Callout title={title}/>
+        </MapboxGL.PointAnnotation>
+
    );
  }
 

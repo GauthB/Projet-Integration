@@ -12,14 +12,13 @@ const {Builder, By, Key, until} = require('selenium-webdriver');
     await driver.sleep(2000);
     await driver.findElement(By.id('message')).sendKeys('Ceci est un test comme message', Key.TAB);
     await driver.sleep(2000);
-<<<<<<< HEAD
+
     await driver.findElement(By.id('submitContact')).sendKeys(Key.ENTER);
     await driver.sleep(9000);
-=======
+
    // await driver.findElement(By.id('submitContact')).sendKeys(Key.ENTER);
    // await driver.sleep(2000);
     var test="########## Test ok ########## ";
->>>>>>> 4b4e7a517e54bf88e8a184a105f2fe080cbd9440
 
   } finally {
     await driver.quit();
