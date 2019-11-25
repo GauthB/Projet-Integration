@@ -172,7 +172,7 @@ require_once "esp-data.php";
 " );
         $grapheInfo = $grapheQuery->fetchAll(PDO::FETCH_ASSOC);
         $clientQuery = $dbh->query(
-            " SELECT * FROM `Clients` as c join Events as e where c.id_client=e.id_client
+            " SELECT c.id_client, e.id_event, e.event_name, e.event_city, e.date_from, e.date_to, e.id_client FROM `Clients` as c join Events as e where c.id_client=e.id_client
 " );
         $clientInfo = $clientQuery->fetchAll(PDO::FETCH_ASSOC);
         $stageQuery = $dbh->query(
