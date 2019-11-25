@@ -1,5 +1,14 @@
 <?php
+
+session_start();
+
+if (!isset($_SESSION['id']) && $_SESSION['ifAdmin'] != true) {
+    header('Location: index.php');
+    exit;
+}
+
 require_once "db_connect.php";
+require_once "php/function.php";
 $errors = array();
 $messages = array();
 
@@ -11,6 +20,9 @@ if($_POST['sub']){
     }
 
     if($mail && !empty($_POST['nom']) && !empty($_POST['password']) && $phone) {
+        if($phone == true) {
+            $phone = null;
+        }
         $clientInfo = $dbh->prepare('SELECT client_name, client_mail FROM Clients WHERE client_mail = ?');
         $clientInfo->execute([$mail]);
         $client = $clientInfo->fetchAll(PDO::FETCH_ASSOC);
@@ -22,7 +34,7 @@ if($_POST['sub']){
             $sql1 = 'INSERT INTO Clients (client_name, client_mail, client_phone ,client_password ) VALUES (?,?,?,?)';
 
             $sth = $dbh -> prepare($sql1);
-            $sth -> execute([$_POST['nom'],$mail,$_POST['tel'],password_hash($_POST['password'],PASSWORD_DEFAULT)]);
+            $sth -> execute([$_POST['nom'],$mail,$phone,password_hash($_POST['password'],PASSWORD_DEFAULT)]);
             array_push($messages, 'Nouveau client ajouté');
         }
     } else {
@@ -30,39 +42,10 @@ if($_POST['sub']){
     }
 }
 
-function validate_phone_number($phone)
-{
-    // Allow +, - and . in phone number
-    $filtered_phone_number = filter_var($phone, FILTER_SANITIZE_NUMBER_INT);
-    // Remove "-" from number
-    $phone_to_check = str_replace("-", "", $filtered_phone_number);
-    // Check the lenght of number
-    // This can be customized if you want phone number from a specific country
-    if (strlen($phone_to_check) < 9  || strlen($phone_to_check) > 14) {
-        return false;
-    } else {
-        return $phone_to_check;
-    }
-}
 
 ?>
 
-<?php
-session_start();
 
-if($_SESSION['ifAdmin']!=true){
-    header('Location: index.php');
-    exit;
-}
-
-
-
-if(!isset($_SESSION['id'])) {
-    header('Location: index.php');
-    exit;
-}
-
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -101,7 +84,7 @@ if(!isset($_SESSION['id'])) {
         <div class="site-mobile-menu-body"></div>
     </div>
 
-    <?php include 'header.php'?>
+    <?php include 'header.php' ?>
 
     <div class="site-section site-hero inner">
         <div class="container">
@@ -184,7 +167,6 @@ if(!isset($_SESSION['id'])) {
 
 
                 </form>
-                <div id="errorContact"></div>
             </div>
         </div>
     </div>

@@ -19,6 +19,8 @@ if(!isset($_SESSION['id'])) {
     exit;
 }
 
+$sth = $dbh->prepare('DELETE FROM Clients WHERE id_client = ?');
+$sth->execute([$_POST['id']]);
 ?>
 
 
@@ -59,7 +61,7 @@ if(!isset($_SESSION['id'])) {
         <div class="site-mobile-menu-body"></div>
     </div>
 
-    <?php include 'header.php'?>
+    <?php include 'header.php' ?>
 
     <div class="site-section site-hero inner">
         <div class="container">

@@ -34,7 +34,7 @@ session_start();
                             <li class="cta"><a href="user.php">S'identifier</a></li>
                         <?php endif?>
                         <?php if($_SESSION['ifAdmin']==true):?>
-                            <a href="addclient.php"> <i class="fas fa-user-plus"></i></a>
+                            <a href="user/addclient.php"> <i class="fas fa-user-plus"></i></a>
                             <a href="delClient.php"><i class="fas fa-user-minus"></i></a>
                         <?php endif?>
 
