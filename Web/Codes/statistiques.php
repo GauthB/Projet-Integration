@@ -23,6 +23,7 @@ require_once "esp-data.php";
     <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
     <link rel="stylesheet" href="css/aos.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/select-css.css">
     <link rel="icon" type="image/x-icon" href="LogoSmall.ico"/>
     <script src="js/Chart.js"></script>
     <script src="js/jquery-3.4.1.min.js"></script>
@@ -118,8 +119,8 @@ require_once "esp-data.php";
             <hr>
             */
             ?>
-            <br><select id="eventt"  class="yop" onchange="stage();number();"></select></br>
-            <br><select id="stagee"  onchange="number();graphe();"></select></br>
+            <br><select id="eventt"  class="select-css" onchange="stage();number();graphe();actu();entree();sortie();"></select></br>
+            <br><select id="stagee"  class="select-css" onchange="number();graphe();actu();entree();sortie();"></select></br>
             <br style="margin-top=20px">
             <button name="button" type="button" id="tab" class="boutonstats" onclick="number()"> Afficher ses statistiques </button>
             <button name="button" type="button" id="tab" class="boutonstats" onclick="tbleau()"> Ne plus afficher </button>
@@ -128,10 +129,13 @@ require_once "esp-data.php";
             <!-- affiche les statistiques liés à un evennement -->
             <div class="d-block mb-3 caption" data-aos="fade-up"></br>
                 <h2>Statistiques public</h2>
-                <?php $data = new data();
+                <h2 style="font-size: 15px" id="entre"> Nombre entree : 0</h2>
+                <h2 style="font-size: 15px" id="sort"> Nombre sortie : 0</h2>
+                <h2 style="font-size: 15px" id="actu">Nombre actuel : 0</h2>
+                <?php /*$data = new data();
                 echo '<table class="tftable" border="1" data-aos="fade-up">';
                 echo '<br>' . $data->afficheStat("public",$_SESSION['id'],$_GET['nom'],0) .'</table>';
-                ?>
+                */?>
             </div>
             <hr>
             <form class="d-block mb-3 caption" data-aos="fade-up"></br>
@@ -162,8 +166,9 @@ require_once "esp-data.php";
 
     <script>
         <?php
+
         $grapheQuery = $dbh->query(
-            " SELECT * FROM `Nbr_Personne` as p join Stages as s WHERE p.id_stage = s.id_stage
+            " SELECT * FROM `Nbr_Personne` as p join Stages as s WHERE p.id_stage = s.id_stage order by p.heure desc
 " );
         $grapheInfo = $grapheQuery->fetchAll(PDO::FETCH_ASSOC);
         $clientQuery = $dbh->query(
@@ -174,11 +179,17 @@ require_once "esp-data.php";
             " SELECT * FROM `Events` as e join Stages as s where e.id_event = s.id_event
 " );
         $stageInfo = $stageQuery->fetchAll(PDO::FETCH_ASSOC);
+
+
         ?>
         var idclient = <?php echo json_encode($_SESSION['id']); ?>;
         var variableRecuperee = <?php echo json_encode($grapheInfo); ?>;
         var variableClient = <?php echo json_encode($clientInfo); ?>;
         var variableStage = <?php echo json_encode($stageInfo); ?>;
+
+
+
+
         window.onload = function() {
             for (a = 0; a < variableClient.length; a++) {
                 if (idclient == variableClient[a]['id_client']) {
@@ -201,35 +212,70 @@ require_once "esp-data.php";
                     document.getElementById("stagee").innerHTML += "<option>" + variableStage[p]['stage_name'] + "</option>"
                 }
             }
-        }
-        function afficher() {
-            document.getElementById("myChart").style.display = "block";
-        }
-        function annuler() {
-            document.getElementById("myChart").style.display = "none";
-        }
-        window.onload = function() {
-            for (a = 0; a < variableClient.length; a++) {
-                if (idclient == variableClient[a]['id_client']) {
-                    document.getElementById("eventt").innerHTML += "<option " + variableClient[a]['id_event'] + ">" + variableClient[a]['event_name'] + "</option>"
-                }
-            }
-            for (e = 0; e < variableRecuperee.length; e++) {
-                if (document.getElementById('stagee').value == variableRecuperee[e]['stage_name']) {
-                }
-            }
-            if (document.getElementById("eventt").value == "Welcome Spring Festival") {
-                for (p = 0; p < variableStage.length; p++) {
-                    if (variableStage[p]['id_event'] == 2) {
-                        document.getElementById("stagee").innerHTML += "<option>" + variableStage[p]['stage_name'] + "</option>"
+            var max = ("0000-00-00 00:00:00.000000")
+            for( x = 0; x < variableRecuperee.length; x++) {
+                if(document.getElementById("stagee").value == variableRecuperee[x]["stage_name"]) {
+                    if (max < variableRecuperee[x]["heure"]) {
+                        max = variableRecuperee[x]["heure"];
+                        document.getElementById("actu").innerHTML = "Nombre actuel : " + variableRecuperee[x]["nbr_actuel"];
                     }
                 }
             }
-            for (p = 0; p < variableStage.length; p++) {
-                if (document.getElementById("eventt").value == variableStage[p]['event_name']) {
-                    document.getElementById("stagee").innerHTML += "<option>" + variableStage[p]['stage_name'] + "</option>"
+
+            var ent = 0;
+            for( x = 0; x < variableRecuperee.length; x++) {
+                if(document.getElementById("stagee").value == variableRecuperee[x]["stage_name"]) {
+                    if( variableRecuperee[x]["nbr_entree"] == 1) {
+                        ent++;
+                    }
                 }
             }
+            document.getElementById("entre").innerHTML = "Nombre entree  : " + ent;
+
+            var sor = 0;
+            for( x = 0; x < variableRecuperee.length; x++) {
+                if(document.getElementById("stagee").value == variableRecuperee[x]["stage_name"]) {
+                    if( variableRecuperee[x]["nbr_sortie"] == 1) {
+                        sor++;
+                    }
+                }
+            }
+            document.getElementById("sort").innerHTML = "Nombre sortie : " + sor;
+        }
+        function actu() {
+            document.getElementById("actu").innerHTML = "Nombre actuel : 0";
+            var max = ("0000-00-00 00:00:00.000000")
+            for( x = 0; x < variableRecuperee.length; x++) {
+                if(document.getElementById("stagee").value == variableRecuperee[x]["stage_name"]) {
+                    if (max < variableRecuperee[x]["heure"]) {
+                        max = variableRecuperee[x]["heure"];
+                        document.getElementById("actu").innerHTML = "Nombre actuel : " + variableRecuperee[x]["nbr_actuel"];
+                    }
+                    }
+            }
+        }
+        function entree() {
+            var ent = 0;
+            for( x = 0; x < variableRecuperee.length; x++) {
+                if(document.getElementById("stagee").value == variableRecuperee[x]["stage_name"]) {
+                    if( variableRecuperee[x]["nbr_entree"] == 1) {
+                        ent++;
+                    }
+                }
+            }
+            document.getElementById("entre").innerHTML = "Nombre entree  : " + ent;
+        }
+
+        function sortie() {
+            var sor = 0;
+            for( x = 0; x < variableRecuperee.length; x++) {
+                if(document.getElementById("stagee").value == variableRecuperee[x]["stage_name"]) {
+                    if( variableRecuperee[x]["nbr_sortie"] == 1) {
+                        sor++;
+                    }
+                }
+            }
+            document.getElementById("sort").innerHTML = "Nombre sortie : " + sor;
         }
 
         function afficher() {
