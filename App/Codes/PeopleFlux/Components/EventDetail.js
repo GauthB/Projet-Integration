@@ -45,6 +45,8 @@ class EventDetail extends React.Component {
     const dateFrom = this.props.navigation.state.params.dateFrom
     const dateTo = this.props.navigation.state.params.dateTo
     const address = this.props.navigation.state.params.address
+    const name = this.props.navigation.state.params.name
+
 
     const description = this.props.navigation.state.params.description
 
@@ -110,7 +112,7 @@ const styles = StyleSheet.create({
     borderRadius:10,
   },
   description_container:{
-    
+
   },
   titre_description:{
     color: '#ff5733',

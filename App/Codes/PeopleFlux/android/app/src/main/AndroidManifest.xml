@@ -12,7 +12,7 @@
       android:name=".MainApplication"
       android:label="@string/app_name"
       android:icon="@mipmap/peopleflux_icon"
-      android:roundIcon="@mipmap/peopleflux_icon"
+      android:roundIcon="@mipmap/peopleflux_roundicon"
       android:allowBackup="false"
       android:theme="@style/AppTheme">
       <activity
