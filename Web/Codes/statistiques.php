@@ -1,14 +1,11 @@
 <?php
 session_start();
-
 if(!isset($_SESSION['id'])) {
     header('Location: index.php');
     exit;
 }
-
 require_once "db_connect.php";
 require_once "esp-data.php";
-
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,7 +35,7 @@ require_once "esp-data.php";
             }
         }
     </style>
-   
+
 </head>
 
 <body>
@@ -73,28 +70,24 @@ require_once "esp-data.php";
                     border-top: 1px solid red
                 }
             </style><br>
-             <?php /*
-
+            <?php /*
             $sth = $dbh -> prepare('SELECT *
-                                            FROM Events 
-                                            join Clients ON Events.id_client = Clients.id_client 
+                                            FROM Events
+                                            join Clients ON Events.id_client = Clients.id_client
                                             WHERE Clients.id_client =:client_id');
             $sth->execute(array(':client_id' => $_SESSION['id']));
             $eventsInfo = $sth -> fetchAll(PDO::FETCH_ASSOC);
             $sth->closeCursor();
-
             //$sth2->execute(array(':event_id' => $_EVENT['id_event']));
-            $sth2 = $dbh -> prepare('SELECT * 
-                                              FROM Stages 
+            $sth2 = $dbh -> prepare('SELECT *
+                                              FROM Stages
                                               join Events on Stages.id_event = Events.id_event
                                               join Clients on Events.id_client = Clients.id_client
                                               where Clients.id_client =:client_id');
             $sth2->execute(array(':client_id' => $_SESSION['id']));
             $difStage = $sth2 -> fetchAll(PDO::FETCH_ASSOC);
             $sth2->closeCursor();
-
              echo  ' <br><br><form method="get">';
-
             if(empty($eventsInfo)) {
                 echo '<p data-aos="fade-up">Vous n\'avez aucun évènements</p>';
             }
@@ -107,7 +100,6 @@ require_once "esp-data.php";
                 }
                 echo '</SELECT><br>';
             }
-
             if(empty($difStage)) {
                 echo '<option>Vous n\'avez aucune stage</option>';
             }
@@ -153,14 +145,14 @@ require_once "esp-data.php";
 
             <table class="tftable" id="tablee" border="1" data-aos="fade-up" >
                 <tr><th>Nom Scene</th> <th>ID</th> <th>Entrées</th> <th>Sorties</th> <th>Actuel</th> <th>Heure</th> </tr>
-                 <?php // echo '<br>' . $data->afficheStat("prive",$_SESSION['id'],$_GET['nom'],$_GET['cpt']); ?>
+                <?php // echo '<br>' . $data->afficheStat("prive",$_SESSION['id'],$_GET['nom'],$_GET['cpt']); ?>
             </table>
             <br>
             <hr>
             <button name="button" id="boutongraphe" class="boutonstats" onclick="afficher(),graphe();"> Observer son graphique</button>
             <button name="button" id="grapheannule" class="boutonstats" onclick="annuler();"> Annuler </button>
             <button name="button" id="boutonimprimer" class="boutonstats" onClick="window.print();"> Imprimer la page</button>
-
+            <a href="export.php"><button name="button" id="excel" class="boutonstats">importer sur Excel</button></a>
         </div>
     </div>
     <canvas id="myChart" width="20%" height="5%" style="display: none"></canvas>
@@ -169,46 +161,63 @@ require_once "esp-data.php";
 
 
     <script>
-
         <?php
         $grapheQuery = $dbh->query(
             " SELECT * FROM `Nbr_Personne` as p join Stages as s WHERE p.id_stage = s.id_stage
 " );
         $grapheInfo = $grapheQuery->fetchAll(PDO::FETCH_ASSOC);
-
         $clientQuery = $dbh->query(
             " SELECT * FROM `Clients` as c join Events as e where c.id_client=e.id_client
 " );
         $clientInfo = $clientQuery->fetchAll(PDO::FETCH_ASSOC);
-
         $stageQuery = $dbh->query(
             " SELECT * FROM `Events` as e join Stages as s where e.id_event = s.id_event
 " );
         $stageInfo = $stageQuery->fetchAll(PDO::FETCH_ASSOC);
-
         ?>
-
-
-
         var idclient = <?php echo json_encode($_SESSION['id']); ?>;
         var variableRecuperee = <?php echo json_encode($grapheInfo); ?>;
         var variableClient = <?php echo json_encode($clientInfo); ?>;
         var variableStage = <?php echo json_encode($stageInfo); ?>;
-
         window.onload = function() {
             for (a = 0; a < variableClient.length; a++) {
                 if (idclient == variableClient[a]['id_client']) {
                     document.getElementById("eventt").innerHTML += "<option " + variableClient[a]['id_event'] + ">" + variableClient[a]['event_name'] + "</option>"
                 }
             }
-
-
             for (e = 0; e < variableRecuperee.length; e++) {
                 if (document.getElementById('stagee').value == variableRecuperee[e]['stage_name']) {
-
                 }
             }
-
+            if (document.getElementById("eventt").value == "Welcome Spring Festival") {
+                for (p = 0; p < variableStage.length; p++) {
+                    if (variableStage[p]['id_event'] == 2) {
+                        document.getElementById("stagee").innerHTML += "<option>" + variableStage[p]['stage_name'] + "</option>"
+                    }
+                }
+            }
+            for (p = 0; p < variableStage.length; p++) {
+                if (document.getElementById("eventt").value == variableStage[p]['event_name']) {
+                    document.getElementById("stagee").innerHTML += "<option>" + variableStage[p]['stage_name'] + "</option>"
+                }
+            }
+        }
+        function afficher() {
+            document.getElementById("myChart").style.display = "block";
+        }
+        function annuler() {
+            document.getElementById("myChart").style.display = "none";
+        }
+        window.onload = function() {
+            for (a = 0; a < variableClient.length; a++) {
+                if (idclient == variableClient[a]['id_client']) {
+                    document.getElementById("eventt").innerHTML += "<option " + variableClient[a]['id_event'] + ">" + variableClient[a]['event_name'] + "</option>"
+                }
+            }
+            for (e = 0; e < variableRecuperee.length; e++) {
+                if (document.getElementById('stagee').value == variableRecuperee[e]['stage_name']) {
+                }
+            }
             if (document.getElementById("eventt").value == "Welcome Spring Festival") {
                 for (p = 0; p < variableStage.length; p++) {
                     if (variableStage[p]['id_event'] == 2) {
@@ -226,75 +235,29 @@ require_once "esp-data.php";
         function afficher() {
             document.getElementById("myChart").style.display = "block";
         }
-        function annuler() {
 
+        function annuler() {
             document.getElementById("myChart").style.display = "none";
         }
-        window.onload = function() {
-            for (a = 0; a < variableClient.length; a++) {
-                if (idclient == variableClient[a]['id_client']) {
-                    document.getElementById("eventt").innerHTML += "<option " + variableClient[a]['id_event'] + ">" + variableClient[a]['event_name'] + "</option>"
-                }
-            }
-
-
-            for (e = 0; e < variableRecuperee.length; e++) {
-                if (document.getElementById('stagee').value == variableRecuperee[e]['stage_name']) {
-
-                }
-            }
-
-            if (document.getElementById("eventt").value == "Welcome Spring Festival") {
-                for (p = 0; p < variableStage.length; p++) {
-                    if (variableStage[p]['id_event'] == 2) {
-                        document.getElementById("stagee").innerHTML += "<option>" + variableStage[p]['stage_name'] + "</option>"
-                    }
-                }
-            }
-            for (p = 0; p < variableStage.length; p++) {
-                if (document.getElementById("eventt").value == variableStage[p]['event_name']) {
-                    document.getElementById("stagee").innerHTML += "<option>" + variableStage[p]['stage_name'] + "</option>"
-                }
-            }
-        }
-
-        function afficher() {
-            document.getElementById("myChart").style.display = "block";
-        }
-        function annuler() {
-
-            document.getElementById("myChart").style.display = "none";
-        }
-
 
         function graphe() {
-
             var i = 0;
             var heures = [];
             var nbrAct = [];
             var myChart = null;
             var ctx = null;
             for (f = 0; f < variableRecuperee.length; f++) {
-
                 if (document.getElementById("stagee").value == variableRecuperee[f]["stage_name"]) {
-
-
                     heures[i] = variableRecuperee[f]["heure"];
                     nbrAct[i] = variableRecuperee[f]["nbr_actuel"];
                     i++;
                 }
-
-
             }
-
-
             var ctx = document.getElementById('myChart').getContext('2d');
             var myChart = new Chart(ctx, {
                 type: 'line',
                 data: {
-
                     labels: heures,
-
                     datasets: [{
                         label: 'Observer ici le nombre de personne présente en fonction de la soirée !',
                         data: nbrAct,
@@ -333,45 +296,34 @@ require_once "esp-data.php";
                 }
             }
         }
-
-
-            function number() {
+        function number() {
             indica = document.getElementById("cpt").value;
             var indic = 0;
-                document.getElementById("tablee").innerHTML =  "<tr><th>Nom Scene</th> <th>ID</th> <th>Entrées</th> <th>Sorties</th> <th>Actuel</th> <th>Heure</th> </tr>";
-                document.getElementById("tablee").innerHTML += "<tr>";
-                for (c = 0; c < variableRecuperee.length; c++) {
-                    if (document.getElementById("stagee").value == variableRecuperee[c]['stage_name']) {
-                        indic++
-                        if( indic <= indica) {
-                            document.getElementById("tablee").innerHTML += "<td>" + variableRecuperee[c]['stage_name'] + "</td><td>" + variableRecuperee[c]['id_stage'] + "</td><td>" + variableRecuperee[c]['nbr_entree'] + "</td><td>" + variableRecuperee[c]['nbr_sortie'] + "</td><td>" + variableRecuperee[c]['nbr_actuel'] + "</td><td>" + variableRecuperee[c]['heure'] + "</td>"
-                        }
-                        }
-                }
-                document.getElementById("tablee").innerHTML += "</tr>";
-            }
-
-            function tableau() {
-
-                document.getElementById("tablee").innerHTML =  "<tr><th>Nom Scene</th> <th>ID</th> <th>Entrées</th> <th>Sorties</th> <th>Actuel</th> <th>Heure</th> </tr>";
-                document.getElementById("tablee").innerHTML += "<tr>";
-                for (c = 0; c < variableRecuperee.length; c++) {
-                    if (document.getElementById("stagee").value == variableRecuperee[c]['stage_name']) {
-                        document.getElementById("tablee").innerHTML += "<td>" + variableRecuperee[c]['stage_name'] + "</td><td>" + variableRecuperee[c]['id_stage'] + "</td><td>" + variableRecuperee[c]['nbr_entree'] + "</td><td>" + variableRecuperee[c]['nbr_entree'] + "</td><td>" + variableRecuperee[c]['nbr_actuel'] + "</td><td>" + variableRecuperee[c]['heure'] + "</td>"
+            document.getElementById("tablee").innerHTML =  "<tr><th>Nom Scene</th> <th>ID</th> <th>Entrées</th> <th>Sorties</th> <th>Actuel</th> <th>Heure</th> </tr>";
+            document.getElementById("tablee").innerHTML += "<tr>";
+            for (c = 0; c < variableRecuperee.length; c++) {
+                if (document.getElementById("stagee").value == variableRecuperee[c]['stage_name']) {
+                    indic++
+                    if( indic <= indica) {
+                        document.getElementById("tablee").innerHTML += "<td>" + variableRecuperee[c]['stage_name'] + "</td><td>" + variableRecuperee[c]['id_stage'] + "</td><td>" + variableRecuperee[c]['nbr_entree'] + "</td><td>" + variableRecuperee[c]['nbr_sortie'] + "</td><td>" + variableRecuperee[c]['nbr_actuel'] + "</td><td>" + variableRecuperee[c]['heure'] + "</td>"
                     }
                 }
-                document.getElementById("tablee").innerHTML += "</tr>";
             }
-
-            function tbleau() {
-                document.getElementById("tablee").innerHTML =  "<tr><th>Nom Scene</th> <th>ID</th> <th>Entrées</th> <th>Sorties</th> <th>Actuel</th> <th>Heure</th> </tr>";
+            document.getElementById("tablee").innerHTML += "</tr>";
+        }
+        function tableau() {
+            document.getElementById("tablee").innerHTML =  "<tr><th>Nom Scene</th> <th>ID</th> <th>Entrées</th> <th>Sorties</th> <th>Actuel</th> <th>Heure</th> </tr>";
+            document.getElementById("tablee").innerHTML += "<tr>";
+            for (c = 0; c < variableRecuperee.length; c++) {
+                if (document.getElementById("stagee").value == variableRecuperee[c]['stage_name']) {
+                    document.getElementById("tablee").innerHTML += "<td>" + variableRecuperee[c]['stage_name'] + "</td><td>" + variableRecuperee[c]['id_stage'] + "</td><td>" + variableRecuperee[c]['nbr_entree'] + "</td><td>" + variableRecuperee[c]['nbr_entree'] + "</td><td>" + variableRecuperee[c]['nbr_actuel'] + "</td><td>" + variableRecuperee[c]['heure'] + "</td>"
+                }
             }
-
-
-
-
-
-
+            document.getElementById("tablee").innerHTML += "</tr>";
+        }
+        function tbleau() {
+            document.getElementById("tablee").innerHTML =  "<tr><th>Nom Scene</th> <th>ID</th> <th>Entrées</th> <th>Sorties</th> <th>Actuel</th> <th>Heure</th> </tr>";
+        }
     </script>
 
     <footer class="site-footer">
@@ -380,17 +332,17 @@ require_once "esp-data.php";
 
 
 
-<script src="js/jquery-migrate-3.0.1.min.js"></script>
-<script src="js/jquery-ui.js"></script>
-<script src="js/popper.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/jquery.stellar.min.js"></script>
-<script src="js/jquery.countdown.min.js"></script>
-<script src="js/jquery.magnific-popup.min.js"></script>
-<script src="js/aos.js"></script>
+    <script src="js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.stellar.min.js"></script>
+    <script src="js/jquery.countdown.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/aos.js"></script>
 
-<script src="js/main.js"></script>
+    <script src="js/main.js"></script>
 
 </body>
 </html>
