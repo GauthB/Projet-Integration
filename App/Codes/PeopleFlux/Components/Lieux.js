@@ -4,6 +4,8 @@ import RNPickerSelect from 'react-native-picker-select';
 import { connect } from 'react-redux'
 import MapboxGL from "@mapbox/react-native-mapbox-gl";
 import { PermissionsAndroid } from 'react-native';
+import {getStages} from '../Helpers/Utils'
+import {getEvents} from '../Helpers/Utils'
 
 
 
@@ -19,11 +21,16 @@ class Lieux extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      coordonnes:coordonnes,
+      coordonnes:[],
+      dataStages:[],
+      dataEvents:[],
       isLoading: true
     }
 
+
   }
+
+
   _displayLoading() {
 if (this.state.isLoading) {
   return (
@@ -37,25 +44,47 @@ if (this.state.isLoading) {
   _setLieu(value) {
    const action = { type: "SET_LIEU", value: value }
    this.props.dispatch(action)
+
  }
+
+ _convertItemEvents(){
+   let n=0;
+   let tab=[];
+
+   while(n < this.state.dataEvents.length){
+     tab += {'label':this.state.dataEvents[n].event_name, 'value' :this.state.dataEvents[n].event_name }
+     n++;
+   }
+
+ }
+
+
+ getData(){
+
+   setTimeout(() => {
+     getStages().then((data) => {this.setState({dataStages :data, isLoading: false})})
+     getEvents().then((data) => {this.setState({dataEvents :data, isLoading: false})})
+    }, 1000)
+
+ }
+
 
  componentDidMount() {
 
   PermissionsAndroid.requestMultiple(
              [PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
              PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION],
-             {
+              {
                  title: 'Give Location Permission',
-             message: 'App needs location permission to find your position.'
-         }
+                 message: 'App needs location permission to find your position.'
+              }
      ).then(granted => {
          console.log(granted);
      }).catch(err => {
          console.warn(err);
      });
-     this.setState({
-       isLoading: false
-     })
+
+     this.getData()
 
 
  }
@@ -100,22 +129,23 @@ if (this.state.isLoading) {
 
   render() {
 
+
     return (
       <View style={styles.main_container}>
         <Text style={styles.text_lieu}>Lieux</Text>
-
             <View style={styles.picker_container}>
               <View style={styles.evenements_text_container}>
                 <Text style={styles.text_evenements} >Evenements : </Text>
               </View>
               <View style={styles.pickerSelect_container}>
+                {this._convertItemEvents()}
                 <RNPickerSelect
                   style={pickerStyle}
                   onValueChange={(value) => this._setLieu(value)}
                   placeholder= {{ label: 'Selectionnez un lieu', value: null}}
                   mode="dropdown"
                   items={[
-                    { label: '24h Vélo', value: '24h vélo' },
+                    { label: 'Solidarité', value: 'Solidarité' },
                     { label: 'Solidarité', value: 'Solidarité' },
                     { label: 'Welcome Spring Festival', value: 'Welcome Spring Festival' },
                     { label: 'BFS', value: 'BFS' },
@@ -144,6 +174,7 @@ if (this.state.isLoading) {
 
       </View>
     )
+
   }
 }
 

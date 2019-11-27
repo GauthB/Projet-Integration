@@ -1,3 +1,4 @@
+//Return JSON of all Events
 export function getEvents(){
    return fetch('https://peopleflux.gauthierbohyn.com/app/dbReturnEvent.php',
    {
@@ -14,6 +15,8 @@ export function getEvents(){
    .catch(error => console.warn(error));
  }
 
+
+//Return JSON of all Stages
  export function getStages(){
     return fetch('https://peopleflux.gauthierbohyn.com/app/dbReturnStage.php',
     {
@@ -30,6 +33,8 @@ export function getEvents(){
     .catch(error => console.warn(error));
   }
 
+
+//Return JSON of all Pers
   export function getNbrPers(){
      return fetch('https://peopleflux.gauthierbohyn.com/app/dbReturnNbrPers.php',
      {
