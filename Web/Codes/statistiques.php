@@ -294,7 +294,7 @@ require_once "esp-data.php";
             var ctx = null;
             for (f = 0; f < variableRecuperee.length; f++) {
                 if (document.getElementById("stagee").value == variableRecuperee[f]["stage_name"]) {
-                    heures[i] = variableRecuperee[f]["heure"];
+                    heures[i] = variableRecuperee[f]["heure"].slice(11,19);
                     nbrAct[i] = variableRecuperee[f]["nbr_actuel"];
                     i++;
                 }
@@ -303,10 +303,10 @@ require_once "esp-data.php";
             var myChart = new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: heures,
+                    labels: heures.reverse(),
                     datasets: [{
                         label: 'Observer ici le nombre de personne présente en fonction de la soirée !',
-                        data: nbrAct,
+                        data: nbrAct.reverse(),
                         backgroundColor:
                             'rgb(0,0,0,0.1)'
                         ,
