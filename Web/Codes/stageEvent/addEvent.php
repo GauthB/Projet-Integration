@@ -1,5 +1,5 @@
 <?php
-require_once '../db_connect.php';
+require_once '../php/db_connect.php';
 session_start();
 
 if(!empty($_POST['nomEvenement']) && !empty($_POST['dateFrom']) && !empty($_POST['dateTo']) && !empty($_POST['villeEvent']) && !empty($_POST['adresseEvent'])) {

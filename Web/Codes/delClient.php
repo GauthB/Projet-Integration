@@ -1,7 +1,6 @@
 <?php
-require_once "db_connect.php";
-$errors = array();
-$messages = array();
+require_once "php/db_connect.php";
+
 
 
 
@@ -19,15 +18,15 @@ if(!isset($_SESSION['id'])) {
     exit;
 }
 
-$sth = $dbh->prepare('DELETE FROM Clients WHERE id_client = ?');
-$sth->execute([$_POST['id']]);
+//$sth = $dbh->prepare('DELETE FROM Clients WHERE id_client = ?');
+//$sth->execute([$_POST['id']]);
 ?>
 
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>PeopleFlux - Ajout client</title>
+    <title>PeopleFlux - Supression du client</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -35,17 +34,17 @@ $sth->execute([$_POST['id']]);
     <link rel="stylesheet" href="fonts/icomoon/style.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/magnific-popup.css">
-    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="css/jquery-ui.min.css">
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
     <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
     <link rel="stylesheet" href="css/aos.css">
-    <script type="text/javascript" src="js/contact.js"></script>
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/x-icon" href="LogoSmall.ico"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
     <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
 </head>
 <body>
 
@@ -77,15 +76,15 @@ $sth->execute([$_POST['id']]);
         <div class="container">
             <div>
 
-                <div id="dialogClient"><p>Êtes-vous sûr de vouloir supprimer l'évènement "<span id="spnClientName"></span>"?</p>Vous pourrez faire cette action si vous avez supprimé auparavant toutes les scènes liées à cette évènement!</div>
+                <div id="dialogClient"><p>Êtes-vous sûr de vouloir supprimer "<span id="spnClientName"></span>"?</p></div>
 
-              <h2 class="d-block mb-3 caption" data-aos="fade-up">Clients</h2>
+                <h2 class="d-block mb-3 caption" data-aos="fade-up">Clients</h2>
                 <!-- Table des clients-->
                 <?php
 
-                $eventInfoQuery = $dbh->query('SELECT * FROM Clients ');
-                $eventInfos = $eventInfoQuery->fetchAll(PDO::FETCH_ASSOC);
-                $eventInfoQuery->closeCursor();
+                $clientInfoQuery = $dbh->query('SELECT * FROM Clients ');
+                $clientInfos = $clientInfoQuery->fetchAll(PDO::FETCH_ASSOC);
+                $clientInfoQuery->closeCursor();
 
 
 
@@ -95,7 +94,7 @@ $sth->execute([$_POST['id']]);
                 echo '<table class="tftable" border="1" data-aos="fade-up">';
                 echo '<tr><th>Nom</th><th>Mail</th><th>Tél.</th><th>Suppression</th></tr>';
 
-        foreach ($eventInfos as $client) {
+        foreach ($clientInfos as $client) {
             echo '<tr><td>' .
                 $client["client_name"] . '</td><td>' .
                 $client["client_mail"] . '</td><td>' .
