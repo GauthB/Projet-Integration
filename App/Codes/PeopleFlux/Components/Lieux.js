@@ -95,11 +95,23 @@ class Lieux extends React.Component {
  }
 
  renderAnnotations () {
-    const items = [];
+    var items = [];
+    var name_event = this.props.selectedLieu;
+    var id_event="";
+    for (let n = 0; n < this.state.dataEvents.length; n++) {
+
+      if(this.state.dataEvents[n].event_name == name_event){
+        id_event = this.state.dataEvents[n].id_event;
+      }
+
+    }
 
     for (let i = 0; i < this.state.dataStages.length; i++) {
 
-      items.push(this.renderAnnotation(this.state.dataStages[i]));
+      if(this.state.dataStages[i].id_event == id_event){
+        items.push(this.renderAnnotation(this.state.dataStages[i]));
+      }
+
     }
 
     return items;
@@ -142,7 +154,7 @@ class Lieux extends React.Component {
                 zoomLevel={7}
                 centerCoordinate={[4.6667145, 50.6402809]}
               >
-              
+
                 {this.renderAnnotations()}
               </MapboxGL.MapView>
 
