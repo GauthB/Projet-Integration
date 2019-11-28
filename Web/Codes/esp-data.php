@@ -24,6 +24,7 @@ class data{
     public function getPassword(){
         return $this->password;
     }
+
     public function setEntree($entree){
         $this->tot_entree = $entree;
     }
@@ -33,6 +34,7 @@ class data{
     public function setActuel($actuel){
         $this->tot_actuel = $actuel;
     }
+
     public function getEntree(){
         return ($this->tot_entree>0?$this->tot_entree:0);
     }
@@ -41,6 +43,30 @@ class data{
     }
     public function getActuel(){
         return ($this->tot_actuel>0?$this->tot_actuel:0);
+    }
+    public function nbrActu($x){
+        // Create connection
+        $conn = new mysqli($this->getServerName(), $this->getUsername(), $this->getPassword(), $this->getDbName());
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+        $sqlNbr = "SELECT SUM(nbr_entree), SUM(nbr_sortie) 
+                       FROM Nbr_Personne
+                       join Stages on Nbr_Personne.id_stage = Stages.id_stage 
+                       join Events on Stages.id_event = Events.id_event
+                       where Stages.id_stage = " . $x;
+        if ($result = $conn->query($sqlNbr)) {
+            while ($row = $result->fetch_assoc()) {
+                $this->setEntree($row["SUM(nbr_entree)"]);
+                $this->setSortie($row["SUM(nbr_sortie)"]);
+                $total = $row["SUM(nbr_entree)"] - $row["SUM(nbr_sortie)"];
+                $this->setActuel($total);
+            }
+            $result->free();
+        }
+        return $this->getActuel();
+
     }
     public function supprimerTable($id){
         $sql = "DELETE FROM `Nbr_Personne` WHERE `id_stage`=  1";
@@ -84,20 +110,7 @@ class data{
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
-        if($acces == "total"){
-            $sqlNbr = $this->getQueryTotal($idClient);
-            if ($result = $conn->query($sqlNbr)) {
-                while ($row = $result->fetch_assoc()) {
-                    $this->setEntree($row["SUM(nbr_entree)"]);
-                    $this->setSortie($row["SUM(nbr_sortie)"]);
-                    $total = $row["SUM(nbr_entree)"] - $row["SUM(nbr_sortie)"] - 1;
-                    $this->setActuel($total);
-                }
-                $result->free();
-            }
-            return $this->getActuel();
-        }
-        elseif($acces == "public"){
+        if($acces == "public"){
             $sqlNbr = $this->getQueryPublic($idClient,$stageName);
             if ($result = $conn->query($sqlNbr)) {
                 while ($row = $result->fetch_assoc()) {

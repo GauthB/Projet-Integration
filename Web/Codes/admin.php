@@ -6,7 +6,7 @@ if(!isset($_SESSION['id'])) {
     exit;
 }
 
-require_once "db_connect.php";
+require_once "php/db_connect.php";
 require_once "esp-data.php";
 
 ?>
@@ -79,7 +79,7 @@ require_once "esp-data.php";
                 if(empty($eventsInfo)) {
                     echo '<p data-aos="fade-up">Vous n\'avez aucun évènements</p>';
                 } else {
-                    echo '<table class="tftable" border="1" data-aos="fade-up">';
+                    echo '<table class="tftable" id="tablee" border="1" data-aos="fade-up">';
                     echo '<tr><th>Nom</th><th>Date du début</th><th>Date de fin</th><th>Ville</th><th>Adresse</th><th></th></tr>';
 
                     foreach ($eventsInfo as $event) {
@@ -111,7 +111,7 @@ require_once "esp-data.php";
                 if(empty($stageInfo)) {
                     echo '<p data-aos="fade-up">Vous n\'avez aucune stage</p>';
                 } else {
-                    echo '<table class="tftable" border="1" data-aos="fade-up">';
+                    echo '<table class="tftable" id="tablee" border="1" data-aos="fade-up">';
                     echo '<tr><th>Nom de l\'évènement</th><th>Nom de la scène</th><th>Latitude</th><th>Longitude</th><th>Max participants</th><th>Heure de début</th><th>Heure de fin</th><th></th></tr>';
 
                     foreach ($stageInfo as $stage) {

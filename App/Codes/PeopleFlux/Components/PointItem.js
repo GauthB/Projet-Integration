@@ -8,6 +8,7 @@ class PointItem extends React.Component {
 
   render() {
     const stage = this.props.stage
+    const nbrPers = this.props.nbrPers
     console.log(stage.stage_name);
 
     return (
