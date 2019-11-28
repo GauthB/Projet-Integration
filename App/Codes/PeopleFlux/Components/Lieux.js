@@ -142,7 +142,7 @@ class Lieux extends React.Component {
                 zoomLevel={7}
                 centerCoordinate={[4.6667145, 50.6402809]}
               >
-              
+
                 {this.renderAnnotations()}
               </MapboxGL.MapView>
 
