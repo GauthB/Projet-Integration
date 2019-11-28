@@ -1,5 +1,7 @@
 <?php
-require_once "db_connect.php";
+require_once "esp-data.php";
+$data = new data();
+require_once "php/db_connect.php";
 $eventInfoQuery = $dbh->query('SELECT * FROM Events ORDER BY date_from DESC');
 $eventInfos = $eventInfoQuery->fetchAll(PDO::FETCH_ASSOC);
 
@@ -19,8 +21,7 @@ $idQuery = $dbh->query("SELECT id_Event FROM `Events`" );
 $idInfo = $idQuery->fetchAll(PDO::FETCH_ASSOC);
 
 
-require_once "esp-data.php";
-$data = new data();
+
 ?>
 
 <div class="container">
@@ -30,7 +31,7 @@ $data = new data();
         <select id="lieu" class="select-css" onchange="lieux();">
         <?php
         foreach ($eventInfos as $eventName) {
-            echo '<option data-city="weather-' . strtolower($eventName['event_city']) . '" class="boutonstats" value="' . $eventName['id_event'] . '" style="cursor:pointer">'. $eventName['event_name'] .'</option></br></br>';
+            echo '<option data-city="weather-' . strtolower($eventName['event_city']) . '"  value="' . $eventName['id_event'] . '" style="cursor:pointer">'. $eventName['event_name'] .'</option></br></br>';
         }
         ?>
         </select>
@@ -127,12 +128,16 @@ $data = new data();
 
         // Créer les points sur la carte
         <?php foreach ($stageInfo as $stage): ?>
+
+
+
+
             L.marker([
                 <?=$stage['stage_latitude']?>,
                 <?=$stage['stage_longitude']?>])
                 .bindPopup(
                     "<b><?=$stage['stage_name']?></b><br>"+
-                    "Il y a <?=$stage['nbr_actuel']?> participant(s)!<br>"+
+                    "Il y a <?=$data->nbrActu($stage['id_stage'])?> participant(s)!<br>"+
                     "Le nombre maximum de participant est estimé à <?=$stage['max_people']?>")
                     .addTo(layers[<?=$stage['id_event']?>]);
         <?php endforeach;?>

@@ -291,7 +291,17 @@ h1, h2, h3, h4, h5,
     border-radius: 50%; }
 
 /* Style tableau */
-
+#tablee tr{
+  background-color: #232531;
+  color: white;
+  border: 1px solid #232531;
+}
+#tablee th{
+  background-color: #232531;
+  color: white;
+  font-size: 120%;
+  border: 1px solid #232531;
+}
 .tftable {
   font-size:12px;
   color:#333333;
@@ -299,6 +309,8 @@ h1, h2, h3, h4, h5,
   border-width: 1px;
   border-color: #e74c3c;
   border-collapse: collapse;
+  table-layout: auto;
+  width: 100%;
 }
 .tftable th {
   font-size:12px;

@@ -28,7 +28,7 @@ class Calendrier extends React.Component {
       <View>
         <FlatList
           data={this.state.data}
-          keyExtractor={(item) => item.id_event}
+          keyExtractor={(item) => item.id_event.toString()}
           renderItem={({item}) => <EventItem event={item} displayDetail={this._displayDetail}/>}
           refreshing={this.state.refreshing}
           onRefresh={this.onRefresh.bind(this)}
