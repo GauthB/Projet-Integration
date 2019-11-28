@@ -1,11 +1,12 @@
 import React, {Component} from 'react'
-import { StyleSheet, View, Text, Picker, Image, TouchableOpacity, ActivityIndicator } from 'react-native'
+import { StyleSheet, View, Text, Picker, Image, TouchableOpacity, ActivityIndicator, FlatList } from 'react-native'
 import RNPickerSelect from 'react-native-picker-select';
 import { connect } from 'react-redux'
 import MapboxGL from "@mapbox/react-native-mapbox-gl";
 import { PermissionsAndroid } from 'react-native';
 import {getStages} from '../Helpers/Utils'
 import {getEvents} from '../Helpers/Utils'
+import PointItem from './PointItem'
 
 
 
@@ -15,6 +16,7 @@ const coordonnes = [
   [4.61288,50.6682],
   [4.612069434158341,50.66590045123987]
 ];
+
 
 class Lieux extends React.Component {
 
@@ -26,19 +28,17 @@ class Lieux extends React.Component {
       dataEvents:[],
       isLoading: true
     }
-
-
   }
 
 
   _displayLoading() {
-if (this.state.isLoading) {
-  return (
-    <View style={styles.loading_container}>
-      <ActivityIndicator size='large' color='#c70039' />
-    </View>
-  )
-}
+    if (this.state.isLoading) {
+      return (
+        <View style={styles.loading_container}>
+        <ActivityIndicator size='large' color='#c70039' />
+        </View>
+      )
+    }
 }
 
   _setLieu(value) {
@@ -47,20 +47,17 @@ if (this.state.isLoading) {
 
  }
 
- _convertItemEvents(){
-   let n=0;
-   let tab=[];
 
-   while(n < this.state.dataEvents.length){
-     tab += {'label':this.state.dataEvents[n].event_name, 'value' :this.state.dataEvents[n].event_name }
-     n++;
-   }
-
+ ItemSelect = () => {
+   let items = this.state.dataEvents.map( x => ({
+      label : x.event_name,
+      value: x.event_name
+    }));
+    return items;
  }
 
 
  getData(){
-
    setTimeout(() => {
      getStages().then((data) => {this.setState({dataStages :data, isLoading: false})})
      getEvents().then((data) => {this.setState({dataEvents :data, isLoading: false})})
@@ -87,48 +84,31 @@ if (this.state.isLoading) {
      this.getData()
 
 
+
  }
 
  renderAnnotation (counter) {
-   const id = `pointAnnotation${counter}`;
-   const coordinate = this.state.coordonnes[counter];
-   const title = `Longitude: ${this.state.coordonnes[counter][0]} Latitude: ${this.state.coordonnes[counter][1]}`;
 
    return (
-
-       <MapboxGL.PointAnnotation
-         key={id}
-         id={id}
-         title=''
-         coordinate={coordinate}>
-
-         <Image
-         source={require('../Images/marker.png')}
-         style={{
-           flex: 1,
-           resizeMode: 'contain',
-           width: 50,
-           height: 50
-           }}/>
-           <MapboxGL.Callout title={title}/>
-        </MapboxGL.PointAnnotation>
-
+       <PointItem stage={counter}/>
    );
  }
 
  renderAnnotations () {
     const items = [];
 
-    for (let i = 0; i < this.state.coordonnes.length; i++) {
-      items.push(this.renderAnnotation(i));
+    for (let i = 0; i < this.state.dataStages.length; i++) {
+
+      items.push(this.renderAnnotation(this.state.dataStages[i]));
     }
 
     return items;
   }
 
 
-  render() {
 
+
+  render() {
 
     return (
       <View style={styles.main_container}>
@@ -138,18 +118,13 @@ if (this.state.isLoading) {
                 <Text style={styles.text_evenements} >Evenements : </Text>
               </View>
               <View style={styles.pickerSelect_container}>
-                {this._convertItemEvents()}
+
                 <RNPickerSelect
                   style={pickerStyle}
                   onValueChange={(value) => this._setLieu(value)}
                   placeholder= {{ label: 'Selectionnez un lieu', value: null}}
                   mode="dropdown"
-                  items={[
-                    { label: 'Solidarité', value: 'Solidarité' },
-                    { label: 'Solidarité', value: 'Solidarité' },
-                    { label: 'Welcome Spring Festival', value: 'Welcome Spring Festival' },
-                    { label: 'BFS', value: 'BFS' },
-                  ]}
+                  items={this.ItemSelect()}
                 />
               </View>
             </View>
@@ -158,15 +133,17 @@ if (this.state.isLoading) {
 
             <View style={styles.container_map}>
             {this._displayLoading()}
+
               <MapboxGL.MapView
                 ref={(c) => this._map = c}
                 styleURL={MapboxGL.StyleURL.Street}
                 style={styles.map}
                 showUserLocation ={true}
-                zoomLevel={14}
-                centerCoordinate={this.state.coordonnes[0]}
+                zoomLevel={7}
+                centerCoordinate={[4.6667145, 50.6402809]}
               >
-              {this.renderAnnotations()}
+              
+                {this.renderAnnotations()}
               </MapboxGL.MapView>
 
             </View>
