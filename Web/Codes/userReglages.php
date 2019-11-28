@@ -1,5 +1,5 @@
 <?php
-require_once "db_connect.php";
+require_once "php/db_connect.php";
 require_once "php/function.php";
 $errors = array();
 $messages = array();

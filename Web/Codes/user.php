@@ -3,7 +3,7 @@
 session_start();
 
 if(isset($_POST['envoi'])) {
-    require_once "db_connect.php";
+    require_once "php/db_connect.php";
     
     $sql = 'SELECT id_client, client_name, client_mail, client_password, client_phone
     FROM Clients

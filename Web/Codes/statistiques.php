@@ -118,7 +118,9 @@ require_once "esp-data.php";
             <br>
             <hr>
             */
-            ?>
+            ?><br>
+            <br>
+            <br>
             <br><select id="eventt"  class="select-css" onchange="stage();number();graphe();actu();entree();sortie();"></select></br>
             <br><select id="stagee"  class="select-css" onchange="number();graphe();actu();entree();sortie();"></select></br>
             <br style="margin-top=20px">

@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
     <link rel="stylesheet" href="css/aos.css">
     <link rel="stylesheet" href="css/add.css">
+    <link rel="stylesheet" href="css/select-css.css">
     <link rel="icon" type="image/x-icon" href="LogoSmall.ico"/>
     <link rel="stylesheet" href="css/style.css">
 
