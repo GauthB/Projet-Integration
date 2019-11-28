@@ -13,12 +13,6 @@ import PointItem from './PointItem'
 
 MapboxGL.setAccessToken("pk.eyJ1IjoidGhpYmF1dGhlcm1hbnQiLCJhIjoiY2sxejI0NGd5MGxmeTNobXZ0bmttZnI1OSJ9.qDZmXtEgBV2n5hCbUA2qow");
 
-const coordonnes = [
-  [4.61288,50.6682],
-  [4.612069434158341,50.66590045123987]
-];
-
-
 class Lieux extends React.Component {
 
   constructor(props) {
@@ -91,24 +85,55 @@ class Lieux extends React.Component {
  }
 
  calculNbrPers(stage){
+
    nbrEntree =0;
    nbrSortie =0;
 
    for (let x=0; x < this.state.dataNbrPers.length; x++){
 
      if(this.state.dataNbrPers[x].id_stage == stage.id_stage){
-       nbrEntree += this.state.dataNbrPers[x].nbr_entree;
-       nbrSortie += this.state.dataNbrPers[x].nbr_sortie;
+       nbrEntree += Number(this.state.dataNbrPers[x].nbr_entree);
+       nbrSortie += Number(this.state.dataNbrPers[x].nbr_sortie);
      }
    }
    return nbrEntree - nbrSortie;
  }
+
+
 
  renderAnnotation (stage) {
 
    return (
        <PointItem stage={stage} nbrPers={this.calculNbrPers(stage)} />
    );
+ }
+
+ centerMap(){
+   var name_event = this.props.selectedLieu;
+   var id_event="";
+   var coordonnees=[];
+
+   for (let n = 0; n < this.state.dataEvents.length; n++) {
+
+     if(this.state.dataEvents[n].event_name == name_event){
+       id_event = this.state.dataEvents[n].id_event;
+     }
+
+   }
+   var x=0;
+   while (this.state.dataStages[x].id_event != id_event){
+     x++;
+   }
+
+
+
+   coordonnees.push(Number(this.state.dataStages[x].stage_longitude));
+   coordonnees.push(Number(this.state.dataStages[x].stage_latitude));
+
+
+
+   return coordonnees;
+
  }
 
  renderAnnotations () {
@@ -176,6 +201,7 @@ class Lieux extends React.Component {
               >
 
                 {this.renderAnnotations()}
+
               </MapboxGL.MapView>
 
             </View>
