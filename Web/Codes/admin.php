@@ -28,6 +28,7 @@ require_once "esp-data.php";
     <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
     <link rel="stylesheet" href="css/aos.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/select-css.css">
     <link rel="icon" type="image/x-icon" href="LogoSmall.ico"/>
 
     <script src="js/jquery-3.4.1.min.js"></script>
@@ -63,7 +64,7 @@ require_once "esp-data.php";
         </div>
     </div>
 
-    <div style="margin-bottom: 200px;">
+    <div style="margin-bottom: 100px;">
         <div class="container">
             <div>
                 <div id="dialogEvent"><p>Êtes-vous sûr de vouloir supprimer l'évènement "<span id="spnEventName"></span>"?</p>Vous pourrez faire cette action si vous avez supprimé auparavant toutes les scènes liées à cette évènement!</div>
@@ -79,9 +80,8 @@ require_once "esp-data.php";
                 if(empty($eventsInfo)) {
                     echo '<p data-aos="fade-up">Vous n\'avez aucun évènements</p>';
                 } else {
-                    echo '<table class="tftable" id="tablee" border="1" data-aos="fade-up">';
+                    echo '<table class="tftable" id="tablee" border="1" data-aos="fade-up" class="w3-table w3-bordered">';
                     echo '<tr><th>Nom</th><th>Date du début</th><th>Date de fin</th><th>Ville</th><th>Adresse</th><th></th></tr>';
-
                     foreach ($eventsInfo as $event) {
                         echo '<tr><td>' .
                             $event["event_name"] . '</td><td>' .
@@ -89,7 +89,7 @@ require_once "esp-data.php";
                             $event["date_to"] . '</td><td>' .
                             $event["event_city"] . '</td><td>' .
                             $event["event_address"] . '</td><td>' .
-                            '<span class="close btnDelEvent" data-idEvent="' . $event["id_event"] . '"><i class="fas fa-backspace"></i></span></td></tr>';
+                            '<span class="close btnDelEvent" data-idEvent="' . $event["id_event"] . '"><i class="fas fa-backspace suppr"></i></span></td></tr>';
                     }
 
                     echo '</table>';
@@ -123,7 +123,7 @@ require_once "esp-data.php";
                             $stage["max_people"] . '</td><td>' .
                             $stage["hour_from"] . '</td><td>' .
                             $stage["hour_to"] . '</td><td>' .
-                            '<span class="close btnDelStage" data-idStage="' . $stage["id_stage"] . '"><i class="fas fa-backspace"></i></span></td></tr>';
+                            '<span class="close btnDelStage" data-idStage="' . $stage["id_stage"] . '"><i class="fas fa-backspace suppr"></i></span></td></tr>';
                     }
 
                     echo '</table>';
@@ -214,7 +214,7 @@ require_once "esp-data.php";
                         <div class="row form-group" data-aos="fade-up">
                             <div class="col-md-12">
                                 <label class="" for="nomEvent">Evènement</label>
-                                <select id="idEvent" name="idEvent" size="1">
+                                <select id="idEvent" class="select-css" name="idEvent" size="1">
 
                                 <?php
 

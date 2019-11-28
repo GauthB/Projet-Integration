@@ -28,7 +28,7 @@ $idInfo = $idQuery->fetchAll(PDO::FETCH_ASSOC);
 
     <ul>
 <!-- ################################    Boutton Event  ####################################-->
-        <select id="lieu" class="select-css" onchange="lieux();">
+        <select id="lieu" class="select-css" data-aos="fade-up" onchange="lieux();">
         <?php
         foreach ($eventInfos as $eventName) {
             echo '<option data-city="weather-' . strtolower($eventName['event_city']) . '"  value="' . $eventName['id_event'] . '" style="cursor:pointer">'. $eventName['event_name'] .'</option></br></br>';

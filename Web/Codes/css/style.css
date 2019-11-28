@@ -71,8 +71,9 @@ h1, h2, h3, h4, h5,
 
 .btn {
   text-transform: uppercase;
-  letter-spacing: .2em;
-  border-radius: 0; }
+  letter-spacing: .1em;
+  height: 40px;
+}
   .btn:hover, .btn:active, .btn:focus {
     outline: none;
     -webkit-box-shadow: none !important;
@@ -86,8 +87,7 @@ h1, h2, h3, h4, h5,
 
 .form-control {
   margin-bottom: 0.5em;
-  height: 43px;
-  border-radius: 0; }
+}
   .form-control:active, .form-control:focus {
     border-color: #ff5733; }
   .form-control:hover, .form-control:active, .form-control:focus {
@@ -138,13 +138,12 @@ h1, h2, h3, h4, h5,
 
 .border-top {
   border-top: 1px solid #edf0f5 !important; }
-
 .site-footer {
   padding: 4em 0;
   background: #1b1d24; }
   @media (min-width: 768px) {
     .site-footer {
-      padding: 8em 0; } }
+      padding: 4em 0; } }
   .site-footer .border-top {
     border-top: 1px solid rgba(255, 255, 255, 0.1) !important; }
   .site-footer h2, .site-footer h3, .site-footer h4, .site-footer h5 {
@@ -291,16 +290,26 @@ h1, h2, h3, h4, h5,
     border-radius: 50%; }
 
 /* Style tableau */
+#tablee{
+  table-layout: auto;
+  width: 100%;
+}
+#tablee tr:nth-child(even) {
+  background: #2e3040;
+}
+#tablee th{
+  background-color: #232531;
+  color: white;
+  font-size: 110%;
+  border-bottom: 1px solid red;
+}
 #tablee tr{
   background-color: #232531;
   color: white;
   border: 1px solid #232531;
 }
-#tablee th{
-  background-color: #232531;
-  color: white;
-  font-size: 120%;
-  border: 1px solid #232531;
+.suppr{
+  color: #686d91;
 }
 .tftable {
   font-size:12px;
@@ -749,7 +758,8 @@ position: relative; }
 .form-group .form-control {
   color: #fff !important;
   background: none;
-  border: 2px solid #fff; }
+  border: 1px solid #ff5050;
+}
   .form-group .form-control:active, .form-group .form-control:focus {
     background: none; }
 

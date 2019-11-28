@@ -5,12 +5,11 @@ session_start();
     <div class="container-fluid">
         <div class="row align-items-center">
             <div class="col-11 col-xl-2   ">
-                <h1 class="mb-0"><a href="index.php" class="text-white h2 mb-0"><img src="images/LogoSmall.png" height="100px"></span> </a></h1>
+                <h1 class="mb-0 logo"><a href="index.php" class="text-white h2 mb-0"><img src="images/LogoSmall.png" height="100px"></span> </a></h1>
                 <!-- <h1 class="mb-0"><a href="index.php" class="text-white h2 mb-0">People<span class="text-primary" style="color: #e74c3c">Flux</span> </a></h1>-->
 
 
                 <?php if(isset($_SESSION['id'])):?>
-<br>
                     <span class="d-block mb-3 caption">Compte: <?=$_SESSION['name']?> </span>
                 <?php endif?>
             </div>
@@ -27,14 +26,14 @@ session_start();
 
                         <li><a href="admin.php">Evènements</a></li>
                         <a href="statistiques.php"> <i class="fas fa-chart-bar"></i></a>
-                        <li class="cta"><a href="logout.php">Déconnexion<br></a></li>
+                        <li class="cta"><a href="php/logout.php">Déconnexion<br></a></li>
                         <a href="userReglages.php"><i class="fas fa-user-cog"></i></a>
 
                         <?php else:?>
                             <li class="cta"><a href="user.php">S'identifier</a></li>
                         <?php endif?>
                         <?php if($_SESSION['ifAdmin']==true):?>
-                            <a href="user/addclient.php"> <i class="fas fa-user-plus"></i></a>
+                            <a href="addclient.php"> <i class="fas fa-user-plus"></i></a>
                             <a href="delClient.php"><i class="fas fa-user-minus"></i></a>
                         <?php endif?>
 

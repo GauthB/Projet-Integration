@@ -4,7 +4,7 @@ if(!isset($_SESSION['id'])) {
     header('Location: index.php');
     exit;
 }
-require_once "db_connect.php";
+require_once "php/db_connect.php";
 require_once "esp-data.php";
 ?><!DOCTYPE html>
 <html lang="en">
@@ -147,8 +147,9 @@ require_once "esp-data.php";
             </form>
 
 
-            <table class="tftable" id="tablee" border="1" data-aos="fade-up" >
-                <tr><th>Nom Scene</th> <th>ID</th> <th>Entrées</th> <th>Sorties</th> <th>Actuel</th> <th>Heure</th> </tr>
+            <table class="tftable" border="1" data-aos="fade-up" >
+                <tbody id="tablee">
+                </tbody>
                 <?php // echo '<br>' . $data->afficheStat("prive",$_SESSION['id'],$_GET['nom'],$_GET['cpt']); ?>
             </table>
             <br>
