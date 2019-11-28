@@ -9,7 +9,6 @@ class PointItem extends React.Component {
   render() {
     const stage = this.props.stage
     const nbrPers = this.props.nbrPers
-    console.log(stage.stage_name);
 
     return (
       <MapboxGL.PointAnnotation
@@ -26,7 +25,7 @@ class PointItem extends React.Component {
           width: 50,
           height: 50
           }}/>
-          <MapboxGL.Callout title={stage.stage_name}/>
+          <MapboxGL.Callout title={stage.stage_name + "\n" + nbrPers + "/" + stage.max_people }/>
        </MapboxGL.PointAnnotation>
     )
   }

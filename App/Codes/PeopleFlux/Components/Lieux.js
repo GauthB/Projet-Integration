@@ -90,10 +90,24 @@ class Lieux extends React.Component {
 
  }
 
- renderAnnotation (stage, nbrPers) {
+ calculNbrPers(stage){
+   nbrEntree =0;
+   nbrSortie =0;
+
+   for (let x=0; x < this.state.dataNbrPers.length; x++){
+
+     if(this.state.dataNbrPers[x].id_stage == stage.id_stage){
+       nbrEntree += this.state.dataNbrPers[x].nbr_entree;
+       nbrSortie += this.state.dataNbrPers[x].nbr_sortie;
+     }
+   }
+   return nbrEntree - nbrSortie;
+ }
+
+ renderAnnotation (stage) {
 
    return (
-       <PointItem stage={stage} nbrPers ={nbrPers}/>
+       <PointItem stage={stage} nbrPers={this.calculNbrPers(stage)} />
    );
  }
 
@@ -102,6 +116,8 @@ class Lieux extends React.Component {
     var items = [];
     var name_event = this.props.selectedLieu;
     var id_event="";
+    var nbrPers=[];
+
     for (let n = 0; n < this.state.dataEvents.length; n++) {
 
       if(this.state.dataEvents[n].event_name == name_event){
@@ -115,8 +131,8 @@ class Lieux extends React.Component {
       if(this.state.dataStages[i].id_event == id_event){
         items.push(this.renderAnnotation(this.state.dataStages[i]));
       }
-
     }
+
 
     return items;
   }
