@@ -162,8 +162,6 @@ require_once "esp-data.php";
     <canvas id="myChart" width="20%" height="5%" style="display: none"></canvas>
 
 
-
-
     <script>
         <?php
 
@@ -368,7 +366,7 @@ require_once "esp-data.php";
             document.getElementById("tablee").innerHTML += "</tr>";
         }
         function tbleau() {
-            document.getElementById("tablee").innerHTML =  "<tr><th>Nom Scene</th> <th>ID</th> <th>Entrées</th> <th>Sorties</th> <th>Actuel</th> <th>Heure</th> </tr>";
+            document.getElementById("tablee").innerHTML =  "";
         }
     </script>
 
