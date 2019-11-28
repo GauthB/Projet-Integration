@@ -15,6 +15,8 @@ $stageQuery = $dbh->query("SELECT *
                   GROUP BY Stages.id_stage" );
 $stageInfo = $stageQuery->fetchAll(PDO::FETCH_ASSOC);
 
+$idQuery = $dbh->query("SELECT id_Event FROM `Events`" );
+$idInfo = $idQuery->fetchAll(PDO::FETCH_ASSOC);
 
 
 require_once "esp-data.php";
@@ -25,12 +27,27 @@ $data = new data();
 
     <ul>
 <!-- ################################    Boutton Event  ####################################-->
+        <select id="lieu" class="select-css" onchange="lieux();">
         <?php
         foreach ($eventInfos as $eventName) {
-            echo '<span data-aos="fade-up" data-city="weather-' . strtolower($eventName['event_city']) . '" class="boutonstats" value="' . $eventName['event_name'] . '" id="btn' . $eventName['id_event'] . '" style="cursor:pointer">'. $eventName['event_name'] .'</span></br></br>';
+            echo '<option data-city="weather-' . strtolower($eventName['event_city']) . '" class="boutonstats" value="' . $eventName['id_event'] . '" style="cursor:pointer">'. $eventName['event_name'] .'</option></br></br>';
         }
         ?>
+        </select>
+
    </ul>
+
+
+
+
+    <script>
+        /*
+
+
+
+
+                document.getElementById("even").innerHTML += variableRecuperee; */
+    </script>
 
 <!--  ####################################  Titre Event   ################################################-->
     <?php for ($i=0; $i<count($eventInfos); $i++): ?>
@@ -140,6 +157,7 @@ $data = new data();
 
         $('.boutonstats').click(function () {
             var idEvent = $(this).attr('id').slice(3);
+            alert(idEvent);
             if(idEvent !== actifId) {
                 // Change les informations affiché de l'évènement
                 $('.id_event'+actifId).hide();
@@ -166,7 +184,39 @@ $data = new data();
                 actifId = idEvent;
             }
 
+
+
+
         });
+
+
+        function lieux() {
+            var variableRecuperee = <?php echo json_encode($stageInfo); ?>;
+            var id = document.getElementById("lieu").value;
+            $('.id_event'+actifId).hide();
+            $('.id_event'+id).show();
+
+
+            if(id == 3) {
+                $('#ephec').show();
+            } else if(actifId == 3) {
+                $('#ephec').hide();
+            }
+
+            var weatherWidget = $('.weather-city:visible');
+            var city = $("#lieu option:selected").data('city');
+
+            if(city !== weatherWidget.attr('id')) {
+                weatherWidget.hide();
+                $('#' + city).show();
+            }
+
+            mymap.removeLayer(layers[actifId]);
+            mymap.addLayer(layers[id]);
+            actifId = id;
+            }
+
+
 
     </script>
 </div>
