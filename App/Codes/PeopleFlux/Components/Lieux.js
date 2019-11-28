@@ -6,6 +6,7 @@ import MapboxGL from "@mapbox/react-native-mapbox-gl";
 import { PermissionsAndroid } from 'react-native';
 import {getStages} from '../Helpers/Utils'
 import {getEvents} from '../Helpers/Utils'
+import {getNbrPers} from '../Helpers/Utils'
 import PointItem from './PointItem'
 
 
@@ -26,6 +27,7 @@ class Lieux extends React.Component {
       coordonnes:[],
       dataStages:[],
       dataEvents:[],
+      dataNbrPers:[],
       isLoading: true
     }
   }
@@ -61,6 +63,7 @@ class Lieux extends React.Component {
    setTimeout(() => {
      getStages().then((data) => {this.setState({dataStages :data, isLoading: false})})
      getEvents().then((data) => {this.setState({dataEvents :data, isLoading: false})})
+     getNbrPers().then((data) => {this.setState({dataNbrPers :data, isLoading: false})})
     }, 1000)
 
  }
@@ -87,14 +90,15 @@ class Lieux extends React.Component {
 
  }
 
- renderAnnotation (counter) {
+ renderAnnotation (stage, nbrPers) {
 
    return (
-       <PointItem stage={counter}/>
+       <PointItem stage={stage} nbrPers ={nbrPers}/>
    );
  }
 
  renderAnnotations () {
+
     var items = [];
     var name_event = this.props.selectedLieu;
     var id_event="";
