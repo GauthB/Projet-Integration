@@ -7,6 +7,7 @@ function setLieu(state = initialState, action) {
       nextState = {
         ...state,
         selectedLieu: action.value
+        
       }
       return nextState || state
   default:
