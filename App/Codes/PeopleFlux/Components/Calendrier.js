@@ -56,6 +56,7 @@ class Calendrier extends React.Component {
   render() {
     return (
       <View style={styles.main_container}>
+      
             <Text style={styles.text_calendrier}>Calendrier</Text>
             {this._displayEvent()}
             {this._displayLoading()}
