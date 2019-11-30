@@ -21,7 +21,7 @@
     <script type="text/javascript" src="js/contact.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 </head>
-<body>
+<body style="background-image: linear-gradient(#232531, #f265652e);">
 
 <div class="site-wrap">
 
@@ -89,15 +89,15 @@
                     <div id="errorContact"></div>
                 </div>
                 <div class="col-md-5 ml-auto" data-aos="fade-up" data-aos-delay="100">
-                    <div class="p-4 mb-3">
-                        <p class="mb-0 font-weight-bold text-secondary text-uppercase mb-3">Addresse</p>
-                        <p class="mb-4"><a href="#">Louvain-la-Neuve</a></p>
+                    <div class="p-4 mb-3" style="margin-top: -4rem;">
+                        <p class="mb-0 font-weight-bold text-secondary text-uppercase mb-3">Adresse</p>
+                        <p class="mb-4" style="margin-bottom: 0rem !important;"><a href="#">Louvain-la-Neuve</a></p>
 
                         <p class="mb-0 font-weight-bold text-secondary text-uppercase mb-3">Tél.</p>
-                        <p class="mb-4"><a href="#">+32 472/30.76.70</a></p>
+                        <p class="mb-4" style="margin-bottom: 0rem !important;"><a href="#">+32 472/30.76.70</a></p>
 
                         <p class="mb-0 font-weight-bold text-secondary text-uppercase mb-3">Email</p>
-                        <p class="mb-0"><a href="#">peopleflux@gmail.com</a></p>
+                        <p class="mb-0" style="margin-bottom: 0rem !important;"><a href="#">peopleflux@gmail.com</a></p>
 
                     </div>
                 </div>
