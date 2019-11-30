@@ -17,7 +17,7 @@ npm install --save react-native-vector-icons
 npm uninstall @react-native-mapbox-gl/maps --save
 npm install https://github.com/nitaliano/react-native-mapbox-gl/tarball/master
 npm i --save moment
-
+npm i --save react-native-splash-screen
 
 ### Test Unit
 
