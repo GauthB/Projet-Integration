@@ -108,14 +108,10 @@ $idInfo = $idQuery->fetchAll(PDO::FETCH_ASSOC);
 <div class="container">
 
     <!--  ####################################  Info sur les évènements   ################################################-->
-    <h2 data-aos="fade-up" style="margin-bottom:15px;text-align:center;color: #fff;
+    <h2 data-aos="fade-up" style="margin-top:150px;margin-bottom:60px;text-align:center;color: #fff;
   font-size: 2em;
-  text-shadow:
-          0 1px 0 #ccc,
-          0 2px 0 #c9c9c9,
-          0 3px 0 #bbb,
-          0 4px 0 #b9b9b9;">Informations</h2>
-    <h2 style="border: 10px double coral; font-size: 20px; line-height: normal;>
+ text-shadow: 1px">Informations</h2>
+    <h2 data-aos="fade-up" style="border: 10px coral; font-size: 20px; line-height: normal;>
     <?php for ($i=0; $i<count($eventInfos); $i++): ?>
         <p data-aos="fade-up" class="eventInfo id_event<?=$eventInfos[$i]['id_event']?>" <?php if($i != 0) echo 'style="display:none"'?>>
             <?=nl2br($eventInfos[$i]['event_description'])?>
