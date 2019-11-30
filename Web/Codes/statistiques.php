@@ -293,10 +293,17 @@ require_once "esp-data.php";
             var nbrAct = [];
             var myChart = null;
             var ctx = null;
+            var nbrActu = 0;
             for (f = 0; f < variableRecuperee.length; f++) {
                 if (document.getElementById("stagee").value == variableRecuperee[f]["stage_name"]) {
+                    if ( variableRecuperee[f]['nbr_entree'] == 1) {
+                        nbrActu++;
+                    }
+                    if ( variableRecuperee[f]['nbr_sortie'] == 1) {
+                        nbrActu--;
+                    }
                     heures[i] = variableRecuperee[f]["heure"].slice(11,19);
-                    nbrAct[i] = variableRecuperee[f]["nbr_actuel"];
+                    nbrAct[i] = nbrActu;
                     i++;
                 }
             }
@@ -307,7 +314,7 @@ require_once "esp-data.php";
                     labels: heures.reverse(),
                     datasets: [{
                         label: 'Observer ici le nombre de personne présente en fonction de la soirée !',
-                        data: nbrAct.reverse(),
+                        data: nbrAct,
                         backgroundColor:
                             'rgb(0,0,0,0.1)'
                         ,
