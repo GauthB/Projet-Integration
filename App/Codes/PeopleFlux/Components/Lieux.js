@@ -111,7 +111,6 @@ class Lieux extends React.Component {
  centerMap(){
    var name_event = this.props.selectedLieu;
    var id_event="";
-   var coordonnees=[];
 
    for (let n = 0; n < this.state.dataEvents.length; n++) {
 
@@ -120,19 +119,17 @@ class Lieux extends React.Component {
      }
 
    }
-   var x=0;
-   while (this.state.dataStages[x].id_event != id_event){
-     x++;
+
+   for (let i = 0; i < this.state.dataStages.length; i++) {
+
+     if(this.state.dataStages[i].id_event == id_event){
+       return [Number(this.state.dataStages[i].stage_longitude),Number(this.state.dataStages[i].stage_latitude)];
+
+     }
+
    }
 
 
-
-   coordonnees.push(Number(this.state.dataStages[x].stage_longitude));
-   coordonnees.push(Number(this.state.dataStages[x].stage_latitude));
-
-
-
-   return coordonnees;
 
  }
 
@@ -196,8 +193,8 @@ class Lieux extends React.Component {
                 styleURL={MapboxGL.StyleURL.Street}
                 style={styles.map}
                 showUserLocation ={true}
-                zoomLevel={7}
-                centerCoordinate={[4.6667145, 50.6402809]}
+                zoomLevel={13}
+                centerCoordinate={this.centerMap()}
               >
 
                 {this.renderAnnotations()}
