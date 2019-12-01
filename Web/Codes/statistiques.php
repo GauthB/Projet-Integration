@@ -39,7 +39,7 @@ require_once "esp-data.php";
 
 </head>
 
-<body>
+<body style="background-image: linear-gradient(#232531, #f265652e);">
 <div class="site-wrap">
     <div class="site-mobile-menu">
         <div class="site-mobile-menu-header">
@@ -151,6 +151,7 @@ require_once "esp-data.php";
 
             <table class="tftable" border="1" data-aos="fade-up" >
                 <tbody id="tablee">
+
                 </tbody>
                 <?php // echo '<br>' . $data->afficheStat("prive",$_SESSION['id'],$_GET['nom'],$_GET['cpt']); ?>
             </table>
@@ -365,6 +366,7 @@ require_once "esp-data.php";
             }
             document.getElementById("tablee").innerHTML += "</tr>";
         }
+
         function tableau() {
             document.getElementById("tablee").innerHTML =  "<tr><th>Nom Scene</th> <th>ID</th> <th>Entrées</th> <th>Sorties</th> <th>Actuel</th> <th>Heure</th> </tr>";
             document.getElementById("tablee").innerHTML += "<tr>";
