@@ -89,7 +89,7 @@ require_once "esp-data.php";
                             $event["date_to"] . '</td><td>' .
                             $event["event_city"] . '</td><td>' .
                             $event["event_address"] . '</td><td>' .
-                            '<span class="close btnDelEvent" data-idEvent="' . $event["id_event"] . '"><i class="fas fa-backspace suppr"></i></span></td></tr>';
+                            '<span class="close btnDelEvent" data-idEvent="' . $event["id_event"] . '"><i class="fas fa-backspace suppr" style="margin-right:4rem"></i></span></td></tr>';
                     }
 
                     echo '</table>';
@@ -123,7 +123,7 @@ require_once "esp-data.php";
                             $stage["max_people"] . '</td><td>' .
                             $stage["hour_from"] . '</td><td>' .
                             $stage["hour_to"] . '</td><td>' .
-                            '<span class="close btnDelStage" data-idStage="' . $stage["id_stage"] . '"><i class="fas fa-backspace suppr"></i></span></td></tr>';
+                            '<span class="close btnDelStage" data-idStage="' . $stage["id_stage"] . '"><i class="fas fa-backspace suppr" style="margin-right:2.5rem"></i></span></td></tr>';
                     }
 
                     echo '</table>';

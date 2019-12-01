@@ -121,8 +121,8 @@ require_once "esp-data.php";
             ?><br>
             <br>
             <br>
-            <br><select id="eventt"  class="select-css" onchange="stage();number();graphe();actu();entree();sortie();"></select></br>
-            <br><select id="stagee"  class="select-css" onchange="number();graphe();actu();entree();sortie();"></select></br>
+            <br><span style="padding-right: 0.4rem;"">Evènement : </span><select id="eventt"  class="select-css" onchange="stage();number();graphe();actu();entree();sortie();"></select></br>
+            <br><span style="padding-right: 2.8rem;">Scène : </span><select id="stagee"  class="select-css" onchange="number();graphe();actu();entree();sortie();"></select></br>
             <br style="margin-top=20px">
             <button name="button" type="button" id="tab" class="boutonstats" onclick="number()"> Afficher ses statistiques </button>
             <button name="button" type="button" id="tab" class="boutonstats" onclick="tbleau()"> Ne plus afficher </button>
@@ -354,13 +354,13 @@ require_once "esp-data.php";
         function number() {
             indica = document.getElementById("cpt").value;
             var indic = 0;
-            document.getElementById("tablee").innerHTML =  "<tr><th>Nom Scene</th> <th>ID</th> <th>Entrées</th> <th>Sorties</th> <th>Actuel</th> <th>Heure</th> </tr>";
+            document.getElementById("tablee").innerHTML =  "<tr><th>Nom Scene</th> <th>Entrées</th> <th>Sorties</th> <th>Heure</th> </tr>";
             document.getElementById("tablee").innerHTML += "<tr>";
             for (c = 0; c < variableRecuperee.length; c++) {
                 if (document.getElementById("stagee").value == variableRecuperee[c]['stage_name']) {
                     indic++
                     if( indic <= indica) {
-                        document.getElementById("tablee").innerHTML += "<td>" + variableRecuperee[c]['stage_name'] + "</td><td>" + variableRecuperee[c]['id_stage'] + "</td><td>" + variableRecuperee[c]['nbr_entree'] + "</td><td>" + variableRecuperee[c]['nbr_sortie'] + "</td><td>" + variableRecuperee[c]['nbr_actuel'] + "</td><td>" + variableRecuperee[c]['heure'] + "</td>"
+                        document.getElementById("tablee").innerHTML += "<td>" + variableRecuperee[c]['stage_name'] + "</td><td>" + variableRecuperee[c]['nbr_entree'] + "</td><td>" + variableRecuperee[c]['nbr_sortie'] + "</td><td>" + variableRecuperee[c]['heure'] + "</td>"
                     }
                 }
             }
@@ -368,11 +368,11 @@ require_once "esp-data.php";
         }
 
         function tableau() {
-            document.getElementById("tablee").innerHTML =  "<tr><th>Nom Scene</th> <th>ID</th> <th>Entrées</th> <th>Sorties</th> <th>Actuel</th> <th>Heure</th> </tr>";
+            document.getElementById("tablee").innerHTML =  "<tr><th>Nom Scene</th> <th>Entrées</th> <th>Sorties</th> <th>Heure</th> </tr>";
             document.getElementById("tablee").innerHTML += "<tr>";
             for (c = 0; c < variableRecuperee.length; c++) {
                 if (document.getElementById("stagee").value == variableRecuperee[c]['stage_name']) {
-                    document.getElementById("tablee").innerHTML += "<td>" + variableRecuperee[c]['stage_name'] + "</td><td>" + variableRecuperee[c]['id_stage'] + "</td><td>" + variableRecuperee[c]['nbr_entree'] + "</td><td>" + variableRecuperee[c]['nbr_entree'] + "</td><td>" + variableRecuperee[c]['nbr_actuel'] + "</td><td>" + variableRecuperee[c]['heure'] + "</td>"
+                    document.getElementById("tablee").innerHTML += "<td>" + variableRecuperee[c]['stage_name'] + "</td><td>" + variableRecuperee[c]['nbr_entree'] + "</td><td>" + variableRecuperee[c]['nbr_sortie'] + "</td><td>" + variableRecuperee[c]['heure'] + "</td>"
                 }
             }
             document.getElementById("tablee").innerHTML += "</tr>";
