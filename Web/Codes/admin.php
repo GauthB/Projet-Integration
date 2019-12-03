@@ -67,7 +67,7 @@ require_once "esp-data.php";
     <div style="margin-bottom: 100px;">
         <div class="container">
             <div>
-                <div id="dialogEvent"><p>Êtes-vous sûr de vouloir supprimer l'évènement "<span id="spnEventName"></span>"?</p>Vous pourrez faire cette action si vous avez supprimé auparavant toutes les scènes liées à cette évènement!</div>
+                <div id="dialogEvent"><p>Êtes-vous sûr de vouloir supprimer l'évènement "<span id="spnEventName"></span>"?</p></div>
                 <h2 class="d-block mb-3 caption" data-aos="fade-up">Evènements</h2>
                 <!-- Table des évènements-->
                 <?php
