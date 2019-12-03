@@ -7,10 +7,11 @@
 */
 
 // Network credentials
-const char* ssid = "WiFi-2.4-AA4C";
-const char* password = "";
-//const char* ssid = "VOO-540128";
-//const char* password = "";
+const char* ssid = "LAPTOP-QUU5U7G9 5473";
+const char* password = "8440<4Dq";
+
+String scene = "1";
+
 const char* serverName = "http://peopleflux.gauthierbohyn.com/post-esp-data.php";
 String apiKeyValue = "12mAT5Ab3j7F9";
 boolean vrai = 0;  // VALEUR PRECEDENTE DU LASER AU COMPTEUR
@@ -62,7 +63,7 @@ void loop() {
     http.addHeader("Content-Type", "application/x-www-form-urlencoded");
     
     // Prepare your HTTP POST request data
-    String httpRequestData = "api_key=" + apiKeyValue + "&id_stage=" + "1"
+    String httpRequestData = "api_key=" + apiKeyValue + "&id_stage=" + scene
                           + "&nbr_entree=" + "1";
     
     // Send HTTP POST request
