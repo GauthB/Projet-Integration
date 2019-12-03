@@ -96,7 +96,7 @@ class Lieux extends React.Component {
        nbrSortie += Number(this.state.dataNbrPers[x].nbr_sortie);
      }
    }
-   return nbrEntree - nbrSortie;
+   return  (nbrSortie > nbrEntree) ? 0 : nbrEntree - nbrSortie;
  }
 
 

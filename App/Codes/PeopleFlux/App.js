@@ -11,6 +11,7 @@ export default class App extends React.Component {
   SplashScreen.hide()
 }
   render() {
+    console.disableYellowBox = true
     return (
         <Provider store={Store}>
           <View style={styles.main_container}>
