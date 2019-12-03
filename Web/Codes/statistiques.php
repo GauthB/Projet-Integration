@@ -126,8 +126,7 @@ require_once "esp-data.php";
             <br style="margin-top=20px">
             <button name="button" type="button" id="tab" class="boutonstats" onclick="number()"> Afficher ses statistiques </button>
             <button name="button" type="button" id="tab" class="boutonstats" onclick="tbleau()"> Ne plus afficher </button>
-
-            <bouton
+            
             <!-- affiche les statistiques liés à un evennement -->
             <div class="d-block mb-3 caption" data-aos="fade-up"></br>
                 <h2>Statistiques public</h2>
@@ -214,15 +213,20 @@ require_once "esp-data.php";
                     document.getElementById("stagee").innerHTML += "<option>" + variableStage[p]['stage_name'] + "</option>"
                 }
             }
-            var max = ("0000-00-00 00:00:00.000000")
+            var acto = 0;
             for( x = 0; x < variableRecuperee.length; x++) {
                 if(document.getElementById("stagee").value == variableRecuperee[x]["stage_name"]) {
-                    if (max < variableRecuperee[x]["heure"]) {
-                        max = variableRecuperee[x]["heure"];
-                        document.getElementById("actu").innerHTML = "Nombre actuel : " + variableRecuperee[x]["nbr_actuel"];
+                    if (variableRecuperee[x]["nbr_entree"] == 1) {
+                        acto++;
+                    }
+                    if (variableRecuperee[x]["nbr_sortie"] == 1) {
+                        acto--;
                     }
                 }
             }
+            document.getElementById("actu").innerHTML = "Nombre actuel : " + acto;
+
+
 
             var ent = 0;
             for( x = 0; x < variableRecuperee.length; x++) {
@@ -245,16 +249,18 @@ require_once "esp-data.php";
             document.getElementById("sort").innerHTML = "Nombre sortie : " + sor;
         }
         function actu() {
-            document.getElementById("actu").innerHTML = "Nombre actuel : 0";
-            var max = ("0000-00-00 00:00:00.000000")
+            var acto = 0;
             for( x = 0; x < variableRecuperee.length; x++) {
                 if(document.getElementById("stagee").value == variableRecuperee[x]["stage_name"]) {
-                    if (max < variableRecuperee[x]["heure"]) {
-                        max = variableRecuperee[x]["heure"];
-                        document.getElementById("actu").innerHTML = "Nombre actuel : " + variableRecuperee[x]["nbr_actuel"];
+                    if (variableRecuperee[x]["nbr_entree"] == 1) {
+                        acto++;
                     }
+                    if (variableRecuperee[x]["nbr_sortie"] == 1) {
+                        acto--;
                     }
+                }
             }
+            document.getElementById("actu").innerHTML = "Nombre actuel : " + acto;
         }
         function entree() {
             var ent = 0;
