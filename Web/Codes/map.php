@@ -26,29 +26,16 @@ $idInfo = $idQuery->fetchAll(PDO::FETCH_ASSOC);
 
 <div class="container">
 
-    <ul>
 <!-- ################################    Select Event  ####################################-->
-        <select id="lieu" style="margin-top:50px;" class="select-css" data-aos="fade-up" onchange="updateInfo();">
-        <?php
-        foreach ($eventInfos as $eventName) {
-            echo '<option data-city="weather-' . strtolower($eventName['event_city']) . '"  value="' . $eventName['id_event'] . '" style="cursor:pointer">'. $eventName['event_name'] .'</option></br></br>';
-        }
-        ?>
-        </select>
-
-   </ul>
+    <select id="eventSelect" style="margin-top:50px;" class="select-css" data-aos="fade-up" onchange="updateInfo();">
+    <?php
+    foreach ($eventInfos as $eventName) {
+        echo '<option data-city="weather-' . strtolower($eventName['event_city']) . '"  value="' . $eventName['id_event'] . '">'. $eventName['event_name'] .'</option></br></br>';
+    }
+    ?>
+    </select>
 
 
-
-
-    <script>
-        /*
-
-
-
-
-                document.getElementById("even").innerHTML += variableRecuperee; */
-    </script>
 
 <!--  ####################################  Titre Event   ################################################-->
     <?php for ($i=0; $i<count($eventInfos); $i++): ?>
@@ -109,31 +96,32 @@ $idInfo = $idQuery->fetchAll(PDO::FETCH_ASSOC);
 <div class="container">
 
     <!--  ####################################  Info sur les évènements   ################################################-->
-    <h2 data-aos="fade-up" style="margin-top:150px;margin-bottom:60px;text-align:center;color: #fff;
-  font-size: 2em;
- text-shadow: 1px">Informations</h2>
-    <h2 data-aos="fade-up" style="border: 10px coral; font-size: 20px; line-height: normal;>
-    <?php for ($i=0; $i<count($eventInfos); $i++): ?>
-        <p data-aos="fade-up" class="eventInfo id_event<?=$eventInfos[$i]['id_event']?>" <?php if($i != 0) echo 'style="display:none"'?>>
-            <?=nl2br($eventInfos[$i]['event_description'])?>
-        </p>
-    <?php endfor;?>
-    </h2>
+
+    <h2 data-aos="fade-up" style="margin-top:150px;margin-bottom:60px;text-align:center;color: #fff; font-size: 2em; text-shadow: 1px">Informations</h2>
+
+    <div data-aos="fade-up" style="border: 10px coral; font-size: 20px; line-height: normal;">
+        <?php for ($i=0; $i<count($eventInfos); $i++): ?>
+            <p data-aos="fade-up" class="eventInfo id_event<?=$eventInfos[$i]['id_event']?>" <?php if($i != 0) echo 'style="display:none"'?>>
+                <?=nl2br($eventInfos[$i]['event_description'])?>
+            </p>
+        <?php endfor;?>
+    </div>
+</div>
+
     <script>
+        var actifId = ''+<?=$eventInfos[0]['id_event']?>;
+        var layers = [];
+        var mymap;
+
         $(function() {
 
             // Layers
-            var layers = [];
             <?php foreach ($eventInfos as $eventName): ?>
             layers[<?=$eventName['id_event']?>] = L.layerGroup();
             <?php endforeach;?>
 
-            var actifId = ''+<?=$eventInfos[0]['id_event']?>;
-
             // Créer les points sur la carte
             <?php foreach ($stageInfo as $stage): ?>
-
-
 
 
             L.marker([
@@ -146,7 +134,7 @@ $idInfo = $idQuery->fetchAll(PDO::FETCH_ASSOC);
                 .addTo(layers[<?=$stage['id_event']?>]);
             <?php endforeach;?>
 
-            var mymap = L.map('mapid', {
+            mymap = L.map('mapid', {
                 center: [50.668686, 4.612479],
                 zoom: 16,
                 layers: [layers[actifId]]
@@ -159,7 +147,7 @@ $idInfo = $idQuery->fetchAll(PDO::FETCH_ASSOC);
                 accessToken: 'pk.eyJ1IjoiZ2F1dGhpZXJiIiwiYSI6ImNrMTQzODZuZDBlcDkzb29henlhMndvMnEifQ.nrVFAyoW00lvhk94CeCz0Q'
             }).addTo(mymap);
 
-            updateMeteo();
+            setTimeout(updateMeteo, 100);
         });
 
 
@@ -170,7 +158,7 @@ $idInfo = $idQuery->fetchAll(PDO::FETCH_ASSOC);
 
 
         function updateInfo() {
-            var id = document.getElementById("lieu").value;
+            var id = document.getElementById("eventSelect").value;
             $('.id_event'+actifId).hide();
             $('.id_event'+id).show();
 
@@ -190,11 +178,11 @@ $idInfo = $idQuery->fetchAll(PDO::FETCH_ASSOC);
 
         function updateMeteo() {
             var weatherWidget = $('.weather-city:visible');
-            var city = $("#lieu option:selected").data('city');
+            var city = $("#eventSelect option:selected").data('city');
 
             if(city !== weatherWidget.attr('id')) {
-                weatherWidget.hide();
                 $('#' + city).show();
+                weatherWidget.hide();
             }
         }
 
