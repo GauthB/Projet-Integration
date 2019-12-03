@@ -15,8 +15,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $id_stage = test_input($_POST["id_stage"]);
         $nbr_entree = test_input($_POST["nbr_entree"]);
         $nbr_sortie = test_input($_POST["nbr_sortie"]);
-        $nbr_actuel = 0;
-
         // Create connection
         $conn = new mysqli($data->getServerName(), $data->getUsername(), $data->getPassword(), $data->getDbName());
         // Check connection
@@ -24,8 +22,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             die("Connection failed: " . $conn->connect_error);
         }
 
-        $sql = "INSERT INTO Nbr_Personne (id_stage, nbr_entree, nbr_sortie, nbr_actuel)
-        VALUES ('" . $id_stage . "', '" . $nbr_entree . "', '" . $nbr_sortie . "', '" . $nbr_actuel . "')";
+        $sql = "INSERT INTO Nbr_Personne (id_stage, nbr_entree, nbr_sortie)
+        VALUES ('" . $id_stage . "', '" . $nbr_entree . "', '" . $nbr_sortie . "')";
 
         if ($conn->query($sql) === TRUE) {
             echo "New record created successfully";

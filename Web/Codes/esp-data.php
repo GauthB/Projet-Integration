@@ -68,15 +68,6 @@ class data{
         return $this->getActuel();
 
     }
-    public function supprimerTable($id){
-        $sql = "DELETE FROM `Nbr_Personne` WHERE `id_stage`=  1";
-        $dbh -> exec ($sql);
-        /*if ($conn->query($sql) === TRUE) {
-            echo "Record deleted successfully";
-        } else {
-            echo "Error deleting record: " . $conn->error;
-        }*/
-    }
     public function getQueryTotal($idClient){
         $sqlNbr = "SELECT SUM(nbr_entree), SUM(nbr_sortie) 
                        FROM Nbr_Personne
@@ -94,7 +85,7 @@ class data{
         return $sqlNbr;
     }
     public function getQueryPrive($idClient,$stageName,$cpt){
-        $sqlNbr =   "SELECT Stages.stage_name, id, Nbr_Personne.nbr_entree, Nbr_Personne.nbr_sortie, Nbr_Personne.nbr_actuel, Nbr_Personne.heure 
+        $sqlNbr =   "SELECT Stages.stage_name, id, Nbr_Personne.nbr_entree, Nbr_Personne.nbr_sortie, Nbr_Personne.heure 
                          FROM `Nbr_Personne`
                          join Stages on Nbr_Personne.id_stage = Stages.id_stage 
                          join Events on Stages.id_event = Events.id_event 
@@ -134,7 +125,6 @@ class data{
                     $row_id = $row["id"];
                     $row_nbr_entree = $row["nbr_entree"];
                     $row_nbr_sortie = $row["nbr_sortie"];
-                    $row_nbr_actuel = $row["nbr_actuel"];
                     $row_heure = $row["heure"];
 
                     echo '<tr> 
@@ -142,7 +132,6 @@ class data{
                 <td>' . $row_id . '</td> 
                 <td>' . $row_nbr_entree . '</td> 
                 <td>' . $row_nbr_sortie . '</td> 
-                <td>' . $row_nbr_actuel . '</td> 
                 <td>' . $row_heure . '</td>
               </tr>';
                 }

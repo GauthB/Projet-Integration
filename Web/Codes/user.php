@@ -61,7 +61,7 @@ if(isset($_POST['envoi'])) {
     <script src="js/jquery-3.4.1.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 </head>
-<body>
+<body style="background-image: linear-gradient(#232531, #f265652e);">
 <div class="site-wrap">
 
     <div class="site-mobile-menu">
@@ -104,7 +104,7 @@ if(isset($_POST['envoi'])) {
                 <div class="row form-group">
                     <div class="col-md-12">
                         <label class="" for="password">Mot de passe</label>
-                        <input type="password" id="password"  class="input form-control" name="password" placeholder="Mdp" required>
+                        <input type="password" id="password"  class="input form-control" name="password" placeholder="Mot de Passe" required>
                     </div>
                 </div>
 

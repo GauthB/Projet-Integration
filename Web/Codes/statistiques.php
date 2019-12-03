@@ -224,7 +224,7 @@ require_once "esp-data.php";
                     }
                 }
             }
-            document.getElementById("actu").innerHTML = "Nombre actuel : " + acto;
+            document.getElementById("actu").innerHTML = "Nombre actuel : " + (acto<0?0:acto);
 
 
 
@@ -260,7 +260,7 @@ require_once "esp-data.php";
                     }
                 }
             }
-            document.getElementById("actu").innerHTML = "Nombre actuel : " + acto;
+            document.getElementById("actu").innerHTML = "Nombre actuel : " + (acto<0?0:acto);
         }
         function entree() {
             var ent = 0;

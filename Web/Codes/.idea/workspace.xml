@@ -26,16 +26,30 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+    <leaf>
+      <file pinned="true" current-in-tab="false">
+        <entry file="remoteDeploymentFS://&lt;b75c33ca-0950-4e87-82d9-469c49ea37cc&gt;/post-esp-data.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="232">
+              <caret line="25" column="10" selection-start-line="25" selection-start-column="10" selection-end-line="25" selection-end-column="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="true" current-in-tab="false">
+        <entry file="remoteDeploymentFS://&lt;b75c33ca-0950-4e87-82d9-469c49ea37cc&gt;/esp-data.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="232">
+              <caret line="110" column="34" selection-start-line="110" selection-start-column="30" selection-end-line="110" selection-end-column="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="true" current-in-tab="false">
         <entry file="remoteDeploymentFS://&lt;b75c33ca-0950-4e87-82d9-469c49ea37cc&gt;/statistiques.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="124" column="47" selection-start-line="124" selection-start-column="47" selection-end-line="124" selection-end-column="47" />
-              <folding>
-                <element signature="n#style#0;n#span#0;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#br#6;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
+            <state relative-caret-position="811">
+              <caret line="226" column="92" selection-start-line="226" selection-start-column="92" selection-end-line="226" selection-end-column="92" />
             </state>
           </provider>
         </entry>
@@ -43,20 +57,20 @@
       <file pinned="true" current-in-tab="false">
         <entry file="remoteDeploymentFS://&lt;b75c33ca-0950-4e87-82d9-469c49ea37cc&gt;/admin.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="595">
-              <caret line="125" column="160" selection-start-line="125" selection-start-column="160" selection-end-line="125" selection-end-column="160" />
+            <state>
               <folding>
                 <element signature="n#style#0;n#i#0;n#td#5;n#tr#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#i#0;n#td#7;n#tr#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="true" current-in-tab="true">
-        <entry file="remoteDeploymentFS://&lt;b75c33ca-0950-4e87-82d9-469c49ea37cc&gt;/css/style.css">
+        <entry file="remoteDeploymentFS://&lt;b75c33ca-0950-4e87-82d9-469c49ea37cc&gt;/user.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="136" column="18" selection-start-line="136" selection-start-column="18" selection-end-line="136" selection-end-column="18" />
+            <state relative-caret-position="459">
+              <caret line="106" column="130" selection-start-line="106" selection-start-column="130" selection-end-line="106" selection-end-column="130" />
             </state>
           </provider>
         </entry>
@@ -67,7 +81,6 @@
     <findStrings>
       <find>get</find>
       <find>post</find>
-      <find>actu</find>
       <find>stats</find>
       <find>afficher</find>
       <find>tbleau</find>
@@ -95,6 +108,7 @@
       <find>tfta</find>
       <find>table-l</find>
       <find>nbr_actuel</find>
+      <find>actu</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -112,23 +126,25 @@
         <option value="&lt;b75c33ca-0950-4e87-82d9-469c49ea37cc&gt;/js/contact.js" />
         <option value="&lt;b75c33ca-0950-4e87-82d9-469c49ea37cc&gt;/lieux.php" />
         <option value="&lt;b75c33ca-0950-4e87-82d9-469c49ea37cc&gt;/footer.php" />
-        <option value="&lt;b75c33ca-0950-4e87-82d9-469c49ea37cc&gt;/post-esp-data.php" />
-        <option value="&lt;b75c33ca-0950-4e87-82d9-469c49ea37cc&gt;/esp-data.php" />
         <option value="&lt;b75c33ca-0950-4e87-82d9-469c49ea37cc&gt;/css/select-css.css" />
         <option value="&lt;b75c33ca-0950-4e87-82d9-469c49ea37cc&gt;/css/bootstrap/bootstrap.min.css" />
         <option value="&lt;b75c33ca-0950-4e87-82d9-469c49ea37cc&gt;/header.php" />
         <option value="&lt;b75c33ca-0950-4e87-82d9-469c49ea37cc&gt;/css/bootstrap.min.css" />
         <option value="&lt;b75c33ca-0950-4e87-82d9-469c49ea37cc&gt;/map.php" />
-        <option value="&lt;b75c33ca-0950-4e87-82d9-469c49ea37cc&gt;/statistiques.php" />
         <option value="&lt;b75c33ca-0950-4e87-82d9-469c49ea37cc&gt;/css/style.css" />
         <option value="&lt;b75c33ca-0950-4e87-82d9-469c49ea37cc&gt;/admin.php" />
+        <option value="&lt;b75c33ca-0950-4e87-82d9-469c49ea37cc&gt;/index.php" />
+        <option value="&lt;b75c33ca-0950-4e87-82d9-469c49ea37cc&gt;/esp-data.php" />
+        <option value="&lt;b75c33ca-0950-4e87-82d9-469c49ea37cc&gt;/user.php" />
+        <option value="&lt;b75c33ca-0950-4e87-82d9-469c49ea37cc&gt;/statistiques.php" />
+        <option value="&lt;b75c33ca-0950-4e87-82d9-469c49ea37cc&gt;/post-esp-data.php" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="1908" />
     <option name="width" value="1944" />
-    <option name="height" value="2104" />
+    <option name="height" value="2106" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -217,12 +233,15 @@
       <workItem from="1574699729800" duration="6004000" />
       <workItem from="1574709595377" duration="511000" />
       <workItem from="1574934342947" duration="11672000" />
-      <workItem from="1575234380340" duration="3675000" />
+      <workItem from="1575234380340" duration="3842000" />
+      <workItem from="1575291161720" duration="633000" />
+      <workItem from="1575305654555" duration="612000" />
+      <workItem from="1575388835578" duration="1234000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="62768000" />
+    <option name="totallyTimeSpent" value="65414000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
@@ -234,7 +253,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="848" y="0" width="864" height="935" extended-state="0" />
+    <frame x="-6" y="-6" width="1719" height="942" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.365099" />
@@ -257,10 +276,10 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Database" order="3" weight="0.21226698" />
-      <window_info anchor="right" id="Remote Host" order="4" weight="0.26980197" />
+      <window_info anchor="right" id="Remote Host" order="4" weight="0.13108839" />
     </layout>
     <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.365099" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.365099" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -274,13 +293,13 @@
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.499098" weight="0.3296433" />
       <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.499098" weight="0.3296433" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5074257" side_tool="true" visible="true" weight="0.12779157" />
-      <window_info anchor="bottom" id="File Transfer" order="12" sideWeight="0.49257424" visible="true" weight="0.12779157" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5074257" side_tool="true" weight="0.12779157" />
+      <window_info anchor="bottom" id="File Transfer" order="12" sideWeight="0.49257424" weight="0.12779157" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Database" order="3" weight="0.21226698" />
-      <window_info active="true" anchor="right" id="Remote Host" order="4" visible="true" weight="0.26980197" />
+      <window_info active="true" anchor="right" id="Remote Host" order="4" visible="true" weight="0.13108839" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
