@@ -8,7 +8,6 @@ import Contact from '../Components/Contact'
 import Lieux from '../Components/Lieux.js'
 import Calendrier from '../Components/Calendrier.js'
 import EventDetail from '../Components/EventDetail.js'
-import Test from '../Components/Test'
 import Icon from 'react-native-vector-icons/Foundation'
 
 
@@ -55,16 +54,6 @@ const DrawerNavigator = createDrawerNavigator({
     navigationOptions: ({ navigation }) => ({
       title: 'Contact Screen',
       drawerLabel: 'Contact',
-      drawerIcon: () => <Icon name="mail" size={20} color='#fff' />
-
-
-    })
-  },
-  Test: {
-    screen: Test,
-    navigationOptions: ({ navigation }) => ({
-      title: 'Test Screen',
-      drawerLabel: 'Test',
       drawerIcon: () => <Icon name="mail" size={20} color='#fff' />
 
 
