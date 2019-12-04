@@ -45,7 +45,7 @@ require_once "esp-data.php";
 
 
 </head>
-<body style="background-image: linear-gradient(#232531, #f265652e);">
+<body>
 
 <div class="site-wrap">
 
