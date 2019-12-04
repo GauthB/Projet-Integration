@@ -257,8 +257,16 @@ require_once "esp-data.php";
                         <div class="row form-group" data-aos="fade-up">
                             <div class="col-md-12">
                                 <label class="" for="horaires">Horaires</label>
-                                <input type="text" id="horaires"  class="input form-control" name="heureDebut" placeholder="Heure de début">
-                                <input type="text" id="horaires"  class="input form-control" name="heurefin" placeholder="Heure de fin">
+                                <input type="text" id="heureDebut"  class="input form-control" name="heureDebut" placeholder="Heure de début">
+                                <input type="text" id="heureFin"  class="input form-control" name="heurefin" placeholder="Heure de fin">
+
+<!--                                <script>-->
+<!--                                    $('#heureDebut, #heureFin').datetimepicker({-->
+<!--                                        locale: 'fr',-->
+<!--                                        sideBySide: true,-->
+<!--                                        calendarWeeks: false-->
+<!--                                    });-->
+<!--                                </script>-->
                             </div>
                         </div>
                         <div class="row form-group" data-aos="fade-up">
