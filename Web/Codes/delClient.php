@@ -6,20 +6,18 @@ require_once "php/db_connect.php";
 
 session_start();
 
-if($_SESSION['ifAdmin']!=true){
+if (!isset($_SESSION['id']) && $_SESSION['ifAdmin'] != true) {
     header('Location: index.php');
     exit;
 }
 
-
-
-if(!isset($_SESSION['id'])) {
-    header('Location: index.php');
-    exit;
+if(isset($_POST['id'])){
+    $sth = $dbh -> prepare('DELETE FROM Clients WHERE id_client = ?');
+    $sth->execute([$_POST['id']]);
+    exit();
 }
 
-//$sth = $dbh->prepare('DELETE FROM Clients WHERE id_client = ?');
-//$sth->execute([$_POST['id']]);
+
 ?>
 
 
@@ -91,7 +89,7 @@ if(!isset($_SESSION['id'])) {
 
 
 
-                echo '<table class="tftable" border="1" data-aos="fade-up">';
+                echo '<table class="tftable" id="tablee" border="1" data-aos="fade-up">';
                 echo '<tr><th>Nom</th><th>Mail</th><th>Tél.</th><th>Suppression</th></tr>';
 
         foreach ($clientInfos as $client) {
@@ -116,25 +114,10 @@ if(!isset($_SESSION['id'])) {
 
 
 
-                <?php
-             //   if($_POST['sub']){
-
-             //       $sth = $dbh -> prepare('DELETE FROM Clients WHERE id_client = data-idClient');
-         //           $sth->execute([$_POST['id']]);
-           //     }
-
-                ?>
-
-
             </div>
         </div>
     </div>
 </div>
-
-
-
-
-
 
 
 <footer class="site-footer">
@@ -158,8 +141,9 @@ if(!isset($_SESSION['id'])) {
             {
                 text: "Oui",
                 click: function() {
-                    $.post('stageEvent/delClient.php', {id: $("#dialogClient").data('idClient')}, function (data) {
+                    $.post('delClient.php', {id: $("#dialogClient").data('idClient')}, function (data) {
                         location.reload();
+                        console.log(data);
                     });
                     $( this ).dialog( "close" );
                 }
@@ -180,18 +164,6 @@ if(!isset($_SESSION['id'])) {
         return false;
     });
 
-
-</script>
-
-<script>
- /*   $(function() {
-        // Dialog confirmation supression client
-                        $.post('stageEvent/delClient.php', {id: $("#dialogClient").data('idClient')}, function (data) {
-                            location.reload();
-                        });
-                        $( this ).dialog( "close" );
-                    }
-*/
 
 </script>
 
