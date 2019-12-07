@@ -2,6 +2,7 @@ import React from 'react'
 import { StyleSheet, View, TextInput, Text , Platform, Button, TouchableOpacity, Alert  } from 'react-native'
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview'
 import email from 'react-native-email'
+import {sendEmail} from '../Helpers/Utils'
 
 
 
@@ -24,6 +25,8 @@ class Contact extends React.Component {
        return false;
      }
    }
+
+
 
   render() {
     return (
@@ -92,28 +95,23 @@ class Contact extends React.Component {
     )
   }
 
-  handleEmail = () => {
-        const to = 'peopleflux@gmail.com' // string or array of email addresses
-        if(this._isMailCorrect()){
-          email(to, {
-              // Optional additional arguments
-              subject: this.state.sujet,
-              body: this.state.corps + '\n\n' + ' email: ' + this.state.mail
-          }).catch(console.error)
-        }
-        else{
-          Alert.alert(
-            'Mail incorrect',
-            'Veuillez entrer un email correct',
-            [
-              {text: 'OK', onPress: () => console.log('OK Pressed')},
-            ],
-            {cancelable: false},
-          );
-        }
+  handleEmail=()=> {
 
-
-    }
+    sendEmail(this.state.mail,this.state.sujet,this.state.corps,"Envoye").then((data) => {Alert.alert(
+      'Email PeopleFlux',
+      data,
+      [
+        {
+          text: 'Cancel',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {text: 'OK', onPress: () => console.log('OK Pressed')},
+      ],
+      {cancelable: false},
+    )})
+    
+  }
 }
 
 const styles = StyleSheet.create({

@@ -8,6 +8,7 @@ $(document).ready(function() {
         var message = $('#message').val();
         var email = $('#email').val();
         var envoi = $('#submitContact').val();
+        
 
         $.post(
             'contact.php',
