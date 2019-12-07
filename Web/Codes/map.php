@@ -26,29 +26,16 @@ $idInfo = $idQuery->fetchAll(PDO::FETCH_ASSOC);
 
 <div class="container">
 
-    <ul>
-<!-- ################################    Boutton Event  ####################################-->
-        <select id="lieu" style="margin-top:50px;" class="select-css" data-aos="fade-up" onchange="lieux();">
-        <?php
-        foreach ($eventInfos as $eventName) {
-            echo '<option data-city="weather-' . strtolower($eventName['event_city']) . '"  value="' . $eventName['id_event'] . '" style="cursor:pointer">'. $eventName['event_name'] .'</option></br></br>';
-        }
-        ?>
-        </select>
-
-   </ul>
+<!-- ################################    Select Event  ####################################-->
+    <select id="eventSelect" style="margin-top:50px;" class="select-css" data-aos="fade-up" onchange="updateInfo();">
+    <?php
+    foreach ($eventInfos as $eventName) {
+        echo '<option data-city="weather-' . strtolower($eventName['event_city']) . '"  value="' . $eventName['id_event'] . '">'. $eventName['event_name'] .'</option></br></br>';
+    }
+    ?>
+    </select>
 
 
-
-
-    <script>
-        /*
-
-
-
-
-                document.getElementById("even").innerHTML += variableRecuperee; */
-    </script>
 
 <!--  ####################################  Titre Event   ################################################-->
     <?php for ($i=0; $i<count($eventInfos); $i++): ?>
@@ -78,6 +65,7 @@ $idInfo = $idQuery->fetchAll(PDO::FETCH_ASSOC);
 
 <!--    <pre style="color: white;" id="testweather"></pre>-->
     <div id="openweathermap-widget" class="container"></div>
+
     <?php
     $citiesQuery = $dbh->query('SELECT DISTINCT event_city FROM Events');
     $cities = $citiesQuery->fetchAll(PDO::FETCH_NUM);
@@ -94,7 +82,7 @@ $idInfo = $idQuery->fetchAll(PDO::FETCH_ASSOC);
             },
             function (data) {
                 // $('#testweather').html(JSON.stringify(data, undefined, 2));
-                var widget = $('<div id="weather-<?php echo strtolower($cities[$i][0])?>" class="weather-city bg-dark mx-auto mt-4" style="width: 20rem; border-radius: 1rem <?php if($i != 0) echo ";display:none"?>"></div>');
+                var widget = $('<div id="weather-<?php echo strtolower($cities[$i][0])?>" class="weather-city bg-dark mx-auto mt-4" style="width: 20rem; border-radius: 1rem; display:none"></div>');
                 widget.append('<div class="d-inline-block px-3 py-1">' + data.name + '</div>');
                 widget.append('<div class="d-inline-block" style="background-color: #B2B1B1"><img src="http://openweathermap.org/img/wn/' + data.weather[0].icon + '.png"></div>');
                 widget.append('<div class="d-inline-block px-3 py-1">' + Math.round(data.main.temp) + '°C</div>');
@@ -108,30 +96,32 @@ $idInfo = $idQuery->fetchAll(PDO::FETCH_ASSOC);
 <div class="container">
 
     <!--  ####################################  Info sur les évènements   ################################################-->
-    <h2 data-aos="fade-up" style="margin-top:150px;margin-bottom:60px;text-align:center;color: #fff;
-  font-size: 2em;
- text-shadow: 1px">Informations</h2>
-    <h2 data-aos="fade-up" style="border: 10px coral; font-size: 20px; line-height: normal;>
-    <?php for ($i=0; $i<count($eventInfos); $i++): ?>
-        <p data-aos="fade-up" class="eventInfo id_event<?=$eventInfos[$i]['id_event']?>" <?php if($i != 0) echo 'style="display:none"'?>>
-            <?=nl2br($eventInfos[$i]['event_description'])?>
-        </p>
-    <?php endfor;?>
-    </h2>
+
+    <h2 data-aos="fade-up" style="margin-top:150px;margin-bottom:60px;text-align:center;color: #fff; font-size: 2em; text-shadow: 1px">Informations</h2>
+
+    <div data-aos="fade-up" style="border: 10px coral; font-size: 20px; line-height: normal;">
+        <?php for ($i=0; $i<count($eventInfos); $i++): ?>
+            <p data-aos="fade-up" class="eventInfo id_event<?=$eventInfos[$i]['id_event']?>" <?php if($i != 0) echo 'style="display:none"'?>>
+                <?=nl2br($eventInfos[$i]['event_description'])?>
+            </p>
+        <?php endfor;?>
+    </div>
+</div>
+
     <script>
-
-        // Layers
-        var layers = [];
-        <?php foreach ($eventInfos as $eventName): ?>
-            layers[<?=$eventName['id_event']?>] = L.layerGroup();
-        <?php endforeach;?>
-
         var actifId = ''+<?=$eventInfos[0]['id_event']?>;
+        var layers = [];
+        var mymap;
 
-        // Créer les points sur la carte
-        <?php foreach ($stageInfo as $stage): ?>
+        $(function() {
 
+            // Layers
+            <?php foreach ($eventInfos as $eventName): ?>
+            layers[<?=$eventName['id_event']?>] = L.layerGroup();
+            <?php endforeach;?>
 
+            // Créer les points sur la carte
+            <?php foreach ($stageInfo as $stage): ?>
 
 
             L.marker([
@@ -141,65 +131,34 @@ $idInfo = $idQuery->fetchAll(PDO::FETCH_ASSOC);
                     "<b><?=$stage['stage_name']?></b><br>"+
                     "Il y a <?=$data->nbrActu($stage['id_stage'])?> participant(s)!<br>"+
                     "Le nombre maximum de participant est estimé à <?=$stage['max_people']?>")
-                    .addTo(layers[<?=$stage['id_event']?>]);
-        <?php endforeach;?>
+                .addTo(layers[<?=$stage['id_event']?>]);
+            <?php endforeach;?>
 
-        var mymap = L.map('mapid', {
-            center: [50.668686, 4.612479],
-            zoom: 16,
-            layers: [layers[actifId]]
+            mymap = L.map('mapid', {
+                center: [50.668686, 4.612479],
+                zoom: 16,
+                layers: [layers[actifId]]
+            });
+
+            L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                maxZoom: 18,
+                id: 'mapbox.satellite',
+                accessToken: 'pk.eyJ1IjoiZ2F1dGhpZXJiIiwiYSI6ImNrMTQzODZuZDBlcDkzb29henlhMndvMnEifQ.nrVFAyoW00lvhk94CeCz0Q'
+            }).addTo(mymap);
+
+            setTimeout(updateMeteo, 100);
         });
 
-        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-            maxZoom: 18,
-            id: 'mapbox.satellite',
-            accessToken: 'pk.eyJ1IjoiZ2F1dGhpZXJiIiwiYSI6ImNrMTQzODZuZDBlcDkzb29henlhMndvMnEifQ.nrVFAyoW00lvhk94CeCz0Q'
-        }).addTo(mymap);
+
 
         //############################################################################################################
         // ############ Affiche de nouveau points lorsque l'on clique sur un boutton  ################################
         //############################################################################################################
 
 
-        $('.boutonstats').click(function () {
-            var idEvent = $(this).attr('id').slice(3);
-            alert(idEvent);
-            if(idEvent !== actifId) {
-                // Change les informations affiché de l'évènement
-                $('.id_event'+actifId).hide();
-                $('.id_event'+idEvent).show();
-
-                // affiche la carte de l'Ephec
-                if(idEvent == 3) {
-                    $('#ephec').show();
-                } else if(actifId == 3) {
-                    $('#ephec').hide();
-                }
-
-                // Met à jour la météo
-                var weatherWidget = $('.weather-city:visible');
-                if($(this).data('city') !== weatherWidget.attr('id')) {
-                    weatherWidget.hide();
-                    $('#' + $(this).data('city')).show();
-                }
-
-
-                // Met les points de l'évènement cliqué
-                mymap.removeLayer(layers[actifId]);
-                mymap.addLayer(layers[idEvent]);
-                actifId = idEvent;
-            }
-
-
-
-
-        });
-
-
-        function lieux() {
-            var variableRecuperee = <?php echo json_encode($stageInfo); ?>;
-            var id = document.getElementById("lieu").value;
+        function updateInfo() {
+            var id = document.getElementById("eventSelect").value;
             $('.id_event'+actifId).hide();
             $('.id_event'+id).show();
 
@@ -210,20 +169,22 @@ $idInfo = $idQuery->fetchAll(PDO::FETCH_ASSOC);
                 $('#ephec').hide();
             }
 
-            var weatherWidget = $('.weather-city:visible');
-            var city = $("#lieu option:selected").data('city');
-
-            if(city !== weatherWidget.attr('id')) {
-                weatherWidget.hide();
-                $('#' + city).show();
-            }
+            updateMeteo();
 
             mymap.removeLayer(layers[actifId]);
             mymap.addLayer(layers[id]);
             actifId = id;
+        }
+
+        function updateMeteo() {
+            var weatherWidget = $('.weather-city:visible');
+            var city = $("#eventSelect option:selected").data('city');
+
+            if(city !== weatherWidget.attr('id')) {
+                $('#' + city).show();
+                weatherWidget.hide();
             }
-
-
+        }
 
     </script>
 </div>

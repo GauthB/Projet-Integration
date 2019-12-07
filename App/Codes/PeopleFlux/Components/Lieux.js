@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { StyleSheet, View, Text, Picker, Image, TouchableOpacity, ActivityIndicator, FlatList } from 'react-native'
+import { StyleSheet, View, Text, Picker, Image, TouchableOpacity, ActivityIndicator, ScrollView } from 'react-native'
 import RNPickerSelect from 'react-native-picker-select';
 import { connect } from 'react-redux'
 import MapboxGL from "@mapbox/react-native-mapbox-gl";
@@ -8,6 +8,8 @@ import {getStages} from '../Helpers/Utils'
 import {getEvents} from '../Helpers/Utils'
 import {getNbrPers} from '../Helpers/Utils'
 import PointItem from './PointItem'
+import Icon from 'react-native-vector-icons/Foundation'
+
 
 
 
@@ -22,7 +24,10 @@ class Lieux extends React.Component {
       dataStages:[],
       dataEvents:[],
       dataNbrPers:[],
-      isLoading: true
+      isLoading: true,
+      refreshing: false,
+      refreshIcon: ""
+
     }
   }
 
@@ -55,13 +60,25 @@ class Lieux extends React.Component {
 
  getData(){
    setTimeout(() => {
-     getStages().then((data) => {this.setState({dataStages :data, isLoading: false})})
-     getEvents().then((data) => {this.setState({dataEvents :data, isLoading: false})})
-     getNbrPers().then((data) => {this.setState({dataNbrPers :data, isLoading: false})})
+     getStages().then((data) => {this.setState({dataStages :data, isLoading: false, refreshIcon: "refresh"})})
+     getEvents().then((data) => {this.setState({dataEvents :data, isLoading: false, refreshIcon: "refresh"})})
+     getNbrPers().then((data) => {this.setState({dataNbrPers :data, isLoading: false, refreshIcon: "refresh"})})
     }, 1000)
 
  }
 
+ onRefresh(){
+   this.setState({
+     coordonnes:[],
+     dataStages:[],
+     dataEvents:[],
+     dataNbrPers:[],
+     isLoading: true,
+     refreshIcon: ""
+   })
+   this.getData()
+
+ }
 
  componentDidMount() {
 
@@ -165,31 +182,37 @@ class Lieux extends React.Component {
 
   render() {
 
+
+
     return (
       <View style={styles.main_container}>
-        <Text style={styles.text_lieu}>Lieux</Text>
-            <View style={styles.picker_container}>
-              <View style={styles.evenements_text_container}>
-                <Text style={styles.text_evenements} >Evenements : </Text>
-              </View>
-              <View style={styles.pickerSelect_container}>
 
-                <RNPickerSelect
+        <Text style={styles.text_lieu}>Lieux</Text>
+          <View style={styles.picker_container}>
+
+            <View style={styles.evenements_text_container}>
+
+              <Text style={styles.text_evenements} >Evenements : </Text>
+            </View>
+            <View style={styles.pickerSelect_container}>
+              <RNPickerSelect
                   style={pickerStyle}
                   onValueChange={(value) => this._setLieu(value)}
                   placeholder= {{ label: 'Selectionnez un lieu', value: null}}
                   mode="dropdown"
                   items={this.ItemSelect()}
                 />
-              </View>
             </View>
-
-            <Text style={styles.lieu_selectionne}>{this.props.selectedLieu}</Text>
-
-            <View style={styles.container_map}>
             {this._displayLoading()}
 
-              <MapboxGL.MapView
+            <TouchableOpacity style={styles.bouton_refresh} onPress= {this.onRefresh.bind(this)}>
+              <Icon name={this.state.refreshIcon} size={35} color="#c70039" />
+            </TouchableOpacity>
+          </View>
+          <Text style={styles.lieu_selectionne}>{this.props.selectedLieu}</Text>
+          <View style={styles.container_map}>
+            {this._displayLoading()}
+            <MapboxGL.MapView
                 ref={(c) => this._map = c}
                 styleURL={MapboxGL.StyleURL.Street}
                 style={styles.map}
@@ -197,15 +220,10 @@ class Lieux extends React.Component {
                 zoomLevel={13}
                 centerCoordinate={this.centerMap()}
               >
-
-                {this.renderAnnotations()}
-
-              </MapboxGL.MapView>
-
-            </View>
-
-
-      </View>
+              {this.renderAnnotations()}
+            </MapboxGL.MapView>
+          </View>
+        </View>
     )
 
   }
@@ -277,7 +295,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#bdc3c7',
     marginTop:3,
-    marginRight:50
+    marginRight:30
 
 
   },
@@ -323,8 +341,12 @@ const styles = StyleSheet.create({
  top: 0,
  bottom: 0,
  alignItems: 'center',
- justifyContent: 'center'
- }
+ justifyContent: 'center',
+ backgroundColor : '#232531'
+  },
+  bouton_refresh:{
+     marginRight: 20
+  }
 })
 
 const mapStateToProps = (state) => {

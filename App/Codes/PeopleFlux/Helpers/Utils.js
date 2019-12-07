@@ -50,3 +50,30 @@ export function getEvents(){
      })
      .catch(error => console.warn(error));
    }
+
+
+//Send Email
+
+export function sendEmail(votremail,objet,message,envoi){
+
+  let data ={}
+  data.votremail = votremail
+  data.objet = objet
+  data.message = message
+  data.envoi = envoi
+
+
+   return fetch('https://peopleflux.gauthierbohyn.com/app/contact.php',
+   {
+     method: "POST",
+     headers: {
+       'Content-Type': 'application/json',
+     },
+     body: JSON.stringify(data)
+   })
+   .then((response) => response.json())
+   .then((responseData) => {
+     return responseData;
+   })
+   .catch(error => console.error(error));
+ }

@@ -24,7 +24,7 @@ require_once "esp-data.php";
     <link rel="stylesheet" href="css/jquery-ui.min.css">
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="css/bootstrap-datetimepicker.css">
     <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
     <link rel="stylesheet" href="css/aos.css">
     <link rel="stylesheet" href="css/style.css">
@@ -33,10 +33,19 @@ require_once "esp-data.php";
 
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/jquery-ui.min.js"></script>
+    <script src="js/moment-with-locales.min.js"></script>
+
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/bootstrap-datetimepicker.css">
+    <script src="js/bootstrap-datetimepicker.min.js"></script>
+
+
+
+
 
 </head>
-<body style="background-image: linear-gradient(#232531, #f265652e);">
+<body>
 
 <div class="site-wrap">
 
@@ -67,7 +76,7 @@ require_once "esp-data.php";
     <div style="margin-bottom: 100px;">
         <div class="container">
             <div>
-                <div id="dialogEvent"><p>Êtes-vous sûr de vouloir supprimer l'évènement "<span id="spnEventName"></span>"?</p>Vous pourrez faire cette action si vous avez supprimé auparavant toutes les scènes liées à cette évènement!</div>
+                <div id="dialogEvent"><p>Êtes-vous sûr de vouloir supprimer l'évènement "<span id="spnEventName"></span>"?</p></div>
                 <h2 class="d-block mb-3 caption" data-aos="fade-up">Evènements</h2>
                 <!-- Table des évènements-->
                 <?php
@@ -162,22 +171,17 @@ require_once "esp-data.php";
                         <div class="row form-group" data-aos="fade-up">
                             <div class="col-md-12">
                                 <label class="" for="dateFrom" >Dates*</label>
-                                <input type="text" id="dateFrom"  class="input form-control" name="dateFrom" placeholder="Début (0000-00-00 24:00:00)" required>
+                                <input type="text" id="dateFrom"  class="input form-control" name="dateFrom" placeholder="Début (0000-00-00 24:00:00)" required style="z-index: 99">
                                 <input type="text" id="dateTo"  class="input form-control" name="dateTo" placeholder="Fin (0000-00-00 24:00:00)" required>
 
+                                <script>
+                                    $('#dateFrom, #dateTo').datetimepicker({
+                                        locale: 'fr',
+                                        sideBySide: true,
+                                        format: 'YYYY-MM-DD HH:mm'
+                                    });
 
-
-
-
-
-
-   <!--                             <iframe name="InlineFrame1" id="InlineFrame1" style="width:180px;height:220px;" src="https://www.mathieuweb.fr/calendrier/calendrier-des-semaines.php?nb_mois=1&nb_mois_ligne=4&mois=&an=&langue=fr&texte_color=B9CBDD&week_color=DAE9F8&week_end_color=C7DAED&police_color=453413&sel=true" scrolling="no" frameborder="0" allowtransparency="true"></iframe>
--->
-
-
-
-
-
+                                </script>
 
 
                             </div>
@@ -253,8 +257,16 @@ require_once "esp-data.php";
                         <div class="row form-group" data-aos="fade-up">
                             <div class="col-md-12">
                                 <label class="" for="horaires">Horaires</label>
-                                <input type="text" id="horaires"  class="input form-control" name="heureDebut" placeholder="Heure de début">
-                                <input type="text" id="horaires"  class="input form-control" name="heurefin" placeholder="Heure de fin">
+                                <input type="text" id="heureDebut"  class="input form-control" name="heureDebut" placeholder="Heure de début">
+                                <input type="text" id="heureFin"  class="input form-control" name="heurefin" placeholder="Heure de fin">
+
+<!--                                <script>-->
+<!--                                    $('#heureDebut, #heureFin').datetimepicker({-->
+<!--                                        locale: 'fr',-->
+<!--                                        sideBySide: true,-->
+<!--                                        calendarWeeks: false-->
+<!--                                    });-->
+<!--                                </script>-->
                             </div>
                         </div>
                         <div class="row form-group" data-aos="fade-up">

@@ -1,0 +1,9 @@
+
+# Redirections https peopleflux.gauthierbohyn.com
+RewriteEngine On
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteCond %{HTTPS} !on
+RewriteCond %{HTTP_HOST} ^(?:peopleflux\.)?gauthierbohyn\.com(?:.*)$ [nc]
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [redirect=301,L]
+
+
