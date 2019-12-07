@@ -24,6 +24,9 @@ class Calendrier extends React.Component {
  }
 }
   _displayEvent(){
+    
+    this.state.data.sort((a,b) => a.date_from.localeCompare(b.date_from))
+
     return(
       <View>
         <FlatList
@@ -54,7 +57,7 @@ class Calendrier extends React.Component {
   }
 
   render() {
-    
+
     return (
       <View style={styles.main_container}>
 
