@@ -23,17 +23,18 @@ void setup(){
   pinMode(23, INPUT);  // Recepteur 2 en mode input
   pinMode(21, OUTPUT); // LED bleu en mode output
   pinMode(18, OUTPUT); // LED rouge en mode output
+  pinMode(22, OUTPUT); // LED jaune en mode output
   
   WiFi.begin(ssid, password);
   Serial.println("Connecting");
   while(WiFi.status() != WL_CONNECTED) { 
     delay(500);
     Serial.print(".");
-    ledBlink(2,18);
+    ledBlink(2,22);
   }
   Serial.println("");
   Serial.print("Connected to WiFi network with IP Address: ");
-  ledBlink(3,21);
+  ledBlink(2,21);
   Serial.println(WiFi.localIP());
 }
 void ledBlink(int x, int y){ // Clignotement LED
@@ -53,7 +54,7 @@ int laser1(){                     // Retourne 1 quand le laser est coupé
         if(laser2() < laser1() && laser2()== 0){ // Si le laser 1 est coupé avant le laser 2
           ledBlink(1,21);        // LED clignote
           Serial.println("Entre");
-          delay(1000);           // On attend 1.0s 
+          delay(750);           // On attend 0.75s 
           return 1;              // On renvoit 1 pour dire qu'une personne entre
         }   
     }
@@ -69,7 +70,7 @@ int laser2(){                     // Retourne 1 quand le laser est coupé
         if(laser1() < laser2()  && laser1()== 0){ // Si le laser 2 est coupé avant le laser 1
           ledBlink(1,18);        // LED clignote
           Serial.println("Sort");
-          delay(1000);           // On attend 1.0s
+          delay(750);           // On attend 0.75s
           return 1;              // On renvoit 1 pour dire qu'une personne entre
         }
     }
@@ -107,7 +108,7 @@ void loop(){
         Serial.println(httpResponseCode);
       }
       if(httpResponseCode!=200){
-        ledBlink(3,18); // Code d'erreur
+        ledBlink(3,22); // Code d'erreur
       }
     }
     if(laser2() == 1){
@@ -124,7 +125,7 @@ void loop(){
         Serial.println(httpResponseCode);
       }
       if(httpResponseCode!=200){
-        ledBlink(3,18); // Code d'erreur
+        ledBlink(3,22); // Code d'erreur
       }
     }
     // Free resources
@@ -132,7 +133,7 @@ void loop(){
   }
   else {
     Serial.println("WiFi Disconnected");
-    ledBlink(2,18); // Code d'erreur
+    ledBlink(2,22); // Code d'erreur
   } 
   
 }
