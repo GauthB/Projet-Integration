@@ -7,7 +7,7 @@ $data = new data();
 // If you change this value, the ESP32 sketch needs to match
 $api_key_value = "12mAT5Ab3j7F9";
 
-$api_key= $id_stage = $nbr_entree = $nbr_sortie = $heure = "";
+$api_key= $id_stage = $nbr_entree = $nbr_sortie = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $api_key = test_input($_POST["api_key"]);

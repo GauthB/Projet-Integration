@@ -26,51 +26,12 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="true" current-in-tab="false">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="true" current-in-tab="true">
         <entry file="remoteDeploymentFS://&lt;b75c33ca-0950-4e87-82d9-469c49ea37cc&gt;/post-esp-data.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="25" column="10" selection-start-line="25" selection-start-column="10" selection-end-line="25" selection-end-column="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="true" current-in-tab="false">
-        <entry file="remoteDeploymentFS://&lt;b75c33ca-0950-4e87-82d9-469c49ea37cc&gt;/esp-data.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="110" column="34" selection-start-line="110" selection-start-column="30" selection-end-line="110" selection-end-column="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="true" current-in-tab="false">
-        <entry file="remoteDeploymentFS://&lt;b75c33ca-0950-4e87-82d9-469c49ea37cc&gt;/statistiques.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="811">
-              <caret line="226" column="92" selection-start-line="226" selection-start-column="92" selection-end-line="226" selection-end-column="92" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="true" current-in-tab="false">
-        <entry file="remoteDeploymentFS://&lt;b75c33ca-0950-4e87-82d9-469c49ea37cc&gt;/admin.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <folding>
-                <element signature="n#style#0;n#i#0;n#td#5;n#tr#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#i#0;n#td#7;n#tr#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="true" current-in-tab="true">
-        <entry file="remoteDeploymentFS://&lt;b75c33ca-0950-4e87-82d9-469c49ea37cc&gt;/user.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="106" column="130" selection-start-line="106" selection-start-column="130" selection-end-line="106" selection-end-column="130" />
+            <state relative-caret-position="374">
+              <caret line="25" column="79" selection-start-line="25" selection-start-column="79" selection-end-line="25" selection-end-column="79" />
             </state>
           </provider>
         </entry>
@@ -137,12 +98,14 @@
         <option value="&lt;b75c33ca-0950-4e87-82d9-469c49ea37cc&gt;/esp-data.php" />
         <option value="&lt;b75c33ca-0950-4e87-82d9-469c49ea37cc&gt;/user.php" />
         <option value="&lt;b75c33ca-0950-4e87-82d9-469c49ea37cc&gt;/statistiques.php" />
+        <option value="&lt;b75c33ca-0950-4e87-82d9-469c49ea37cc&gt;/.htaccess" />
         <option value="&lt;b75c33ca-0950-4e87-82d9-469c49ea37cc&gt;/post-esp-data.php" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1908" />
+    <option name="x" value="380" />
+    <option name="y" value="135" />
     <option name="width" value="1944" />
     <option name="height" value="2106" />
   </component>
@@ -237,11 +200,12 @@
       <workItem from="1575291161720" duration="633000" />
       <workItem from="1575305654555" duration="612000" />
       <workItem from="1575388835578" duration="1234000" />
+      <workItem from="1575838701928" duration="1428000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="65414000" />
+    <option name="totallyTimeSpent" value="66842000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
@@ -276,31 +240,8 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Database" order="3" weight="0.21226698" />
-      <window_info anchor="right" id="Remote Host" order="4" weight="0.13108839" />
-    </layout>
-    <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.365099" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49969932" weight="0.3296433" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Database Changes" order="8" />
-      <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.499098" weight="0.3296433" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.499098" weight="0.3296433" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5074257" side_tool="true" weight="0.12779157" />
-      <window_info anchor="bottom" id="File Transfer" order="12" sideWeight="0.49257424" weight="0.12779157" />
-      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Database" order="3" weight="0.21226698" />
       <window_info active="true" anchor="right" id="Remote Host" order="4" visible="true" weight="0.13108839" />
-    </layout-to-restore>
+    </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
