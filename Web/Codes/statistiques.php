@@ -121,8 +121,27 @@ require_once "esp-data.php";
             ?><br>
             <br>
             <br>
-            <br><span style="padding-right: 0.4rem;"">Evènement : </span><select id="eventt"  class="select-css" onchange="stage();number();graphe();actu();entree();sortie();"></select></br>
-            <br><span style="padding-right: 2.8rem;">Lieux : </span><select id="stagee"  class="select-css" onchange="number();graphe();actu();entree();sortie();"></select></br>
+            <br><span style="padding-right: 0.4rem;"">Evènement :
+            <?php
+                $sth = $dbh -> prepare('SELECT * FROM Events join Clients ON Events.id_client = Clients.id_client');
+                $sth->execute();
+                $eventsInfo = $sth -> fetchAll(PDO::FETCH_ASSOC);
+                $sth->closeCursor();
+            ?>
+            </span>
+            <select id="eventt"  class="select-css" onchange="stage();number();graphe();actu();entree();sortie();">
+                <?php if($_SESSION['id'] == 9){
+                        foreach ($eventsInfo as $event) {
+                            //$res = ($_GET['nom']==$event["event_name"]?"selected":"");
+                            echo '<option id="event_'.$event["id_event"].'">' .
+                                $event["event_name"] . '</option></span>';
+                        }
+                      }
+                ?>
+            </select></br>
+            <br><span style="padding-right: 2.8rem;">Lieux :</span>
+            <select id="stagee"  class="select-css" onchange="number();graphe();actu();entree();sortie();">
+            </select></br>
             <br style="margin-top=20px">
             <button name="button" type="button" id="tab" class="boutonstats" onclick="number()"> Afficher ses statistiques </button>
             <button name="button" type="button" id="tab" class="boutonstats" onclick="tbleau()"> Ne plus afficher </button>
