@@ -1,4 +1,4 @@
-Signification du code d'erreur LED sur le boitier:
+Signification du code LED sur le boitier:
 - Clignotement continu LED jaune : Pas connecté au WiFi.
 - Clignotement 2x LED bleue : Connexion au WiFi.
 - Clignotement 1x LED bleue : 1 personne est entrée
