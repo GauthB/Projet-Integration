@@ -143,8 +143,7 @@ require_once "esp-data.php";
             <select id="stagee"  class="select-css" onchange="number();graphe();actu();entree();sortie();">
             </select></br>
             <br style="margin-top=20px">
-            <button name="button" type="button" id="tab" class="boutonstats" onclick="number()"> Afficher ses statistiques </button>
-            <button name="button" type="button" id="tab" class="boutonstats" onclick="tbleau()"> Ne plus afficher </button>
+
             
             <!-- affiche les statistiques liés à un evennement -->
             <div class="d-block mb-3 caption" data-aos="fade-up"></br>
@@ -163,7 +162,10 @@ require_once "esp-data.php";
 
                 Afficher derniers resultats :
                 <input name="cpt" id="cpt" type="number" step="10" value="10" min="10" style="width: 3rem">
-                <button name="button" type="button" id="tab" class="boutonstats" onclick="number()"> Actualiser </button>
+                <button name="button" type="button" id="tab" class="boutonstats" onclick="number()"> Afficher ses statistiques </button>
+                <button name="button" type="button" id="tab" class="boutonstats" onclick="tbleau()"> Ne plus afficher </button>
+                <button name="button" type="button" id="tab" class="boutonstats" onclick="numberr()"> Actualiser </button>
+
             </form>
 
 
@@ -177,6 +179,8 @@ require_once "esp-data.php";
             <hr>
             <button name="button" id="boutongraphe" class="boutonstats" onclick="afficher(),graphe();"> Observer son graphique</button>
             <button name="button" id="grapheannule" class="boutonstats" onclick="annuler();"> Annuler </button>
+            <button name="button" id="grapheannule" class="boutonstats" onclick="graphe();"> Actualiser </button>
+
             <button name="button" id="boutonimprimer" class="boutonstats" onClick="window.print();"> Imprimer la page</button>
             <a href="export.php"><button name="button" id="excel" class="boutonstats">importer sur Excel</button></a>
         </div>
@@ -211,6 +215,9 @@ require_once "esp-data.php";
 
 
         window.onload = function() {
+            document.getElementById("tablee").innerHTML = "";
+            document.getElementById("tablee").style.display = "none";
+
             for (a = 0; a < variableClient.length; a++) {
                 if (idclient == variableClient[a]['id_client']) {
                     document.getElementById("eventt").innerHTML += "<option " + variableClient[a]['id_event'] + ">" + variableClient[a]['event_name'] + "</option>"
@@ -377,6 +384,8 @@ require_once "esp-data.php";
             }
         }
         function number() {
+            document.getElementById("tablee").style.display = "";
+
             indica = document.getElementById("cpt").value;
             var indic = 0;
             document.getElementById("tablee").innerHTML =  "<tr><th>Nom Scene</th> <th>Entrées</th> <th>Sorties</th> <th>Heure</th> </tr>";
@@ -392,6 +401,27 @@ require_once "esp-data.php";
             document.getElementById("tablee").innerHTML += "</tr>";
         }
 
+        function numberr() {
+            if((document.getElementById("tablee").innerHTML == "")) {alert("Afficher d'abord vos statistiques");}
+            else if ( document.getElementById("tablee").style.display == "none") {alert("Afficher d'abord vos statistiques");}
+                else if ( (document.getElementById("tablee").style.display == "") ) {
+                indica = document.getElementById("cpt").value;
+                var indic = 0;
+                document.getElementById("tablee").innerHTML = "<tr><th>Nom Scene</th> <th>Entrées</th> <th>Sorties</th> <th>Heure</th> </tr>";
+                document.getElementById("tablee").innerHTML += "<tr>";
+                for (c = 0; c < variableRecuperee.length; c++) {
+                    if (document.getElementById("stagee").value == variableRecuperee[c]['stage_name']) {
+                        indic++
+                        if (indic <= indica) {
+                            document.getElementById("tablee").innerHTML += "<td>" + variableRecuperee[c]['stage_name'] + "</td><td>" + variableRecuperee[c]['nbr_entree'] + "</td><td>" + variableRecuperee[c]['nbr_sortie'] + "</td><td>" + variableRecuperee[c]['heure'] + "</td>"
+                        }
+                    }
+                }
+                document.getElementById("tablee").innerHTML += "</tr>";
+            }
+
+        }
+
         function tableau() {
             document.getElementById("tablee").innerHTML =  "<tr><th>Nom Scene</th> <th>Entrées</th> <th>Sorties</th> <th>Heure</th> </tr>";
             document.getElementById("tablee").innerHTML += "<tr>";
@@ -402,8 +432,9 @@ require_once "esp-data.php";
             }
             document.getElementById("tablee").innerHTML += "</tr>";
         }
+
         function tbleau() {
-            document.getElementById("tablee").innerHTML =  "";
+            document.getElementById("tablee").style.display = "none";
         }
     </script>
 
