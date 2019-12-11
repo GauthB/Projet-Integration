@@ -174,8 +174,11 @@ $idInfo = $idQuery->fetchAll(PDO::FETCH_ASSOC);
             mymap.removeLayer(layers[actifId]);
             mymap.addLayer(layers[id]);
 
-            mymap.flyTo(getCenterPoint(layers[id]));
-
+            centerPoint = getCenterPoint(layers[id]);
+            if(centerPoint) {
+                mymap.flyTo(centerPoint);
+            }
+            
             actifId = id;
         }
 
@@ -191,6 +194,9 @@ $idInfo = $idQuery->fetchAll(PDO::FETCH_ASSOC);
 
         function getCenterPoint(layer) {
             points = layer.getLayers();
+            if (points.length === 0) {
+                return false;
+            }
             var minLatLng = {lat: points[0].getLatLng().lat, lng: points[0].getLatLng().lng};
             var maxLatLng = {lat: 0, lng: 0};
             for (point of points) {
