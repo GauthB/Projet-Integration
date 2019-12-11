@@ -97,7 +97,7 @@ $idInfo = $idQuery->fetchAll(PDO::FETCH_ASSOC);
 
     <!--  ####################################  Info sur les évènements   ################################################-->
 
-    <h2 data-aos="fade-up" style="margin-top:150px;margin-bottom:60px;text-align:center;color: #fff; font-size: 2em; text-shadow: 1px">Informations</h2>
+    <h2 data-aos="fade-up" style="margin-top:150px;margin-bottom:60px;text-align:center;color: #fff; font-size: 2em">Informations</h2>
 
     <div data-aos="fade-up" style="border: 10px coral; font-size: 20px; line-height: normal;">
         <?php for ($i=0; $i<count($eventInfos); $i++): ?>
@@ -173,6 +173,9 @@ $idInfo = $idQuery->fetchAll(PDO::FETCH_ASSOC);
 
             mymap.removeLayer(layers[actifId]);
             mymap.addLayer(layers[id]);
+
+            mymap.flyTo(getCenterPoint(layers[id]));
+
             actifId = id;
         }
 
@@ -184,6 +187,30 @@ $idInfo = $idQuery->fetchAll(PDO::FETCH_ASSOC);
                 $('#' + city).show();
                 weatherWidget.hide();
             }
+        }
+
+        function getCenterPoint(layer) {
+            points = layer.getLayers();
+            var minLatLng = {lat: points[0].getLatLng().lat, lng: points[0].getLatLng().lng};
+            var maxLatLng = {lat: 0, lng: 0};
+            for (point of points) {
+                if(minLatLng.lat > point.getLatLng().lat) {
+                    minLatLng.lat = point.getLatLng().lat;
+                }
+                if(minLatLng.lng > point.getLatLng().lng) {
+                    minLatLng.lng = point.getLatLng().lng;
+                }
+
+                if(maxLatLng.lat < point.getLatLng().lat) {
+                    maxLatLng.lat = point.getLatLng().lat;
+                }
+                if(maxLatLng.lng < point.getLatLng().lng) {
+                    maxLatLng.lng = point.getLatLng().lng;
+                }
+            }
+            latCenter = (minLatLng.lat + maxLatLng.lat)/2;
+            lngCenter = (minLatLng.lng + maxLatLng.lng)/2;
+            return {lat: latCenter, lng: lngCenter};
         }
 
     </script>
