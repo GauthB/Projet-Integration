@@ -6,8 +6,8 @@
   LES ENTREES/SORTIES DANS UNE SEULE PORTE
 */
 // Network credentials
-const char* ssid = "LAPTOP-QUU5U7G9 5473";
-const char* password = "8440<4Dq";
+const char* ssid = "V30";
+const char* password = "11111111";
 
 String scene = "11";
 
@@ -54,7 +54,7 @@ int laser1(){                     // Retourne 1 quand le laser est coupé
         if(laser2() < laser1() && laser2()== 0){ // Si le laser 1 est coupé avant le laser 2
           ledBlink(1,21);        // LED clignote
           Serial.println("Entre");
-          delay(750);           // On attend 0.75s 
+          delay(500);           // On attend 0.5s 
           return 1;              // On renvoit 1 pour dire qu'une personne entre
         }   
     }
@@ -70,7 +70,7 @@ int laser2(){                     // Retourne 1 quand le laser est coupé
         if(laser1() < laser2()  && laser1()== 0){ // Si le laser 2 est coupé avant le laser 1
           ledBlink(1,18);        // LED clignote
           Serial.println("Sort");
-          delay(750);           // On attend 0.75s
+          delay(500);           // On attend 0.5s
           return 1;              // On renvoit 1 pour dire qu'une personne entre
         }
     }
