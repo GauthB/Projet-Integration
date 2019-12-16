@@ -1,8 +1,15 @@
+<?php
+session_start();
+?>
 <div class="container">
     <div class="row mb-5">
         <div class="col-md-4">
             <h2 class="footer-heading text-uppercase mb-4">A propos</h2>
             <p>Ceci est une invention due à notre projet d'intégration.</p>
+            <?php if(isset($_SESSION['id'])):?>
+            <hr style=" border-top: 1px solid red">
+                <p>Lire le <a href="images/RGPD-PeopleFlux.pdf">"Règlement général sur la protection des données"</a></p>
+            <?php endif?>
         </div>
         <div class="col-md-3 ml-auto">
             <h2 class="footer-heading text-uppercase mb-4">Liens</h2>
