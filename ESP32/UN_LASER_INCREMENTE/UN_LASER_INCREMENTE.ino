@@ -7,8 +7,8 @@
 */
 
 // Network credentials
-const char* ssid = "LAPTOP-QUU5U7G9 5473";
-const char* password = "8440<4Dq";
+const char* ssid = "V30";
+const char* password = "11111111";
 
 String scene = "1";
 
