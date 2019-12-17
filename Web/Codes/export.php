@@ -1,21 +1,14 @@
 <?php
-//header('Content-Type: text/csv');
-//header('Content-Disposition: attachement; filename="stats.csv"');
 
 require_once "php/db_connect.php";
 
-$eventInfoQuery = $dbh->query('SELECT stage_name, nbr_entree, nbr_sortie, heure 
-                               FROM Nbr_Personne 
-                               join Stages on Stages.id_stage = Nbr_Personne.id_stage');
+$eventInfoQuery = $dbh->query('SELECT stage_name as NOM, nbr_entree as ENTREE, nbr_sortie as SORTIE, heure
+                               FROM Nbr_Personne
+                               JOIN Stages on Stages.id_stage = Nbr_Personne.id_stage
+                               WHERE NOM');
 
 $eventInfos = $eventInfoQuery->fetchAll(PDO::FETCH_ASSOC);
-$data = array();
-foreach ($eventInfos as $d){
-    $data[] = array(
-        'Nom du stage' => $d->stage_name,
-        'Nombre entree' => $d->nbr_entree,
-        'Nombre entree' => $d->nbr_sortie,
-        'heure'      => $d->heure
-    );
-}
-print_r($data);
+
+require 'class_csv.php';
+CSV::export($eventInfos,'Export');
+?>
