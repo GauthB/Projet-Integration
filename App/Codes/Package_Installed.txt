@@ -11,10 +11,8 @@ npm install --save react-native-email
 npm i --save react-native-picker-select
 npm i --save react-redux
 npm i --save redux
-npm uninstall --save @expo/vector-icons
 npm i --save react-native-keyboard-aware-scrollview
 npm install --save react-native-vector-icons
-npm uninstall @react-native-mapbox-gl/maps --save
 npm install https://github.com/nitaliano/react-native-mapbox-gl/tarball/master
 npm i --save moment
 npm i --save react-native-splash-screen
