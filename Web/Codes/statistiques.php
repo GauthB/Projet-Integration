@@ -182,7 +182,7 @@ require_once "esp-data.php";
             <button name="button" id="grapheannule" class="boutonstats" onclick="graphe();"> Actualiser </button>
 
             <button name="button" id="boutonimprimer" class="boutonstats" onClick="window.print();"> Imprimer la page</button>
-            <a href="export.php"><button name="button" id="excel" class="boutonstats">importer sur Excel</button></a>
+            <a href="export.php"><button name="button" id="excel" class="boutonstats" onclick="variableRecuperee">importer sur Excel</button></a>
         </div>
     </div>
     <canvas id="myChart" width="20%" height="5%" style="display: none"></canvas>
@@ -213,6 +213,7 @@ require_once "esp-data.php";
 
 
 
+        //Demarrage de la page
 
         window.onload = function() {
             document.getElementById("tablee").innerHTML = "";
@@ -274,6 +275,8 @@ require_once "esp-data.php";
             }
             document.getElementById("sort").innerHTML = "Nombre sortie : " + sor;
         }
+
+        // On recupere le nombre actuel de personne
         function actu() {
             var acto = 0;
             for( x = 0; x < variableRecuperee.length; x++) {
@@ -288,6 +291,8 @@ require_once "esp-data.php";
             }
             document.getElementById("actu").innerHTML = "Nombre actuel : " + (acto<0?0:acto);
         }
+
+        // On recupere le nombre d'entrée
         function entree() {
             var ent = 0;
             for( x = 0; x < variableRecuperee.length; x++) {
@@ -300,6 +305,8 @@ require_once "esp-data.php";
             document.getElementById("entre").innerHTML = "Nombre entree  : " + ent;
         }
 
+
+        // On recupere le nombre de sortie
         function sortie() {
             var sor = 0;
             for( x = 0; x < variableRecuperee.length; x++) {
@@ -312,14 +319,18 @@ require_once "esp-data.php";
             document.getElementById("sort").innerHTML = "Nombre sortie : " + sor;
         }
 
+        //Afficher graphique
         function afficher() {
             document.getElementById("myChart").style.display = "block";
         }
 
+        //Désafficher graphique
         function annuler() {
             document.getElementById("myChart").style.display = "none";
         }
 
+
+        //Créer le graphique
         function graphe() {
             var i = 0;
             var heures = [];
@@ -335,9 +346,14 @@ require_once "esp-data.php";
                     if ( variableRecuperee[f]['nbr_sortie'] == 1) {
                         nbrActu--;
                     }
-                    heures[i] = variableRecuperee[f]["heure"].slice(11,19);
-                    nbrAct[i] = nbrActu;
+                    if ( nbrActu < 0) {
+                        nbrActu = 0;
+                    }
+                        heures[i] = variableRecuperee[f]["heure"].slice(11, 19);
+                        nbrAct[i] = nbrActu;
+
                     i++;
+
                 }
             }
             var ctx = document.getElementById('myChart').getContext('2d');
@@ -368,6 +384,8 @@ require_once "esp-data.php";
                 }
             });
         }
+
+        //Liste des évenements
         function stage() {
             document.getElementById("stagee").innerHTML = "";
             if (document.getElementById("eventt").value == "Welcome Spring Festival") {
@@ -383,6 +401,8 @@ require_once "esp-data.php";
                 }
             }
         }
+
+        //Tableau d'entrées
         function number() {
             document.getElementById("tablee").style.display = "";
 
@@ -401,6 +421,8 @@ require_once "esp-data.php";
             document.getElementById("tablee").innerHTML += "</tr>";
         }
 
+
+        //Actualiser le tableau d'entrée
         function numberr() {
             if((document.getElementById("tablee").innerHTML == "")) {alert("Afficher d'abord vos statistiques");}
             else if ( document.getElementById("tablee").style.display == "none") {alert("Afficher d'abord vos statistiques");}
