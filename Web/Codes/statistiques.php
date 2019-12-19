@@ -182,7 +182,7 @@ require_once "esp-data.php";
             <button name="button" id="grapheannule" class="boutonstats" onclick="graphe();"> Actualiser </button>
 
             <button name="button" id="boutonimprimer" class="boutonstats" onClick="window.print();"> Imprimer la page</button>
-            <a href="export.php"><button name="button" id="excel" class="boutonstats" onclick="variableRecuperee">importer sur Excel</button></a>
+            <a href="export.php"><button name="button" id="excel" class="boutonstats">importer sur Excel</button></a>
         </div>
     </div>
     <canvas id="myChart" width="20%" height="5%" style="display: none"></canvas>
@@ -192,7 +192,7 @@ require_once "esp-data.php";
         <?php
 
         $grapheQuery = $dbh->query(
-            " SELECT * FROM `Nbr_Personne` as p join Stages as s WHERE p.id_stage = s.id_stage order by p.heure desc
+            " SELECT * FROM `Nbr_Personne` as p join Stages as s WHERE p.id_stage = s.id_stage 
 " );
         $grapheInfo = $grapheQuery->fetchAll(PDO::FETCH_ASSOC);
         $clientQuery = $dbh->query(
@@ -360,7 +360,7 @@ require_once "esp-data.php";
             var myChart = new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: heures.reverse(),
+                    labels: heures,
                     datasets: [{
                         label: 'Observer ici le nombre de personne présente en fonction de la soirée !',
                         data: nbrAct,
@@ -464,6 +464,7 @@ require_once "esp-data.php";
         <?php include("footer.php"); ?>
     </footer>
 
+   
 
 
     <script src="js/jquery-migrate-3.0.1.min.js"></script>
